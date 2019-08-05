@@ -61,10 +61,10 @@
                 <h1 class="my-4 text-5xl font-bold leading-tight">Main Hero Message to sell yourself!</h1>
                 <p class="leading-normal text-2xl mb-8">Sub-hero message, not too long and not too short. Make it just right!</p>
                 <div class="w-full">
-                    <a href="#" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded-full">
+                    <a href="#" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
                         Suscribete
                     </a>
-                    <a href="#" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-4 border border-white hover:border-transparent rounded-full">
+                    <a href="#" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
                         Explorar Cursos
                     </a>
                 </div>
