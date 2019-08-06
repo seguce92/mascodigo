@@ -103,10 +103,6 @@
     background: var(--bg-color-light);
 }
   
-.card:hover p {
-    color: var(--text-color-hover);
-}
-  
 .card .skill {
     text-transform: uppercase;
     font-size: 12px;
