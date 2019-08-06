@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->loadViewsFrom(resource_path('/views/app'), 'app');
+
+        \Carbon\Carbon::setLocale(config('app.locale'));
+        \Faker\Factory::create('es_ES');
     }
 
     /**
