@@ -1,0 +1,27 @@
+.javascript {
+    --bg-color: #FBC02D;
+    --bg-color-light: #fff;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(117, 117, 117, .4);
+}
+
+.vue {
+    --bg-color: #4CAF50;
+    --bg-color-light: #fff;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(117, 117, 117, .4);
+}
+  
+.laravel {
+    --bg-color: #F44336;
+    --bg-color-light: #fff;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(117, 117, 117, .4);
+}
+  
+.php {
+    --bg-color: #3F51B5;
+    --bg-color-light: #fff;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(117, 117, 117, .4);
+}

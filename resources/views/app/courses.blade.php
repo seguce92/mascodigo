@@ -58,13 +58,13 @@
         <section class="flex flex-wrap container px-3 mx-auto text-white">
             <nav class="select-none bg-grey flex justify-between items-stretch w-full">
                 <div class="flex flex-no-shrink items-stretch h-12">
-                    <a href="{{ route('courses') }}" class="flex-no-grow flex-no-shrink leading-normal text-white no-underline flex items-center font-bold">CURSOS</a>
+                    <a class="flex-no-grow flex-no-shrink leading-normal text-white no-underline flex items-center font-bold">CURSOS</a>
                 </div>
                 <div class="flex items-stretch flex-no-shrink h-12">
                     <div class="flex items-stretch justify-end ml-auto">
                         <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
                             Blog</a>
-                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
+                        <a href="#" class="border-b-4 font-bold flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
                             Cursos</a>
                         <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
                             Acerca</a>
@@ -73,31 +73,47 @@
             </nav>
         </section>
     </header>
-    <section class="sticky top-0 px-3 mx-auto bg-gray-200 shadow z-50">
-        <nav class="bg-grey flex justify-between items-stretch w-full text-black container mx-auto">
-            <div class="flex flex-no-shrink items-stretch h-12">
-                <a href="#" class="flex-no-grow flex-no-shrink font-bold py-2 px-4 leading-normal flex items-center hover:text-gray-600">
-                    Todos</a>
-                <a href="#" class="flex-no-grow flex-no-shrink py-2 px-4 leading-normal flex items-center hover:text-gray-600 text-gray-600">
-                    Por Categoría</a>
-            </div>
-            <div class="flex items-stretch flex-no-shrink h-12">
-                <div class="flex items-stretch justify-end ml-auto">
-                    <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark">
-                        <i class="fa fa-users"></i>
-                    </a>
-                    <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark">
-                        <i class="fa fa-search"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </section>
 
     <main id="app" class="mx-auto">
 
-        <section id="courses" class="container mx-auto">
-            <div class="flex justify-center flex-wrap pt-6 pb-6">
+        <section class="sticky top-0 px-3 mx-auto bg-gray-200 z-50">
+            <nav class="bg-grey flex justify-between items-stretch w-full text-black container mx-auto">
+                <div class="flex flex-no-shrink items-stretch h-12">
+                    <a href="#" class="flex-no-grow flex-no-shrink font-bold py-2 leading-normal flex items-center hover:text-gray-600">
+                        Todos</a>
+                    <a href="#" class="flex-no-grow flex-no-shrink py-2 px-4 leading-normal flex items-center hover:text-gray-600 text-gray-600">
+                        Por Categoría</a>
+                </div>
+                <div class="flex items-stretch flex-no-shrink h-12">
+                    <div class="flex items-stretch justify-end ml-auto">
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark">
+                            <i class="fa fa-users"></i>
+                        </a>
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 leading-normal no-underline flex items-center hover:bg-grey-dark">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <section id="courses" class="container mx-auto pt-10 pb-10">
+            <div class="flex justify-center flex-wrap">
+                <div class="w-full w-1/1 sticky skill-group">
+                    <h3 class="uppercase font-bold bg-gray-200 py-2 px-3 shadow-md">
+                        <i class="far fa-bookmark"></i> Javascript
+                    </h3>
+                </div>
+                @for( $i = 0; $i < 12; $i++ )
+                    @include('component.course')
+                @endfor
+            </div>
+            <div class="flex justify-center flex-wrap">
+                <div class="w-full w-1/1 sticky skill-group">
+                    <h3 class="uppercase font-bold bg-gray-200 py-2 px-3 shadow-md">
+                        <i class="far fa-bookmark"></i> Laravel
+                    </h3>
+                </div>
                 @for( $i = 0; $i < 12; $i++ )
                     @include('component.course')
                 @endfor
@@ -109,9 +125,6 @@
     <footer class="h-64" style="background:#880e4f">
 
     </footer>
-    <footer class="h-64" style="background:#880e4f">
-
-        </footer>
     <script>
         var navMenuDiv = document.getElementById("nav-content");
 	    var navMenu = document.getElementById("nav-toggle");
