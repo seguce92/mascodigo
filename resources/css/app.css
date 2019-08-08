@@ -89,7 +89,7 @@
     margin-top: 15px;
     z-index: 40;
     border-radius: 20px;
-    padding: 2px 15px;
+    padding: 3px 15px;
     transition: color 0.3s ease-out;
 }
 
@@ -135,7 +135,7 @@
     color: #fff;
 }
   
-.circle {
+.card .circle {
     width: 131px;
     height: 131px;
     border-radius: 50%;
@@ -149,7 +149,7 @@
     transition: all 0.3s ease-out;
 }
   
-.circle:after {
+.card .circle:after {
     content: "";
     width: 118px;
     height: 118px;
@@ -162,7 +162,7 @@
     transition: opacity 0.3s ease-out;
 }
   
-.circle svg {
+.card .circle svg {
     width: 70px;
     height: 70px;
     z-index: 400;
@@ -195,18 +195,19 @@
 }
 
 .course .skill {
-    background: rgba(0, 0, 0, .5)
+    background: rgba(0, 0, 0, .4)
 }
 
 .course .skill:hover {
-    background: rgba(0, 0, 0, .7)
+    background: rgba(0, 0, 0, .5)
 }
 
 .course .circle {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, .6);
+    background: rgba(0, 0, 0, .4);
+    border: 7px solid rgba(255, 255, 255, .8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -215,28 +216,40 @@
     transition: all 0.3s ease-out;
 }
   
-.course .circle:after {
-    width: 230px;
-    height: 230px;
-    display: block;
-    position: absolute;
-    background: var(--bg-color);
-    border-radius: 50%;
-    top: 8px;
-    left: 8px;
-    transition: opacity 0.3s ease-out;
-}
-  
 .course .circle svg {
     width: 160px;
     height: 160px;
     z-index: 400;
-    fill: rgba(255, 255, 255, .6);;
+    fill: rgba(255, 255, 255, .8);
     transform: translateZ(0);
+}
+
+.lesson .icon {
+    background: var(--bg-color);
+}
+
+.lesson .icon:after {
+    width: 3rem;
+    height: 3rem;
+    content: attr(data-value);
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .4);
+    text-align: center;
+    line-height: 49px;
 }
 
 .border-trans {
     border-color: rgba(255, 255, 255, .2)
+}
+
+.bg-black-trans {
+    background: rgba(0, 0, 0, .4);
+}
+
+.bg-white-trans {
+    background: rgba(255, 255, 255, .5);
 }
 
 @tailwind utilities;

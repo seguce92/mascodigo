@@ -76,8 +76,8 @@
 
     <main id="app" class="mx-auto">
 
-        <section class="sticky top-0 px-3 mx-auto bg-gray-200 z-50">
-            <nav class="bg-grey flex justify-between items-stretch w-full text-black container mx-auto">
+        <section class="sticky top-0 mx-auto bg-gray-200 z-50">
+            <nav class="bg-grey px-3 flex justify-between items-stretch w-full text-black container mx-auto">
                 <div class="flex flex-no-shrink items-stretch h-12">
                     <a href="#" class="flex-no-grow flex-no-shrink font-bold py-2 leading-normal flex items-center hover:text-gray-600">
                         Todos</a>
@@ -97,26 +97,30 @@
             </nav>
         </section>
 
-        <section id="courses" class="container mx-auto pt-10 pb-10">
-            <div class="flex justify-center flex-wrap">
-                <div class="w-full w-1/1 sticky skill-group">
-                    <h3 class="uppercase font-bold bg-gray-200 py-2 px-3 shadow-md">
-                        <i class="far fa-bookmark"></i> Javascript
+        <section id="courses" class="mx-auto">
+            <div class="flex justify-center flex-wrap pb-8">
+                <div class="w-full sticky skill-group bg-gray-100 shadow-md mb-3">
+                    <h3 class="uppercase container font-bold py-2 px-3 mx-auto text-sm">
+                        <i class="far fa-bookmark mr-1"></i> Javascript
                     </h3>
                 </div>
-                @for( $i = 0; $i < 12; $i++ )
-                    @include('component.course')
-                @endfor
+                <div class="flex justify-center flex-wrap container">
+                    @for( $i = 0; $i < 12; $i++ )
+                        @include('component.course')
+                    @endfor
+                </div>
             </div>
-            <div class="flex justify-center flex-wrap">
-                <div class="w-full w-1/1 sticky skill-group">
-                    <h3 class="uppercase font-bold bg-gray-200 py-2 px-3 shadow-md">
-                        <i class="far fa-bookmark"></i> Laravel
+            <div class="flex justify-center flex-wrap pb-8">
+                <div class="w-full sticky skill-group bg-gray-100 shadow-md mb-3">
+                    <h3 class="uppercase container font-bold py-2 px-3 mx-auto text-sm">
+                        <i class="far fa-bookmark mr-1"></i> Laravel
                     </h3>
                 </div>
-                @for( $i = 0; $i < 12; $i++ )
-                    @include('component.course')
-                @endfor
+                <div class="flex justify-center flex-wrap container">
+                    @for( $i = 0; $i < 12; $i++ )
+                        @include('component.course')
+                    @endfor
+                </div>
             </div>
         </section>
 
