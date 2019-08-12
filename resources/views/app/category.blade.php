@@ -28,20 +28,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    {{--<style>
-        .hero {
-            background-image: url(img/hero.svg);
-            height: 83vh;
-            background-position: right;
-            background-repeat: no-repeat;
-            background-position-y: top;
-            background-size: cover
-        }
-    </style>--}}
 </head>
 <body class="leading-normal tracking-normal font-sans">
     <header class="hero box-shadow-hero" id="hero">
-        <nav id="header" class="fixed w-full z-50 text-white hero">
+        <nav id="header" class="w-full z-50 text-white hero">
             <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
                 <div class="pl-4 flex items-center">
                     <a class="uppercase no-underline hover:no-underline font-bold text-2xl text-shadow-2xl"  href="{{ url('/') }}"> 
@@ -65,43 +55,55 @@
                 </div>
             </div>
         </nav>
-        <section class="flex flex-wrap pt-20 lg:pt-40 lg:pb-40 pb-10 container px-3 mx-auto text-white">
-            <div class="flex flex-col w-full pt-12 lg:pt-0 lg:w-1/2 order-2 lg:order-1 text-center lg:text-left">
-                <p class="uppercase tracking-loose w-full">What business are you?</p>
-                <h1 class="my-4 text-5xl font-bold leading-tight">Main Hero Message to sell yourself!</h1>
-                <p class="leading-normal text-2xl mb-8">Sub-hero message, not too long and not too short. Make it just right!</p>
-                <div class="w-full">
-                    <a href="#" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
-                        Suscribete
-                    </a>
-                    <a href="{{ route('courses') }}" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
-                        Ver todos los Cursos
-                    </a>
+        <section class="flex flex-wrap container px-3 mx-auto text-white">
+            <nav class="select-none bg-grey flex justify-between items-stretch w-full">
+                <div class="flex flex-no-shrink items-stretch h-12">
+                    <a class="flex-no-grow flex-no-shrink leading-normal text-white no-underline flex items-center font-bold">CURSOS</a>
                 </div>
-            </div>
-            <div class="w-full lg:w-1/2 order-1 lg:order-2">
-                <img class="w-5/5 lg:3/5 xl:3/5 ml-auto mr-auto" src="{{ asset('img/logo.svg') }}">
-            </div>
+                <div class="flex items-stretch flex-no-shrink h-12">
+                    <div class="flex items-stretch justify-end ml-auto">
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
+                            Blog</a>
+                        <a href="#" class="border-b-4 font-bold flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
+                            Cursos</a>
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
+                            Acerca</a>
+                    </div>
+                </div>
+            </nav>
         </section>
     </header>
 
     <main id="app" class="mx-auto">
 
-        <section id="courses" class="container mx-auto">
-            <div class="text-center mt-10 mb-4">
-                <h1 class="font-bold text-xl uppercase text-shadow">Categorías</h1>
-            </div>
+        <section class="sticky top-0 mx-auto bg-gray-200 z-50">
+            <nav class="bg-grey px-3 flex justify-between items-stretch w-full text-black container mx-auto">
+                <div class="flex flex-no-shrink items-stretch h-12">
+                    <a href="#" class="flex-no-grow flex-no-shrink font-bold py-2 leading-normal flex items-center hover:text-gray-600">
+                        Todos</a>
+                    <a href="#" class="flex-no-grow flex-no-shrink py-2 px-4 leading-normal flex items-center hover:text-gray-600 text-gray-600">
+                        Por Categoría</a>
+                </div>
+                <div class="flex items-stretch flex-no-shrink h-12">
+                    <div class="flex items-stretch justify-end ml-auto">
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark">
+                            <i class="fa fa-users"></i>
+                        </a>
+                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 leading-normal no-underline flex items-center hover:bg-grey-dark">
+                            <i class="fa fa-search"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </section>
+
+        <section id="courses" class="mx-auto">
             <div class="flex justify-center flex-wrap pb-8">
                 <div class="flex justify-center flex-wrap container">
-                    @for( $i = 0; $i < 8; $i++ )
-                        @include('component.skill')
+                    @for( $i = 0; $i < 12; $i++ )
+                        @include('component.course')
                     @endfor
                 </div>
-            </div>
-            <div class="text-center mb-10">
-                <a href="{{ route('courses') }}" class="bg-white shadow hover:text-pink-700 py-3 px-8 border border-gray-400 hover:border-pink-700 rounded-full">
-                    VER TODOS LOS CURSOS
-                </a>
             </div>
         </section>
 

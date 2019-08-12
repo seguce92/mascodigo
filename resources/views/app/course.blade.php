@@ -85,7 +85,7 @@
             </nav>
         </section>
     </header>
-    <section class="text-white course vue">
+    <section class="text-white course c-sharp">
         <section class="sticky top-0 px-3 mx-auto z-50 shadow bg-black-trans">
             <nav class="flex justify-center items-stretch w-full container mx-auto">
                 <div class="flex flex-no-shrink items-stretch h-12">

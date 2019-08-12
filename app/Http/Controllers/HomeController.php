@@ -26,6 +26,10 @@ class HomeController extends Controller
         return view('app::index');
     }
 
+    public function category ($category) {
+        return view('app::category');
+    }
+
     public function courses()
     {
         return view('app::courses');
