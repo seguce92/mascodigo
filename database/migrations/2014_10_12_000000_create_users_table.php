@@ -16,11 +16,24 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('name');
+            $table->string('username')->unique()->nullable();
+            $table->string('fullname')->nullable();
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+
+            $table->string('photo')->nullable();
+            $table->integer('xp')->default(0);
+
+            $table->enum('profile', ['public', 'private'])->default('public');
+
+            $table->enum('status', ['enable', 'disable', 'register'])->default('enable');
+            $table->string('provider')->default('web');
+            $table->boolean('verified')->default(false);
+            $table->string('verification_token')->nullable();
             
+            $table->string('plan')->nullable();
+            $table->timestamp('end_suscription_at')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
