@@ -6,22 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('android-icon-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
-    <meta name="theme-color" content="#ffffff">
+    @include('component.icons')
 
     <script src="{{ mix('js/manifest.js') }}" defer></script>
     <script src="{{ mix('js/vendor.js') }}" defer></script>
@@ -77,37 +62,7 @@
     </header>
 
     <main id="app" class="mx-auto">
-
-        <section class="sticky top-0 mx-auto bg-gray-200 z-50">
-            <nav class="bg-grey px-3 flex justify-between items-stretch w-full text-black container mx-auto">
-                <div class="flex flex-no-shrink items-stretch h-12">
-                    <a href="#" class="flex-no-grow flex-no-shrink font-bold py-2 leading-normal flex items-center hover:text-gray-600">
-                        Todos</a>
-                    <a href="#" class="flex-no-grow flex-no-shrink py-2 px-4 leading-normal flex items-center hover:text-gray-600 text-gray-600">
-                        Por Categoría</a>
-                </div>
-                <div class="flex items-stretch flex-no-shrink h-12">
-                    <div class="flex items-stretch justify-end ml-auto">
-                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark">
-                            <i class="fa fa-users"></i>
-                        </a>
-                        <a href="#" class="flex-no-grow flex-no-shrink relative py-2 leading-normal no-underline flex items-center hover:bg-grey-dark">
-                            <i class="fa fa-search"></i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </section>
-
-        <section id="courses" class="mx-auto">
-            <div class="flex justify-center flex-wrap pb-8">
-                <div class="flex justify-center flex-wrap container">
-                    @for( $i = 0; $i < 12; $i++ )
-                        @include('component.course')
-                    @endfor
-                </div>
-            </div>
-        </section>
+        <skill-courses :courses="{{ $skill->courses }}" :skill="{{ $skill }}"></skill-courses>
 
     </main>
 

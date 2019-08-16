@@ -1,6 +1,7 @@
 import axios from 'axios'
 import CONFIG from './config'
 
+window.config = CONFIG
 export const http = axios.create({
     baseURL: CONFIG.domain,
 })

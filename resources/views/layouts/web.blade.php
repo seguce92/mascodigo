@@ -28,16 +28,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    {{--<style>
-        .hero {
-            background-image: url(img/hero.svg);
-            height: 83vh;
-            background-position: right;
-            background-repeat: no-repeat;
-            background-position-y: top;
-            background-size: cover
-        }
-    </style>--}}
+    
 </head>
 <body class="leading-normal tracking-normal font-sans">
     <header class="hero box-shadow-hero" id="hero">

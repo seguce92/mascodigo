@@ -11,6 +11,6 @@ class Skill extends Model
     ];
 
     public function courses () {
-        return $this->hasMany(Course::class, 'course_id', 'id');
+        return $this->hasMany(Course::class, 'skill_id', 'id');
     }
 }

@@ -21,8 +21,11 @@ const options = {
 Vue.use(VueSweetalert2, options);
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('skill-courses', require('./components/SkillCourses.vue').default);
+Vue.component('course-component', require('./components/CourseComponent.vue').default);
+Vue.component('lesson-component', require('./components/LessonComponent.vue').default);
 
 const app = new Vue({
     store
 }).$mount('#app');
+

@@ -109,7 +109,7 @@
 
 .card .title {
     font-weight: bold;
-    color: #000;
+    color: #2D3748;
     z-index: 40;
     padding: 10px 5px 0 5px;
     font-size: 20px;
@@ -131,10 +131,17 @@
 }
 
 .card .description .text {
-    color: #000;
+    color: #2D3748;
 }
 .card:hover .description .text {
     color: #fff;
+}
+
+.card .description svg {
+    fill: #2D3748;
+}
+.card:hover .description svg {
+    fill: #fff;
 }
   
 .card .circle {
@@ -238,7 +245,7 @@
     display: block;
     position: absolute;
     border-radius: 50%;
-    background: rgba(0, 0, 0, .4);
+    background: rgba(0, 0, 0, .2);
     text-align: center;
     line-height: 49px;
 }
@@ -253,6 +260,14 @@
 
 .bg-white-trans {
     background: rgba(255, 255, 255, .5);
+}
+
+.collection {
+    max-width: 400px;
+}
+
+.video-content {
+    max-width: 140vh;
 }
 
 @tailwind utilities;

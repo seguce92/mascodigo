@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Laravel') }}</title>
-
   @include('component.icons')
-
   <script src="{{ mix('js/manifest.js') }}" defer></script>
   <script src="{{ mix('js/vendor.js') }}" defer></script>
   <script src="{{ mix('js/app.js') }}" defer></script>
@@ -65,13 +63,15 @@
   <main id="app" class="mx-auto">
     <section id="courses" class="container mx-auto">
       <div class="text-center mt-10 mb-4">
-        <h1 class="font-bold text-xl uppercase text-shadow">Categorías</h1>
+        <h1 class="font-bold text-xl uppercase text-shadow">Habilidades / Categorías</h1>
       </div>
       <div class="flex justify-center flex-wrap pb-8">
         <div class="flex justify-center flex-wrap container">
-          @for( $i = 0; $i < 8; $i++ )
-            @include('component.skill')
-          @endfor
+          @foreach( $skills as $skill )
+            @include('component.skill', [
+              'skill' =>  $skill
+            ])
+          @endforeach
         </div>
       </div>
       <div class="text-center mb-10">
