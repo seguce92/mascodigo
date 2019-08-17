@@ -7,15 +7,6 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   @include('component.icons')
-
-  <script src="{{ mix('js/manifest.js') }}" defer></script>
-  <script src="{{ mix('js/vendor.js') }}" defer></script>
-  <script src="{{ mix('js/app.js') }}" defer></script>
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body class="leading-normal tracking-normal font-sans">
   <header class="hero box-shadow-hero" id="hero">
@@ -27,8 +18,10 @@
           </a>
         </div>
         <div class="block lg:hidden pr-4">
-          <button id="nav-toggle" class="flex items-center px-3 py-2 appearance-none focus:outline-none">
-            <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          <button id="nav-toggle" class="items-center px-3 py-2 appearance-none focus:outline-none">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
           </button>
         </div>
         <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20" id="nav-content">
@@ -112,32 +105,6 @@
     </section>
   </main>
 
-  <footer class="h-64" style="background:#880e4f">
-
-  </footer>
-  <script>
-    var navMenuDiv = document.getElementById("nav-content");
-    var navMenu = document.getElementById("nav-toggle");
-    document.onclick = check;
-    function check(e) {
-      var target = (e && e.target) || (event && event.srcElement);
-      if (!checkParent(target, navMenuDiv)) {
-        if (checkParent(target, navMenu)) {
-          if (navMenuDiv.classList.contains("hidden")) {
-            navMenuDiv.classList.remove("hidden");
-          } else {navMenuDiv.classList.add("hidden");}
-        } else {
-          navMenuDiv.classList.add("hidden");
-        }
-      }
-    }
-    function checkParent(t, elm) {
-      while(t.parentNode) {
-        if( t == elm ) {return true;}
-        t = t.parentNode;
-      }
-      return false;
-    }
-  </script>
+  @include ('component.footer')
 </body>
 </html>

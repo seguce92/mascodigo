@@ -16,6 +16,14 @@ class Lesson extends Model
         'publish_at'    =>  'datetime'
     ];
 
+    protected $appends = [
+        'server'
+    ];
+
+    public function getServerAttribute () {
+        return 'youtube';
+    }
+
     public function author () {
         return $this->belongsTo(\App\User::class, 'author_id', 'id');
     }

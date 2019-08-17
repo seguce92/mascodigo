@@ -1,5 +1,5 @@
 <div class="max-w-sm w-full w-1/1 lg:w-1/4 py-3 px-3">
-  <div class="card {{ $skill->slug }} pt-4">
+  <div class="card skilled {{ $skill->slug }} pt-4">
     <div class="overlay"></div>
     <a href="{{ route('skill', $skill->slug) }}" class="circle text-white" title="EXPLORAR CURSOS">
       {!! $skill->icon !!}

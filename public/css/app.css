@@ -259,6 +259,48 @@
   --bg-color-light: #fff;
   --text-color-hover: #4C5656;
   --box-shadow-color: rgba(117, 117, 117, .4);
+}#nav-toggle {
+  text-align: right;
+  text-align: -webkit-right;
+}
+
+.bar1 {
+  width: 30px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.bar2 {
+  width: 25px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.bar3 {
+  width: 20px;
+  height: 4px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  width: 30px;
+  transform: rotate(-45deg) translate(-7px, 5px);
+}
+
+.change .bar2 {
+  opacity: 0;
+  width: 30px;
+}
+
+.change .bar3 {
+  width: 30px;
+  transform: rotate(45deg) translate(-8px, -8px);
 }/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -1276,8 +1318,8 @@ video {
   background: var(--bg-color);
 }
 
-.card:hover .circle:after {
-  background: var(--bg-color-light);
+.card:hover.skilled .circle:after {
+  background: #fff;
 }
 
 .card .skill {
@@ -1360,6 +1402,11 @@ video {
   transition: all 0.3s ease-out;
 }
 
+.card:hover .circle {
+  background: var(--bg-color);
+  background-image: radial-gradient(farthest-corner, var(--bg-color) 3%, var(--bg-color-dark) 100%);
+}
+
 .card .circle:after {
   content: "";
   width: 118px;
@@ -1415,12 +1462,9 @@ video {
   background: rgba(0, 0, 0, .5)
 }
 
-.course .circle {
+.course .icon {
   width: 250px;
   height: 250px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, .4);
-  border: 7px solid rgba(255, 255, 255, .8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1429,28 +1473,10 @@ video {
   transition: all 0.3s ease-out;
 }
 
-.course .circle svg {
-  width: 160px;
-  height: 160px;
-  z-index: 400;
-  fill: rgba(255, 255, 255, .8);
-  transform: translateZ(0);
-}
-
 .lesson .icon {
-  background: var(--bg-color);
-}
-
-.lesson .icon:after {
-  width: 3rem;
-  height: 3rem;
-  content: attr(data-value);
-  display: block;
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, .2);
-  text-align: center;
-  line-height: 49px;
+  background-image: --webkit-gradient(linear, left top, left bottom, from(var(--bg-color)), to(var(--bg-color-dark)));
+  background-image: linear-gradient(180deg, var(--bg-color), var(--bg-color-dark));
+  color: var(--bg-color-light);
 }
 
 .border-trans {
@@ -1467,6 +1493,7 @@ video {
 
 .collection {
   max-width: 400px;
+  max-height: 50vh;
 }
 
 .video-content {

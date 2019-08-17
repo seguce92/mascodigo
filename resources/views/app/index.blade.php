@@ -6,13 +6,6 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Laravel') }}</title>
   @include('component.icons')
-  <script src="{{ mix('js/manifest.js') }}" defer></script>
-  <script src="{{ mix('js/vendor.js') }}" defer></script>
-  <script src="{{ mix('js/app.js') }}" defer></script>
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body class="leading-normal tracking-normal font-sans">
   <header class="hero box-shadow-hero" id="hero">
@@ -24,8 +17,10 @@
           </a>
         </div>
         <div class="block lg:hidden pr-4">
-          <button id="nav-toggle" class="flex items-center px-3 py-2 appearance-none focus:outline-none">
-            <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          <button id="nav-toggle" class="items-center px-3 py-2 appearance-none focus:outline-none">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
           </button>
         </div>
         <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20" id="nav-content">
@@ -34,7 +29,9 @@
               <a class="w-full text-white font-bold uppercase inline-block py-2 px-4 text-black no-underline" href="#">Inicia Sesión</a>
             </li>
             <li class="mr-3">
-              <a class="w-full text-white inline-block py-2 px-4 text-black no-underline" href="#"><i class="fa fa-search"></i></a>
+              <a class="w-full text-white inline-block py-2 px-4 text-black no-underline" href="#">
+                <svg class="fa w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+              </a>
             </li>
           </ul>
         </div>
@@ -82,31 +79,6 @@
     </section>
   </main>
 
-  <footer class="h-64" style="background:#880e4f">
-  </footer>
-  <script>
-    var navMenuDiv = document.getElementById("nav-content");
-    var navMenu = document.getElementById("nav-toggle");
-    document.onclick = check;
-    function check(e) {
-      var target = (e && e.target) || (event && event.srcElement);
-      if (!checkParent(target, navMenuDiv)) {
-        if (checkParent(target, navMenu)) {
-          if (navMenuDiv.classList.contains("hidden")) {
-            navMenuDiv.classList.remove("hidden");
-          } else {navMenuDiv.classList.add("hidden");}
-        } else {
-          navMenuDiv.classList.add("hidden");
-        }
-      }
-    }
-    function checkParent(t, elm) {
-      while(t.parentNode) {
-        if( t == elm ) {return true;}
-        t = t.parentNode;
-      }
-      return false;
-    }
-  </script>
+  @include ('component.footer')
 </body>
 </html>

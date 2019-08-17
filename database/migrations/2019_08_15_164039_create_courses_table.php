@@ -18,6 +18,7 @@ class CreateCoursesTable extends Migration
 
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('icon')->nullable();
             $table->text('content');
             $table->boolean('is_publish')->default(false);
             $table->string('level');

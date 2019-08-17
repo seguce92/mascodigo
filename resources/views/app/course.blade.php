@@ -7,14 +7,6 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
   
   @include('component.icons')
-  
-  <script src="{{ mix('js/manifest.js') }}" defer></script>
-  <script src="{{ mix('js/vendor.js') }}" defer></script>
-  <script src="{{ mix('js/app.js') }}" defer></script>
-  <link rel="dns-prefetch" href="//fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body class="leading-normal tracking-normal font-sans">
   <header class="hero box-shadow-hero" id="hero">
@@ -26,8 +18,10 @@
           </a>
         </div>
         <div class="block lg:hidden pr-4">
-          <button id="nav-toggle" class="flex items-center px-3 py-2 appearance-none focus:outline-none">
-            <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+          <button id="nav-toggle" class="items-center px-3 py-2 appearance-none focus:outline-none">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
           </button>
         </div>
         <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20" id="nav-content">
@@ -51,7 +45,9 @@
               </a>
             </li>
             <li class="mr-3">
-              <a class="w-full text-white inline-block py-2 px-4 text-black no-underline" href="#"><i class="fa fa-search"></i></a>
+              <a class="w-full text-white inline-block py-2 px-4 text-black no-underline" href="#">
+                <svg class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+              </a>
             </li>
           </ul>
         </div>
@@ -91,8 +87,8 @@
         </div>
       </nav>
     </div>
-    <div class="flex flex-wrap container mx-auto py-16">
-      <div class="flex flex-col w-full pt-12 lg:pt-0 lg:w-2/3 order-2 lg:order-1 text-center lg:text-left">
+    <div class="flex flex-wrap container mx-auto py-8 lg:py-16">
+      <div class="flex flex-col w-full pt-12 pl-4 pr-4 lg:pt-0 lg:w-2/3 order-2 lg:order-1 text-center lg:text-left">
         <p class="uppercase tracking-loose w-full">
           <a href="{{ route('skill', $course->skill->slug) }}" class="skill rounded-full bg-gray-300 px-4 py-2 text-xs font-bold">{{ $course->skill->name }}</a>
         </p>
@@ -102,14 +98,12 @@
         </p>
         <div class="w-full">
           <a href="{{ route('lesson', ['course' => $course->slug, 'order' => 1]) }}" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
-            <i class="fa fa-play-circle mr-2"></i> INICIAR CURSO
+            <svg class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"/></svg> INICIAR CURSO
           </a>
         </div>
       </div>
       <div class="flex w-full lg:w-1/3 order-1 lg:order-2 justify-center lg:justify-end">
-        <div class="flex circle justify-center shadow-lg">
-          <svg class="w-5/5 lg:3/5 xl:3/5 ml-auto mr-auto text-5xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M637.5 241.6c-4.2-4.8-62.8-78.1-73.1-90.5-10.3-12.4-15.4-10.2-21.7-9.3-6.4.9-80.5 13.4-89.1 14.8-8.6 1.5-14 4.9-8.7 12.3 4.7 6.6 53.4 75.7 64.2 90.9l-193.7 46.4L161.2 48.7c-6.1-9.1-7.4-12.3-21.4-11.6-14 .6-120.9 9.5-128.5 10.2-7.6.6-16 4-8.4 22s129 279.6 132.4 287.2c3.4 7.6 12.2 20 32.8 15 21.1-5.1 94.3-24.2 134.3-34.7 21.1 38.3 64.2 115.9 72.2 127 10.6 14.9 18 12.4 34.3 7.4 12.8-3.9 199.6-71.1 208-74.5 8.4-3.5 13.6-5.9 7.9-14.4-4.2-6.2-53.5-72.2-79.3-106.8 17.7-4.7 80.6-21.4 87.3-23.3 7.9-2 9-5.8 4.7-10.6zm-352.2 72c-2.3.5-110.8 26.5-116.6 27.8-5.8 1.3-5.8.7-6.5-1.3-.7-2-129-266.7-130.8-270-1.8-3.3-1.7-5.9 0-5.9s102.5-9 106-9.2c3.6-.2 3.2.6 4.5 2.8 0 0 142.2 245.4 144.6 249.7 2.6 4.3 1.1 5.6-1.2 6.1zm306 57.4c1.7 2.7 3.5 4.5-2 6.4-5.4 2-183.7 62.1-187.1 63.6-3.5 1.5-6.2 2-10.6-4.5s-62.4-106.8-62.4-106.8L518 280.6c4.7-1.5 6.2-2.5 9.2 2.2 2.9 4.8 62.4 85.5 64.1 88.2zm12.1-134.1c-4.2.9-73.6 18.1-73.6 18.1l-56.7-77.8c-1.6-2.3-2.9-4.5 1.1-5s68.4-12.2 71.3-12.8c2.9-.7 5.4-1.5 9 3.4 3.6 4.9 52.6 67 54.5 69.4 1.8 2.3-1.4 3.7-5.6 4.7z"/></svg>
-        </div>
+        <img class="icon ml-auto mr-auto text-5xl" src="{{ asset($course->icon) }}" alt="">
       </div>
     </div>
   </section>
@@ -156,31 +150,6 @@
     </section>
   </main>
 
-  <footer class="h-64" style="background:#880e4f">
-  </footer>
-  <script>
-    var navMenuDiv = document.getElementById("nav-content");
-    var navMenu = document.getElementById("nav-toggle");
-    document.onclick = check;
-    function check(e) {
-      var target = (e && e.target) || (event && event.srcElement);
-      if (!checkParent(target, navMenuDiv)) {
-        if (checkParent(target, navMenu)) {
-          if (navMenuDiv.classList.contains("hidden")) {
-            navMenuDiv.classList.remove("hidden");
-          } else {navMenuDiv.classList.add("hidden");}
-		} else {
-          navMenuDiv.classList.add("hidden");
-        }
-      }
-    }
-    function checkParent(t, elm) {
-      while(t.parentNode) {
-        if( t == elm ) {return true;}
-        t = t.parentNode;
-      }
-      return false;
-    }
-  </script>
+  @include ('component.footer')
 </body>
 </html>
