@@ -19,6 +19,7 @@ class CreateLessonsTable extends Migration
             $table->string('title');
             $table->text('url');
             $table->string('repository')->nullable();
+            $table->text('content')->nullable();
             $table->boolean('is_publish')->default(false);
             $table->boolean('is_private')->default(false);
             $table->string('duration')->default('00:00:00');

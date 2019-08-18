@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     protected $fillable = [
-        'title', 'url', 'repository', 'is_publish', 'is_private', 'duration', 'points', 'order', 'course_id', 'author_id', 'editor_id', 'published_at'
+        'title', 'url', 'content', 'repository', 'is_publish', 'is_private', 'duration', 'points', 'order', 'course_id', 'author_id', 'editor_id', 'published_at'
     ];
 
     protected $casts = [

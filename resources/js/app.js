@@ -4,6 +4,8 @@ window.Vue = require('vue');
 
 import store from './store'
 
+window.marked = require('marked');
+
 import Helper from './Helper'
 window.Helper = new Helper()
 
@@ -24,6 +26,8 @@ Vue.use(VueSweetalert2, options);
 Vue.component('skill-courses', require('./components/SkillCourses.vue').default);
 Vue.component('course-component', require('./components/CourseComponent.vue').default);
 Vue.component('lesson-component', require('./components/LessonComponent.vue').default);
+
+Vue.component('markdown', require('./components/Markdown.vue').default);
 
 const app = new Vue({
     store

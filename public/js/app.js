@@ -1,5 +1,697 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["/js/app"],{
 
+/***/ "./node_modules/@github/markdown-toolbar-element/dist/index.esm.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@github/markdown-toolbar-element/dist/index.esm.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function keydown(fn) {
+  return function (event) {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      fn(event);
+    }
+  };
+}
+
+const styles = new WeakMap();
+
+class MarkdownButtonElement extends HTMLElement {
+  constructor() {
+    super();
+
+    const apply = () => {
+      const style = styles.get(this);
+      if (!style) return;
+      applyStyle(this, style);
+    };
+
+    this.addEventListener('keydown', keydown(apply));
+    this.addEventListener('click', apply);
+  }
+
+  connectedCallback() {
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', '0');
+    }
+
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'button');
+    }
+  }
+
+  click() {
+    const style = styles.get(this);
+    if (!style) return;
+    applyStyle(this, style);
+  }
+
+}
+
+class MarkdownHeaderButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '### '
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-header')) {
+  window.MarkdownHeaderButtonElement = MarkdownHeaderButtonElement;
+  window.customElements.define('md-header', MarkdownHeaderButtonElement);
+}
+
+class MarkdownBoldButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '**',
+      suffix: '**',
+      trimFirst: true
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('hotkey', 'b');
+  }
+
+}
+
+if (!window.customElements.get('md-bold')) {
+  window.MarkdownBoldButtonElement = MarkdownBoldButtonElement;
+  window.customElements.define('md-bold', MarkdownBoldButtonElement);
+}
+
+class MarkdownItalicButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '_',
+      suffix: '_',
+      trimFirst: true
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('hotkey', 'i');
+  }
+
+}
+
+if (!window.customElements.get('md-italic')) {
+  window.MarkdownItalicButtonElement = MarkdownItalicButtonElement;
+  window.customElements.define('md-italic', MarkdownItalicButtonElement);
+}
+
+class MarkdownQuoteButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '> ',
+      multiline: true,
+      surroundWithNewlines: true
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-quote')) {
+  window.MarkdownQuoteButtonElement = MarkdownQuoteButtonElement;
+  window.customElements.define('md-quote', MarkdownQuoteButtonElement);
+}
+
+class MarkdownCodeButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '`',
+      suffix: '`',
+      blockPrefix: '```',
+      blockSuffix: '```'
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-code')) {
+  window.MarkdownCodeButtonElement = MarkdownCodeButtonElement;
+  window.customElements.define('md-code', MarkdownCodeButtonElement);
+}
+
+class MarkdownLinkButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '[',
+      suffix: '](url)',
+      replaceNext: 'url',
+      scanFor: 'https?://'
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('hotkey', 'k');
+  }
+
+}
+
+if (!window.customElements.get('md-link')) {
+  window.MarkdownLinkButtonElement = MarkdownLinkButtonElement;
+  window.customElements.define('md-link', MarkdownLinkButtonElement);
+}
+
+class MarkdownUnorderedListButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '- ',
+      multiline: true,
+      surroundWithNewlines: true
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-unordered-list')) {
+  window.MarkdownUnorderedListButtonElement = MarkdownUnorderedListButtonElement;
+  window.customElements.define('md-unordered-list', MarkdownUnorderedListButtonElement);
+}
+
+class MarkdownOrderedListButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '1. ',
+      multiline: true,
+      orderedList: true
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-ordered-list')) {
+  window.MarkdownOrderedListButtonElement = MarkdownOrderedListButtonElement;
+  window.customElements.define('md-ordered-list', MarkdownOrderedListButtonElement);
+}
+
+class MarkdownTaskListButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '- [ ] ',
+      multiline: true,
+      surroundWithNewlines: true
+    });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute('hotkey', 'L');
+  }
+
+}
+
+if (!window.customElements.get('md-task-list')) {
+  window.MarkdownTaskListButtonElement = MarkdownTaskListButtonElement;
+  window.customElements.define('md-task-list', MarkdownTaskListButtonElement);
+}
+
+class MarkdownMentionButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '@',
+      prefixSpace: true
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-mention')) {
+  window.MarkdownMentionButtonElement = MarkdownMentionButtonElement;
+  window.customElements.define('md-mention', MarkdownMentionButtonElement);
+}
+
+class MarkdownRefButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '#',
+      prefixSpace: true
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-ref')) {
+  window.MarkdownRefButtonElement = MarkdownRefButtonElement;
+  window.customElements.define('md-ref', MarkdownRefButtonElement);
+}
+
+const modifierKey = navigator.userAgent.match(/Macintosh/) ? 'Meta' : 'Control';
+
+class MarkdownToolbarElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    const fn = shortcut.bind(null, this);
+
+    if (this.field) {
+      this.field.addEventListener('keydown', fn);
+      shortcutListeners.set(this, fn);
+    }
+  }
+
+  disconnectedCallback() {
+    const fn = shortcutListeners.get(this);
+
+    if (fn && this.field) {
+      this.field.removeEventListener('keydown', fn);
+      shortcutListeners.delete(this);
+    }
+  }
+
+  get field() {
+    const id = this.getAttribute('for');
+    if (!id) return;
+    const field = document.getElementById(id);
+    return field instanceof HTMLTextAreaElement ? field : null;
+  }
+
+}
+
+const shortcutListeners = new WeakMap();
+
+function shortcut(toolbar, event) {
+  if (event.metaKey && modifierKey === 'Meta' || event.ctrlKey && modifierKey === 'Control') {
+    const button = toolbar.querySelector("[hotkey=\"".concat(event.key, "\"]"));
+
+    if (button) {
+      button.click();
+      event.preventDefault();
+    }
+  }
+}
+
+if (!window.customElements.get('markdown-toolbar')) {
+  window.MarkdownToolbarElement = MarkdownToolbarElement;
+  window.customElements.define('markdown-toolbar', MarkdownToolbarElement);
+}
+
+function isMultipleLines(string) {
+  return string.trim().split('\n').length > 1;
+}
+
+function repeat(string, n) {
+  return Array(n + 1).join(string);
+}
+
+function wordSelectionStart(text, i) {
+  let index = i;
+
+  while (text[index] && text[index - 1] != null && !text[index - 1].match(/\s/)) {
+    index--;
+  }
+
+  return index;
+}
+
+function wordSelectionEnd(text, i, multiline) {
+  let index = i;
+  const breakpoint = multiline ? /\n/ : /\s/;
+
+  while (text[index] && !text[index].match(breakpoint)) {
+    index++;
+  }
+
+  return index;
+}
+
+let canInsertText = null;
+
+function insertText(textarea, _ref) {
+  let {
+    text,
+    selectionStart,
+    selectionEnd
+  } = _ref;
+  const originalSelectionStart = textarea.selectionStart;
+  const before = textarea.value.slice(0, originalSelectionStart);
+  const after = textarea.value.slice(textarea.selectionEnd);
+
+  if (canInsertText === null || canInsertText === true) {
+    textarea.contentEditable = 'true';
+
+    try {
+      canInsertText = document.execCommand('insertText', false, text);
+    } catch (error) {
+      canInsertText = false;
+    }
+
+    textarea.contentEditable = 'false';
+  }
+
+  if (canInsertText && !textarea.value.slice(0, textarea.selectionStart).endsWith(text)) {
+    canInsertText = false;
+  }
+
+  if (!canInsertText) {
+    try {
+      document.execCommand('ms-beginUndoUnit');
+    } catch (e) {// Do nothing.
+    }
+
+    textarea.value = before + text + after;
+
+    try {
+      document.execCommand('ms-endUndoUnit');
+    } catch (e) {// Do nothing.
+    }
+
+    textarea.dispatchEvent(new CustomEvent('input', {
+      bubbles: true,
+      cancelable: true
+    }));
+  }
+
+  if (selectionStart != null && selectionEnd != null) {
+    textarea.setSelectionRange(selectionStart, selectionEnd);
+  } else {
+    textarea.setSelectionRange(originalSelectionStart, textarea.selectionEnd);
+  }
+}
+
+function styleSelectedText(textarea, styleArgs) {
+  const text = textarea.value.slice(textarea.selectionStart, textarea.selectionEnd);
+  let result;
+
+  if (styleArgs.orderedList) {
+    result = orderedList(textarea);
+  } else if (styleArgs.multiline && isMultipleLines(text)) {
+    result = multilineStyle(textarea, styleArgs);
+  } else {
+    result = blockStyle(textarea, styleArgs);
+  }
+
+  insertText(textarea, result);
+}
+
+function expandSelectedText(textarea, prefixToUse, suffixToUse) {
+  let multiline = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+  if (textarea.selectionStart === textarea.selectionEnd) {
+    textarea.selectionStart = wordSelectionStart(textarea.value, textarea.selectionStart);
+    textarea.selectionEnd = wordSelectionEnd(textarea.value, textarea.selectionEnd, multiline);
+  } else {
+    const expandedSelectionStart = textarea.selectionStart - prefixToUse.length;
+    const expandedSelectionEnd = textarea.selectionEnd + suffixToUse.length;
+    const beginsWithPrefix = textarea.value.slice(expandedSelectionStart, textarea.selectionStart) === prefixToUse;
+    const endsWithSuffix = textarea.value.slice(textarea.selectionEnd, expandedSelectionEnd) === suffixToUse;
+
+    if (beginsWithPrefix && endsWithSuffix) {
+      textarea.selectionStart = expandedSelectionStart;
+      textarea.selectionEnd = expandedSelectionEnd;
+    }
+  }
+
+  return textarea.value.slice(textarea.selectionStart, textarea.selectionEnd);
+}
+
+function newlinesToSurroundSelectedText(textarea) {
+  const beforeSelection = textarea.value.slice(0, textarea.selectionStart);
+  const afterSelection = textarea.value.slice(textarea.selectionEnd);
+  const breaksBefore = beforeSelection.match(/\n*$/);
+  const breaksAfter = afterSelection.match(/^\n*/);
+  const newlinesBeforeSelection = breaksBefore ? breaksBefore[0].length : 0;
+  const newlinesAfterSelection = breaksAfter ? breaksAfter[0].length : 0;
+  let newlinesToAppend;
+  let newlinesToPrepend;
+
+  if (beforeSelection.match(/\S/) && newlinesBeforeSelection < 2) {
+    newlinesToAppend = repeat('\n', 2 - newlinesBeforeSelection);
+  }
+
+  if (afterSelection.match(/\S/) && newlinesAfterSelection < 2) {
+    newlinesToPrepend = repeat('\n', 2 - newlinesAfterSelection);
+  }
+
+  if (newlinesToAppend == null) {
+    newlinesToAppend = '';
+  }
+
+  if (newlinesToPrepend == null) {
+    newlinesToPrepend = '';
+  }
+
+  return {
+    newlinesToAppend,
+    newlinesToPrepend
+  };
+}
+
+function blockStyle(textarea, arg) {
+  let newlinesToAppend;
+  let newlinesToPrepend;
+  const {
+    prefix,
+    suffix,
+    blockPrefix,
+    blockSuffix,
+    replaceNext,
+    prefixSpace,
+    scanFor,
+    surroundWithNewlines
+  } = arg;
+  const originalSelectionStart = textarea.selectionStart;
+  const originalSelectionEnd = textarea.selectionEnd;
+  let selectedText = textarea.value.slice(textarea.selectionStart, textarea.selectionEnd);
+  let prefixToUse = isMultipleLines(selectedText) && blockPrefix.length > 0 ? "".concat(blockPrefix, "\n") : prefix;
+  let suffixToUse = isMultipleLines(selectedText) && blockSuffix.length > 0 ? "\n".concat(blockSuffix) : suffix;
+
+  if (prefixSpace) {
+    const beforeSelection = textarea.value[textarea.selectionStart - 1];
+
+    if (textarea.selectionStart !== 0 && beforeSelection != null && !beforeSelection.match(/\s/)) {
+      prefixToUse = " ".concat(prefixToUse);
+    }
+  }
+
+  selectedText = expandSelectedText(textarea, prefixToUse, suffixToUse, arg.multiline);
+  let selectionStart = textarea.selectionStart;
+  let selectionEnd = textarea.selectionEnd;
+  const hasReplaceNext = replaceNext.length > 0 && suffixToUse.indexOf(replaceNext) > -1 && selectedText.length > 0;
+
+  if (surroundWithNewlines) {
+    const ref = newlinesToSurroundSelectedText(textarea);
+    newlinesToAppend = ref.newlinesToAppend;
+    newlinesToPrepend = ref.newlinesToPrepend;
+    prefixToUse = newlinesToAppend + prefix;
+    suffixToUse += newlinesToPrepend;
+  }
+
+  if (selectedText.startsWith(prefixToUse) && selectedText.endsWith(suffixToUse)) {
+    const replacementText = selectedText.slice(prefixToUse.length, selectedText.length - suffixToUse.length);
+
+    if (originalSelectionStart === originalSelectionEnd) {
+      let position = originalSelectionStart - prefixToUse.length;
+      position = Math.max(position, selectionStart);
+      position = Math.min(position, selectionStart + replacementText.length);
+      selectionStart = selectionEnd = position;
+    } else {
+      selectionEnd = selectionStart + replacementText.length;
+    }
+
+    return {
+      text: replacementText,
+      selectionStart,
+      selectionEnd
+    };
+  } else if (!hasReplaceNext) {
+    let replacementText = prefixToUse + selectedText + suffixToUse;
+    selectionStart = originalSelectionStart + prefixToUse.length;
+    selectionEnd = originalSelectionEnd + prefixToUse.length;
+    const whitespaceEdges = selectedText.match(/^\s*|\s*$/g);
+
+    if (arg.trimFirst && whitespaceEdges) {
+      const leadingWhitespace = whitespaceEdges[0] || '';
+      const trailingWhitespace = whitespaceEdges[1] || '';
+      replacementText = leadingWhitespace + prefixToUse + selectedText.trim() + suffixToUse + trailingWhitespace;
+      selectionStart += leadingWhitespace.length;
+      selectionEnd -= trailingWhitespace.length;
+    }
+
+    return {
+      text: replacementText,
+      selectionStart,
+      selectionEnd
+    };
+  } else if (scanFor.length > 0 && selectedText.match(scanFor)) {
+    suffixToUse = suffixToUse.replace(replaceNext, selectedText);
+    const replacementText = prefixToUse + suffixToUse;
+    selectionStart = selectionEnd = selectionStart + prefixToUse.length;
+    return {
+      text: replacementText,
+      selectionStart,
+      selectionEnd
+    };
+  } else {
+    const replacementText = prefixToUse + selectedText + suffixToUse;
+    selectionStart = selectionStart + prefixToUse.length + selectedText.length + suffixToUse.indexOf(replaceNext);
+    selectionEnd = selectionStart + replaceNext.length;
+    return {
+      text: replacementText,
+      selectionStart,
+      selectionEnd
+    };
+  }
+}
+
+function multilineStyle(textarea, arg) {
+  const {
+    prefix,
+    suffix,
+    surroundWithNewlines
+  } = arg;
+  let text = textarea.value.slice(textarea.selectionStart, textarea.selectionEnd);
+  let selectionStart = textarea.selectionStart;
+  let selectionEnd = textarea.selectionEnd;
+  const lines = text.split('\n');
+  const undoStyle = lines.every(line => line.startsWith(prefix) && line.endsWith(suffix));
+
+  if (undoStyle) {
+    text = lines.map(line => line.slice(prefix.length, line.length - suffix.length)).join('\n');
+    selectionEnd = selectionStart + text.length;
+  } else {
+    text = lines.map(line => prefix + line + suffix).join('\n');
+
+    if (surroundWithNewlines) {
+      const {
+        newlinesToAppend,
+        newlinesToPrepend
+      } = newlinesToSurroundSelectedText(textarea);
+      selectionStart += newlinesToAppend.length;
+      selectionEnd = selectionStart + text.length;
+      text = newlinesToAppend + text + newlinesToPrepend;
+    }
+  }
+
+  return {
+    text,
+    selectionStart,
+    selectionEnd
+  };
+}
+
+function orderedList(textarea) {
+  const orderedListRegex = /^\d+\.\s+/;
+  const noInitialSelection = textarea.selectionStart === textarea.selectionEnd;
+  let selectionEnd;
+  let selectionStart;
+  let text = textarea.value.slice(textarea.selectionStart, textarea.selectionEnd);
+  let textToUnstyle = text;
+  let lines = text.split('\n');
+  let startOfLine, endOfLine;
+
+  if (noInitialSelection) {
+    const linesBefore = textarea.value.slice(0, textarea.selectionStart).split(/\n/);
+    startOfLine = textarea.selectionStart - linesBefore[linesBefore.length - 1].length;
+    endOfLine = wordSelectionEnd(textarea.value, textarea.selectionStart, true);
+    textToUnstyle = textarea.value.slice(startOfLine, endOfLine);
+  }
+
+  const linesToUnstyle = textToUnstyle.split('\n');
+  const undoStyling = linesToUnstyle.every(line => orderedListRegex.test(line));
+
+  if (undoStyling) {
+    lines = linesToUnstyle.map(line => line.replace(orderedListRegex, ''));
+    text = lines.join('\n');
+
+    if (noInitialSelection && startOfLine && endOfLine) {
+      const lengthDiff = linesToUnstyle[0].length - lines[0].length;
+      selectionStart = selectionEnd = textarea.selectionStart - lengthDiff;
+      textarea.selectionStart = startOfLine;
+      textarea.selectionEnd = endOfLine;
+    }
+  } else {
+    lines = function () {
+      let i;
+      let len;
+      let index;
+      const results = [];
+
+      for (index = i = 0, len = lines.length; i < len; index = ++i) {
+        const line = lines[index];
+        results.push("".concat(index + 1, ". ").concat(line));
+      }
+
+      return results;
+    }();
+
+    text = lines.join('\n');
+    const {
+      newlinesToAppend,
+      newlinesToPrepend
+    } = newlinesToSurroundSelectedText(textarea);
+    selectionStart = textarea.selectionStart + newlinesToAppend.length;
+    selectionEnd = selectionStart + text.length;
+    if (noInitialSelection) selectionStart = selectionEnd;
+    text = newlinesToAppend + text + newlinesToPrepend;
+  }
+
+  return {
+    text,
+    selectionStart,
+    selectionEnd
+  };
+}
+
+function applyStyle(button, stylesToApply) {
+  const toolbar = button.closest('markdown-toolbar');
+  if (!(toolbar instanceof MarkdownToolbarElement)) return;
+  const defaults = {
+    prefix: '',
+    suffix: '',
+    blockPrefix: '',
+    blockSuffix: '',
+    multiline: false,
+    replaceNext: '',
+    prefixSpace: false,
+    scanFor: '',
+    surroundWithNewlines: false,
+    orderedList: false,
+    trimFirst: false
+  };
+
+  const style = _objectSpread({}, defaults, stylesToApply);
+
+  const field = toolbar.field;
+
+  if (field) {
+    field.focus();
+    styleSelectedText(field, style);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (MarkdownToolbarElement);
+
+
+/***/ }),
+
 /***/ "./node_modules/asn1.js/lib/asn1.js":
 /*!******************************************!*\
   !*** ./node_modules/asn1.js/lib/asn1.js ***!
@@ -3614,6 +4306,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3624,7 +4393,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
   data: function data() {
     return {
       domain: config.domain,
-      total: 0
+      total: 0,
+      comment: "",
+      options: {
+        mention: false,
+        listol: false,
+        listtask: false,
+        listul: false,
+        quote: false,
+        style: "max-height:200px"
+      }
     };
   },
   mounted: function mounted() {
@@ -3672,6 +4450,125 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Markdown.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Markdown.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _github_markdown_toolbar_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @github/markdown-toolbar-element */ "./node_modules/@github/markdown-toolbar-element/dist/index.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value', 'options'],
+  data: function data() {
+    return {
+      setting: {
+        bold: true,
+        italic: true,
+        header: true,
+        quote: true,
+        code: true,
+        link: true,
+        listol: true,
+        listul: true,
+        listtask: true,
+        mention: true,
+        preview: true,
+        "class": "",
+        style: ""
+      },
+      preview: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (typeof this.options != "undefined") {
+      Object.assign(this.setting, this.options);
+    }
+
+    this.$nextTick(function () {
+      _this.$refs.textarea.setAttribute('style', 'height:' + _this.$el.scrollHeight + 'px;' + _this.setting.style);
+    });
+    this.$refs.textarea.addEventListener('input', this.resizeTextarea);
+  },
+  computed: {
+    parse: function parse() {
+      marked.setOptions({
+        /*highlight: (code) => {
+            return hljs.highlightAuto(code).value
+        },*/
+        sanitize: true
+      });
+      return this.value != null ? marked(this.value) : marked('');
+    }
+  },
+  methods: {
+    updateData: function updateData() {
+      var textareaValue = this.$refs.textarea.value;
+      this.$emit('input', "".concat(textareaValue));
+    },
+    resizeTextarea: function resizeTextarea(event) {
+      event.target.style.height = 'auto';
+      event.target.style.height = event.target.scrollHeight + 'px';
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SkillCourses.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SkillCourses.vue?vue&type=script&lang=js& ***!
@@ -3681,6 +4578,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -11665,6 +12563,25 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 // module
 exports.push([module.i, "\n@-webkit-keyframes plyr-progress{\nto{background-position:25px 0\n}\n}\n@keyframes plyr-progress{\nto{background-position:25px 0\n}\n}\n@-webkit-keyframes plyr-popup{\n0%{opacity:.5;-webkit-transform:translateY(10px);transform:translateY(10px)\n}\nto{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)\n}\n}\n@keyframes plyr-popup{\n0%{opacity:.5;-webkit-transform:translateY(10px);transform:translateY(10px)\n}\nto{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)\n}\n}\n@-webkit-keyframes plyr-fade-in{\nfrom{opacity:0\n}\nto{opacity:1\n}\n}\n@keyframes plyr-fade-in{\nfrom{opacity:0\n}\nto{opacity:1\n}\n}\n.plyr{-moz-osx-font-smoothing:auto;-webkit-font-smoothing:subpixel-antialiased;direction:ltr;font-family:Avenir,\"Avenir Next\",\"Helvetica Neue\",\"Segoe UI\",Helvetica,Arial,sans-serif;font-variant-numeric:tabular-nums;font-weight:500;line-height:1.7;max-width:100%;min-width:200px;position:relative;text-shadow:none;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease\n}\n.plyr audio,.plyr video{border-radius:inherit;height:auto;vertical-align:middle;width:100%\n}\n.plyr button{font:inherit;line-height:inherit;width:auto\n}\n.plyr:focus{outline:0\n}\n.plyr--full-ui{-webkit-box-sizing:border-box;box-sizing:border-box\n}\n.plyr--full-ui *,.plyr--full-ui ::after,.plyr--full-ui ::before{-webkit-box-sizing:inherit;box-sizing:inherit\n}\n.plyr--full-ui a,.plyr--full-ui button,.plyr--full-ui input,.plyr--full-ui label{-ms-touch-action:manipulation;touch-action:manipulation\n}\n.plyr__badge{background:#4f5b5f;border-radius:2px;color:#fff;font-size:9px;line-height:1;padding:3px 4px\n}\n.plyr--full-ui ::-webkit-media-text-track-container{display:none\n}\n.plyr__captions{-webkit-animation:plyr-fade-in .3s ease;animation:plyr-fade-in .3s ease;bottom:0;color:#fff;display:none;font-size:14px;left:0;padding:10px;position:absolute;text-align:center;-webkit-transition:-webkit-transform .4s ease-in-out;transition:-webkit-transform .4s ease-in-out;transition:transform .4s ease-in-out;transition:transform .4s ease-in-out, -webkit-transform .4s ease-in-out;width:100%\n}\n.plyr__captions .plyr__caption{background:rgba(0,0,0,.8);border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone;line-height:185%;padding:.2em .5em;white-space:pre-wrap\n}\n.plyr__captions .plyr__caption div{display:inline\n}\n.plyr__captions span:empty{display:none\n}\n@media (min-width:480px){\n.plyr__captions{font-size:16px;padding:20px\n}\n}\n@media (min-width:768px){\n.plyr__captions{font-size:18px\n}\n}\n.plyr--captions-active .plyr__captions{display:block\n}\n.plyr:not(.plyr--hide-controls) .plyr__controls:not(:empty)~.plyr__captions{-webkit-transform:translateY(-40px);transform:translateY(-40px)\n}\n.plyr__control{background:0 0;border:0;border-radius:3px;color:inherit;cursor:pointer;-ms-flex-negative:0;flex-shrink:0;overflow:visible;padding:7px;position:relative;-webkit-transition:all .3s ease;transition:all .3s ease\n}\n.plyr__control svg{display:block;fill:currentColor;height:18px;pointer-events:none;width:18px\n}\n.plyr__control:focus{outline:0\n}\n.plyr__control.plyr__tab-focus{-webkit-box-shadow:0 0 0 5px rgba(26,175,255,.5);box-shadow:0 0 0 5px rgba(26,175,255,.5);outline:0\n}\na.plyr__control{text-decoration:none\n}\na.plyr__control::after,a.plyr__control::before{display:none\n}\n.plyr__control.plyr__control--pressed .icon--not-pressed,.plyr__control.plyr__control--pressed .label--not-pressed,.plyr__control:not(.plyr__control--pressed) .icon--pressed,.plyr__control:not(.plyr__control--pressed) .label--pressed{display:none\n}\n.plyr--audio .plyr__control.plyr__tab-focus,.plyr--audio .plyr__control:hover,.plyr--audio .plyr__control[aria-expanded=true]{background:#1aafff;color:#fff\n}\n.plyr--video .plyr__control svg{-webkit-filter:drop-shadow(0 1px 1px rgba(0, 0, 0, .15));filter:drop-shadow(0 1px 1px rgba(0, 0, 0, .15))\n}\n.plyr--video .plyr__control.plyr__tab-focus,.plyr--video .plyr__control:hover,.plyr--video .plyr__control[aria-expanded=true]{background:#1aafff;color:#fff\n}\n.plyr__control--overlaid{background:rgba(26,175,255,.8);border:0;border-radius:100%;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.15);box-shadow:0 1px 1px rgba(0,0,0,.15);color:#fff;display:none;left:50%;padding:15px;position:absolute;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);z-index:2\n}\n.plyr__control--overlaid svg{left:2px;position:relative\n}\n.plyr__control--overlaid:focus,.plyr__control--overlaid:hover{background:#1aafff\n}\n.plyr--playing .plyr__control--overlaid{opacity:0;visibility:hidden\n}\n.plyr--full-ui.plyr--video .plyr__control--overlaid{display:block\n}\n.plyr--full-ui ::-webkit-media-controls{display:none\n}\n.plyr__controls{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;text-align:center\n}\n.plyr__controls .plyr__menu,.plyr__controls .plyr__progress,.plyr__controls .plyr__time,.plyr__controls .plyr__volume,.plyr__controls>.plyr__control{margin-left:5px\n}\n.plyr__controls .plyr__menu+.plyr__control,.plyr__controls .plyr__progress+.plyr__control,.plyr__controls>.plyr__control+.plyr__control,.plyr__controls>.plyr__control+.plyr__menu{margin-left:2px\n}\n.plyr__controls>.plyr__control:first-child,.plyr__controls>.plyr__control:first-child+[data-plyr=pause]{margin-left:0;margin-right:auto\n}\n.plyr__controls:empty{display:none\n}\n@media (min-width:480px){\n.plyr__controls .plyr__menu,.plyr__controls .plyr__progress,.plyr__controls .plyr__time,.plyr__controls .plyr__volume,.plyr__controls>.plyr__control{margin-left:10px\n}\n}\n.plyr--audio .plyr__controls{background:#fff;border-radius:inherit;color:#4f5b5f;padding:10px\n}\n.plyr--video .plyr__controls{background:-webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,0)),to(rgba(0,0,0,.7)));background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.7));border-bottom-left-radius:inherit;border-bottom-right-radius:inherit;bottom:0;color:#fff;left:0;padding:20px 5px 5px;position:absolute;right:0;-webkit-transition:opacity .4s ease-in-out,-webkit-transform .4s ease-in-out;transition:opacity .4s ease-in-out,-webkit-transform .4s ease-in-out;transition:opacity .4s ease-in-out,transform .4s ease-in-out;transition:opacity .4s ease-in-out,transform .4s ease-in-out,-webkit-transform .4s ease-in-out;z-index:3\n}\n@media (min-width:480px){\n.plyr--video .plyr__controls{padding:35px 10px 10px\n}\n}\n.plyr--video.plyr--hide-controls .plyr__controls{opacity:0;pointer-events:none;-webkit-transform:translateY(100%);transform:translateY(100%)\n}\n.plyr [data-plyr=airplay],.plyr [data-plyr=captions],.plyr [data-plyr=fullscreen],.plyr [data-plyr=pip]{display:none\n}\n.plyr--airplay-supported [data-plyr=airplay],.plyr--captions-enabled [data-plyr=captions],.plyr--fullscreen-enabled [data-plyr=fullscreen],.plyr--pip-supported [data-plyr=pip]{display:inline-block\n}\n.plyr__video-embed{height:0;padding-bottom:56.25%;position:relative\n}\n.plyr__video-embed iframe{border:0;height:100%;left:0;position:absolute;top:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100%\n}\n.plyr--full-ui .plyr__video-embed>.plyr__video-embed__container{padding-bottom:240%;position:relative;-webkit-transform:translateY(-38.28125%);transform:translateY(-38.28125%)\n}\n.plyr__menu{display:-webkit-box;display:-ms-flexbox;display:flex;position:relative\n}\n.plyr__menu .plyr__control svg{-webkit-transition:-webkit-transform .3s ease;transition:-webkit-transform .3s ease;transition:transform .3s ease;transition:transform .3s ease, -webkit-transform .3s ease\n}\n.plyr__menu .plyr__control[aria-expanded=true] svg{-webkit-transform:rotate(90deg);transform:rotate(90deg)\n}\n.plyr__menu .plyr__control[aria-expanded=true] .plyr__tooltip{display:none\n}\n.plyr__menu__container{-webkit-animation:plyr-popup .2s ease;animation:plyr-popup .2s ease;background:rgba(255,255,255,.9);border-radius:4px;bottom:100%;-webkit-box-shadow:0 1px 2px rgba(0,0,0,.15);box-shadow:0 1px 2px rgba(0,0,0,.15);color:#4f5b5f;font-size:16px;margin-bottom:10px;position:absolute;right:-3px;text-align:left;white-space:nowrap;z-index:3\n}\n.plyr__menu__container>div{overflow:hidden;-webkit-transition:height .35s cubic-bezier(.4,0,.2,1),width .35s cubic-bezier(.4,0,.2,1);transition:height .35s cubic-bezier(.4,0,.2,1),width .35s cubic-bezier(.4,0,.2,1)\n}\n.plyr__menu__container::after{border:4px solid transparent;border-top-color:rgba(255,255,255,.9);content:'';height:0;position:absolute;right:15px;top:100%;width:0\n}\n.plyr__menu__container [role=menu]{padding:7px\n}\n.plyr__menu__container [role=menuitem],.plyr__menu__container [role=menuitemradio]{margin-top:2px\n}\n.plyr__menu__container [role=menuitem]:first-child,.plyr__menu__container [role=menuitemradio]:first-child{margin-top:0\n}\n.plyr__menu__container .plyr__control{-webkit-box-align:center;-ms-flex-align:center;align-items:center;color:#4f5b5f;display:-webkit-box;display:-ms-flexbox;display:flex;font-size:14px;padding:4px 11px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100%\n}\n.plyr__menu__container .plyr__control>span{-webkit-box-align:inherit;-ms-flex-align:inherit;align-items:inherit;display:-webkit-box;display:-ms-flexbox;display:flex;width:100%\n}\n.plyr__menu__container .plyr__control::after{border:4px solid transparent;content:'';position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)\n}\n.plyr__menu__container .plyr__control--forward{padding-right:28px\n}\n.plyr__menu__container .plyr__control--forward::after{border-left-color:rgba(79,91,95,.8);right:5px\n}\n.plyr__menu__container .plyr__control--forward.plyr__tab-focus::after,.plyr__menu__container .plyr__control--forward:hover::after{border-left-color:currentColor\n}\n.plyr__menu__container .plyr__control--back{font-weight:500;margin:7px;margin-bottom:3px;padding-left:28px;position:relative;width:calc(100% - 14px)\n}\n.plyr__menu__container .plyr__control--back::after{border-right-color:rgba(79,91,95,.8);left:7px\n}\n.plyr__menu__container .plyr__control--back::before{background:#b7c5cd;-webkit-box-shadow:0 1px 0 #fff;box-shadow:0 1px 0 #fff;content:'';height:1px;left:0;margin-top:4px;overflow:hidden;position:absolute;right:0;top:100%\n}\n.plyr__menu__container .plyr__control--back.plyr__tab-focus::after,.plyr__menu__container .plyr__control--back:hover::after{border-right-color:currentColor\n}\n.plyr__menu__container .plyr__control[role=menuitemradio]{padding-left:7px\n}\n.plyr__menu__container .plyr__control[role=menuitemradio]::after,.plyr__menu__container .plyr__control[role=menuitemradio]::before{border-radius:100%\n}\n.plyr__menu__container .plyr__control[role=menuitemradio]::before{background:rgba(0,0,0,.1);content:'';display:block;-ms-flex-negative:0;flex-shrink:0;height:16px;margin-right:10px;-webkit-transition:all .3s ease;transition:all .3s ease;width:16px\n}\n.plyr__menu__container .plyr__control[role=menuitemradio]::after{background:#fff;border:0;height:6px;left:12px;opacity:0;top:50%;-webkit-transform:translateY(-50%) scale(0);transform:translateY(-50%) scale(0);-webkit-transition:opacity .3s ease,-webkit-transform .3s ease;transition:opacity .3s ease,-webkit-transform .3s ease;transition:transform .3s ease,opacity .3s ease;transition:transform .3s ease,opacity .3s ease,-webkit-transform .3s ease;width:6px\n}\n.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::before{background:#1aafff\n}\n.plyr__menu__container .plyr__control[role=menuitemradio][aria-checked=true]::after{opacity:1;-webkit-transform:translateY(-50%) scale(1);transform:translateY(-50%) scale(1)\n}\n.plyr__menu__container .plyr__control[role=menuitemradio].plyr__tab-focus::before,.plyr__menu__container .plyr__control[role=menuitemradio]:hover::before{background:rgba(0,0,0,.1)\n}\n.plyr__menu__container .plyr__menu__value{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;margin-left:auto;margin-right:-5px;overflow:hidden;padding-left:25px;pointer-events:none\n}\n.plyr--full-ui input[type=range]{-webkit-appearance:none;background:0 0;border:0;border-radius:26px;color:#1aafff;display:block;height:19px;margin:0;padding:0;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;width:100%\n}\n.plyr--full-ui input[type=range]::-webkit-slider-runnable-track{background:0 0;border:0;border-radius:2.5px;height:5px;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;-webkit-user-select:none;user-select:none;background-image:-webkit-gradient(linear,left top, right top,from(currentColor),to(transparent));background-image:linear-gradient(to right,currentColor var(--value,0),transparent var(--value,0))\n}\n.plyr--full-ui input[type=range]::-webkit-slider-thumb{background:#fff;border:0;border-radius:100%;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2);box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2);height:13px;position:relative;-webkit-transition:all .2s ease;transition:all .2s ease;width:13px;-webkit-appearance:none;margin-top:-4px\n}\n.plyr--full-ui input[type=range]::-moz-range-track{background:0 0;border:0;border-radius:2.5px;height:5px;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;-moz-user-select:none;user-select:none\n}\n.plyr--full-ui input[type=range]::-moz-range-thumb{background:#fff;border:0;border-radius:100%;box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2);height:13px;position:relative;-webkit-transition:all .2s ease;transition:all .2s ease;width:13px\n}\n.plyr--full-ui input[type=range]::-moz-range-progress{background:currentColor;border-radius:2.5px;height:5px\n}\n.plyr--full-ui input[type=range]::-ms-track{background:0 0;border:0;border-radius:2.5px;height:5px;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;-ms-user-select:none;user-select:none;color:transparent\n}\n.plyr--full-ui input[type=range]::-ms-fill-upper{background:0 0;border:0;border-radius:2.5px;height:5px;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;-ms-user-select:none;user-select:none\n}\n.plyr--full-ui input[type=range]::-ms-fill-lower{background:0 0;border:0;border-radius:2.5px;height:5px;-webkit-transition:-webkit-box-shadow .3s ease;transition:-webkit-box-shadow .3s ease;transition:box-shadow .3s ease;transition:box-shadow .3s ease, -webkit-box-shadow .3s ease;-ms-user-select:none;user-select:none;background:currentColor\n}\n.plyr--full-ui input[type=range]::-ms-thumb{background:#fff;border:0;border-radius:100%;box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2);height:13px;position:relative;-webkit-transition:all .2s ease;transition:all .2s ease;width:13px;margin-top:0\n}\n.plyr--full-ui input[type=range]::-ms-tooltip{display:none\n}\n.plyr--full-ui input[type=range]:focus{outline:0\n}\n.plyr--full-ui input[type=range]::-moz-focus-outer{border:0\n}\n.plyr--full-ui input[type=range].plyr__tab-focus::-webkit-slider-runnable-track{-webkit-box-shadow:0 0 0 5px rgba(26,175,255,.5);box-shadow:0 0 0 5px rgba(26,175,255,.5);outline:0\n}\n.plyr--full-ui input[type=range].plyr__tab-focus::-moz-range-track{box-shadow:0 0 0 5px rgba(26,175,255,.5);outline:0\n}\n.plyr--full-ui input[type=range].plyr__tab-focus::-ms-track{box-shadow:0 0 0 5px rgba(26,175,255,.5);outline:0\n}\n.plyr--full-ui.plyr--video input[type=range]::-webkit-slider-runnable-track{background-color:rgba(255,255,255,.25)\n}\n.plyr--full-ui.plyr--video input[type=range]::-moz-range-track{background-color:rgba(255,255,255,.25)\n}\n.plyr--full-ui.plyr--video input[type=range]::-ms-track{background-color:rgba(255,255,255,.25)\n}\n.plyr--full-ui.plyr--video input[type=range]:active::-webkit-slider-thumb{-webkit-box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(255,255,255,.5);box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(255,255,255,.5)\n}\n.plyr--full-ui.plyr--video input[type=range]:active::-moz-range-thumb{box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(255,255,255,.5)\n}\n.plyr--full-ui.plyr--video input[type=range]:active::-ms-thumb{box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(255,255,255,.5)\n}\n.plyr--full-ui.plyr--audio input[type=range]::-webkit-slider-runnable-track{background-color:rgba(183,197,205,.66)\n}\n.plyr--full-ui.plyr--audio input[type=range]::-moz-range-track{background-color:rgba(183,197,205,.66)\n}\n.plyr--full-ui.plyr--audio input[type=range]::-ms-track{background-color:rgba(183,197,205,.66)\n}\n.plyr--full-ui.plyr--audio input[type=range]:active::-webkit-slider-thumb{-webkit-box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(0,0,0,.1);box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(0,0,0,.1)\n}\n.plyr--full-ui.plyr--audio input[type=range]:active::-moz-range-thumb{box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(0,0,0,.1)\n}\n.plyr--full-ui.plyr--audio input[type=range]:active::-ms-thumb{box-shadow:0 1px 1px rgba(0,0,0,.15),0 0 0 1px rgba(47,52,61,.2),0 0 0 3px rgba(0,0,0,.1)\n}\n.plyr__poster{background-color:#000;background-position:50% 50%;background-repeat:no-repeat;background-size:contain;height:100%;left:0;opacity:0;position:absolute;top:0;-webkit-transition:opacity .2s ease;transition:opacity .2s ease;width:100%;z-index:1\n}\n.plyr--stopped.plyr__poster-enabled .plyr__poster{opacity:1\n}\n.plyr__time{font-size:14px\n}\n.plyr__time+.plyr__time::before{content:'\\2044';margin-right:10px\n}\n@media (max-width:767px){\n.plyr__time+.plyr__time{display:none\n}\n}\n.plyr--video .plyr__time{text-shadow:0 1px 1px rgba(0,0,0,.15)\n}\n.plyr__tooltip{background:rgba(255,255,255,.9);border-radius:3px;bottom:100%;-webkit-box-shadow:0 1px 2px rgba(0,0,0,.15);box-shadow:0 1px 2px rgba(0,0,0,.15);color:#4f5b5f;font-size:14px;font-weight:500;left:50%;line-height:1.3;margin-bottom:10px;opacity:0;padding:5px 7.5px;pointer-events:none;position:absolute;-webkit-transform:translate(-50%,10px) scale(.8);transform:translate(-50%,10px) scale(.8);-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transition:opacity .2s .1s ease,-webkit-transform .2s .1s ease;transition:opacity .2s .1s ease,-webkit-transform .2s .1s ease;transition:transform .2s .1s ease,opacity .2s .1s ease;transition:transform .2s .1s ease,opacity .2s .1s ease,-webkit-transform .2s .1s ease;white-space:nowrap;z-index:2\n}\n.plyr__tooltip::before{border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid rgba(255,255,255,.9);bottom:-4px;content:'';height:0;left:50%;position:absolute;-webkit-transform:translateX(-50%);transform:translateX(-50%);width:0;z-index:2\n}\n.plyr .plyr__control.plyr__tab-focus .plyr__tooltip,.plyr .plyr__control:hover .plyr__tooltip,.plyr__tooltip--visible{opacity:1;-webkit-transform:translate(-50%,0) scale(1);transform:translate(-50%,0) scale(1)\n}\n.plyr .plyr__control:hover .plyr__tooltip{z-index:3\n}\n.plyr__controls>.plyr__control:first-child .plyr__tooltip,.plyr__controls>.plyr__control:first-child+.plyr__control .plyr__tooltip{left:0;-webkit-transform:translate(0,10px) scale(.8);transform:translate(0,10px) scale(.8);-webkit-transform-origin:0 100%;transform-origin:0 100%\n}\n.plyr__controls>.plyr__control:first-child .plyr__tooltip::before,.plyr__controls>.plyr__control:first-child+.plyr__control .plyr__tooltip::before{left:16px\n}\n.plyr__controls>.plyr__control:last-child .plyr__tooltip{left:auto;right:0;-webkit-transform:translate(0,10px) scale(.8);transform:translate(0,10px) scale(.8);-webkit-transform-origin:100% 100%;transform-origin:100% 100%\n}\n.plyr__controls>.plyr__control:last-child .plyr__tooltip::before{left:auto;right:16px;-webkit-transform:translateX(50%);transform:translateX(50%)\n}\n.plyr__controls>.plyr__control:first-child .plyr__tooltip--visible,.plyr__controls>.plyr__control:first-child+.plyr__control .plyr__tooltip--visible,.plyr__controls>.plyr__control:first-child+.plyr__control.plyr__tab-focus .plyr__tooltip,.plyr__controls>.plyr__control:first-child+.plyr__control:hover .plyr__tooltip,.plyr__controls>.plyr__control:first-child.plyr__tab-focus .plyr__tooltip,.plyr__controls>.plyr__control:first-child:hover .plyr__tooltip,.plyr__controls>.plyr__control:last-child .plyr__tooltip--visible,.plyr__controls>.plyr__control:last-child.plyr__tab-focus .plyr__tooltip,.plyr__controls>.plyr__control:last-child:hover .plyr__tooltip{-webkit-transform:translate(0,0) scale(1);transform:translate(0,0) scale(1)\n}\n.plyr--video{background:#000;overflow:hidden\n}\n.plyr--video.plyr--menu-open{overflow:visible\n}\n.plyr__video-wrapper{background:#000;border-radius:inherit;overflow:hidden;position:relative;z-index:0\n}\n.plyr__progress{-webkit-box-flex:1;-ms-flex:1;flex:1;left:6.5px;margin-right:13px;position:relative\n}\n.plyr__progress input[type=range],.plyr__progress__buffer{margin-left:-6.5px;margin-right:-6.5px;width:calc(100% + 13px)\n}\n.plyr__progress input[type=range]{position:relative;z-index:2\n}\n.plyr__progress .plyr__tooltip{font-size:14px;left:0\n}\n.plyr__progress__buffer{-webkit-appearance:none;background:0 0;border:0;border-radius:100px;height:5px;left:0;margin-top:-2.5px;padding:0;position:absolute;top:50%\n}\n.plyr__progress__buffer::-webkit-progress-bar{background:0 0\n}\n.plyr__progress__buffer::-webkit-progress-value{background:currentColor;border-radius:100px;min-width:5px;-webkit-transition:width .2s ease;transition:width .2s ease\n}\n.plyr__progress__buffer::-moz-progress-bar{background:currentColor;border-radius:100px;min-width:5px;-webkit-transition:width .2s ease;transition:width .2s ease\n}\n.plyr__progress__buffer::-ms-fill{border-radius:100px;-webkit-transition:width .2s ease;transition:width .2s ease\n}\n.plyr--video .plyr__progress__buffer{-webkit-box-shadow:0 1px 1px rgba(0,0,0,.15);box-shadow:0 1px 1px rgba(0,0,0,.15);color:rgba(255,255,255,.25)\n}\n.plyr--audio .plyr__progress__buffer{color:rgba(183,197,205,.66)\n}\n.plyr--loading .plyr__progress__buffer{-webkit-animation:plyr-progress 1s linear infinite;animation:plyr-progress 1s linear infinite;background-image:linear-gradient(-45deg,rgba(47,52,61,.6) 25%,transparent 25%,transparent 50%,rgba(47,52,61,.6) 50%,rgba(47,52,61,.6) 75%,transparent 75%,transparent);background-repeat:repeat-x;background-size:25px 25px;color:transparent\n}\n.plyr--video.plyr--loading .plyr__progress__buffer{background-color:rgba(255,255,255,.25)\n}\n.plyr--audio.plyr--loading .plyr__progress__buffer{background-color:rgba(183,197,205,.66)\n}\n.plyr__volume{-webkit-box-align:center;-ms-flex-align:center;align-items:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;position:relative\n}\n.plyr__volume input[type=range]{margin-left:5px;position:relative;z-index:2\n}\n@media (min-width:480px){\n.plyr__volume{max-width:90px\n}\n}\n@media (min-width:768px){\n.plyr__volume{max-width:110px\n}\n}\n.plyr--is-ios .plyr__volume{display:none!important\n}\n.plyr--is-ios.plyr--vimeo [data-plyr=mute]{display:none!important\n}\n.plyr:-webkit-full-screen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-ms-fullscreen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-moz-full-screen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:fullscreen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-webkit-full-screen video{height:100%\n}\n.plyr:-ms-fullscreen video{height:100%\n}\n.plyr:-moz-full-screen video{height:100%\n}\n.plyr:fullscreen video{height:100%\n}\n.plyr:-webkit-full-screen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-ms-fullscreen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-moz-full-screen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:fullscreen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-webkit-full-screen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)\n}\n.plyr:-ms-fullscreen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;transform:translateY(-50%)\n}\n.plyr:-moz-full-screen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;transform:translateY(-50%)\n}\n.plyr:fullscreen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)\n}\n.plyr:-webkit-full-screen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-ms-fullscreen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-moz-full-screen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:fullscreen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-webkit-full-screen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-ms-fullscreen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-moz-full-screen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:fullscreen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-webkit-full-screen.plyr--hide-controls{cursor:none\n}\n.plyr:-ms-fullscreen.plyr--hide-controls{cursor:none\n}\n.plyr:-moz-full-screen.plyr--hide-controls{cursor:none\n}\n.plyr:fullscreen.plyr--hide-controls{cursor:none\n}\n@media (min-width:1024px){\n.plyr:-webkit-full-screen .plyr__captions{font-size:21px\n}\n.plyr:-ms-fullscreen .plyr__captions{font-size:21px\n}\n.plyr:-moz-full-screen .plyr__captions{font-size:21px\n}\n.plyr:fullscreen .plyr__captions{font-size:21px\n}\n}\n.plyr:-webkit-full-screen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-webkit-full-screen video{height:100%\n}\n.plyr:-webkit-full-screen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-webkit-full-screen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)\n}\n.plyr:-webkit-full-screen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-webkit-full-screen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-webkit-full-screen.plyr--hide-controls{cursor:none\n}\n@media (min-width:1024px){\n.plyr:-webkit-full-screen .plyr__captions{font-size:21px\n}\n}\n.plyr:-moz-full-screen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-moz-full-screen video{height:100%\n}\n.plyr:-moz-full-screen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-moz-full-screen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;transform:translateY(-50%)\n}\n.plyr:-moz-full-screen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-moz-full-screen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-moz-full-screen.plyr--hide-controls{cursor:none\n}\n@media (min-width:1024px){\n.plyr:-moz-full-screen .plyr__captions{font-size:21px\n}\n}\n.plyr:-ms-fullscreen{background:#000;border-radius:0!important;height:100%;margin:0;width:100%\n}\n.plyr:-ms-fullscreen video{height:100%\n}\n.plyr:-ms-fullscreen .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr:-ms-fullscreen.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;transform:translateY(-50%)\n}\n.plyr:-ms-fullscreen .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr:-ms-fullscreen .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr:-ms-fullscreen.plyr--hide-controls{cursor:none\n}\n@media (min-width:1024px){\n.plyr:-ms-fullscreen .plyr__captions{font-size:21px\n}\n}\n.plyr--fullscreen-fallback{background:#000;border-radius:0!important;height:100%;margin:0;width:100%;bottom:0;left:0;position:fixed;right:0;top:0;z-index:10000000\n}\n.plyr--fullscreen-fallback video{height:100%\n}\n.plyr--fullscreen-fallback .plyr__video-wrapper{height:100%;width:100%\n}\n.plyr--fullscreen-fallback.plyr--vimeo .plyr__video-wrapper{height:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)\n}\n.plyr--fullscreen-fallback .plyr__control .icon--exit-fullscreen{display:block\n}\n.plyr--fullscreen-fallback .plyr__control .icon--exit-fullscreen+svg{display:none\n}\n.plyr--fullscreen-fallback.plyr--hide-controls{cursor:none\n}\n@media (min-width:1024px){\n.plyr--fullscreen-fallback .plyr__captions{font-size:21px\n}\n}\n.plyr__ads{border-radius:inherit;bottom:0;cursor:pointer;left:0;overflow:hidden;position:absolute;right:0;top:0;z-index:-1\n}\n.plyr__ads>div,.plyr__ads>div iframe{height:100%;position:absolute;width:100%\n}\n.plyr__ads::after{background:rgba(47,52,61,.8);border-radius:2px;bottom:10px;color:#fff;content:attr(data-badge-text);font-size:11px;padding:2px 6px;pointer-events:none;position:absolute;right:10px;z-index:3\n}\n.plyr__ads::after:empty{display:none\n}\n.plyr__cues{background:currentColor;display:block;height:5px;left:0;margin:-2.5px 0 0;opacity:.8;position:absolute;top:50%;width:3px;z-index:3\n}\n.plyr__preview-thumb{background-color:rgba(255,255,255,.9);border-radius:3px;bottom:100%;-webkit-box-shadow:0 1px 2px rgba(0,0,0,.15);box-shadow:0 1px 2px rgba(0,0,0,.15);margin-bottom:10px;opacity:0;padding:3px;pointer-events:none;position:absolute;-webkit-transform:translate(0,10px) scale(.8);transform:translate(0,10px) scale(.8);-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-transition:opacity .2s .1s ease,-webkit-transform .2s .1s ease;transition:opacity .2s .1s ease,-webkit-transform .2s .1s ease;transition:transform .2s .1s ease,opacity .2s .1s ease;transition:transform .2s .1s ease,opacity .2s .1s ease,-webkit-transform .2s .1s ease;z-index:2\n}\n.plyr__preview-thumb--is-shown{opacity:1;-webkit-transform:translate(0,0) scale(1);transform:translate(0,0) scale(1)\n}\n.plyr__preview-thumb::before{border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid rgba(255,255,255,.9);bottom:-4px;content:'';height:0;left:50%;position:absolute;-webkit-transform:translateX(-50%);transform:translateX(-50%);width:0;z-index:2\n}\n.plyr__preview-thumb__image-container{background:#b7c5cd;border-radius:2px;overflow:hidden;position:relative;z-index:0\n}\n.plyr__preview-thumb__image-container img{height:100%;left:0;max-height:none;max-width:none;position:absolute;top:0;width:100%\n}\n.plyr__preview-thumb__time-container{bottom:6px;left:0;position:absolute;right:0;white-space:nowrap;z-index:3\n}\n.plyr__preview-thumb__time-container span{background-color:rgba(0,0,0,.55);border-radius:2px;color:#fff;font-size:14px;padding:3px 6px\n}\n.plyr__preview-scrubbing{bottom:0;-webkit-filter:blur(1px);filter:blur(1px);height:100%;left:0;margin:auto;opacity:0;overflow:hidden;position:absolute;right:0;top:0;-webkit-transition:opacity .3s ease;transition:opacity .3s ease;width:100%;z-index:1\n}\n.plyr__preview-scrubbing--is-shown{opacity:1\n}\n.plyr__preview-scrubbing img{height:100%;left:0;max-height:none;max-width:none;-o-object-fit:contain;object-fit:contain;position:absolute;top:0;width:100%\n}\n.plyr--no-transition{-webkit-transition:none!important;transition:none!important\n}\n.plyr__sr-only{clip:rect(1px,1px,1px,1px);overflow:hidden;border:0!important;height:1px!important;padding:0!important;position:absolute!important;width:1px!important\n}\n.plyr [hidden]{display:none!important\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@media (min-width: 1024px) {\n.plyr--video {\n    border-radius: 0.5rem;\n}\n}\n", ""]);
 
 // exports
 
@@ -36248,6 +37165,1718 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
+/***/ "./node_modules/marked/lib/marked.js":
+/*!*******************************************!*\
+  !*** ./node_modules/marked/lib/marked.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * marked - a markdown parser
+ * Copyright (c) 2011-2018, Christopher Jeffrey. (MIT Licensed)
+ * https://github.com/markedjs/marked
+ */
+
+;(function(root) {
+'use strict';
+
+/**
+ * Block-Level Grammar
+ */
+
+var block = {
+  newline: /^\n+/,
+  code: /^( {4}[^\n]+\n*)+/,
+  fences: /^ {0,3}(`{3,}|~{3,})([^`~\n]*)\n(?:|([\s\S]*?)\n)(?: {0,3}\1[~`]* *(?:\n+|$)|$)/,
+  hr: /^ {0,3}((?:- *){3,}|(?:_ *){3,}|(?:\* *){3,})(?:\n+|$)/,
+  heading: /^ {0,3}(#{1,6}) +([^\n]*?)(?: +#+)? *(?:\n+|$)/,
+  blockquote: /^( {0,3}> ?(paragraph|[^\n]*)(?:\n|$))+/,
+  list: /^( {0,3})(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
+  html: '^ {0,3}(?:' // optional indentation
+    + '<(script|pre|style)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n+|$)' // (1)
+    + '|comment[^\\n]*(\\n+|$)' // (2)
+    + '|<\\?[\\s\\S]*?\\?>\\n*' // (3)
+    + '|<![A-Z][\\s\\S]*?>\\n*' // (4)
+    + '|<!\\[CDATA\\[[\\s\\S]*?\\]\\]>\\n*' // (5)
+    + '|</?(tag)(?: +|\\n|/?>)[\\s\\S]*?(?:\\n{2,}|$)' // (6)
+    + '|<(?!script|pre|style)([a-z][\\w-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:\\n{2,}|$)' // (7) open tag
+    + '|</(?!script|pre|style)[a-z][\\w-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:\\n{2,}|$)' // (7) closing tag
+    + ')',
+  def: /^ {0,3}\[(label)\]: *\n? *<?([^\s>]+)>?(?:(?: +\n? *| *\n *)(title))? *(?:\n+|$)/,
+  nptable: noop,
+  table: noop,
+  lheading: /^([^\n]+)\n {0,3}(=+|-+) *(?:\n+|$)/,
+  // regex template, placeholders will be replaced according to different paragraph
+  // interruption rules of commonmark and the original markdown spec:
+  _paragraph: /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html)[^\n]+)*)/,
+  text: /^[^\n]+/
+};
+
+block._label = /(?!\s*\])(?:\\[\[\]]|[^\[\]])+/;
+block._title = /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/;
+block.def = edit(block.def)
+  .replace('label', block._label)
+  .replace('title', block._title)
+  .getRegex();
+
+block.bullet = /(?:[*+-]|\d{1,9}\.)/;
+block.item = /^( *)(bull) ?[^\n]*(?:\n(?!\1bull ?)[^\n]*)*/;
+block.item = edit(block.item, 'gm')
+  .replace(/bull/g, block.bullet)
+  .getRegex();
+
+block.list = edit(block.list)
+  .replace(/bull/g, block.bullet)
+  .replace('hr', '\\n+(?=\\1?(?:(?:- *){3,}|(?:_ *){3,}|(?:\\* *){3,})(?:\\n+|$))')
+  .replace('def', '\\n+(?=' + block.def.source + ')')
+  .getRegex();
+
+block._tag = 'address|article|aside|base|basefont|blockquote|body|caption'
+  + '|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption'
+  + '|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe'
+  + '|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option'
+  + '|p|param|section|source|summary|table|tbody|td|tfoot|th|thead|title|tr'
+  + '|track|ul';
+block._comment = /<!--(?!-?>)[\s\S]*?-->/;
+block.html = edit(block.html, 'i')
+  .replace('comment', block._comment)
+  .replace('tag', block._tag)
+  .replace('attribute', / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/)
+  .getRegex();
+
+block.paragraph = edit(block._paragraph)
+  .replace('hr', block.hr)
+  .replace('heading', ' {0,3}#{1,6} +')
+  .replace('|lheading', '') // setex headings don't interrupt commonmark paragraphs
+  .replace('blockquote', ' {0,3}>')
+  .replace('fences', ' {0,3}(?:`{3,}|~{3,})[^`\\n]*\\n')
+  .replace('list', ' {0,3}(?:[*+-]|1[.)]) ') // only lists starting from 1 can interrupt
+  .replace('html', '</?(?:tag)(?: +|\\n|/?>)|<(?:script|pre|style|!--)')
+  .replace('tag', block._tag) // pars can be interrupted by type (6) html blocks
+  .getRegex();
+
+block.blockquote = edit(block.blockquote)
+  .replace('paragraph', block.paragraph)
+  .getRegex();
+
+/**
+ * Normal Block Grammar
+ */
+
+block.normal = merge({}, block);
+
+/**
+ * GFM Block Grammar
+ */
+
+block.gfm = merge({}, block.normal, {
+  nptable: /^ *([^|\n ].*\|.*)\n *([-:]+ *\|[-| :]*)(?:\n((?:.*[^>\n ].*(?:\n|$))*)\n*|$)/,
+  table: /^ *\|(.+)\n *\|?( *[-:]+[-| :]*)(?:\n((?: *[^>\n ].*(?:\n|$))*)\n*|$)/
+});
+
+/**
+ * Pedantic grammar (original John Gruber's loose markdown specification)
+ */
+
+block.pedantic = merge({}, block.normal, {
+  html: edit(
+    '^ *(?:comment *(?:\\n|\\s*$)'
+    + '|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)' // closed tag
+    + '|<tag(?:"[^"]*"|\'[^\']*\'|\\s[^\'"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))')
+    .replace('comment', block._comment)
+    .replace(/tag/g, '(?!(?:'
+      + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub'
+      + '|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)'
+      + '\\b)\\w+(?!:|[^\\w\\s@]*@)\\b')
+    .getRegex(),
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
+  heading: /^ *(#{1,6}) *([^\n]+?) *(?:#+ *)?(?:\n+|$)/,
+  fences: noop, // fences not supported
+  paragraph: edit(block.normal._paragraph)
+    .replace('hr', block.hr)
+    .replace('heading', ' *#{1,6} *[^\n]')
+    .replace('lheading', block.lheading)
+    .replace('blockquote', ' {0,3}>')
+    .replace('|fences', '')
+    .replace('|list', '')
+    .replace('|html', '')
+    .getRegex()
+});
+
+/**
+ * Block Lexer
+ */
+
+function Lexer(options) {
+  this.tokens = [];
+  this.tokens.links = Object.create(null);
+  this.options = options || marked.defaults;
+  this.rules = block.normal;
+
+  if (this.options.pedantic) {
+    this.rules = block.pedantic;
+  } else if (this.options.gfm) {
+    this.rules = block.gfm;
+  }
+}
+
+/**
+ * Expose Block Rules
+ */
+
+Lexer.rules = block;
+
+/**
+ * Static Lex Method
+ */
+
+Lexer.lex = function(src, options) {
+  var lexer = new Lexer(options);
+  return lexer.lex(src);
+};
+
+/**
+ * Preprocessing
+ */
+
+Lexer.prototype.lex = function(src) {
+  src = src
+    .replace(/\r\n|\r/g, '\n')
+    .replace(/\t/g, '    ')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\u2424/g, '\n');
+
+  return this.token(src, true);
+};
+
+/**
+ * Lexing
+ */
+
+Lexer.prototype.token = function(src, top) {
+  src = src.replace(/^ +$/gm, '');
+  var next,
+      loose,
+      cap,
+      bull,
+      b,
+      item,
+      listStart,
+      listItems,
+      t,
+      space,
+      i,
+      tag,
+      l,
+      isordered,
+      istask,
+      ischecked;
+
+  while (src) {
+    // newline
+    if (cap = this.rules.newline.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[0].length > 1) {
+        this.tokens.push({
+          type: 'space'
+        });
+      }
+    }
+
+    // code
+    if (cap = this.rules.code.exec(src)) {
+      var lastToken = this.tokens[this.tokens.length - 1];
+      src = src.substring(cap[0].length);
+      // An indented code block cannot interrupt a paragraph.
+      if (lastToken && lastToken.type === 'paragraph') {
+        lastToken.text += '\n' + cap[0].trimRight();
+      } else {
+        cap = cap[0].replace(/^ {4}/gm, '');
+        this.tokens.push({
+          type: 'code',
+          codeBlockStyle: 'indented',
+          text: !this.options.pedantic
+            ? rtrim(cap, '\n')
+            : cap
+        });
+      }
+      continue;
+    }
+
+    // fences
+    if (cap = this.rules.fences.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'code',
+        lang: cap[2] ? cap[2].trim() : cap[2],
+        text: cap[3] || ''
+      });
+      continue;
+    }
+
+    // heading
+    if (cap = this.rules.heading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[1].length,
+        text: cap[2]
+      });
+      continue;
+    }
+
+    // table no leading pipe (gfm)
+    if (cap = this.rules.nptable.exec(src)) {
+      item = {
+        type: 'table',
+        header: splitCells(cap[1].replace(/^ *| *\| *$/g, '')),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3] ? cap[3].replace(/\n$/, '').split('\n') : []
+      };
+
+      if (item.header.length === item.align.length) {
+        src = src.substring(cap[0].length);
+
+        for (i = 0; i < item.align.length; i++) {
+          if (/^ *-+: *$/.test(item.align[i])) {
+            item.align[i] = 'right';
+          } else if (/^ *:-+: *$/.test(item.align[i])) {
+            item.align[i] = 'center';
+          } else if (/^ *:-+ *$/.test(item.align[i])) {
+            item.align[i] = 'left';
+          } else {
+            item.align[i] = null;
+          }
+        }
+
+        for (i = 0; i < item.cells.length; i++) {
+          item.cells[i] = splitCells(item.cells[i], item.header.length);
+        }
+
+        this.tokens.push(item);
+
+        continue;
+      }
+    }
+
+    // hr
+    if (cap = this.rules.hr.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'hr'
+      });
+      continue;
+    }
+
+    // blockquote
+    if (cap = this.rules.blockquote.exec(src)) {
+      src = src.substring(cap[0].length);
+
+      this.tokens.push({
+        type: 'blockquote_start'
+      });
+
+      cap = cap[0].replace(/^ *> ?/gm, '');
+
+      // Pass `top` to keep the current
+      // "toplevel" state. This is exactly
+      // how markdown.pl works.
+      this.token(cap, top);
+
+      this.tokens.push({
+        type: 'blockquote_end'
+      });
+
+      continue;
+    }
+
+    // list
+    if (cap = this.rules.list.exec(src)) {
+      src = src.substring(cap[0].length);
+      bull = cap[2];
+      isordered = bull.length > 1;
+
+      listStart = {
+        type: 'list_start',
+        ordered: isordered,
+        start: isordered ? +bull : '',
+        loose: false
+      };
+
+      this.tokens.push(listStart);
+
+      // Get each top-level item.
+      cap = cap[0].match(this.rules.item);
+
+      listItems = [];
+      next = false;
+      l = cap.length;
+      i = 0;
+
+      for (; i < l; i++) {
+        item = cap[i];
+
+        // Remove the list item's bullet
+        // so it is seen as the next token.
+        space = item.length;
+        item = item.replace(/^ *([*+-]|\d+\.) */, '');
+
+        // Outdent whatever the
+        // list item contains. Hacky.
+        if (~item.indexOf('\n ')) {
+          space -= item.length;
+          item = !this.options.pedantic
+            ? item.replace(new RegExp('^ {1,' + space + '}', 'gm'), '')
+            : item.replace(/^ {1,4}/gm, '');
+        }
+
+        // Determine whether the next list item belongs here.
+        // Backpedal if it does not belong in this list.
+        if (i !== l - 1) {
+          b = block.bullet.exec(cap[i + 1])[0];
+          if (bull.length > 1 ? b.length === 1
+            : (b.length > 1 || (this.options.smartLists && b !== bull))) {
+            src = cap.slice(i + 1).join('\n') + src;
+            i = l - 1;
+          }
+        }
+
+        // Determine whether item is loose or not.
+        // Use: /(^|\n)(?! )[^\n]+\n\n(?!\s*$)/
+        // for discount behavior.
+        loose = next || /\n\n(?!\s*$)/.test(item);
+        if (i !== l - 1) {
+          next = item.charAt(item.length - 1) === '\n';
+          if (!loose) loose = next;
+        }
+
+        if (loose) {
+          listStart.loose = true;
+        }
+
+        // Check for task list items
+        istask = /^\[[ xX]\] /.test(item);
+        ischecked = undefined;
+        if (istask) {
+          ischecked = item[1] !== ' ';
+          item = item.replace(/^\[[ xX]\] +/, '');
+        }
+
+        t = {
+          type: 'list_item_start',
+          task: istask,
+          checked: ischecked,
+          loose: loose
+        };
+
+        listItems.push(t);
+        this.tokens.push(t);
+
+        // Recurse.
+        this.token(item, false);
+
+        this.tokens.push({
+          type: 'list_item_end'
+        });
+      }
+
+      if (listStart.loose) {
+        l = listItems.length;
+        i = 0;
+        for (; i < l; i++) {
+          listItems[i].loose = true;
+        }
+      }
+
+      this.tokens.push({
+        type: 'list_end'
+      });
+
+      continue;
+    }
+
+    // html
+    if (cap = this.rules.html.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: this.options.sanitize
+          ? 'paragraph'
+          : 'html',
+        pre: !this.options.sanitizer
+          && (cap[1] === 'pre' || cap[1] === 'script' || cap[1] === 'style'),
+        text: this.options.sanitize ? (this.options.sanitizer ? this.options.sanitizer(cap[0]) : escape(cap[0])) : cap[0]
+      });
+      continue;
+    }
+
+    // def
+    if (top && (cap = this.rules.def.exec(src))) {
+      src = src.substring(cap[0].length);
+      if (cap[3]) cap[3] = cap[3].substring(1, cap[3].length - 1);
+      tag = cap[1].toLowerCase().replace(/\s+/g, ' ');
+      if (!this.tokens.links[tag]) {
+        this.tokens.links[tag] = {
+          href: cap[2],
+          title: cap[3]
+        };
+      }
+      continue;
+    }
+
+    // table (gfm)
+    if (cap = this.rules.table.exec(src)) {
+      item = {
+        type: 'table',
+        header: splitCells(cap[1].replace(/^ *| *\| *$/g, '')),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3] ? cap[3].replace(/\n$/, '').split('\n') : []
+      };
+
+      if (item.header.length === item.align.length) {
+        src = src.substring(cap[0].length);
+
+        for (i = 0; i < item.align.length; i++) {
+          if (/^ *-+: *$/.test(item.align[i])) {
+            item.align[i] = 'right';
+          } else if (/^ *:-+: *$/.test(item.align[i])) {
+            item.align[i] = 'center';
+          } else if (/^ *:-+ *$/.test(item.align[i])) {
+            item.align[i] = 'left';
+          } else {
+            item.align[i] = null;
+          }
+        }
+
+        for (i = 0; i < item.cells.length; i++) {
+          item.cells[i] = splitCells(
+            item.cells[i].replace(/^ *\| *| *\| *$/g, ''),
+            item.header.length);
+        }
+
+        this.tokens.push(item);
+
+        continue;
+      }
+    }
+
+    // lheading
+    if (cap = this.rules.lheading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'heading',
+        depth: cap[2].charAt(0) === '=' ? 1 : 2,
+        text: cap[1]
+      });
+      continue;
+    }
+
+    // top-level paragraph
+    if (top && (cap = this.rules.paragraph.exec(src))) {
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'paragraph',
+        text: cap[1].charAt(cap[1].length - 1) === '\n'
+          ? cap[1].slice(0, -1)
+          : cap[1]
+      });
+      continue;
+    }
+
+    // text
+    if (cap = this.rules.text.exec(src)) {
+      // Top-level should never reach here.
+      src = src.substring(cap[0].length);
+      this.tokens.push({
+        type: 'text',
+        text: cap[0]
+      });
+      continue;
+    }
+
+    if (src) {
+      throw new Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
+  }
+
+  return this.tokens;
+};
+
+/**
+ * Inline-Level Grammar
+ */
+
+var inline = {
+  escape: /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/,
+  autolink: /^<(scheme:[^\s\x00-\x1f<>]*|email)>/,
+  url: noop,
+  tag: '^comment'
+    + '|^</[a-zA-Z][\\w:-]*\\s*>' // self-closing tag
+    + '|^<[a-zA-Z][\\w-]*(?:attribute)*?\\s*/?>' // open tag
+    + '|^<\\?[\\s\\S]*?\\?>' // processing instruction, e.g. <?php ?>
+    + '|^<![a-zA-Z]+\\s[\\s\\S]*?>' // declaration, e.g. <!DOCTYPE html>
+    + '|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>', // CDATA section
+  link: /^!?\[(label)\]\(\s*(href)(?:\s+(title))?\s*\)/,
+  reflink: /^!?\[(label)\]\[(?!\s*\])((?:\\[\[\]]?|[^\[\]\\])+)\]/,
+  nolink: /^!?\[(?!\s*\])((?:\[[^\[\]]*\]|\\[\[\]]|[^\[\]])*)\](?:\[\])?/,
+  strong: /^__([^\s_])__(?!_)|^\*\*([^\s*])\*\*(?!\*)|^__([^\s][\s\S]*?[^\s])__(?!_)|^\*\*([^\s][\s\S]*?[^\s])\*\*(?!\*)/,
+  em: /^_([^\s_])_(?!_)|^\*([^\s*<\[])\*(?!\*)|^_([^\s<][\s\S]*?[^\s_])_(?!_|[^\spunctuation])|^_([^\s_<][\s\S]*?[^\s])_(?!_|[^\spunctuation])|^\*([^\s<"][\s\S]*?[^\s\*])\*(?!\*|[^\spunctuation])|^\*([^\s*"<\[][\s\S]*?[^\s])\*(?!\*)/,
+  code: /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/,
+  br: /^( {2,}|\\)\n(?!\s*$)/,
+  del: noop,
+  text: /^(`+|[^`])(?:[\s\S]*?(?:(?=[\\<!\[`*]|\b_|$)|[^ ](?= {2,}\n))|(?= {2,}\n))/
+};
+
+// list of punctuation marks from common mark spec
+// without ` and ] to workaround Rule 17 (inline code blocks/links)
+inline._punctuation = '!"#$%&\'()*+,\\-./:;<=>?@\\[^_{|}~';
+inline.em = edit(inline.em).replace(/punctuation/g, inline._punctuation).getRegex();
+
+inline._escapes = /\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/g;
+
+inline._scheme = /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/;
+inline._email = /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/;
+inline.autolink = edit(inline.autolink)
+  .replace('scheme', inline._scheme)
+  .replace('email', inline._email)
+  .getRegex();
+
+inline._attribute = /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/;
+
+inline.tag = edit(inline.tag)
+  .replace('comment', block._comment)
+  .replace('attribute', inline._attribute)
+  .getRegex();
+
+inline._label = /(?:\[[^\[\]]*\]|\\.|`[^`]*`|[^\[\]\\`])*?/;
+inline._href = /<(?:\\[<>]?|[^\s<>\\])*>|[^\s\x00-\x1f]*/;
+inline._title = /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/;
+
+inline.link = edit(inline.link)
+  .replace('label', inline._label)
+  .replace('href', inline._href)
+  .replace('title', inline._title)
+  .getRegex();
+
+inline.reflink = edit(inline.reflink)
+  .replace('label', inline._label)
+  .getRegex();
+
+/**
+ * Normal Inline Grammar
+ */
+
+inline.normal = merge({}, inline);
+
+/**
+ * Pedantic Inline Grammar
+ */
+
+inline.pedantic = merge({}, inline.normal, {
+  strong: /^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,
+  em: /^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/,
+  link: edit(/^!?\[(label)\]\((.*?)\)/)
+    .replace('label', inline._label)
+    .getRegex(),
+  reflink: edit(/^!?\[(label)\]\s*\[([^\]]*)\]/)
+    .replace('label', inline._label)
+    .getRegex()
+});
+
+/**
+ * GFM Inline Grammar
+ */
+
+inline.gfm = merge({}, inline.normal, {
+  escape: edit(inline.escape).replace('])', '~|])').getRegex(),
+  _extended_email: /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![-_])/,
+  url: /^((?:ftp|https?):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/,
+  _backpedal: /(?:[^?!.,:;*_~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_~)]+(?!$))+/,
+  del: /^~+(?=\S)([\s\S]*?\S)~+/,
+  text: /^(`+|[^`])(?:[\s\S]*?(?:(?=[\\<!\[`*~]|\b_|https?:\/\/|ftp:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))|(?= {2,}\n|[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))/
+});
+
+inline.gfm.url = edit(inline.gfm.url, 'i')
+  .replace('email', inline.gfm._extended_email)
+  .getRegex();
+/**
+ * GFM + Line Breaks Inline Grammar
+ */
+
+inline.breaks = merge({}, inline.gfm, {
+  br: edit(inline.br).replace('{2,}', '*').getRegex(),
+  text: edit(inline.gfm.text)
+    .replace('\\b_', '\\b_| {2,}\\n')
+    .replace(/\{2,\}/g, '*')
+    .getRegex()
+});
+
+/**
+ * Inline Lexer & Compiler
+ */
+
+function InlineLexer(links, options) {
+  this.options = options || marked.defaults;
+  this.links = links;
+  this.rules = inline.normal;
+  this.renderer = this.options.renderer || new Renderer();
+  this.renderer.options = this.options;
+
+  if (!this.links) {
+    throw new Error('Tokens array requires a `links` property.');
+  }
+
+  if (this.options.pedantic) {
+    this.rules = inline.pedantic;
+  } else if (this.options.gfm) {
+    if (this.options.breaks) {
+      this.rules = inline.breaks;
+    } else {
+      this.rules = inline.gfm;
+    }
+  }
+}
+
+/**
+ * Expose Inline Rules
+ */
+
+InlineLexer.rules = inline;
+
+/**
+ * Static Lexing/Compiling Method
+ */
+
+InlineLexer.output = function(src, links, options) {
+  var inline = new InlineLexer(links, options);
+  return inline.output(src);
+};
+
+/**
+ * Lexing/Compiling
+ */
+
+InlineLexer.prototype.output = function(src) {
+  var out = '',
+      link,
+      text,
+      href,
+      title,
+      cap,
+      prevCapZero;
+
+  while (src) {
+    // escape
+    if (cap = this.rules.escape.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += escape(cap[1]);
+      continue;
+    }
+
+    // tag
+    if (cap = this.rules.tag.exec(src)) {
+      if (!this.inLink && /^<a /i.test(cap[0])) {
+        this.inLink = true;
+      } else if (this.inLink && /^<\/a>/i.test(cap[0])) {
+        this.inLink = false;
+      }
+      if (!this.inRawBlock && /^<(pre|code|kbd|script)(\s|>)/i.test(cap[0])) {
+        this.inRawBlock = true;
+      } else if (this.inRawBlock && /^<\/(pre|code|kbd|script)(\s|>)/i.test(cap[0])) {
+        this.inRawBlock = false;
+      }
+
+      src = src.substring(cap[0].length);
+      out += this.options.sanitize
+        ? this.options.sanitizer
+          ? this.options.sanitizer(cap[0])
+          : escape(cap[0])
+        : cap[0];
+      continue;
+    }
+
+    // link
+    if (cap = this.rules.link.exec(src)) {
+      var lastParenIndex = findClosingBracket(cap[2], '()');
+      if (lastParenIndex > -1) {
+        var linkLen = 4 + cap[1].length + lastParenIndex;
+        cap[2] = cap[2].substring(0, lastParenIndex);
+        cap[0] = cap[0].substring(0, linkLen).trim();
+        cap[3] = '';
+      }
+      src = src.substring(cap[0].length);
+      this.inLink = true;
+      href = cap[2];
+      if (this.options.pedantic) {
+        link = /^([^'"]*[^\s])\s+(['"])(.*)\2/.exec(href);
+
+        if (link) {
+          href = link[1];
+          title = link[3];
+        } else {
+          title = '';
+        }
+      } else {
+        title = cap[3] ? cap[3].slice(1, -1) : '';
+      }
+      href = href.trim().replace(/^<([\s\S]*)>$/, '$1');
+      out += this.outputLink(cap, {
+        href: InlineLexer.escapes(href),
+        title: InlineLexer.escapes(title)
+      });
+      this.inLink = false;
+      continue;
+    }
+
+    // reflink, nolink
+    if ((cap = this.rules.reflink.exec(src))
+        || (cap = this.rules.nolink.exec(src))) {
+      src = src.substring(cap[0].length);
+      link = (cap[2] || cap[1]).replace(/\s+/g, ' ');
+      link = this.links[link.toLowerCase()];
+      if (!link || !link.href) {
+        out += cap[0].charAt(0);
+        src = cap[0].substring(1) + src;
+        continue;
+      }
+      this.inLink = true;
+      out += this.outputLink(cap, link);
+      this.inLink = false;
+      continue;
+    }
+
+    // strong
+    if (cap = this.rules.strong.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.strong(this.output(cap[4] || cap[3] || cap[2] || cap[1]));
+      continue;
+    }
+
+    // em
+    if (cap = this.rules.em.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.em(this.output(cap[6] || cap[5] || cap[4] || cap[3] || cap[2] || cap[1]));
+      continue;
+    }
+
+    // code
+    if (cap = this.rules.code.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.codespan(escape(cap[2].trim(), true));
+      continue;
+    }
+
+    // br
+    if (cap = this.rules.br.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.br();
+      continue;
+    }
+
+    // del (gfm)
+    if (cap = this.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this.renderer.del(this.output(cap[1]));
+      continue;
+    }
+
+    // autolink
+    if (cap = this.rules.autolink.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[2] === '@') {
+        text = escape(this.mangle(cap[1]));
+        href = 'mailto:' + text;
+      } else {
+        text = escape(cap[1]);
+        href = text;
+      }
+      out += this.renderer.link(href, null, text);
+      continue;
+    }
+
+    // url (gfm)
+    if (!this.inLink && (cap = this.rules.url.exec(src))) {
+      if (cap[2] === '@') {
+        text = escape(cap[0]);
+        href = 'mailto:' + text;
+      } else {
+        // do extended autolink path validation
+        do {
+          prevCapZero = cap[0];
+          cap[0] = this.rules._backpedal.exec(cap[0])[0];
+        } while (prevCapZero !== cap[0]);
+        text = escape(cap[0]);
+        if (cap[1] === 'www.') {
+          href = 'http://' + text;
+        } else {
+          href = text;
+        }
+      }
+      src = src.substring(cap[0].length);
+      out += this.renderer.link(href, null, text);
+      continue;
+    }
+
+    // text
+    if (cap = this.rules.text.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (this.inRawBlock) {
+        out += this.renderer.text(this.options.sanitize ? (this.options.sanitizer ? this.options.sanitizer(cap[0]) : escape(cap[0])) : cap[0]);
+      } else {
+        out += this.renderer.text(escape(this.smartypants(cap[0])));
+      }
+      continue;
+    }
+
+    if (src) {
+      throw new Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
+  }
+
+  return out;
+};
+
+InlineLexer.escapes = function(text) {
+  return text ? text.replace(InlineLexer.rules._escapes, '$1') : text;
+};
+
+/**
+ * Compile Link
+ */
+
+InlineLexer.prototype.outputLink = function(cap, link) {
+  var href = link.href,
+      title = link.title ? escape(link.title) : null;
+
+  return cap[0].charAt(0) !== '!'
+    ? this.renderer.link(href, title, this.output(cap[1]))
+    : this.renderer.image(href, title, escape(cap[1]));
+};
+
+/**
+ * Smartypants Transformations
+ */
+
+InlineLexer.prototype.smartypants = function(text) {
+  if (!this.options.smartypants) return text;
+  return text
+    // em-dashes
+    .replace(/---/g, '\u2014')
+    // en-dashes
+    .replace(/--/g, '\u2013')
+    // opening singles
+    .replace(/(^|[-\u2014/(\[{"\s])'/g, '$1\u2018')
+    // closing singles & apostrophes
+    .replace(/'/g, '\u2019')
+    // opening doubles
+    .replace(/(^|[-\u2014/(\[{\u2018\s])"/g, '$1\u201c')
+    // closing doubles
+    .replace(/"/g, '\u201d')
+    // ellipses
+    .replace(/\.{3}/g, '\u2026');
+};
+
+/**
+ * Mangle Links
+ */
+
+InlineLexer.prototype.mangle = function(text) {
+  if (!this.options.mangle) return text;
+  var out = '',
+      l = text.length,
+      i = 0,
+      ch;
+
+  for (; i < l; i++) {
+    ch = text.charCodeAt(i);
+    if (Math.random() > 0.5) {
+      ch = 'x' + ch.toString(16);
+    }
+    out += '&#' + ch + ';';
+  }
+
+  return out;
+};
+
+/**
+ * Renderer
+ */
+
+function Renderer(options) {
+  this.options = options || marked.defaults;
+}
+
+Renderer.prototype.code = function(code, infostring, escaped) {
+  var lang = (infostring || '').match(/\S*/)[0];
+  if (this.options.highlight) {
+    var out = this.options.highlight(code, lang);
+    if (out != null && out !== code) {
+      escaped = true;
+      code = out;
+    }
+  }
+
+  if (!lang) {
+    return '<pre><code>'
+      + (escaped ? code : escape(code, true))
+      + '</code></pre>';
+  }
+
+  return '<pre><code class="'
+    + this.options.langPrefix
+    + escape(lang, true)
+    + '">'
+    + (escaped ? code : escape(code, true))
+    + '</code></pre>\n';
+};
+
+Renderer.prototype.blockquote = function(quote) {
+  return '<blockquote>\n' + quote + '</blockquote>\n';
+};
+
+Renderer.prototype.html = function(html) {
+  return html;
+};
+
+Renderer.prototype.heading = function(text, level, raw, slugger) {
+  if (this.options.headerIds) {
+    return '<h'
+      + level
+      + ' id="'
+      + this.options.headerPrefix
+      + slugger.slug(raw)
+      + '">'
+      + text
+      + '</h'
+      + level
+      + '>\n';
+  }
+  // ignore IDs
+  return '<h' + level + '>' + text + '</h' + level + '>\n';
+};
+
+Renderer.prototype.hr = function() {
+  return this.options.xhtml ? '<hr/>\n' : '<hr>\n';
+};
+
+Renderer.prototype.list = function(body, ordered, start) {
+  var type = ordered ? 'ol' : 'ul',
+      startatt = (ordered && start !== 1) ? (' start="' + start + '"') : '';
+  return '<' + type + startatt + '>\n' + body + '</' + type + '>\n';
+};
+
+Renderer.prototype.listitem = function(text) {
+  return '<li>' + text + '</li>\n';
+};
+
+Renderer.prototype.checkbox = function(checked) {
+  return '<input '
+    + (checked ? 'checked="" ' : '')
+    + 'disabled="" type="checkbox"'
+    + (this.options.xhtml ? ' /' : '')
+    + '> ';
+};
+
+Renderer.prototype.paragraph = function(text) {
+  return '<p>' + text + '</p>\n';
+};
+
+Renderer.prototype.table = function(header, body) {
+  if (body) body = '<tbody>' + body + '</tbody>';
+
+  return '<table>\n'
+    + '<thead>\n'
+    + header
+    + '</thead>\n'
+    + body
+    + '</table>\n';
+};
+
+Renderer.prototype.tablerow = function(content) {
+  return '<tr>\n' + content + '</tr>\n';
+};
+
+Renderer.prototype.tablecell = function(content, flags) {
+  var type = flags.header ? 'th' : 'td';
+  var tag = flags.align
+    ? '<' + type + ' align="' + flags.align + '">'
+    : '<' + type + '>';
+  return tag + content + '</' + type + '>\n';
+};
+
+// span level renderer
+Renderer.prototype.strong = function(text) {
+  return '<strong>' + text + '</strong>';
+};
+
+Renderer.prototype.em = function(text) {
+  return '<em>' + text + '</em>';
+};
+
+Renderer.prototype.codespan = function(text) {
+  return '<code>' + text + '</code>';
+};
+
+Renderer.prototype.br = function() {
+  return this.options.xhtml ? '<br/>' : '<br>';
+};
+
+Renderer.prototype.del = function(text) {
+  return '<del>' + text + '</del>';
+};
+
+Renderer.prototype.link = function(href, title, text) {
+  href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
+  if (href === null) {
+    return text;
+  }
+  var out = '<a href="' + escape(href) + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += '>' + text + '</a>';
+  return out;
+};
+
+Renderer.prototype.image = function(href, title, text) {
+  href = cleanUrl(this.options.sanitize, this.options.baseUrl, href);
+  if (href === null) {
+    return text;
+  }
+
+  var out = '<img src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? '/>' : '>';
+  return out;
+};
+
+Renderer.prototype.text = function(text) {
+  return text;
+};
+
+/**
+ * TextRenderer
+ * returns only the textual part of the token
+ */
+
+function TextRenderer() {}
+
+// no need for block level renderers
+
+TextRenderer.prototype.strong =
+TextRenderer.prototype.em =
+TextRenderer.prototype.codespan =
+TextRenderer.prototype.del =
+TextRenderer.prototype.text = function(text) {
+  return text;
+};
+
+TextRenderer.prototype.link =
+TextRenderer.prototype.image = function(href, title, text) {
+  return '' + text;
+};
+
+TextRenderer.prototype.br = function() {
+  return '';
+};
+
+/**
+ * Parsing & Compiling
+ */
+
+function Parser(options) {
+  this.tokens = [];
+  this.token = null;
+  this.options = options || marked.defaults;
+  this.options.renderer = this.options.renderer || new Renderer();
+  this.renderer = this.options.renderer;
+  this.renderer.options = this.options;
+  this.slugger = new Slugger();
+}
+
+/**
+ * Static Parse Method
+ */
+
+Parser.parse = function(src, options) {
+  var parser = new Parser(options);
+  return parser.parse(src);
+};
+
+/**
+ * Parse Loop
+ */
+
+Parser.prototype.parse = function(src) {
+  this.inline = new InlineLexer(src.links, this.options);
+  // use an InlineLexer with a TextRenderer to extract pure text
+  this.inlineText = new InlineLexer(
+    src.links,
+    merge({}, this.options, { renderer: new TextRenderer() })
+  );
+  this.tokens = src.reverse();
+
+  var out = '';
+  while (this.next()) {
+    out += this.tok();
+  }
+
+  return out;
+};
+
+/**
+ * Next Token
+ */
+
+Parser.prototype.next = function() {
+  this.token = this.tokens.pop();
+  return this.token;
+};
+
+/**
+ * Preview Next Token
+ */
+
+Parser.prototype.peek = function() {
+  return this.tokens[this.tokens.length - 1] || 0;
+};
+
+/**
+ * Parse Text Tokens
+ */
+
+Parser.prototype.parseText = function() {
+  var body = this.token.text;
+
+  while (this.peek().type === 'text') {
+    body += '\n' + this.next().text;
+  }
+
+  return this.inline.output(body);
+};
+
+/**
+ * Parse Current Token
+ */
+
+Parser.prototype.tok = function() {
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        unescape(this.inlineText.output(this.token.text)),
+        this.slugger);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'table': {
+      var header = '',
+          body = '',
+          i,
+          row,
+          cell,
+          j;
+
+      // header
+      cell = '';
+      for (i = 0; i < this.token.header.length; i++) {
+        cell += this.renderer.tablecell(
+          this.inline.output(this.token.header[i]),
+          { header: true, align: this.token.align[i] }
+        );
+      }
+      header += this.renderer.tablerow(cell);
+
+      for (i = 0; i < this.token.cells.length; i++) {
+        row = this.token.cells[i];
+
+        cell = '';
+        for (j = 0; j < row.length; j++) {
+          cell += this.renderer.tablecell(
+            this.inline.output(row[j]),
+            { header: false, align: this.token.align[j] }
+          );
+        }
+
+        body += this.renderer.tablerow(cell);
+      }
+      return this.renderer.table(header, body);
+    }
+    case 'blockquote_start': {
+      body = '';
+
+      while (this.next().type !== 'blockquote_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      body = '';
+      var ordered = this.token.ordered,
+          start = this.token.start;
+
+      while (this.next().type !== 'list_end') {
+        body += this.tok();
+      }
+
+      return this.renderer.list(body, ordered, start);
+    }
+    case 'list_item_start': {
+      body = '';
+      var loose = this.token.loose;
+      var checked = this.token.checked;
+      var task = this.token.task;
+
+      if (this.token.task) {
+        body += this.renderer.checkbox(checked);
+      }
+
+      while (this.next().type !== 'list_item_end') {
+        body += !loose && this.token.type === 'text'
+          ? this.parseText()
+          : this.tok();
+      }
+      return this.renderer.listitem(body, task, checked);
+    }
+    case 'html': {
+      // TODO parse inline content if parameter markdown=1
+      return this.renderer.html(this.token.text);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
+    }
+    default: {
+      var errMsg = 'Token with "' + this.token.type + '" type was not found.';
+      if (this.options.silent) {
+        console.log(errMsg);
+      } else {
+        throw new Error(errMsg);
+      }
+    }
+  }
+};
+
+/**
+ * Slugger generates header id
+ */
+
+function Slugger() {
+  this.seen = {};
+}
+
+/**
+ * Convert string to unique id
+ */
+
+Slugger.prototype.slug = function(value) {
+  var slug = value
+    .toLowerCase()
+    .trim()
+    .replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,./:;<=>?@[\]^`{|}~]/g, '')
+    .replace(/\s/g, '-');
+
+  if (this.seen.hasOwnProperty(slug)) {
+    var originalSlug = slug;
+    do {
+      this.seen[originalSlug]++;
+      slug = originalSlug + '-' + this.seen[originalSlug];
+    } while (this.seen.hasOwnProperty(slug));
+  }
+  this.seen[slug] = 0;
+
+  return slug;
+};
+
+/**
+ * Helpers
+ */
+
+function escape(html, encode) {
+  if (encode) {
+    if (escape.escapeTest.test(html)) {
+      return html.replace(escape.escapeReplace, function(ch) { return escape.replacements[ch]; });
+    }
+  } else {
+    if (escape.escapeTestNoEncode.test(html)) {
+      return html.replace(escape.escapeReplaceNoEncode, function(ch) { return escape.replacements[ch]; });
+    }
+  }
+
+  return html;
+}
+
+escape.escapeTest = /[&<>"']/;
+escape.escapeReplace = /[&<>"']/g;
+escape.replacements = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;'
+};
+
+escape.escapeTestNoEncode = /[<>"']|&(?!#?\w+;)/;
+escape.escapeReplaceNoEncode = /[<>"']|&(?!#?\w+;)/g;
+
+function unescape(html) {
+  // explicitly match decimal, hex, and named HTML entities
+  return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/ig, function(_, n) {
+    n = n.toLowerCase();
+    if (n === 'colon') return ':';
+    if (n.charAt(0) === '#') {
+      return n.charAt(1) === 'x'
+        ? String.fromCharCode(parseInt(n.substring(2), 16))
+        : String.fromCharCode(+n.substring(1));
+    }
+    return '';
+  });
+}
+
+function edit(regex, opt) {
+  regex = regex.source || regex;
+  opt = opt || '';
+  return {
+    replace: function(name, val) {
+      val = val.source || val;
+      val = val.replace(/(^|[^\[])\^/g, '$1');
+      regex = regex.replace(name, val);
+      return this;
+    },
+    getRegex: function() {
+      return new RegExp(regex, opt);
+    }
+  };
+}
+
+function cleanUrl(sanitize, base, href) {
+  if (sanitize) {
+    try {
+      var prot = decodeURIComponent(unescape(href))
+        .replace(/[^\w:]/g, '')
+        .toLowerCase();
+    } catch (e) {
+      return null;
+    }
+    if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
+      return null;
+    }
+  }
+  if (base && !originIndependentUrl.test(href)) {
+    href = resolveUrl(base, href);
+  }
+  try {
+    href = encodeURI(href).replace(/%25/g, '%');
+  } catch (e) {
+    return null;
+  }
+  return href;
+}
+
+function resolveUrl(base, href) {
+  if (!baseUrls[' ' + base]) {
+    // we can ignore everything in base after the last slash of its path component,
+    // but we might need to add _that_
+    // https://tools.ietf.org/html/rfc3986#section-3
+    if (/^[^:]+:\/*[^/]*$/.test(base)) {
+      baseUrls[' ' + base] = base + '/';
+    } else {
+      baseUrls[' ' + base] = rtrim(base, '/', true);
+    }
+  }
+  base = baseUrls[' ' + base];
+
+  if (href.slice(0, 2) === '//') {
+    return base.replace(/:[\s\S]*/, ':') + href;
+  } else if (href.charAt(0) === '/') {
+    return base.replace(/(:\/*[^/]*)[\s\S]*/, '$1') + href;
+  } else {
+    return base + href;
+  }
+}
+var baseUrls = {};
+var originIndependentUrl = /^$|^[a-z][a-z0-9+.-]*:|^[?#]/i;
+
+function noop() {}
+noop.exec = noop;
+
+function merge(obj) {
+  var i = 1,
+      target,
+      key;
+
+  for (; i < arguments.length; i++) {
+    target = arguments[i];
+    for (key in target) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
+        obj[key] = target[key];
+      }
+    }
+  }
+
+  return obj;
+}
+
+function splitCells(tableRow, count) {
+  // ensure that every cell-delimiting pipe has a space
+  // before it to distinguish it from an escaped pipe
+  var row = tableRow.replace(/\|/g, function(match, offset, str) {
+        var escaped = false,
+            curr = offset;
+        while (--curr >= 0 && str[curr] === '\\') escaped = !escaped;
+        if (escaped) {
+          // odd number of slashes means | is escaped
+          // so we leave it alone
+          return '|';
+        } else {
+          // add space before unescaped |
+          return ' |';
+        }
+      }),
+      cells = row.split(/ \|/),
+      i = 0;
+
+  if (cells.length > count) {
+    cells.splice(count);
+  } else {
+    while (cells.length < count) cells.push('');
+  }
+
+  for (; i < cells.length; i++) {
+    // leading or trailing whitespace is ignored per the gfm spec
+    cells[i] = cells[i].trim().replace(/\\\|/g, '|');
+  }
+  return cells;
+}
+
+// Remove trailing 'c's. Equivalent to str.replace(/c*$/, '').
+// /c*$/ is vulnerable to REDOS.
+// invert: Remove suffix of non-c chars instead. Default falsey.
+function rtrim(str, c, invert) {
+  if (str.length === 0) {
+    return '';
+  }
+
+  // Length of suffix matching the invert condition.
+  var suffLen = 0;
+
+  // Step left until we fail to match the invert condition.
+  while (suffLen < str.length) {
+    var currChar = str.charAt(str.length - suffLen - 1);
+    if (currChar === c && !invert) {
+      suffLen++;
+    } else if (currChar !== c && invert) {
+      suffLen++;
+    } else {
+      break;
+    }
+  }
+
+  return str.substr(0, str.length - suffLen);
+}
+
+function findClosingBracket(str, b) {
+  if (str.indexOf(b[1]) === -1) {
+    return -1;
+  }
+  var level = 0;
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] === '\\') {
+      i++;
+    } else if (str[i] === b[0]) {
+      level++;
+    } else if (str[i] === b[1]) {
+      level--;
+      if (level < 0) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}
+
+function checkSanitizeDeprecation(opt) {
+  if (opt && opt.sanitize && !opt.silent) {
+    console.warn('marked(): sanitize and sanitizer parameters are deprecated since version 0.7.0, should not be used and will be removed in the future. Read more here: https://marked.js.org/#/USING_ADVANCED.md#options');
+  }
+}
+
+/**
+ * Marked
+ */
+
+function marked(src, opt, callback) {
+  // throw error in case of non string input
+  if (typeof src === 'undefined' || src === null) {
+    throw new Error('marked(): input parameter is undefined or null');
+  }
+  if (typeof src !== 'string') {
+    throw new Error('marked(): input parameter is of type '
+      + Object.prototype.toString.call(src) + ', string expected');
+  }
+
+  if (callback || typeof opt === 'function') {
+    if (!callback) {
+      callback = opt;
+      opt = null;
+    }
+
+    opt = merge({}, marked.defaults, opt || {});
+    checkSanitizeDeprecation(opt);
+
+    var highlight = opt.highlight,
+        tokens,
+        pending,
+        i = 0;
+
+    try {
+      tokens = Lexer.lex(src, opt);
+    } catch (e) {
+      return callback(e);
+    }
+
+    pending = tokens.length;
+
+    var done = function(err) {
+      if (err) {
+        opt.highlight = highlight;
+        return callback(err);
+      }
+
+      var out;
+
+      try {
+        out = Parser.parse(tokens, opt);
+      } catch (e) {
+        err = e;
+      }
+
+      opt.highlight = highlight;
+
+      return err
+        ? callback(err)
+        : callback(null, out);
+    };
+
+    if (!highlight || highlight.length < 3) {
+      return done();
+    }
+
+    delete opt.highlight;
+
+    if (!pending) return done();
+
+    for (; i < tokens.length; i++) {
+      (function(token) {
+        if (token.type !== 'code') {
+          return --pending || done();
+        }
+        return highlight(token.text, token.lang, function(err, code) {
+          if (err) return done(err);
+          if (code == null || code === token.text) {
+            return --pending || done();
+          }
+          token.text = code;
+          token.escaped = true;
+          --pending || done();
+        });
+      })(tokens[i]);
+    }
+
+    return;
+  }
+  try {
+    if (opt) opt = merge({}, marked.defaults, opt);
+    checkSanitizeDeprecation(opt);
+    return Parser.parse(Lexer.lex(src, opt), opt);
+  } catch (e) {
+    e.message += '\nPlease report this to https://github.com/markedjs/marked.';
+    if ((opt || marked.defaults).silent) {
+      return '<p>An error occurred:</p><pre>'
+        + escape(e.message + '', true)
+        + '</pre>';
+    }
+    throw e;
+  }
+}
+
+/**
+ * Options
+ */
+
+marked.options =
+marked.setOptions = function(opt) {
+  merge(marked.defaults, opt);
+  return marked;
+};
+
+marked.getDefaults = function() {
+  return {
+    baseUrl: null,
+    breaks: false,
+    gfm: true,
+    headerIds: true,
+    headerPrefix: '',
+    highlight: null,
+    langPrefix: 'language-',
+    mangle: true,
+    pedantic: false,
+    renderer: new Renderer(),
+    sanitize: false,
+    sanitizer: null,
+    silent: false,
+    smartLists: false,
+    smartypants: false,
+    xhtml: false
+  };
+};
+
+marked.defaults = marked.getDefaults();
+
+/**
+ * Expose
+ */
+
+marked.Parser = Parser;
+marked.parser = Parser.parse;
+
+marked.Renderer = Renderer;
+marked.TextRenderer = TextRenderer;
+
+marked.Lexer = Lexer;
+marked.lexer = Lexer.lex;
+
+marked.InlineLexer = InlineLexer;
+marked.inlineLexer = InlineLexer.output;
+
+marked.Slugger = Slugger;
+
+marked.parse = marked;
+
+if (true) {
+  module.exports = marked;
+} else {}
+})(this || (typeof window !== 'undefined' ? window : global));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/md5.js/index.js":
 /*!**************************************!*\
   !*** ./node_modules/md5.js/index.js ***!
@@ -42302,6 +44931,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./LessonComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -46182,162 +48841,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    { staticClass: "mx-auto p-0 lg:p-2 xl:pl-20 xl:pr-20 bg-gray-200" },
-    [
-      _c("div", { staticClass: "flex justify-content flex-wrap mx-auto" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "flex-grow self-start hidden lg:block bg-white shadow-lg mr-4 collection ml-auto rounded-lg overflow-y-scroll"
-          },
-          [
-            _c(
-              "ul",
-              {
-                staticClass:
-                  "flex lesson flex-col w-full list-reset select-none",
-                class: _vm.course.skill.slug
-              },
-              [
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2",
-                    class: _vm.course.skill.slug
-                  },
-                  [
-                    _vm.course.icon != null
-                      ? _c("img", {
-                          staticClass:
-                            "bg-black-trans p-1 flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
-                          attrs: {
-                            src:
-                              "data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC00MjEuODMyYy0yNC44NTkgMC00NS4wODQgMjAuMjI1LTQ1LjA4NCA0NS4wODR2MzY2LjIyNmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2YwZjlmZiIvPjxwYXRoIGQ9Im0yMzEuNDE4IDI2Ny4wOTd2LTIzOS4yOTRoLTE4Ni4zMzRjLTI0Ljg1OSAwLTQ1LjA4NCAyMC4yMjUtNDUuMDg0IDQ1LjA4NHYxOTQuMjF6IiBmaWxsPSIjNDA2YmQ0Ii8+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC0yMTAuOTE2djQ1Ni4zOTRoMjEwLjkxNmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2NlZTVmNSIvPjxwYXRoIGQ9Im0wIDI2Mi42NDd2MTc2LjQ2NmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTE3Ni40NjZ6IiBmaWxsPSIjZjQwMDU1Ii8+PHBhdGggZD0ibTI1NiAyNjIuNjQ3djIyMS41NWgyMTAuOTE2YzI0Ljg1OSAwIDQ1LjA4NC0yMC4yMjUgNDUuMDg0LTQ1LjA4NHYtMTc2LjQ2NnoiIGZpbGw9IiNjMjAwNDQiLz48cGF0aCBkPSJtMTQ5LjE0OSAxNTkuNzc1IDI2Ljg2LTE5LjUxNWM1LjMtMy44NTEgMi41NzYtMTIuMjM0LTMuOTc1LTEyLjIzNGgtMzMuMjAxYy0yLjkzIDAtNS41MjctMS44ODctNi40MzItNC42NzNsLTEwLjI2LTMxLjU3NmMtMi4wMjUtNi4yMzEtMTAuODQtNi4yMzEtMTIuODY0IDBsLTEwLjI2IDMxLjU3NmMtLjkwNSAyLjc4Ny0zLjUwMiA0LjY3My02LjQzMiA0LjY3M2gtMzMuMmMtNi41NTIgMC05LjI3NiA4LjM4NC0zLjk3NSAxMi4yMzRsMjYuODYgMTkuNTE1YzIuMzcgMS43MjIgMy4zNjIgNC43NzUgMi40NTcgNy41NjFsLTEwLjI2IDMxLjU3NmMtMi4wMjUgNi4yMzEgNS4xMDcgMTEuNDEyIDEwLjQwNyA3LjU2MWwyNi44Ni0xOS41MTVjMi4zNy0xLjcyMiA1LjU4LTEuNzIyIDcuOTUgMGwyNi44NiAxOS41MTVjNS4zIDMuODUxIDEyLjQzMi0xLjMzIDEwLjQwNy03LjU2MWwtMTAuMjYtMzEuNTc2Yy0uOTA0LTIuNzg2LjA4OC01LjgzOCAyLjQ1OC03LjU2MXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4="
-                          }
-                        })
-                      : _c(
-                          "div",
-                          {
-                            staticClass:
-                              "icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
-                          },
-                          [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(_vm.course.title.substr(0, 2)) +
-                                "\n          "
-                            )
-                          ]
-                        ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-1 min-w-0" }, [
-                      _c("div", { staticClass: "flex justify-between mb-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg",
-                            attrs: {
-                              href:
-                                _vm.domain + "skill/" + _vm.course.skill.slug
-                            }
-                          },
-                          [_vm._v(_vm._s(_vm.course.skill.name))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-sm text-grey-dark truncate" },
-                        [
-                          _c("span", { staticClass: "font-bold text-white" }, [
-                            _vm._v(_vm._s(_vm.course.title))
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.course.lessons, function(row, index) {
-                  return _c(
+  return _c("section", { staticClass: "mx-auto" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "w-full mx-auto bg-gray-200 p-0 lg:p-2 lg:pb-0 xl:pl-20 xl:pr-20"
+      },
+      [
+        _c("div", { staticClass: "flex justify-content flex-wrap mx-auto" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex-grow self-start hidden lg:block bg-white shadow-lg mr-4 collection ml-auto rounded-lg overflow-y-scroll"
+            },
+            [
+              _c(
+                "ul",
+                {
+                  staticClass:
+                    "flex lesson flex-col w-full list-reset select-none",
+                  class: _vm.course.skill.slug
+                },
+                [
+                  _c(
                     "li",
                     {
-                      key: index,
                       staticClass:
-                        "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer",
-                      class: row.id == _vm.lesson.id ? "bg-gray-200" : "",
-                      on: {
-                        click: function($event) {
-                          return _vm.showLesson(_vm.course.slug, row.order)
-                        }
-                      }
+                        "flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2",
+                      class: _vm.course.skill.slug
                     },
                     [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
-                        },
-                        [
-                          row.id == _vm.lesson.id
-                            ? _c(
-                                "svg",
-                                {
-                                  staticClass: "fa h-4 w-4 fill-current",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 448 512"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-                                    }
-                                  })
-                                ]
+                      _vm.course.icon != null
+                        ? _c("img", {
+                            staticClass:
+                              "p-1 bg-black-trans flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3",
+                            attrs: { src: _vm.domain + _vm.course.icon }
+                          })
+                        : _c(
+                            "div",
+                            {
+                              staticClass:
+                                "icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
+                            },
+                            [
+                              _vm._v(
+                                "\n              " +
+                                  _vm._s(_vm.course.title.substr(0, 2)) +
+                                  "\n            "
                               )
-                            : _c(
-                                "svg",
-                                {
-                                  staticClass: "fa h-4 w-4",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 448 512"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
-                                    }
-                                  })
-                                ]
-                              )
-                        ]
-                      ),
+                            ]
+                          ),
                       _vm._v(" "),
                       _c("div", { staticClass: "flex-1 min-w-0" }, [
                         _c(
                           "div",
                           { staticClass: "flex justify-between mb-1" },
                           [
-                            _c("h2", { staticClass: "font-semibold text-xs" }, [
-                              _vm._v("Lección " + _vm._s(row.order))
-                            ]),
-                            _vm._v(" "),
                             _c(
-                              "time",
-                              { staticClass: "text-xs text-grey-dark" },
-                              [_vm._v(_vm._s(row.duration))]
+                              "a",
+                              {
+                                staticClass:
+                                  "font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg",
+                                attrs: {
+                                  href:
+                                    _vm.domain +
+                                    "skill/" +
+                                    _vm.course.skill.slug
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.course.skill.name))]
                             )
                           ]
                         ),
@@ -46346,229 +48920,1022 @@ var render = function() {
                           "div",
                           { staticClass: "text-sm text-grey-dark truncate" },
                           [
-                            _c("span", { staticClass: "font-bold" }, [
-                              _vm._v(_vm._s(row.title))
-                            ])
+                            _c(
+                              "span",
+                              { staticClass: "font-bold text-white" },
+                              [_vm._v(_vm._s(_vm.course.title))]
+                            )
                           ]
                         )
                       ])
                     ]
-                  )
-                })
-              ],
-              2
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg"
-          },
-          [
-            _vm.lesson.server == "youtube" || _vm.lesson.server == "vimeo"
-              ? _c(
-                  "vue-plyr",
-                  {
-                    ref: "plyr",
-                    attrs: { emit: ["ended"] },
-                    on: { ended: _vm.ended }
-                  },
-                  [
-                    _c("div", {
-                      attrs: {
-                        "data-plyr-provider": _vm.lesson.server,
-                        "data-plyr-embed-id": _vm.lesson.url
-                      }
-                    })
-                  ]
-                )
-              : _c(
-                  "vue-plyr",
-                  {
-                    ref: "plyr",
-                    attrs: { emit: ["ended"] },
-                    on: { ended: _vm.ended }
-                  },
-                  [
-                    _c("video", {
-                      attrs: { poster: "poster.png", src: _vm.lesson.url }
-                    })
-                  ]
-                )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "flex justify-content flex-wrap mx-auto lg:hidden xl:hidden "
-        },
-        [
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.course.lessons, function(row, index) {
+                    return _c(
+                      "li",
+                      {
+                        key: index,
+                        staticClass:
+                          "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer",
+                        class: row.id == _vm.lesson.id ? "bg-gray-200" : "",
+                        on: {
+                          click: function($event) {
+                            return _vm.showLesson(_vm.course.slug, row.order)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
+                          },
+                          [
+                            row.id == _vm.lesson.id
+                              ? _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fa h-4 w-4 fill-current",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 448 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fa h-4 w-4",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 448 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                                      }
+                                    })
+                                  ]
+                                )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex-1 min-w-0" }, [
+                          _c(
+                            "div",
+                            { staticClass: "flex justify-between mb-1" },
+                            [
+                              _c(
+                                "h2",
+                                { staticClass: "font-semibold text-xs" },
+                                [_vm._v("Lección " + _vm._s(row.order))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "time",
+                                { staticClass: "text-xs text-grey-dark" },
+                                [_vm._v(_vm._s(row.duration))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "text-sm text-grey-dark truncate" },
+                            [
+                              _c("span", { staticClass: "font-bold" }, [
+                                _vm._v(_vm._s(row.title))
+                              ])
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  })
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
           _c(
-            "ul",
+            "div",
             {
-              staticClass: "flex lesson flex-col w-full list-reset select-none",
-              class: _vm.course.skill.slug
+              staticClass:
+                "flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg"
             },
             [
-              _c(
-                "li",
-                {
-                  staticClass:
-                    "flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2",
-                  class: _vm.course.skill.slug
-                },
-                [
-                  _vm.course.icon != null
-                    ? _c("img", {
-                        staticClass:
-                          "bg-black-trans p-1 flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
+              _vm.lesson.server == "youtube" || _vm.lesson.server == "vimeo"
+                ? _c(
+                    "vue-plyr",
+                    {
+                      ref: "plyr",
+                      staticClass: "rounded-none lg:rounded-lg",
+                      attrs: { emit: ["ended"] },
+                      on: { ended: _vm.ended }
+                    },
+                    [
+                      _c("div", {
                         attrs: {
-                          src:
-                            "data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC00MjEuODMyYy0yNC44NTkgMC00NS4wODQgMjAuMjI1LTQ1LjA4NCA0NS4wODR2MzY2LjIyNmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2YwZjlmZiIvPjxwYXRoIGQ9Im0yMzEuNDE4IDI2Ny4wOTd2LTIzOS4yOTRoLTE4Ni4zMzRjLTI0Ljg1OSAwLTQ1LjA4NCAyMC4yMjUtNDUuMDg0IDQ1LjA4NHYxOTQuMjF6IiBmaWxsPSIjNDA2YmQ0Ii8+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC0yMTAuOTE2djQ1Ni4zOTRoMjEwLjkxNmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2NlZTVmNSIvPjxwYXRoIGQ9Im0wIDI2Mi42NDd2MTc2LjQ2NmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTE3Ni40NjZ6IiBmaWxsPSIjZjQwMDU1Ii8+PHBhdGggZD0ibTI1NiAyNjIuNjQ3djIyMS41NWgyMTAuOTE2YzI0Ljg1OSAwIDQ1LjA4NC0yMC4yMjUgNDUuMDg0LTQ1LjA4NHYtMTc2LjQ2NnoiIGZpbGw9IiNjMjAwNDQiLz48cGF0aCBkPSJtMTQ5LjE0OSAxNTkuNzc1IDI2Ljg2LTE5LjUxNWM1LjMtMy44NTEgMi41NzYtMTIuMjM0LTMuOTc1LTEyLjIzNGgtMzMuMjAxYy0yLjkzIDAtNS41MjctMS44ODctNi40MzItNC42NzNsLTEwLjI2LTMxLjU3NmMtMi4wMjUtNi4yMzEtMTAuODQtNi4yMzEtMTIuODY0IDBsLTEwLjI2IDMxLjU3NmMtLjkwNSAyLjc4Ny0zLjUwMiA0LjY3My02LjQzMiA0LjY3M2gtMzMuMmMtNi41NTIgMC05LjI3NiA4LjM4NC0zLjk3NSAxMi4yMzRsMjYuODYgMTkuNTE1YzIuMzcgMS43MjIgMy4zNjIgNC43NzUgMi40NTcgNy41NjFsLTEwLjI2IDMxLjU3NmMtMi4wMjUgNi4yMzEgNS4xMDcgMTEuNDEyIDEwLjQwNyA3LjU2MWwyNi44Ni0xOS41MTVjMi4zNy0xLjcyMiA1LjU4LTEuNzIyIDcuOTUgMGwyNi44NiAxOS41MTVjNS4zIDMuODUxIDEyLjQzMi0xLjMzIDEwLjQwNy03LjU2MWwtMTAuMjYtMzEuNTc2Yy0uOTA0LTIuNzg2LjA4OC01LjgzOCAyLjQ1OC03LjU2MXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4="
+                          "data-plyr-provider": _vm.lesson.server,
+                          "data-plyr-embed-id": _vm.lesson.url
                         }
                       })
-                    : _c(
-                        "div",
-                        {
-                          staticClass:
-                            "icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
-                        },
-                        [
-                          _vm._v(
-                            "\n            " +
-                              _vm._s(_vm.course.title.substr(0, 2)) +
-                              "\n          "
+                    ]
+                  )
+                : _c(
+                    "vue-plyr",
+                    {
+                      ref: "plyr",
+                      staticClass: "rounded-none lg:rounded-lg",
+                      attrs: { emit: ["ended"] },
+                      on: { ended: _vm.ended }
+                    },
+                    [
+                      _c("video", {
+                        attrs: { poster: "poster.png", src: _vm.lesson.url }
+                      })
+                    ]
+                  )
+            ],
+            1
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "flex justify-content flex-wrap mx-auto lg:hidden xl:hidden p-3"
+      },
+      [
+        _c(
+          "ul",
+          {
+            staticClass:
+              "flex lesson flex-col w-full list-reset select-none shadow-lg rounded-lg",
+            class: _vm.course.skill.slug
+          },
+          [
+            _c(
+              "li",
+              {
+                staticClass:
+                  "flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2",
+                class: _vm.course.skill.slug
+              },
+              [
+                _vm.course.icon != null
+                  ? _c("img", {
+                      staticClass:
+                        "bg-black-trans p-1 flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3",
+                      attrs: { src: _vm.domain + _vm.course.icon }
+                    })
+                  : _c(
+                      "div",
+                      {
+                        staticClass:
+                          "icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-xl text-white mr-3"
+                      },
+                      [
+                        _vm._v(
+                          "\n            " +
+                            _vm._s(_vm.course.title.substr(0, 2)) +
+                            "15px\n          "
+                        )
+                      ]
+                    ),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-1 min-w-0" }, [
+                  _c("div", { staticClass: "flex justify-between mb-1" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg",
+                        attrs: {
+                          href: _vm.domain + "skill/" + _vm.course.skill.slug
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.course.skill.name))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-sm text-grey-dark truncate" },
+                    [
+                      _c("span", { staticClass: "font-bold text-white" }, [
+                        _vm._v(_vm._s(_vm.course.title))
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.course.lessons, function(row, index) {
+              return _c(
+                "li",
+                {
+                  key: index,
+                  staticClass:
+                    "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
+                  class: row.id == _vm.lesson.id ? "bg-gray-400" : "",
+                  on: {
+                    click: function($event) {
+                      return _vm.showLesson(_vm.course.slug, row.order)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
+                    },
+                    [
+                      row.id == _vm.lesson.id
+                        ? _c(
+                            "svg",
+                            {
+                              staticClass: "fa h-4 w-4 fill-current",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 448 512"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+                                }
+                              })
+                            ]
                           )
-                        ]
-                      ),
+                        : _c(
+                            "svg",
+                            {
+                              staticClass: "fa h-4 w-4",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 448 512"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                                }
+                              })
+                            ]
+                          )
+                    ]
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex-1 min-w-0" }, [
                     _c("div", { staticClass: "flex justify-between mb-1" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg",
-                          attrs: {
-                            href: _vm.domain + "skill/" + _vm.course.skill.slug
-                          }
-                        },
-                        [_vm._v(_vm._s(_vm.course.skill.name))]
-                      )
+                      _c("h2", { staticClass: "font-semibold text-xs" }, [
+                        _vm._v("Lección " + _vm._s(row.order))
+                      ]),
+                      _vm._v(" "),
+                      _c("time", { staticClass: "text-xs text-grey-dark" }, [
+                        _vm._v(_vm._s(row.duration))
+                      ])
                     ]),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "text-sm text-grey-dark truncate" },
                       [
-                        _c("span", { staticClass: "font-bold text-white" }, [
-                          _vm._v(_vm._s(_vm.course.title))
+                        _c("span", { staticClass: "font-bold" }, [
+                          _vm._v(_vm._s(row.title))
                         ])
                       ]
                     )
                   ])
                 ]
+              )
+            })
+          ],
+          2
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container mx-auto p-3", attrs: { id: "course" } },
+      [
+        _c("div", { staticClass: "flex justify-center flex-wrap" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "flex flex-wrap w-full lg:2-4/5 xl:w-4/5  items-start content-start mx-auto"
+            },
+            [
+              _c(
+                "h4",
+                {
+                  staticClass:
+                    "w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2"
+                },
+                [_vm._v("Notas de la lección")]
               ),
               _vm._v(" "),
-              _vm._l(_vm.course.lessons, function(row, index) {
-                return _c(
-                  "li",
-                  {
-                    key: index,
-                    staticClass:
-                      "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer",
-                    class: row.id == _vm.lesson.id ? "bg-gray-400" : "",
-                    on: {
-                      click: function($event) {
-                        return _vm.showLesson(_vm.course.slug, row.order)
-                      }
-                    }
-                  },
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "lesson-about w-full bg-white rounded-b-lg px-4 py-2 leading-relaxed shadow"
+                },
+                [_vm._v(_vm._s(_vm.lesson.content))]
+              ),
+              _vm._v(" "),
+              _c(
+                "h4",
+                {
+                  staticClass:
+                    "w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2 mt-3 mb-3"
+                },
+                [_vm._v("COMENTARIOS / DISCUSIÓN")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "comments w-full bg-white py-2" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "comment-box" },
                   [
+                    _c("markdown", {
+                      attrs: { options: _vm.options },
+                      model: {
+                        value: _vm.comment,
+                        callback: function($$v) {
+                          _vm.comment = $$v
+                        },
+                        expression: "comment"
+                      }
+                    }),
+                    _vm._v(" "),
                     _c(
-                      "div",
+                      "button",
                       {
                         staticClass:
-                          "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
+                          "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded"
                       },
                       [
-                        row.id == _vm.lesson.id
-                          ? _c(
-                              "svg",
-                              {
-                                staticClass: "fa h-4 w-4 fill-current",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 448 512"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-                                  }
-                                })
-                              ]
-                            )
-                          : _c(
-                              "svg",
-                              {
-                                staticClass: "fa h-4 w-4",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 448 512"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
-                                  }
-                                })
-                              ]
-                            )
+                        _vm._v(
+                          "\n              Enviar Comentario\n            "
+                        )
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-1 min-w-0" }, [
-                      _c("div", { staticClass: "flex justify-between mb-1" }, [
-                        _c("h2", { staticClass: "font-semibold text-xs" }, [
-                          _vm._v("Lección " + _vm._s(row.order))
-                        ]),
-                        _vm._v(" "),
-                        _c("time", { staticClass: "text-xs text-grey-dark" }, [
-                          _vm._v(_vm._s(row.duration))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-sm text-grey-dark truncate" },
-                        [
-                          _c("span", { staticClass: "font-bold" }, [
-                            _vm._v(_vm._s(row.title))
-                          ])
-                        ]
-                      )
-                    ])
-                  ]
+                    )
+                  ],
+                  1
                 )
-              })
-            ],
-            2
+              ])
+            ]
           )
-        ]
-      )
-    ]
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-start mb-4 text-sm" }, [
+      _c("img", {
+        staticClass: "w-10 h-10 rounded mr-3",
+        attrs: {
+          src:
+            "https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-1 overflow-hidden" }, [
+        _c("div", [
+          _c("span", { staticClass: "font-bold" }, [_vm._v("Adam Wathan")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-grey text-xs" }, [_vm._v("12:45")])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-black leading-normal" }, [
+          _vm._v(
+            "How are we supposed to control the marquee space without an utility for it? I propose this:"
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll"
+          },
+          [
+            _vm._v(
+              "\n                    .marquee-lightspeed { -webkit-marquee-speed: fast; }\n                    .marquee-lightspeeder { -webkit-marquee-speed: faster; }\n                  "
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "reply" }, [
+      _c("div", { staticClass: "flex items-start mb-4 text-sm" }, [
+        _c("img", {
+          staticClass: "w-10 h-10 rounded mr-3",
+          attrs: {
+            src:
+              "https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex-1 overflow-hidden" }, [
+          _c("div", [
+            _c("span", { staticClass: "font-bold" }, [_vm._v("Adam Wathan")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey text-xs" }, [_vm._v("12:45")])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-black leading-normal" }, [
+            _vm._v(
+              "How are we supposed to control the marquee space without an utility for it? I propose this:"
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll"
+            },
+            [
+              _vm._v(
+                "\n                      .marquee-lightspeed { -webkit-marquee-speed: fast; }\n                      .marquee-lightspeeder { -webkit-marquee-speed: faster; }\n                    "
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex items-start mb-4 text-sm" }, [
+        _c("img", {
+          staticClass: "w-10 h-10 rounded mr-3",
+          attrs: {
+            src:
+              "https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex-1 overflow-hidden" }, [
+          _c("div", [
+            _c("span", { staticClass: "font-bold" }, [_vm._v("Adam Wathan")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-grey text-xs" }, [_vm._v("12:45")])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-black leading-normal" }, [
+            _vm._v(
+              "How are we supposed to control the marquee space without an utility for it? I propose this:"
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll"
+            },
+            [
+              _vm._v(
+                "\n                      .marquee-lightspeed { -webkit-marquee-speed: fast; }\n                      .marquee-lightspeeder { -webkit-marquee-speed: faster; }\n                    "
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex items-start mb-4 text-sm" }, [
+      _c("img", {
+        staticClass: "w-10 h-10 rounded mr-3",
+        attrs: {
+          src:
+            "https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-1 overflow-hidden" }, [
+        _c("div", [
+          _c("span", { staticClass: "font-bold" }, [_vm._v("David Hemphill")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-grey text-xs" }, [_vm._v("12:46")])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-black leading-normal" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "inline-block bg-blue-lightest text-blue no-underline",
+              attrs: { href: "#" }
+            },
+            [_vm._v("@Adam Wathan")]
+          ),
+          _vm._v(
+            " the size of the generated CSS is creating a singularity in space/time, we must stop adding more utilities before it's too late!"
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c& ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "flex flex-wrap" },
+    [
+      _c(
+        "markdown-toolbar",
+        {
+          staticClass: "markdown-toolbar w-full",
+          attrs: { for: "textarea_id" }
+        },
+        [
+          _c(
+            "md-bold",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.bold,
+                  expression: "setting.bold"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 384 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M333.49 238a122 122 0 0 0 27-65.21C367.87 96.49 308 32 233.42 32H34a16 16 0 0 0-16 16v48a16 16 0 0 0 16 16h31.87v288H34a16 16 0 0 0-16 16v48a16 16 0 0 0 16 16h209.32c70.8 0 134.14-51.75 141-122.4 4.74-48.45-16.39-92.06-50.83-119.6zM145.66 112h87.76a48 48 0 0 1 0 96h-87.76zm87.76 288h-87.76V288h87.76a56 56 0 0 1 0 112z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-header",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.header,
+                  expression: "setting.header"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M448 96v320h32a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H320a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h32V288H160v128h32a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H32a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h32V96H32a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h160a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16h-32v128h192V96h-32a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h160a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-italic",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.italic,
+                  expression: "setting.italic"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 320 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M320 48v32a16 16 0 0 1-16 16h-62.76l-80 320H208a16 16 0 0 1 16 16v32a16 16 0 0 1-16 16H16a16 16 0 0 1-16-16v-32a16 16 0 0 1 16-16h62.76l80-320H112a16 16 0 0 1-16-16V48a16 16 0 0 1 16-16h192a16 16 0 0 1 16 16z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-quote",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.quote,
+                  expression: "setting.quote"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M464 32H336c-26.5 0-48 21.5-48 48v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48zm-288 0H48C21.5 32 0 53.5 0 80v128c0 26.5 21.5 48 48 48h80v64c0 35.3-28.7 64-64 64h-8c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h8c88.4 0 160-71.6 160-160V80c0-26.5-21.5-48-48-48z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-code",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.code,
+                  expression: "setting.code"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 640 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M278.9 511.5l-61-17.7c-6.4-1.8-10-8.5-8.2-14.9L346.2 8.7c1.8-6.4 8.5-10 14.9-8.2l61 17.7c6.4 1.8 10 8.5 8.2 14.9L293.8 503.3c-1.9 6.4-8.5 10.1-14.9 8.2zm-114-112.2l43.5-46.4c4.6-4.9 4.3-12.7-.8-17.2L117 256l90.6-79.7c5.1-4.5 5.5-12.3.8-17.2l-43.5-46.4c-4.5-4.8-12.1-5.1-17-.5L3.8 247.2c-5.1 4.7-5.1 12.8 0 17.5l144.1 135.1c4.9 4.6 12.5 4.4 17-.5zm327.2.6l144.1-135.1c5.1-4.7 5.1-12.8 0-17.5L492.1 112.1c-4.8-4.5-12.4-4.3-17 .5L431.6 159c-4.6 4.9-4.3 12.7.8 17.2L523 256l-90.6 79.7c-5.1 4.5-5.5 12.3-.8 17.2l43.5 46.4c4.5 4.9 12.1 5.1 17 .6z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-link",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.link,
+                  expression: "setting.link"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-unordered-list",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.listol,
+                  expression: "setting.listol"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M48 48a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm0 160a48 48 0 1 0 48 48 48 48 0 0 0-48-48zm448 16H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-ordered-list",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.listul,
+                  expression: "setting.listul"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157.41 157.41 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09 0 4.72-4.2 8.22-14.36 8.22a41.54 41.54 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94 7.71 4.69 20.38 9.44 37 9.44 34.16 0 48.5-22.75 48.5-44.12-.03-14.38-9.12-29.76-28.73-34.88zM496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zM16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8zm-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44 0-29.06-25-39.56-44.47-39.56-21.36 0-33.8 10-40.46 18.75-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-task-list",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.listtask,
+                  expression: "setting.listtask"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M80 368H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm0-320H16A16 16 0 0 0 0 64v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16V64a16 16 0 0 0-16-16zm0 160H16a16 16 0 0 0-16 16v64a16 16 0 0 0 16 16h64a16 16 0 0 0 16-16v-64a16 16 0 0 0-16-16zm416 176H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm0-320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16zm0 160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "md-mention",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.setting.mention,
+                  expression: "setting.mention"
+                }
+              ],
+              staticClass: "button"
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M256 8C118.941 8 8 118.919 8 256c0 137.059 110.919 248 248 248 48.154 0 95.342-14.14 135.408-40.223 12.005-7.815 14.625-24.288 5.552-35.372l-10.177-12.433c-7.671-9.371-21.179-11.667-31.373-5.129C325.92 429.757 291.314 440 256 440c-101.458 0-184-82.542-184-184S154.542 72 256 72c100.139 0 184 57.619 184 160 0 38.786-21.093 79.742-58.17 83.693-17.349-.454-16.91-12.857-13.476-30.024l23.433-121.11C394.653 149.75 383.308 136 368.225 136h-44.981a13.518 13.518 0 0 0-13.432 11.993l-.01.092c-14.697-17.901-40.448-21.775-59.971-21.775-74.58 0-137.831 62.234-137.831 151.46 0 65.303 36.785 105.87 96 105.87 26.984 0 57.369-15.637 74.991-38.333 9.522 34.104 40.613 34.103 70.71 34.103C462.609 379.41 504 307.798 504 232 504 95.653 394.023 8 256 8zm-21.68 304.43c-22.249 0-36.07-15.623-36.07-40.771 0-44.993 30.779-72.729 58.63-72.729 22.292 0 35.601 15.241 35.601 40.77 0 45.061-33.875 72.73-58.161 72.73z"
+                    }
+                  })
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button",
+              on: {
+                click: function($event) {
+                  _vm.preview = !_vm.preview
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fa w-4 h-4 fill-current",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 576 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.preview,
+            expression: "!preview"
+          }
+        ],
+        ref: "textarea",
+        staticClass:
+          "appearance-none h-8 block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
+        class: _vm.setting.class,
+        style: _vm.setting.style,
+        attrs: { row: "1", id: "textarea_id" },
+        domProps: { value: _vm.value },
+        on: { input: _vm.updateData }
+      }),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.preview,
+            expression: "preview"
+          }
+        ],
+        staticClass:
+          "w-full border markdown-body border border-gray-500 rounded py-3 px-4 mb-3",
+        domProps: { innerHTML: _vm._s(_vm.parse) }
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -46611,8 +49978,25 @@ var render = function() {
                 attrs: { href: _vm.domain }
               },
               [
-                _c("i", { staticClass: "fa fa-arrow-left mr-2" }),
-                _vm._v(" IR A INICIO\n        ")
+                _c(
+                  "svg",
+                  {
+                    staticClass: "fa w-4 h-4 fill-current mr-2",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 448 512"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v("\n          IR A INICIO\n        ")
               ]
             ),
             _vm._v(" "),
@@ -48305,6 +51689,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
+window.marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
 
 window.Helper = new _Helper__WEBPACK_IMPORTED_MODULE_1__["default"]();
 
@@ -48320,6 +51705,7 @@ Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_3__["default"], options);
 Vue.component('skill-courses', __webpack_require__(/*! ./components/SkillCourses.vue */ "./resources/js/components/SkillCourses.vue")["default"]);
 Vue.component('course-component', __webpack_require__(/*! ./components/CourseComponent.vue */ "./resources/js/components/CourseComponent.vue")["default"]);
 Vue.component('lesson-component', __webpack_require__(/*! ./components/LessonComponent.vue */ "./resources/js/components/LessonComponent.vue")["default"]);
+Vue.component('markdown', __webpack_require__(/*! ./components/Markdown.vue */ "./resources/js/components/Markdown.vue")["default"]);
 var app = new Vue({
   store: _store__WEBPACK_IMPORTED_MODULE_0__["default"]
 }).$mount('#app');
@@ -48445,7 +51831,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LessonComponent_vue_vue_type_template_id_2a7e208a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=template&id=2a7e208a& */ "./resources/js/components/LessonComponent.vue?vue&type=template&id=2a7e208a&");
 /* harmony import */ var _LessonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/LessonComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LessonComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -48453,7 +51841,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _LessonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _LessonComponent_vue_vue_type_template_id_2a7e208a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _LessonComponent_vue_vue_type_template_id_2a7e208a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -48485,6 +51873,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./LessonComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "./resources/js/components/LessonComponent.vue?vue&type=template&id=2a7e208a&":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/LessonComponent.vue?vue&type=template&id=2a7e208a& ***!
@@ -48498,6 +51902,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_template_id_2a7e208a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LessonComponent_vue_vue_type_template_id_2a7e208a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Markdown.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Markdown.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Markdown.vue?vue&type=template&id=3c4dfa4c& */ "./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c&");
+/* harmony import */ var _Markdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Markdown.vue?vue&type=script&lang=js& */ "./resources/js/components/Markdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Markdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Markdown.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Markdown.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Markdown.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Markdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Markdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Markdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Markdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c& ***!
+  \*****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Markdown.vue?vue&type=template&id=3c4dfa4c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Markdown.vue?vue&type=template&id=3c4dfa4c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Markdown_vue_vue_type_template_id_3c4dfa4c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

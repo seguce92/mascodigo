@@ -1,63 +1,65 @@
 <template>
-  <section class="mx-auto p-0 lg:p-2 xl:pl-20 xl:pr-20 bg-gray-200">
-    <div class="flex justify-content flex-wrap mx-auto">
-      
-      <div class="flex-grow self-start hidden lg:block bg-white shadow-lg mr-4 collection ml-auto rounded-lg overflow-y-scroll">
-        <ul class="flex lesson flex-col w-full list-reset select-none" :class="course.skill.slug">
-          <li :class="course.skill.slug" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
-            <img v-if="course.icon != null" class="bg-black-trans p-1 flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3" 
-              src='data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC00MjEuODMyYy0yNC44NTkgMC00NS4wODQgMjAuMjI1LTQ1LjA4NCA0NS4wODR2MzY2LjIyNmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2YwZjlmZiIvPjxwYXRoIGQ9Im0yMzEuNDE4IDI2Ny4wOTd2LTIzOS4yOTRoLTE4Ni4zMzRjLTI0Ljg1OSAwLTQ1LjA4NCAyMC4yMjUtNDUuMDg0IDQ1LjA4NHYxOTQuMjF6IiBmaWxsPSIjNDA2YmQ0Ii8+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC0yMTAuOTE2djQ1Ni4zOTRoMjEwLjkxNmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2NlZTVmNSIvPjxwYXRoIGQ9Im0wIDI2Mi42NDd2MTc2LjQ2NmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTE3Ni40NjZ6IiBmaWxsPSIjZjQwMDU1Ii8+PHBhdGggZD0ibTI1NiAyNjIuNjQ3djIyMS41NWgyMTAuOTE2YzI0Ljg1OSAwIDQ1LjA4NC0yMC4yMjUgNDUuMDg0LTQ1LjA4NHYtMTc2LjQ2NnoiIGZpbGw9IiNjMjAwNDQiLz48cGF0aCBkPSJtMTQ5LjE0OSAxNTkuNzc1IDI2Ljg2LTE5LjUxNWM1LjMtMy44NTEgMi41NzYtMTIuMjM0LTMuOTc1LTEyLjIzNGgtMzMuMjAxYy0yLjkzIDAtNS41MjctMS44ODctNi40MzItNC42NzNsLTEwLjI2LTMxLjU3NmMtMi4wMjUtNi4yMzEtMTAuODQtNi4yMzEtMTIuODY0IDBsLTEwLjI2IDMxLjU3NmMtLjkwNSAyLjc4Ny0zLjUwMiA0LjY3My02LjQzMiA0LjY3M2gtMzMuMmMtNi41NTIgMC05LjI3NiA4LjM4NC0zLjk3NSAxMi4yMzRsMjYuODYgMTkuNTE1YzIuMzcgMS43MjIgMy4zNjIgNC43NzUgMi40NTcgNy41NjFsLTEwLjI2IDMxLjU3NmMtMi4wMjUgNi4yMzEgNS4xMDcgMTEuNDEyIDEwLjQwNyA3LjU2MWwyNi44Ni0xOS41MTVjMi4zNy0xLjcyMiA1LjU4LTEuNzIyIDcuOTUgMGwyNi44NiAxOS41MTVjNS4zIDMuODUxIDEyLjQzMi0xLjMzIDEwLjQwNy03LjU2MWwtMTAuMjYtMzEuNTc2Yy0uOTA0LTIuNzg2LjA4OC01LjgzOCAyLjQ1OC03LjU2MXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4='>
-            <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
-              {{ course.title.substr(0, 2) }}
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex justify-between mb-1">
-                <a :href="domain + 'skill/' + course.skill.slug" class="font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg">{{ course.skill.name }}</a>
+  <section class="mx-auto">
+    <div class="w-full mx-auto bg-gray-200 p-0 lg:p-2 lg:pb-0 xl:pl-20 xl:pr-20">
+      <div class="flex justify-content flex-wrap mx-auto">
+        
+        <div class="flex-grow self-start hidden lg:block bg-white shadow-lg mr-4 collection ml-auto rounded-lg overflow-y-scroll">
+          <ul class="flex lesson flex-col w-full list-reset select-none" :class="course.skill.slug">
+            <li :class="course.skill.slug" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
+              <img v-if="course.icon != null" class="p-1 bg-black-trans flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
+                :src="domain + course.icon">
+              <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
+                {{ course.title.substr(0, 2) }}
               </div>
-              <div class="text-sm text-grey-dark truncate">
-                <span class="font-bold text-white">{{ course.title }}</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between mb-1">
+                  <a :href="domain + 'skill/' + course.skill.slug" class="font-semibold text-xs cursor-pointer text-white skill px-2 rounded-lg">{{ course.skill.name }}</a>
+                </div>
+                <div class="text-sm text-grey-dark truncate">
+                  <span class="font-bold text-white">{{ course.title }}</span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li v-for="(row, index) in course.lessons"
-              :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer"
-              :class="row.id == lesson.id ? 'bg-gray-200' : ''" v-on:click="showLesson(course.slug, row.order)">
-            <div class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
-              <svg v-if="row.id == lesson.id" class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
-              <svg v-else class="fa h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex justify-between mb-1">
-                <h2 class="font-semibold text-xs">Lección {{ row.order }}</h2>
-                <time class="text-xs text-grey-dark">{{ row.duration }}</time>
+            </li>
+            <li v-for="(row, index) in course.lessons"
+                :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer"
+                :class="row.id == lesson.id ? 'bg-gray-200' : ''" v-on:click="showLesson(course.slug, row.order)">
+              <div class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
+                <svg v-if="row.id == lesson.id" class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
+                <svg v-else class="fa h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
               </div>
-              <div class="text-sm text-grey-dark truncate">
-                <span class="font-bold">{{ row.title }}</span>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between mb-1">
+                  <h2 class="font-semibold text-xs">Lección {{ row.order }}</h2>
+                  <time class="text-xs text-grey-dark">{{ row.duration }}</time>
+                </div>
+                <div class="text-sm text-grey-dark truncate">
+                  <span class="font-bold">{{ row.title }}</span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-      
-      <div class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg">
-        <vue-plyr v-if="lesson.server == 'youtube' || lesson.server == 'vimeo'" ref="plyr" :emit="['ended']" @ended="ended">
-          <div :data-plyr-provider="lesson.server" :data-plyr-embed-id="lesson.url"></div>
-        </vue-plyr>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg">
+          <vue-plyr v-if="lesson.server == 'youtube' || lesson.server == 'vimeo'" ref="plyr" :emit="['ended']" @ended="ended" class="rounded-none lg:rounded-lg">
+            <div :data-plyr-provider="lesson.server" :data-plyr-embed-id="lesson.url"></div>
+          </vue-plyr>
 
-        <vue-plyr v-else ref="plyr" :emit="['ended']" @ended="ended">
-          <video poster="poster.png" :src="lesson.url"></video>
-        </vue-plyr>
-      </div>
+          <vue-plyr v-else ref="plyr" :emit="['ended']" @ended="ended" class="rounded-none lg:rounded-lg">
+            <video poster="poster.png" :src="lesson.url"></video>
+          </vue-plyr>
+        </div>
 
+      </div>
     </div>
 
-    <div class="flex justify-content flex-wrap mx-auto lg:hidden xl:hidden ">
-      <ul class="flex lesson flex-col w-full list-reset select-none" :class="course.skill.slug">
+    <div class="flex justify-content flex-wrap mx-auto lg:hidden xl:hidden p-3">
+      <ul class="flex lesson flex-col w-full list-reset select-none shadow-lg rounded-lg" :class="course.skill.slug">
           <li :class="course.skill.slug" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
-            <img v-if="course.icon != null" class="bg-black-trans p-1 flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3" 
-              src='data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC00MjEuODMyYy0yNC44NTkgMC00NS4wODQgMjAuMjI1LTQ1LjA4NCA0NS4wODR2MzY2LjIyNmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2YwZjlmZiIvPjxwYXRoIGQ9Im0yMzEuNDE4IDI2Ny4wOTd2LTIzOS4yOTRoLTE4Ni4zMzRjLTI0Ljg1OSAwLTQ1LjA4NCAyMC4yMjUtNDUuMDg0IDQ1LjA4NHYxOTQuMjF6IiBmaWxsPSIjNDA2YmQ0Ii8+PHBhdGggZD0ibTQ2Ni45MTYgMjcuODAzaC0yMTAuOTE2djQ1Ni4zOTRoMjEwLjkxNmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTM2Ni4yMjZjMC0yNC44NTktMjAuMjI1LTQ1LjA4NC00NS4wODQtNDUuMDg0eiIgZmlsbD0iI2NlZTVmNSIvPjxwYXRoIGQ9Im0wIDI2Mi42NDd2MTc2LjQ2NmMwIDI0Ljg1OSAyMC4yMjUgNDUuMDg0IDQ1LjA4NCA0NS4wODRoNDIxLjgzMmMyNC44NTkgMCA0NS4wODQtMjAuMjI1IDQ1LjA4NC00NS4wODR2LTE3Ni40NjZ6IiBmaWxsPSIjZjQwMDU1Ii8+PHBhdGggZD0ibTI1NiAyNjIuNjQ3djIyMS41NWgyMTAuOTE2YzI0Ljg1OSAwIDQ1LjA4NC0yMC4yMjUgNDUuMDg0LTQ1LjA4NHYtMTc2LjQ2NnoiIGZpbGw9IiNjMjAwNDQiLz48cGF0aCBkPSJtMTQ5LjE0OSAxNTkuNzc1IDI2Ljg2LTE5LjUxNWM1LjMtMy44NTEgMi41NzYtMTIuMjM0LTMuOTc1LTEyLjIzNGgtMzMuMjAxYy0yLjkzIDAtNS41MjctMS44ODctNi40MzItNC42NzNsLTEwLjI2LTMxLjU3NmMtMi4wMjUtNi4yMzEtMTAuODQtNi4yMzEtMTIuODY0IDBsLTEwLjI2IDMxLjU3NmMtLjkwNSAyLjc4Ny0zLjUwMiA0LjY3My02LjQzMiA0LjY3M2gtMzMuMmMtNi41NTIgMC05LjI3NiA4LjM4NC0zLjk3NSAxMi4yMzRsMjYuODYgMTkuNTE1YzIuMzcgMS43MjIgMy4zNjIgNC43NzUgMi40NTcgNy41NjFsLTEwLjI2IDMxLjU3NmMtMi4wMjUgNi4yMzEgNS4xMDcgMTEuNDEyIDEwLjQwNyA3LjU2MWwyNi44Ni0xOS41MTVjMi4zNy0xLjcyMiA1LjU4LTEuNzIyIDcuOTUgMGwyNi44NiAxOS41MTVjNS4zIDMuODUxIDEyLjQzMi0xLjMzIDEwLjQwNy03LjU2MWwtMTAuMjYtMzEuNTc2Yy0uOTA0LTIuNzg2LjA4OC01LjgzOCAyLjQ1OC03LjU2MXoiIGZpbGw9IiNmZmYiLz48L3N2Zz4='>
-            <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
-              {{ course.title.substr(0, 2) }}
+            <img v-if="course.icon != null" class="bg-black-trans p-1 flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
+              :src="domain + course.icon">
+            <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-xl text-white mr-3">
+              {{ course.title.substr(0, 2) }}15px
             </div>
             <div class="flex-1 min-w-0">
               <div class="flex justify-between mb-1">
@@ -69,7 +71,7 @@
             </div>
           </li>
           <li v-for="(row, index) in course.lessons"
-              :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer"
+              :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
               :class="row.id == lesson.id ? 'bg-gray-400' : ''" v-on:click="showLesson(course.slug, row.order)">
             <div class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
               <svg v-if="row.id == lesson.id" class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
@@ -87,6 +89,81 @@
           </li>
         </ul>
     </div>
+
+    <div id="course" class="container mx-auto p-3">
+      <div class="flex justify-center flex-wrap">
+        <div class="flex flex-wrap w-full lg:2-4/5 xl:w-4/5  items-start content-start mx-auto">
+          <h4 class="w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2">Notas de la lección</h4> 
+          <div class="lesson-about w-full bg-white rounded-b-lg px-4 py-2 leading-relaxed shadow">{{ lesson.content }}</div>
+
+          <h4 class="w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2 mt-3 mb-3">COMENTARIOS / DISCUSIÓN</h4> 
+          <div class="comments w-full bg-white py-2">
+            <div class="flex items-start mb-4 text-sm">
+                <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
+                <div class="flex-1 overflow-hidden">
+                    <div>
+                        <span class="font-bold">Adam Wathan</span>
+                        <span class="text-grey text-xs">12:45</span>
+                    </div>
+                    <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
+                    <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
+                      .marquee-lightspeed { -webkit-marquee-speed: fast; }
+                      .marquee-lightspeeder { -webkit-marquee-speed: faster; }
+                    </div>
+                </div>
+            </div>
+            <div class="reply">
+              <div class="flex items-start mb-4 text-sm">
+                  <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
+                  <div class="flex-1 overflow-hidden">
+                      <div>
+                          <span class="font-bold">Adam Wathan</span>
+                          <span class="text-grey text-xs">12:45</span>
+                      </div>
+                      <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
+                      <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
+                        .marquee-lightspeed { -webkit-marquee-speed: fast; }
+                        .marquee-lightspeeder { -webkit-marquee-speed: faster; }
+                      </div>
+                  </div>
+              </div>
+              <div class="flex items-start mb-4 text-sm">
+                  <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
+                  <div class="flex-1 overflow-hidden">
+                      <div>
+                          <span class="font-bold">Adam Wathan</span>
+                          <span class="text-grey text-xs">12:45</span>
+                      </div>
+                      <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
+                      <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
+                        .marquee-lightspeed { -webkit-marquee-speed: fast; }
+                        .marquee-lightspeeder { -webkit-marquee-speed: faster; }
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="flex items-start mb-4 text-sm">
+                <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
+                <div class="flex-1 overflow-hidden">
+                    <div>
+                        <span class="font-bold">David Hemphill</span>
+                        <span class="text-grey text-xs">12:46</span>
+                    </div>
+                    <p class="text-black leading-normal"><a href="#" class="inline-block bg-blue-lightest text-blue no-underline">@Adam Wathan</a> the size of the generated CSS is creating a singularity in space/time, we must stop adding more utilities before it's too late!</p>
+                </div>
+            </div>
+            <!-- comment box -->
+            <div class="comment-box">
+              <!--textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"></textarea-->
+              <markdown v-model="comment" :options="options"></markdown>
+              <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded">
+                Enviar Comentario
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -101,7 +178,16 @@ export default {
   props: ["course", 'lesson'],
   data : () => ({
     domain: config.domain,
-    total: 0
+    total: 0,
+    comment: "",
+    options: {
+      mention: false,
+      listol: false,
+      listtask: false,
+      listul: false,
+      quote: false,
+      style: "max-height:200px"
+    }
   }),
   mounted () {
     this.total = this.course.lessons.length
@@ -144,3 +230,11 @@ export default {
   }
 }
 </script>
+
+<style>
+  @media (min-width: 1024px) {
+    .plyr--video {
+      border-radius: 0.5rem;
+    }
+  }
+</style>
