@@ -69,3 +69,11 @@
     --text-color-hover: #4C5656;
     --box-shadow-color: rgba(117, 117, 117, .4);
 }
+
+.servidores {
+    --bg-color: #9C27B0;
+    --bg-color-dark: #5f0586;
+    --bg-color-light: #fff;
+    --text-color-hover: #4C5656;
+    --box-shadow-color: rgba(117, 117, 117, .4);
+}

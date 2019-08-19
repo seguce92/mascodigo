@@ -22,6 +22,7 @@ class CreateCoursesTable extends Migration
             $table->text('content');
             $table->boolean('is_publish')->default(false);
             $table->string('level');
+            $table->string('color')->default('red');
             $table->unsignedBigInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills');
 

@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "@github/markdown-toolbar-element": "^1.0.6",
+        "portal-vue": "^2.1.6",
         "vue-plyr": "^5.1.3"
     }
 }
