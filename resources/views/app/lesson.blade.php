@@ -23,7 +23,7 @@
       </nav>
     </div>
   </section>
-  <main id="app" class="mx-auto">
+  <main class="mx-auto">
     <lesson-component :course="{{ $course }}" :lesson="{{ $lesson }}"></lesson-component>
   </main>
 @endsection

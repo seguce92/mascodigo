@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->loadViewsFrom(resource_path('/views/app'), 'app');
+        $this->loadViewsFrom(resource_path('/views/app/admin'), 'admin');
 
         \Carbon\Carbon::setLocale(config('app.locale'));
         \Faker\Factory::create('es_ES');
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::component('component.alert', 'alert');
+        Blade::component('component.error', 'error');
     }
 }

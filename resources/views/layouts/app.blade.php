@@ -8,6 +8,7 @@
     @include('component.icons')
 </head>
 <body class="leading-normal tracking-normal font-sans">
+    <div id="app">
     <header class="hero box-shadow-hero" id="hero">
         <nav id="header" class="w-full z-50 text-white">
             <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -67,6 +68,7 @@
     </header>
 
     @yield('content')
+    </div>
 
     @include ('component.footer')
     

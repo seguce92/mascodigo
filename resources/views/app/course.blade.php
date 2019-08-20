@@ -46,7 +46,7 @@
       </div>
     </div>
   </section>
-  <main id="app" class="mx-auto">
+  <main class="mx-auto">
     <section class="sticky top-0 px-3 mx-auto bg-gray-200 z-50">
       <nav class="flex justify-between items-stretch w-full text-black container mx-auto">
         <div class="flex flex-no-shrink items-stretch h-12">

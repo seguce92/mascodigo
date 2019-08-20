@@ -16,6 +16,10 @@ class HomeController extends Controller
         
     }
 
+    public function home () {
+        return view('admin::home');
+    }
+
     /**
      * Show the application dashboard.
      *

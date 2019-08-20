@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
 
             $table->enum('status', ['enable', 'disable', 'register'])->default('enable');
             $table->string('provider')->default('web');
-            $table->boolean('verified')->default(false);
+            $table->timestamp('email_verified_at');
             $table->string('verification_token')->nullable();
             
             $table->string('plan')->nullable();

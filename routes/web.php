@@ -20,4 +20,9 @@ Route::get('/me/{author}', 'HomeController@me')->name('me');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@home')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+
+  Route::resource('users', 'Core\UserController');
+});
