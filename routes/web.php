@@ -25,4 +25,6 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
   Route::resource('users', 'Core\UserController');
+  Route::resource('courses', 'Learn\CourseController');
+  Route::resource('skills', 'Learn\SkillController');
 });

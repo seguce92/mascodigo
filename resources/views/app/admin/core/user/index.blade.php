@@ -1,30 +1,9 @@
 @extends('layouts.admin')
 
 @section('menu')
-  <li class="mr-6 my-2 md:my-0">
-    <a href="{{ route('home') }}" class="block py-1 md:py-3 pl-1 align-middle text-orange-600 no-underline hover:text-gray-900 border-b-2 hover:border-orange-600">
-      <i class="fas fa-desktop mr-3"></i>
-      <span class="pb-1 md:pb-0 text-sm">Inicio</span>
-    </a>
-  </li>
-  <li class="mr-6 my-2 md:my-0">
-    <a href="{{ route('users.index') }}" class="block py-1 md:py-3 pl-1 align-middle text-pink-500 no-underline border-b-2 border-pink-500 hover:border-pink-500">
-      <i class="fas fa-shield-alt mr-3"></i>
-      <span class="pb-1 md:pb-0 text-sm">Roles</span>
-    </a>
-  </li>
-  <li class="mr-6 my-2 md:my-0">
-    <a href="{{ route('users.index') }}" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
-      <i class="fas fa-users mr-3"></i>
-      <span class="pb-1 md:pb-0 text-sm">Usuarios</span>
-    </a>
-  </li>
-  <li class="mr-6 my-2 md:my-0">
-    <a href="{{ route('users.index') }}" class="block py-1 md:py-3 pl-1 align-middle text-gray-500 no-underline hover:text-gray-900 border-b-2 border-white hover:border-pink-500">
-      <i class="fas fa-book mr-3"></i>
-      <span class="pb-1 md:pb-0 text-sm">Cursos</span>
-    </a>
-  </li>
+  @include('component.menu', [
+    'option'  =>  'users'
+  ])
 @endsection
 
 @section('content')
@@ -46,26 +25,26 @@
         </div>
       </div>
     </div>
-    <table class="text-left w-full border-collapse">
+    <table class="text-left w-full border-collapse table-auto">
       <thead>
         <tr class="bg-gray-200">
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500">ID</th>
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500">NOMBRES</th>
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500">EMAIL</th>
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500">ROL</th>
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500">REGISTRADO</th>
-          <th class="py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500"></th>
+          <th class="table-head">ID</th>
+          <th class="table-head">NOMBRES</th>
+          <th class="table-head">EMAIL</th>
+          <th class="table-head">ROL</th>
+          <th class="table-head">REGISTRADO</th>
+          <th class="table-head"></th>
         </tr>
       </thead>
       <tbody>
         @foreach ( $users as $user )
           <tr class="hover:bg-gray-200">
-            <td class="py-4 px-6 border-b text-gray-700 border-gray-300">{{ $user->id }}</td>
-            <td class="py-4 px-6 border-b text-gray-700 border-gray-300">{{ $user->fullname }}</td>
-            <td class="py-4 px-6 border-b text-gray-700 border-gray-300">{{ $user->email }}</td>
-            <td class="py-4 px-6 border-b text-gray-700 border-gray-300"></td>
-            <td class="py-4 px-6 border-b text-gray-700 border-gray-300">{{ $user->created_at->format('d/m/Y H:m') }}</td>
-            <td class="py-4 px-6 border-b text-gray-500 border-gray-300">
+            <td class="table-content">{{ $user->id }}</td>
+            <td class="table-content">{{ $user->fullname }}</td>
+            <td class="table-content">{{ $user->email }}</td>
+            <td class="table-content"></td>
+            <td class="table-content">{{ $user->created_at->format('d/m/Y H:m') }}</td>
+            <td class="table-content">
               <a class="hover:text-blue-600" href="{{ route('users.show', $user->id) }}">
                 <i class="fas fa-eye mr-2"></i>
               </a>

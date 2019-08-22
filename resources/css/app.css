@@ -279,6 +279,22 @@
     @apply w-4 h-4 fill-current inline-block mr-1;
 }
 
+.menu-item {
+    @apply block py-1 pl-1 align-middle text-gray-500 no-underline border-b-2 border-white;
+}
+
+.menu-active {
+    @apply block py-1 pl-1 align-middle text-red-600 no-underline border-b-2 border-red-600;
+}
+
+.table-head {
+    @apply py-4 px-6 font-bold uppercase text-sm text-gray-600 border-b border-gray-500;
+}
+
+.table-content {
+    @apply py-4 px-6 border-b text-gray-700 border-gray-300;
+}
+
 @import 'github-markdown.css';
 
 @tailwind utilities;

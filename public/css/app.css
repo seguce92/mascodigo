@@ -2643,6 +2643,53 @@ video {
   margin-right: 0.25rem;
 }
 
+.menu-item {
+  display: block;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  vertical-align: middle;
+  color: #a0aec0;
+  text-decoration: none;
+  border-bottom-width: 2px;
+  border-color: #fff;
+}
+
+.menu-active {
+  display: block;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  vertical-align: middle;
+  color: #e53e3e;
+  text-decoration: none;
+  border-bottom-width: 2px;
+  border-color: #e53e3e;
+}
+
+.table-head {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  color: #718096;
+  border-bottom-width: 1px;
+  border-color: #a0aec0;
+}
+
+.table-content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-bottom-width: 1px;
+  color: #4a5568;
+  border-color: #e2e8f0;
+}
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;
