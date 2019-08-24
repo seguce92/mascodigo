@@ -4,7 +4,7 @@ namespace App\Http\Requests\Learn;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CourseStoreRequest extends FormRequest
+class LessonStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,12 @@ class CourseStoreRequest extends FormRequest
     {
         return [
             'title' =>  'required|min:3|max:255',
-            'slug'  =>  'required|min:3|max:255|unique:courses,slug',
-            'content'   =>  'required',
-            'image'  =>  'required',
-            'color' =>  'required',
+            'url'   =>  'required|url|min:10|max:155',
             'is_publish'    =>  'required',
-            'level' =>  'required',
-            'skill_id'  =>  'required|numeric'
+            'is_private'    =>  'required',
+            'duration'      =>  'required|date_format:H:i:s|min:8|max:8',
+            'points'        =>  'required|numeric',
+            'course_id'     =>  'required|numeric'
         ];
     }
 }

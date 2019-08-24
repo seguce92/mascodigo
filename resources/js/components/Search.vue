@@ -1,9 +1,9 @@
 <template>
-  <div v-if="show" class="modal absolute top-0 h-screen w-full flex flex-col items-center justify-center">
+  <div @keydown.esc="toggleModal" v-if="value" class="modal absolute top-0 h-screen w-full flex flex-col items-center justify-center">
     <div class="modal-container w-full bg-white rounded m-4 text-center overflow-y-scroll">
       <div class="modal-header sticky top-0 bg-white p-2">
         <input 
-          class="appearance-none block w-full bg-gray-100 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          class="appearance-none block w-full text-gray-800 bg-gray-100 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
           placeholder="Escribe aqui.." autofocus>
       </div>
       <div class="modal-body px-3 pb-3 scrollbar">
@@ -30,14 +30,20 @@
 </template>
 
 <script>
+import { constants } from 'crypto';
 export default {
-  props: ['show'],
+  props: ['value'],
   data: () => ({
-    data: {}
+    data: {},
+    show: false,
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   }),
+  created () {
+    this.show = this.value
+  },
   methods: {
     toggleModal() {
-      this.modal = !this.modal
+      this.show = false
     },
 
     fetchData: function () {

@@ -20,6 +20,8 @@ mix.js('resources/js/app.js', 'public/js')
   .tailwind('./tailwind.config.js')
   .purgeCss();
 
+mix.js('resources/js/tail-es.js', 'public/js/es.js');
+
 if (mix.inProduction()) {
   mix.version();
 }

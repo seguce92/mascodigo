@@ -27,17 +27,23 @@
     box-shadow: 0 5px 20px #00000094
 }
 
+.hero-home {
+    background-color: #ff9d00;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23b71c1c' stroke-width='66.7' stroke-opacity='0' %3E%3Ccircle fill='%23ff9d00' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23fd9211' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23fb871c' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23f87d24' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23f4722b' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23ef6831' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23ea5e36' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23e4543a' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23dd4b3e' cx='0' cy='0' r='40'/%3E%3Ccircle fill='%23d64242' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23ce3945' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23c53148' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23bc2a4a' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23b2234c' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%23a81c4e' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%239e174f' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%2393124f' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23880e4f' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .hero {
     background-color: #ff9d00;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23b71c1c' stroke-width='66.7' stroke-opacity='0' %3E%3Ccircle fill='%23ff9d00' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23fd9211' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23fb871c' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23f87d24' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%23f4722b' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%23ef6831' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23ea5e36' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23e4543a' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%23dd4b3e' cx='0' cy='0' r='40'/%3E%3Ccircle fill='%23d64242' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23ce3945' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%23c53148' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%23bc2a4a' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23b2234c' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%23a81c4e' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%239e174f' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%2393124f' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%23880e4f' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
     background-attachment: fixed;
     background-size: cover;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 94%);
 }
 
-@media (max-width: 768px) {
-    .hero {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+@media (min-width: 769px) {
+    .hero-home {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
     }
 }
 
@@ -293,6 +299,59 @@
 
 .table-content {
     @apply py-4 px-6 border-b text-gray-700 border-gray-300;
+}
+
+.form-label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold my-2;
+}
+
+.form-input {
+    width: 100%;
+    @pply w-full appearance-none block text-gray-700 border rounded py-3 px-4 mb-3 leading-tight;
+}
+.form-input:focus {
+    @apply outline-none;
+}
+
+.form-select {
+    width: 100%;
+    @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
+}
+.form-select:focus {
+    @apply outline-none bg-white border-gray-500
+}
+
+.form-button-blue {
+    @apply text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded inline-flex items-center;
+}
+.form-button-blue:hover {
+    @apply bg-blue-500 text-white border-transparent;
+}
+
+.form-button-red {
+    @apply py-2 px-4 border border-red-500 rounded inline-flex items-center text-red-700 font-semibold;
+}
+.form-button-red:hover {
+    @apply bg-red-500 border-transparent text-white
+}
+
+.form-button-yellow {
+    @apply text-orange-500 font-semibold py-2 px-4 border border-orange-500 rounded inline-flex items-center;
+}
+.form-button-yellow:hover {
+    @apply bg-orange-500 text-white border-transparent;
+}
+
+.youtube {
+    @apply bg-red-700 px-2 py-1 text-white ml-2 rounded-lg
+}
+
+.vimeo {
+    @apply bg-blue-500 px-2 py-1 text-white ml-2 rounded-lg
+}
+
+.local {
+    @apply bg-gray-600 px-2 py-1 text-white ml-2 rounded-lg
 }
 
 @import 'github-markdown.css';

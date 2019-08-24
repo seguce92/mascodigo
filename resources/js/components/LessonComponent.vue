@@ -1,13 +1,13 @@
 <template>
   <section class="mx-auto">
     <div class="w-full mx-auto bg-gray-200 p-0 lg:p-2 lg:pb-0 xl:pl-20 xl:pr-20">
-      <div class="flex justify-content flex-wrap mx-auto">
+      <div class="flex justify-content flex-wrap mx-auto lg:pb-2">
         
         <div class="flex-grow self-start hidden lg:block bg-white shadow-lg mr-4 collection ml-auto rounded-lg overflow-y-scroll">
           <ul class="flex lesson flex-col w-full list-reset select-none" :class="course.color">
             <li :class="course.color" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
               <img v-if="course.icon != null" class="p-1 bg-black-trans flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
-                :src="domain + course.icon">
+                :src="course.icon">
               <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
                 {{ course.title.substr(0, 2) }}
               </div>
@@ -53,11 +53,11 @@
       </div>
     </div>
 
-    <div class="flex justify-content flex-wrap mx-auto lg:hidden xl:hidden p-3">
-      <ul class="flex lesson flex-col w-full list-reset select-none shadow-lg rounded-lg" :class="course.color">
+    <div class="flex justify-content flex-wrap mx-auto lg:hidden xl:hidden">
+      <ul class="flex lesson flex-col w-full list-reset select-none rounded-lg" :class="course.color">
         <li :class="course.color" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
           <img v-if="course.icon != null" class="bg-black-trans p-1 flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
-            :src="domain + course.icon">
+            :src="course.icon">
           <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-xl text-white mr-3">
             {{ course.title.substr(0, 2) }}
           </div>
@@ -90,14 +90,18 @@
       </ul>
     </div>
 
-    <div class="container mx-auto p-3">
+    <div class="container mx-auto mb-8">
       <div class="flex justify-center flex-wrap">
         <div class="flex flex-wrap w-full lg:2-4/5 xl:w-4/5  items-start content-start mx-auto">
-          <h4 class="w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2">Notas de la lección</h4> 
-          <div class="lesson-about w-full bg-white rounded-b-lg px-4 py-2 leading-relaxed shadow">{{ lesson.content }}</div>
+          <input type="checkbox" name="panel" id="panel-1" class="hidden" checked>
+          <label for="panel-1" class="panel-header relative w-full lg:rounded-t uppercase font-bold px-4 py-2 bg-gray-300 mt-3">Notas de la lección</label>
+          <div v-show="lesson.content != null && lesson.content != ''" 
+            class="lesson-about accordion__content overflow-hidden w-full bg-white lg:rounded-b px-4 py-2 leading-relaxed lg:border markdown-body" v-html="parse">
+          </div>
 
-          <h4 class="w-full rounded-t-lg uppercase font-bold bg-gray-400 px-4 py-2 mt-3 mb-3">COMENTARIOS / DISCUSIÓN</h4> 
-          <div class="comments w-full bg-white py-2">
+          <!-- comments -->
+          <!--h4 class="w-full lg:rounded uppercase font-bold bg-gray-300 px-4 py-2 mt-3 mb-3">COMENTARIOS / DISCUSIÓN</h4> 
+          <div class="comments w-full bg-white py-2 p-3">
             <div class="flex items-start mb-4 text-sm">
                 <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
                 <div class="flex-1 overflow-hidden">
@@ -159,7 +163,8 @@
                 Enviar Comentario
               </button>
             </div>
-          </div>
+          </div-->
+          <!-- comments -->
         </div>
       </div>
     </div>
@@ -171,6 +176,9 @@ import Vue from 'vue'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
 import { constants } from 'crypto';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github.css';
+window.hljs = hljs;
 
 Vue.use(VuePlyr)
 export default {
@@ -195,6 +203,15 @@ export default {
   computed: {
     player () { 
       return this.$refs.plyr.player
+    },
+    parse() {
+      marked.setOptions({
+        highlight: (code) => {
+          return hljs.highlightAuto(code).value
+        },
+        sanitize: true
+      })
+      return this.lesson.content != null ? marked(this.lesson.content) : marked('')
     }
   },
   methods: {
@@ -235,5 +252,31 @@ export default {
     .plyr--video {
       border-radius: 0.5rem;
     }
+  }
+
+  .panel-header:after {
+    content: '+';
+    position: absolute;
+    right: .5em;
+    color: #000;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  input:checked + .panel-header:after {
+    content: '-';
+    font-size: 25px;
+    line-height: 1;
+  }
+
+  .accordion__content{
+    max-height: 0em;
+    display: none;
+    transition: all 0.4s cubic-bezier(0.865, 0.14, 0.095, 0.87);
+  }
+  
+  input[name='panel']:checked ~ .accordion__content {
+    max-height: 100em;
+    display: inline-block;
   }
 </style>

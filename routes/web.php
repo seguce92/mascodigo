@@ -25,6 +25,12 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
   Route::resource('users', 'Core\UserController');
-  Route::resource('courses', 'Learn\CourseController');
   Route::resource('skills', 'Learn\SkillController');
+  Route::resource('courses', 'Learn\CourseController');
+  Route::resource('lessons', 'Learn\LessonController')->except(['create', 'edit']);
+
+  Route::group(['prefix' => 'media'], function () {
+    Route::post('icon/course', 'Media\FileController@iconCourse')->name('file.icon');
+    Route::post('icon/post', 'Media\FileController@coverPost')->name('file.icon');
+  });
 });

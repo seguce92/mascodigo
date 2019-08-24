@@ -10,7 +10,7 @@
   <div class="bg-white border rounded shadow p-2">
     <div class="flex mb-4">
       <div class="w-1/3 h-7">
-        <a href="{{ route('skills.create') }}" class="g-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center">
+        <a href="{{ route('skills.create') }}" class="form-button-blue">
           <i class="fa fa-plus mr-2"></i>
           <span>Nueva Habilidad</span>
         </a>

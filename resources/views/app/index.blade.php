@@ -8,8 +8,8 @@
   @include('component.icons')
 </head>
 <body class="leading-normal tracking-normal font-sans">
-  <header class="hero box-shadow-hero" id="hero">
-    <nav id="header" class="fixed w-full z-50 text-white hero">
+  <header class="hero-home box-shadow-hero">
+    <nav class="fixed w-full z-50 text-white hero">
       <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
         <div class="pl-4 flex items-center">
           <a class="uppercase no-underline hover:no-underline font-bold text-2xl text-shadow-2xl"  href="{{ url('/') }}"> 
@@ -80,5 +80,39 @@
   </main>
 
   @include ('component.footer')
+
+  <script>
+  var navMenuDiv = document.getElementById("nav-content");
+  var navMenu = document.getElementById("nav-toggle");
+  document.onclick = check;
+  function check(e) {
+    var target = (e && e.target) || (event && event.srcElement);
+    if (!checkParent(target, navMenuDiv)) {
+      
+      if (checkParent(target, navMenu)) {
+        console.log(navMenuDiv.classList)
+        if (navMenuDiv.classList.contains("hidden")) {
+          console.log("content")
+          navMenuDiv.classList.toggle("hidden");
+          navMenu.classList.toggle("change");
+        } else {
+          console.log("content no")
+          navMenuDiv.classList.toggle("hidden");
+          navMenu.classList.toggle("change")
+        }
+      } else {
+        navMenuDiv.classList.add("hidden");
+        navMenu.classList.remove("change")
+      }
+    }
+  }
+  function checkParent(t, elm) {
+    while(t.parentNode) {
+      if( t == elm ) {return true;}
+      t = t.parentNode;
+    }
+    return false;
+  }
+  </script>
 </body>
 </html>

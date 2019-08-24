@@ -87,7 +87,8 @@
 			@alert @endalert
 			@yield('content')	
 		</div>
-	</div> 
+  </div> 
+  
 	<footer class="bg-white border-t border-gray-400 shadow inset-x-0 bottom-0 relative sm:absolute md:fixed lg:fixed xl:fixed">	
 		<div class="py-2 text-center">
       Copyright &copy; <strong>Más Código</strong> {{ \Carbon\Carbon::now()->year }}

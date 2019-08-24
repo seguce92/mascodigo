@@ -20,7 +20,8 @@ class CourseController extends Controller
      */
     public function index(Request $request)
     {
-        if ( $request->q ) $data = $this->entity->where('title', 'like', '%'.$request->q.'%')->orWhere('content', 'like', '%'.$request->q.'%')->orderByDesc()->paginate(12);
+        if ( $request->q ) $data = $this->entity->where('title', 'like', '%'.$request->q.'%')
+            ->orWhere('content', 'like', '%'.$request->q.'%')->orderByDesc('created_at')->paginate(12);
         else $data = $this->entity->orderByDesc('created_at')->paginate(12);
 
         return view('admin::learn.course.index', [
@@ -52,15 +53,13 @@ class CourseController extends Controller
         $course = new $this->entity;
         $course->title = $request->title;
         $course->slug = $request->slug;
-        $course->icon = $request->icon;
+        $course->icon = $request->image;
         $course->color = $request->color;
         $course->content = $request->content;
-        $course->is_publish = $request->is_publish ? 1 : 0;
+        $course->is_publish = $request->is_publish;
         $course->level = $request->level;
         $course->skill_id = $request->skill_id;
         $course->author_id = \Auth::id();
-        $course->editor_id = $request->editor_id;
-        $course->published_at = $request->published_at;
         $course->save();
 
         session()->flash('message', 'Curso registrado.');
@@ -76,8 +75,10 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        return view('admin::learn.course.create', [
-            'course'    =>  $this->entity->find($id)
+        return view('admin::learn.course.show', [
+            'course'    =>  $this->entity->find($id),
+            'skills'    =>  \App\Entities\Learn\Skill::all(),
+            'order'     =>  $this->entity->find($id)->lessons->count() + 1
         ]);
     }
 
@@ -90,7 +91,8 @@ class CourseController extends Controller
     public function edit($id)
     {
         return view('admin::learn.course.edit', [
-            'course'    =>  $this->entity->find($id)
+            'course'    =>  $this->entity->find($id),
+            'skills'    =>  \App\Entities\Learn\Skill::all()
         ]);
     }
 
@@ -106,15 +108,13 @@ class CourseController extends Controller
         $course = $this->entity->find($id);
         $course->title = $request->title;
         $course->slug = $request->slug;
-        $course->icon = $request->icon;
+        $course->icon = $request->image;
         $course->color = $request->color;
         $course->content = $request->content;
         $course->is_publish = $request->is_publish;
         $course->level = $request->level;
         $course->skill_id = $request->skill_id;
-        $course->author_id = $request->author_id;
-        $course->editor_id = $request->editor_id;
-        $course->published_at = $request->published_at;
+        $course->editor_id = \Auth::id();
         $course->save();
 
         session()->flash('message', 'Curso actualizado.');
