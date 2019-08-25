@@ -34,3 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('icon/post', 'Media\FileController@coverPost')->name('file.icon');
   });
 });
+
+Route::group(['prefix' => 'api/data'], function () {
+  Route::post('search', 'Api\DataController@searchGlobal')->name('search');
+});

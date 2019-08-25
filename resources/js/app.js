@@ -27,7 +27,6 @@ Vue.component('lesson-component', require('./components/LessonComponent.vue').de
 Vue.component('markdown', require('./components/Markdown.vue').default);
 Vue.component('menu-component', require('./components/Menu.vue').default);
 Vue.component('file-upload', require('./components/FileUpload.vue').default);
-Vue.component('search', require('./components/Search.vue').default);
 Vue.component('courses', require('./components/Courses.vue').default);
 
 const app = new Vue({
