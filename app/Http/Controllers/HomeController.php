@@ -37,6 +37,8 @@ class HomeController extends Controller
     public function skill ($skill) {
         $skill = \App\Entities\Learn\Skill::with(['courses.lessons', 'courses.skill'])->whereSlug($skill)->first();
 
+        abort_unless($skill, 404);
+
         return view('app::skill', [
             'skill' =>  $skill
         ]);
@@ -60,7 +62,7 @@ class HomeController extends Controller
     {
         $data = \App\Entities\Learn\Course::with(['skill', 'lessons'])->whereSlug($course)->first();
 
-        abort_if(!$data, 404);
+        abort_unless($data, 404);
 
         return view('app::course', [
             'course'    =>  $data
@@ -72,7 +74,7 @@ class HomeController extends Controller
         $data = \App\Entities\Learn\Course::with(['skill', 'lessons'])->whereSlug($course)->first();
         $lesson = \App\Entities\Learn\Lesson::where('course_id', $data->id)->whereOrder($order)->first();
 
-        abort_if(!$lesson || !$course, 404);
+        abort_unless($lesson || $course, 404);
 
         return view('app::lesson', [
             'course'    =>  $data,
@@ -83,5 +85,21 @@ class HomeController extends Controller
     public function me()
     {
         return view('app::me');
+    }
+
+    public function blog (Request $request) {
+        return view('app::blog', [
+            'posts' =>  \App\Entities\Blog\Post::where('is_publish', 1)->orderByDesc('created_at')->paginate(12)
+        ]);
+    }
+
+    public function post ($slug) {
+        $post = \App\Entities\Blog\Post::whereSlug($slug)->where('is_publish', 1)->first();
+
+        abort_unless($post, 404);
+
+        return view('app::post', [
+            'post' => $post
+        ]);
     }
 }

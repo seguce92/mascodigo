@@ -15,12 +15,9 @@
         <nav class="select-none bg-grey flex justify-end items-stretch w-full">
           <div class="flex items-stretch flex-no-shrink h-12">
             <div class="flex items-stretch justify-end ml-auto">
-              <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
-                Blog</a>
-              <a href="{{ route('courses') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white border-b-4 font-bold flex items-center hover:bg-grey-dark">
-                Cursos</a>
-              <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:bg-grey-dark">
-                Acerca</a>
+              
+              @yield('menu')
+
             </div>
           </div>
         </nav>

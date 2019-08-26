@@ -10,8 +10,11 @@ class Course extends Model
         'title', 'slug', 'icon', 'color', 'content', 'is_publish', 'level', 'skill_id', 'author_id', 'editor_id', 'published_at'
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
     protected $casts = [
-        'published_at'  =>  'datetime',
         'is_publish'    =>  'boolean'
     ];
 

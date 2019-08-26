@@ -10,16 +10,6 @@
             class="uppercase font-mono flex-no-grow flex-no-shrink py-2 leading-normal flex items-center hover:text-gray-600 cursor-pointer">
             Por Habilidades</a>
         </div>
-        <div class="flex items-stretch flex-no-shrink h-12">
-          <div class="flex items-stretch justify-end ml-auto">
-            <a href="#" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal no-underline flex items-center hover:bg-grey-dark cursor-pointer">
-              <i class="fa fa-users"></i>
-            </a>
-            <a class="flex-no-grow flex-no-shrink relative py-2 leading-normal no-underline flex items-center hover:bg-grey-dark cursor-pointer">
-              <svg class="fa w-4 h-4 fill-current " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-            </a>
-          </div>
-        </div>
       </nav>
     </section>
 

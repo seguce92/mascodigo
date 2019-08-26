@@ -54,6 +54,6 @@
     </section>
   </main>
 
-  @include ('component.footer')
+  @include ('component.footer-home')
 </body>
 </html>

@@ -10,10 +10,13 @@ class Lesson extends Model
         'title', 'url', 'content', 'repository', 'is_publish', 'is_private', 'duration', 'points', 'order', 'course_id', 'author_id', 'editor_id', 'published_at'
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
     protected $casts = [
         'is_publish'    =>  'boolean',
         'is_private'    =>  'boolean',
-        'publish_at'    =>  'datetime'
     ];
 
     protected $appends = [

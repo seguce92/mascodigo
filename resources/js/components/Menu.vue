@@ -112,6 +112,7 @@ export default {
   },
   methods: {
     toggleModal: function () {
+      this.query = ''
       this.search = !this.search
     },
 

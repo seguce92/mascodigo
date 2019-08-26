@@ -4,12 +4,14 @@
 
 @section('menu')
   @include('component.home-menu', [
-    'opt' =>  'courses'
+    'opt' =>  'blog'
   ])
 @endsection
 
 @section('content')
   <main class="mx-auto">
-    <skill-courses :courses="{{ $skill->courses }}" :skill="{{ $skill }}"></skill-courses>
+
+    <courses :courses="{{ $courses }}" :skills="{{ $skills }}"></courses>
+
   </main>
 @endsection

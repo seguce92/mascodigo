@@ -2,6 +2,12 @@
 
 @section('title', config('app.name', 'Laravel'))
 
+@section('menu')
+  @include('component.home-menu', [
+    'opt' =>  'courses'
+  ])
+@endsection
+
 @section('content')
   <section class="text-white course {{ $course->color }}">
     <div class="sticky top-0 px-3 mx-auto z-50 shadow bg-black-trans">

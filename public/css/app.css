@@ -2917,6 +2917,29 @@ video {
   }
 }
 
+.footer-home {
+  background: #880e4f;
+  margin-top: 5rem;
+}
+
+.footer {
+  background: #880e4f;
+  margin-top: 5rem;
+}
+
+@media (min-width: 769px) {
+  .footer-home {
+    -webkit-clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
+  }
+}
+
+.social {
+  padding-top: 8px;
+  padding-bottom: 16px;
+  border-radius: 5px;
+}
+
 .appearance-none {
   -webkit-appearance: none;
      -moz-appearance: none;

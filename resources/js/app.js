@@ -2,7 +2,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import store from './store'
+/*import store from './store'*/
 
 window.marked = require('marked');
 
@@ -30,7 +30,7 @@ Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('courses', require('./components/Courses.vue').default);
 
 const app = new Vue({
-    store
+    //store
 }).$mount('#app');
 
 window.app = app
