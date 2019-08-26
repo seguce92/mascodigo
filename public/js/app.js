@@ -4191,6 +4191,21 @@ __webpack_require__.r(__webpack_exports__);
     return {
       domain: config.domain
     };
+  },
+  created: function created() {},
+  computed: {
+    pluralize: function pluralize() {
+      var lessons = this.course.lessons.legth;
+      if (lessons > 1 || lessons < 1) return 'Lecciones';
+      return 'Lección';
+    },
+    fullTime: function fullTime() {
+      var seconds = 0;
+      this.course.lessons.reduce(function (key, item) {
+        seconds += window.Helper.toSeconds(item.duration);
+      }, 0);
+      return window.Helper.toTime(seconds);
+    }
   }
 });
 
@@ -4830,6 +4845,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['fixed'],
   data: function data() {
     return {
       domain: config.domain,
@@ -73683,7 +73699,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("p", { staticClass: "text" }, [_vm._v("3 Lecciones")])
+              _c("p", { staticClass: "text" }, [
+                _vm._v(
+                  _vm._s(_vm.course.lessons.length) +
+                    " " +
+                    _vm._s(_vm.pluralize)
+                )
+              ])
             ]
           ),
           _vm._v(" "),
@@ -73713,7 +73735,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("p", { staticClass: "text" }, [_vm._v("00:00:00")])
+              _c("p", { staticClass: "text" }, [_vm._v(_vm._s(_vm.fullTime))])
             ]
           )
         ])
@@ -75005,321 +75027,332 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "w-full z-50 text-white" }, [
-    _c(
-      "div",
-      {
-        staticClass:
-          "w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2"
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "block lg:hidden pr-4" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "items-center px-3 py-2 appearance-none focus:outline-none",
-              class: _vm.show ? "change" : "",
-              attrs: { id: "nav-toggle" },
-              on: {
-                click: function($event) {
-                  _vm.show = !_vm.show
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "bar1" }),
-              _c("div", { staticClass: "bar2" }),
-              _c("div", { staticClass: "bar3" })
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20",
-            class: !_vm.show ? "hidden" : "",
-            attrs: { id: "nav-content" }
-          },
-          [
+  return _c(
+    "nav",
+    {
+      staticClass: "w-full z-50 text-white hero",
+      class: _vm.fixed ? "fixed" : ""
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2"
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "block lg:hidden pr-4" }, [
             _c(
-              "ul",
+              "button",
               {
                 staticClass:
-                  "list-reset lg:flex justify-end flex-1 items-center"
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._m(4),
-                _vm._v(" "),
-                _c("li", { staticClass: "mr-3" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "cursor-pointer uppercase w-full text-white inline-block py-2 px-4 text-black no-underline",
-                      on: { click: _vm.toggleModal }
-                    },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "fa h-4 w-4 fill-current",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            viewBox: "0 0 512 512"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _vm.search
-      ? _c(
-          "div",
-          {
-            staticClass:
-              "modal absolute top-0 h-screen w-full flex flex-col items-center justify-center",
-            on: {
-              keydown: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "esc", 27, $event.key, [
-                    "Esc",
-                    "Escape"
-                  ])
-                ) {
-                  return null
-                }
-                return _vm.toggleModal($event)
-              },
-              click: _vm.toggleModal
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "modal-container w-full bg-white rounded m-4 text-center overflow-auto",
+                  "items-center px-3 py-2 appearance-none focus:outline-none",
+                class: _vm.show ? "change" : "",
+                attrs: { id: "nav-toggle" },
                 on: {
                   click: function($event) {
-                    $event.stopPropagation()
+                    _vm.show = !_vm.show
                   }
                 }
               },
               [
-                _c("button", { staticClass: "close" }, [_vm._v("X")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "modal-header sticky top-0 bg-white p-2" },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.query,
-                          expression: "query"
-                        }
-                      ],
-                      staticClass:
-                        "appearance-none text-2xl block w-full text-gray-700 bg-gray-100 border-t border-b border-gray-300 py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white",
-                      attrs: {
-                        placeholder: "Buscar lección...",
-                        spellcheck: "false",
-                        autofocus: ""
-                      },
-                      domProps: { value: _vm.query },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.query = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
+                _c("div", { staticClass: "bar1" }),
+                _c("div", { staticClass: "bar2" }),
+                _c("div", { staticClass: "bar3" })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-full flex-grow lg:flex lg:items-center lg:w-auto lg:block mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20",
+              class: !_vm.show ? "hidden" : "",
+              attrs: { id: "nav-content" }
+            },
+            [
+              _c(
+                "ul",
+                {
+                  staticClass:
+                    "list-reset lg:flex justify-end flex-1 items-center"
+                },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "mr-3" }, [
                     _c(
-                      "div",
+                      "a",
                       {
-                        staticClass: "absolute",
-                        staticStyle: { top: "1.4rem", right: "0.75rem" }
+                        staticClass:
+                          "cursor-pointer uppercase w-full text-white inline-block py-2 px-4 text-black no-underline",
+                        on: { click: _vm.toggleModal }
                       },
                       [
                         _c(
                           "svg",
                           {
-                            staticClass:
-                              "fill-current pointer-events-none text-gray-800 w-6 h-6",
+                            staticClass: "fa h-4 w-4 fill-current",
                             attrs: {
                               xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 20 20"
+                              viewBox: "0 0 512 512"
                             }
                           },
                           [
                             _c("path", {
                               attrs: {
                                 d:
-                                  "M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+                                  "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
                               }
                             })
                           ]
                         )
                       ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-body px-3 scrollbar" }, [
+                  ])
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.search
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "modal absolute top-0 h-screen w-full flex flex-col items-center justify-center",
+              on: {
+                keydown: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "esc", 27, $event.key, [
+                      "Esc",
+                      "Escape"
+                    ])
+                  ) {
+                    return null
+                  }
+                  return _vm.toggleModal($event)
+                },
+                click: _vm.toggleModal
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-container w-full bg-white rounded m-4 text-center overflow-auto",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                    }
+                  }
+                },
+                [
+                  _c("button", { staticClass: "close" }, [_vm._v("X")]),
+                  _vm._v(" "),
                   _c(
-                    "ul",
-                    { staticClass: "text-left lesson" },
+                    "div",
+                    { staticClass: "modal-header sticky top-0 bg-white p-2" },
                     [
-                      _c(
-                        "li",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.loading,
-                              expression: "loading"
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.query,
+                            expression: "query"
+                          }
+                        ],
+                        staticClass:
+                          "appearance-none text-2xl block w-full text-gray-700 bg-gray-100 border-t border-b border-gray-300 py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white",
+                        attrs: {
+                          placeholder: "Buscar lección...",
+                          spellcheck: "false",
+                          autofocus: ""
+                        },
+                        domProps: { value: _vm.query },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
                             }
-                          ]
+                            _vm.query = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "absolute",
+                          staticStyle: { top: "1.4rem", right: "0.75rem" }
                         },
                         [
-                          _c("div", { staticClass: "loader" }, [
-                            _vm._v("Cargando...")
-                          ])
+                          _c(
+                            "svg",
+                            {
+                              staticClass:
+                                "fill-current pointer-events-none text-gray-800 w-6 h-6",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 20 20"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+                                }
+                              })
+                            ]
+                          )
                         ]
-                      ),
-                      _vm._v(" "),
-                      _vm._l(_vm.filteredData, function(item, index) {
-                        return _c(
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body px-3 scrollbar" }, [
+                    _c(
+                      "ul",
+                      { staticClass: "text-left lesson" },
+                      [
+                        _c(
                           "li",
                           {
-                            key: index,
-                            staticClass:
-                              "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
-                            on: {
-                              click: function($event) {
-                                return _vm.showLesson(
-                                  item.course.slug,
-                                  item.order
-                                )
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.loading,
+                                expression: "loading"
                               }
-                            }
+                            ]
                           },
                           [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
-                                class: item.course.color,
-                                attrs: {
-                                  href:
-                                    _vm.domain +
-                                    "skill/" +
-                                    item.course.skill.slug
-                                }
-                              },
-                              [
-                                _c("img", {
-                                  attrs: { src: item.course.icon, alt: "" }
-                                })
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "flex-1 min-w-0" }, [
-                              _c(
-                                "div",
-                                { staticClass: "flex justify-between mb-1" },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "font-semibold text-base uppercase",
-                                      attrs: {
-                                        href:
-                                          _vm.domain +
-                                          "course/" +
-                                          item.course.slug
-                                      }
-                                    },
-                                    [_vm._v(_vm._s(item.course.title))]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "time",
-                                    { staticClass: "text-xs text-grey-dark" },
-                                    [_vm._v(_vm._s(item.duration))]
+                            _c("div", { staticClass: "loader" }, [
+                              _vm._v("Cargando...")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._l(_vm.filteredData, function(item, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              staticClass:
+                                "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
+                              on: {
+                                click: function($event) {
+                                  return _vm.showLesson(
+                                    item.course.slug,
+                                    item.order
                                   )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
+                                  class: item.course.color,
+                                  attrs: {
+                                    href:
+                                      _vm.domain +
+                                      "skill/" +
+                                      item.course.skill.slug
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: { src: item.course.icon, alt: "" }
+                                  })
                                 ]
                               ),
                               _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "text-base text-gray-700" },
-                                [
-                                  _c("p", { staticClass: "text-gray-700" }, [
-                                    _c("span", { staticClass: "font-bold" }, [
-                                      _vm._v(
-                                        "Lección " + _vm._s(item.order) + ": "
-                                      )
-                                    ]),
-                                    _vm._v(" " + _vm._s(item.title))
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
+                              _c("div", { staticClass: "flex-1 min-w-0" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "flex justify-between mb-1" },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "font-semibold text-base uppercase",
+                                        attrs: {
+                                          href:
+                                            _vm.domain +
+                                            "course/" +
+                                            item.course.slug
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(item.course.title))]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "time",
+                                      { staticClass: "text-xs text-grey-dark" },
+                                      [_vm._v(_vm._s(item.duration))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "text-base text-gray-700" },
+                                  [
+                                    _c("p", { staticClass: "text-gray-700" }, [
+                                      _c("span", { staticClass: "font-bold" }, [
+                                        _vm._v(
+                                          "Lección " + _vm._s(item.order) + ": "
+                                        )
+                                      ]),
+                                      _vm._v(" " + _vm._s(item.title))
+                                    ])
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      { staticClass: "text-xs uppercase text-gray-600" },
+                      [
+                        _vm._v(
+                          "presione ESC o click fuera del panel para salir"
                         )
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "small",
-                    { staticClass: "text-xs uppercase text-gray-600" },
-                    [_vm._v("presione ESC o click fuera del panel para salir")]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      : _vm._e()
-  ])
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -77052,8 +77085,6 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -77079,39 +77110,19 @@ function () {
       return date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
     }
   }, {
-    key: "loadParams",
-    value: function loadParams(item, edit) {
-      var params = new FormData();
-      if (edit) params.set('_method', 'PUT');
-
-      for (var fieldName in item) {
-        var fieldValue = item[fieldName];
-
-        if (_typeof(fieldValue) !== 'object') {
-          params.set(fieldName, fieldValue);
-        } else {
-          if (fieldValue && _typeof(fieldValue[0]) !== 'object') {
-            params.set(fieldName, fieldValue);
-          } else {
-            for (var index in fieldValue) {
-              params.set(fieldName + '[' + index + ']', JSON.stringify(fieldValue[index]));
-            }
-          }
-        }
-      }
-
-      return params;
+    key: "toTime",
+    value: function toTime(seconds) {
+      var date = new Date(null);
+      date.setSeconds(seconds);
+      return date.toISOString().substr(11, 8);
     }
   }, {
-    key: "stateValue",
-    value: function stateValue(state, values) {
-      return state == 'enable' ? {
-        name: 'enable',
-        value: values[0]
-      } : {
-        name: 'disable',
-        value: values[1]
-      };
+    key: "toSeconds",
+    value: function toSeconds(time) {
+      var seconds = time.split(':').reverse().reduce(function (prev, curr, i) {
+        return prev + curr * Math.pow(60, i);
+      }, 0);
+      return seconds;
     }
   }]);
 

@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-full z-50 text-white">
+  <nav class="w-full z-50 text-white hero" :class="fixed ? 'fixed' : ''">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
       <div class="pl-4 flex items-center">
         <a class="uppercase no-underline hover:no-underline font-bold text-2xl text-shadow-2xl"  href="/"> 
@@ -87,6 +87,7 @@
 <script>
 import { constants } from 'crypto';
 export default {
+  props: ['fixed'],
   data: () => ({
     domain: config.domain,
     show: false,

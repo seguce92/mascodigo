@@ -3,5 +3,6 @@
     "/css/app.css": "/css/app.css",
     "/js/es.js": "/js/es.js",
     "/js/manifest.js": "/js/manifest.js",
-    "/js/vendor.js": "/js/vendor.js"
+    "/js/vendor.js": "/js/vendor.js",
+    "/css/error.css": "/css/error.css"
 }

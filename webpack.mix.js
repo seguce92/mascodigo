@@ -15,6 +15,7 @@ require('laravel-mix-purgecss');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+  .styles('resources/css/error.css', 'public/css/error.css')
   .extract(['vue'])
   .postCss('resources/css/app.css', 'public/css')
   .tailwind('./tailwind.config.js')

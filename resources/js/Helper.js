@@ -17,32 +17,16 @@ class Helper {
         return date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds()
     }
 
-    loadParams (item, edit) {
-        let params = new FormData();
-        if ( edit )
-            params.set('_method', 'PUT')
-
-        for (let fieldName in item) {
-            let fieldValue = item[fieldName];
-            if (typeof fieldValue !== 'object') {
-                params.set(fieldName, fieldValue);
-            } else {
-                if (fieldValue && typeof fieldValue[0] !== 'object') {
-                    params.set(fieldName, fieldValue);
-                } else {
-                    for (let index in fieldValue) {
-                        params.set(fieldName + '[' + index + ']', JSON.stringify(fieldValue[index]));
-                    }
-                }
-            }
-        }
-
-        return params;
+    toTime (seconds) {
+        var date = new Date(null);
+        date.setSeconds(seconds);
+        return date.toISOString().substr(11, 8);
     }
 
-    stateValue (state, values) {
-        return state == 'enable' ? { name: 'enable', value: values[0] }
-        : { name: 'disable', value: values[1] }
+    toSeconds (time) {
+        let seconds = time.split(':').reverse().reduce((prev, curr, i) => prev + curr * Math.pow(60, i), 0)
+
+        return seconds
     }
 }
 
