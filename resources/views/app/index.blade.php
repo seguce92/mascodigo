@@ -14,8 +14,8 @@
     <section class="flex flex-wrap pt-20 lg:pt-40 lg:pb-40 pb-10 container px-3 mx-auto text-white">
       <div class="flex flex-col w-full pt-12 lg:pt-0 lg:w-1/2 order-2 lg:order-1 text-center lg:text-left">
         <p class="uppercase tracking-loose w-full">que quieres aprender hoy?</p>
-        <h1 class="my-4 text-5xl font-bold leading-tight">Main Hero Message to sell yourself!</h1>
-        <p class="leading-normal text-2xl mb-8">Escoge un curso, mira las lecciones las veces que quieras</p>
+        <h1 class="my-4 text-5xl font-bold leading-tight">LA FORTUNA JUEGA A FAVOR DE LA GENTE PREPARADA</h1>
+        <p class="leading-normal text-2xl mb-8">Escoge un curso, mira las lecciones las veces que tu desees...</p>
         <div class="w-full">
           <a href="#" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
             Suscribete
