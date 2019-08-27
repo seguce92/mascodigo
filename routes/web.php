@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
   Route::group(['prefix' => 'media'], function () {
     Route::post('icon/course', 'Media\FileController@iconCourse')->name('file.icon');
-    Route::post('icon/post', 'Media\FileController@coverPost')->name('file.icon');
+    Route::post('icon/post', 'Media\FileController@coverPost')->name('file.post');
   });
 
   Route::resource('categories', 'Blog\CategoryController');

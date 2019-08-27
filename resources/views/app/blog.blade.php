@@ -19,10 +19,10 @@
         </div>
         <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
           <div class="mb-8">
-            <p class="text-sm text-gray-600 flex items-center">
-              <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" /></svg>
+            <a href="#" class="text-sm text-gray-600 flex items-center">
+              <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 252.118V48C0 21.49 21.49 0 48 0h204.118a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882L293.823 497.941c-18.745 18.745-49.137 18.745-67.882 0L14.059 286.059A48 48 0 0 1 0 252.118zM112 64c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48z"/></svg>
               {{ $post->category->title }}
-            </p>
+            </a>
             <a href="{{ route('post', $post->slug) }}" class="text-gray-900 font-bold text-xl mb-2 hover:text-gray-700">Can coffee make you a better developer?</a>
             <p class="text-gray-700 text-base">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
@@ -32,7 +32,7 @@
             <img class="w-10 h-10 rounded-full mr-4" src="{{ asset('img/user.jpg') }}" alt="">
             <div class="text-sm">
               <a href="{{ url('/') }}" class="text-gray-900 leading-none hover:text-gray-700">{{ $post->author->fullname }}</a>
-              <p class="text-gray-600">Aug 18</p>
+              <p class="text-gray-600">{{ format_date_post($post->published_at) }}</p>
             </div>
           </div>
         </div>

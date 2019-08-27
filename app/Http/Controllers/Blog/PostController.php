@@ -25,7 +25,7 @@ class PostController extends Controller
         else $data = $this->entity->orderByDesc('created_at')->paginate(12);
 
         return view('admin::blog.post.index', [
-            'posts' =>  $$data,
+            'posts' =>  $data,
             'q' =>  $request->q
         ]);
     }
@@ -38,7 +38,7 @@ class PostController extends Controller
     public function create()
     {
         return view('admin::blog.post.create', [
-            'categories'    =>  \App\Entities\Blog\Post::all()
+            'categories'    =>  \App\Entities\Blog\Category::all()
         ]);
     }
 

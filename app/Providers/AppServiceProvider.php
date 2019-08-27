@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
         $this->loadViewsFrom(resource_path('/views/app'), 'app');
         $this->loadViewsFrom(resource_path('/views/app/admin'), 'admin');
 
-        \Carbon\Carbon::setLocale(config('app.locale'));
+        \Carbon\Carbon::setLocale('es');
         \Faker\Factory::create('es_ES');
     }
 

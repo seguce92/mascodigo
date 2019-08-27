@@ -94,7 +94,7 @@ tail.writer.strings = {
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!***************************************!*\
   !*** multi ./resources/js/tail-es.js ***!
   \***************************************/
@@ -106,4 +106,4 @@ module.exports = __webpack_require__(/*! /media/seguce92/code/projects/web/masco
 
 /***/ })
 
-},[[5,"/js/manifest"]]]);
+},[[6,"/js/manifest"]]]);

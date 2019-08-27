@@ -23,15 +23,15 @@ class Post extends Model
     ];
 
     public function author () {
-        return belongsTo(\App\User::class, 'author_id');
+        return $this->belongsTo(\App\User::class, 'author_id');
     }
 
     public function editor ( ) {
-        return belongsTo(\App\User::class, 'editor_id');
+        return $this->belongsTo(\App\User::class, 'editor_id');
     }
 
 
     public function category () {
-        return belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

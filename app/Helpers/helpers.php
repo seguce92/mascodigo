@@ -35,3 +35,9 @@ if (! function_exists ('to_time') ) {
     return app(\App\Helpers\Helper::class)->toTime($time_seconds);
   }
 }
+
+if (! function_exists ('format_date_post') ) {
+  function format_date_post ($timestamp) {
+    return app(\App\Helpers\Helper::class)->formatDatePost($timestamp);
+  }
+}

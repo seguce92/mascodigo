@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', ' - Categorías')
+
 @section('menu')
   @include('component.menu', [
     'option'  =>  'category'

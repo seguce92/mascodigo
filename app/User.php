@@ -38,4 +38,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'end_suscription_at' => 'datetime'
     ];
+
+    public function courses () {
+        return $this->hasMany(\App\Entities\Learn\Course::class);
+    }
+
+    public function posts () {
+        return $this->hasMany(\App\Entities\Blog\Post::class);
+    }
 }
