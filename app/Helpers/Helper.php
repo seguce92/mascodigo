@@ -82,4 +82,10 @@ class Helper {
     }
   }
 
+  public function excerpt ($content) {
+    $content = \Illuminate\Mail\Markdown::parse($content);
+
+    return strip_tags(substr($content, 0, 180)).'...';
+  }
+
 }

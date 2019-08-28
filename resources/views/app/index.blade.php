@@ -9,6 +9,7 @@
 </head>
 <body class="leading-normal tracking-normal font-sans">
   <header class="hero-home box-shadow-hero" id="app">
+    
     <menu-component :fixed="true"></menu-component>
     
     <section class="flex flex-wrap pt-20 lg:pt-40 lg:pb-40 pb-10 container px-3 mx-auto text-white">

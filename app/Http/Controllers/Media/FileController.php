@@ -33,7 +33,7 @@ class FileController extends Controller
 
         $imagethumb = \Image::make($file);
         
-        $imagethumb->resize(320, 480, function ($constraint) {
+        $imagethumb->resize(480, 320, function ($constraint) {
             $constraint->aspectRatio();                 
         });
 

@@ -6,16 +6,6 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        
-    }
-
     public function home () {
         return view('admin::home');
     }
@@ -98,8 +88,24 @@ class HomeController extends Controller
 
         abort_unless($post, 404);
 
+        $related = \App\Entities\Blog\Post::where('category_id', $post->category_id)
+            ->where('is_publish', 1)
+            ->inRandomOrder()->limit(3)->get();
+
         return view('app::post', [
-            'post' => $post
+            'post'  =>  $post,
+            'posts' =>  $related
+        ]);
+    }
+
+    public function category ($slug) {
+
+        $category = \App\Entities\Blog\Category::whereSlug($slug)->first();
+        abort_unless($category, 404);
+        $posts = \App\Entities\Blog\Post::where('category_id', $category->id)->paginate(12);
+        return view('app::category', [
+            'category'  =>  $category,
+            'posts'     =>  $posts
         ]);
     }
 }

@@ -22,6 +22,8 @@ Route::get('/me/{author}', 'HomeController@me')->name('me');
 
 Route::get('/blog', 'HomeController@blog')->name('blog');
 
+Route::get('/category/{slug}', 'HomeController@category')->name('category');
+
 Route::group(['middleware' => 'auth'], function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
@@ -46,6 +48,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => 'api/data'], function () {
   
   Route::post('search', 'Api\DataController@searchGlobal')->name('search');
+  Route::post('search/post', 'Api\DataController@searchGlobalPost')->name('search.post');
 
 });
 

@@ -4833,9 +4833,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['fixed'],
+  props: ['fixed', 'type'],
   data: function data() {
     return {
       domain: config.domain,
@@ -4847,7 +4868,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.fetchData();
+    if (this.type == 'learn') this.fetchData();else this.fetchPosts();
   },
   computed: {
     filteredData: function filteredData() {
@@ -4860,6 +4881,17 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return [];
       }
+    },
+    filteredDataPost: function filteredDataPost() {
+      var _this2 = this;
+
+      if (this.query) {
+        return this.data.filter(function (item) {
+          return item.title.toLowerCase().startsWith(_this2.query) || item.category.title.toLowerCase().startsWith(_this2.query);
+        });
+      } else {
+        return [];
+      }
     }
   },
   methods: {
@@ -4868,19 +4900,34 @@ __webpack_require__.r(__webpack_exports__);
       this.search = !this.search;
     },
     fetchData: function fetchData() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.loading = true;
       $http.post('/api/data/search').then(function (response) {
-        _this2.data = response.data.data;
+        _this3.data = response.data.data;
       })["catch"](function (error) {
         message = error.response.data.message || error.message;
       })["finally"](function () {
-        _this2.loading = false;
+        _this3.loading = false;
+      });
+    },
+    fetchPosts: function fetchPosts() {
+      var _this4 = this;
+
+      this.loading = true;
+      $http.post('/api/data/search/post').then(function (response) {
+        _this4.data = response.data.data;
+      })["catch"](function (error) {
+        message = error.response.data.message || error.message;
+      })["finally"](function () {
+        _this4.loading = false;
       });
     },
     showLesson: function showLesson(course, order) {
       window.location = this.domain + 'course/' + course + '/lesson/' + order;
+    },
+    showPost: function showPost(slug) {
+      window.location = this.domain + slug;
     }
   }
 });
@@ -75110,7 +75157,10 @@ var render = function() {
                         staticClass:
                           "appearance-none text-2xl block w-full text-gray-700 bg-gray-100 border-t border-b border-gray-300 py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white",
                         attrs: {
-                          placeholder: "Buscar lección...",
+                          placeholder:
+                            _vm.type == "learn"
+                              ? "Buscar Lección..."
+                              : "Buscar Post...",
                           spellcheck: "false",
                           autofocus: ""
                         },
@@ -75157,115 +75207,248 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body px-3 scrollbar" }, [
-                    _c(
-                      "ul",
-                      { staticClass: "text-left lesson" },
-                      [
-                        _c(
-                          "li",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.loading,
-                                expression: "loading"
-                              }
-                            ]
-                          },
+                    _vm.type == "learn"
+                      ? _c(
+                          "ul",
+                          { staticClass: "text-left lesson" },
                           [
-                            _c("div", { staticClass: "loader" }, [
-                              _vm._v("Cargando...")
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.filteredData, function(item, index) {
-                          return _c(
-                            "li",
-                            {
-                              key: index,
-                              staticClass:
-                                "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
-                              on: {
-                                click: function($event) {
-                                  return _vm.showLesson(
-                                    item.course.slug,
-                                    item.order
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
+                            _c(
+                              "li",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.loading,
+                                    expression: "loading"
+                                  }
+                                ]
+                              },
+                              [
+                                _c("div", { staticClass: "loader" }, [
+                                  _vm._v("Cargando...")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.filteredData, function(item, index) {
+                              return _c(
+                                "li",
                                 {
+                                  key: index,
                                   staticClass:
-                                    "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
-                                  class: item.course.color,
-                                  attrs: {
-                                    href:
-                                      _vm.domain +
-                                      "skill/" +
-                                      item.course.skill.slug
+                                    "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showLesson(
+                                        item.course.slug,
+                                        item.order
+                                      )
+                                    }
                                   }
                                 },
                                 [
-                                  _c("img", {
-                                    attrs: { src: item.course.icon, alt: "" }
-                                  })
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "flex-1 min-w-0" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "flex justify-between mb-1" },
-                                  [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "font-semibold text-base uppercase",
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3",
+                                      class: item.course.color,
+                                      attrs: {
+                                        href:
+                                          _vm.domain +
+                                          "skill/" +
+                                          item.course.skill.slug
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
                                         attrs: {
-                                          href:
-                                            _vm.domain +
-                                            "course/" +
-                                            item.course.slug
+                                          src: item.course.icon,
+                                          alt: ""
                                         }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "flex-1 min-w-0" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "flex justify-between mb-1"
                                       },
-                                      [_vm._v(_vm._s(item.course.title))]
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass:
+                                              "font-semibold text-base uppercase",
+                                            attrs: {
+                                              href:
+                                                _vm.domain +
+                                                "course/" +
+                                                item.course.slug
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(item.course.title))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "time",
+                                          {
+                                            staticClass:
+                                              "text-xs text-grey-dark"
+                                          },
+                                          [_vm._v(_vm._s(item.duration))]
+                                        )
+                                      ]
                                     ),
                                     _vm._v(" "),
                                     _c(
-                                      "time",
-                                      { staticClass: "text-xs text-grey-dark" },
-                                      [_vm._v(_vm._s(item.duration))]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "text-base text-gray-700" },
-                                  [
-                                    _c("p", { staticClass: "text-gray-700" }, [
-                                      _c("span", { staticClass: "font-bold" }, [
-                                        _vm._v(
-                                          "Lección " + _vm._s(item.order) + ": "
+                                      "div",
+                                      {
+                                        staticClass: "text-base text-gray-700"
+                                      },
+                                      [
+                                        _c(
+                                          "p",
+                                          { staticClass: "text-gray-700" },
+                                          [
+                                            _c(
+                                              "span",
+                                              { staticClass: "font-bold" },
+                                              [
+                                                _vm._v(
+                                                  "Lección " +
+                                                    _vm._s(item.order) +
+                                                    ": "
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" " + _vm._s(item.title))
+                                          ]
                                         )
-                                      ]),
-                                      _vm._v(" " + _vm._s(item.title))
-                                    ])
-                                  ]
-                                )
-                              ])
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    ),
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      : _c(
+                          "ul",
+                          { staticClass: "text-left lesson" },
+                          [
+                            _c(
+                              "li",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.loading,
+                                    expression: "loading"
+                                  }
+                                ]
+                              },
+                              [
+                                _c("div", { staticClass: "loader" }, [
+                                  _vm._v("Cargando...")
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.filteredDataPost, function(item, index) {
+                              return _c(
+                                "li",
+                                {
+                                  key: index,
+                                  staticClass:
+                                    "flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showPost(
+                                        item.course.slug,
+                                        item.order
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "red flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 mr-3",
+                                      attrs: {
+                                        href:
+                                          _vm.domain +
+                                          "category/" +
+                                          item.category.slug
+                                      }
+                                    },
+                                    [
+                                      _c("img", {
+                                        attrs: { src: item.image, alt: "" }
+                                      })
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "flex-1 min-w-0" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "flex justify-between mb-1"
+                                      },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            staticClass:
+                                              "font-semibold text-base uppercase",
+                                            attrs: {
+                                              href:
+                                                _vm.domain +
+                                                "category/" +
+                                                item.category.slug
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(item.category.title))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "time",
+                                          {
+                                            staticClass:
+                                              "text-xs text-grey-dark"
+                                          },
+                                          [_vm._v(_vm._s(item.duration))]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "text-base text-gray-700"
+                                      },
+                                      [
+                                        _c(
+                                          "p",
+                                          { staticClass: "text-gray-700" },
+                                          [_vm._v(_vm._s(item.title))]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        ),
                     _vm._v(" "),
                     _c(
                       "small",

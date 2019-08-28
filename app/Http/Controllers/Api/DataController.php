@@ -10,11 +10,15 @@ class DataController extends Controller
 {
 
     public function searchGlobal (Request $request) {
-        /*$data = \App\Entities\Learn\Lesson::where('title', 'like', '%'.$request->q.'%')
-            ->orWhere('content', 'like', '%'.$request->q.'%')
-            ->get();*/
-
         $data = \App\Entities\Learn\Lesson::with(['course.skill'])->get();
+
+        return (new ModelResource($data))
+            ->response()
+            ->setStatusCode(201);
+    }
+
+    public function searchGlobalPost (Request $request) {
+        $data = \App\Entities\Blog\Post::with(['category'])->get();
 
         return (new ModelResource($data))
             ->response()

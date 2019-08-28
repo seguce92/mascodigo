@@ -446,6 +446,10 @@
     border-radius: 5px;
 }
 
+.post-content {
+    max-width: 870px;
+}
+
 @import 'github-markdown.css';
 
 @tailwind utilities;

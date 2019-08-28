@@ -6,11 +6,14 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   @include('component.icons')
+  @stack('style')
 </head>
 <body class="leading-normal tracking-normal font-sans">
   <div id="app">
     <header class="hero box-shadow-hero">
-      <menu-component></menu-component>
+      
+      @yield('menu-component')
+
       <section class="flex hidden lg:flex flex-wrap container mx-auto text-white">
         <nav class="select-none bg-grey flex justify-end items-stretch w-full">
           <div class="flex items-stretch flex-no-shrink h-12">
@@ -26,5 +29,6 @@
     @yield('content')
   </div>
   @include ('component.footer')
+  @stack('script')
 </body>
 </html>

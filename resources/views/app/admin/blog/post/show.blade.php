@@ -20,7 +20,7 @@
     <div class="flex flex-wrap self-start w-full lg:w-9/12 bg-white border rounded shadow p-2 mr-0 lg:mr-2">
       <div class="w-full mt-4">
         <a href="{{ route('posts.index') }}" class="form-button-red">
-          <i class="fa fa-times mr-2"></i>
+          <i class="fa fa-arrow-left mr-2"></i>
           <span>Atras</span>
         </a>
         <button type="submit" class="form-button-yellow">

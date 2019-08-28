@@ -41,3 +41,9 @@ if (! function_exists ('format_date_post') ) {
     return app(\App\Helpers\Helper::class)->formatDatePost($timestamp);
   }
 }
+
+if (! function_exists ('excerpt') ) {
+  function excerpt ($content) {
+    return app(\App\Helpers\Helper::class)->excerpt($content);
+  }
+}

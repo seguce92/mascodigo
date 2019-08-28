@@ -46,7 +46,7 @@
         <div class="modal-header sticky top-0 bg-white p-2">
           <input 
             class="appearance-none text-2xl block w-full text-gray-700 bg-gray-100 border-t border-b border-gray-300 py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white"
-            placeholder="Buscar lección..." v-model="query" spellcheck="false" autofocus>
+            :placeholder="type == 'learn' ? 'Buscar Lección...' : 'Buscar Post...'" v-model="query" spellcheck="false" autofocus>
             <div class="absolute" style="top:1.4rem;right:0.75rem;">
               <svg class="fill-current pointer-events-none text-gray-800 w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="modal-body px-3 scrollbar">
-          <ul class="text-left lesson">
+          <ul v-if="type == 'learn'" class="text-left lesson">
             <li v-show="loading">
               <div class="loader">Cargando...</div>
             </li>
@@ -75,6 +75,27 @@
               </div>
             </li>
           </ul>
+          <ul v-else class="text-left lesson">
+            <li v-show="loading">
+              <div class="loader">Cargando...</div>
+            </li>
+            <li v-for="(item, index) in filteredDataPost"
+              :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
+              v-on:click="showPost(item.course.slug, item.order)">
+              <a :href="domain + 'category/' + item.category.slug" class="red flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 mr-3">
+                <img :src="item.image" alt="">
+              </a>
+              <div class="flex-1 min-w-0">
+                <div class="flex justify-between mb-1">
+                  <a :href="domain + 'category/' + item.category.slug" class="font-semibold text-base uppercase">{{ item.category.title }}</a>
+                  <time class="text-xs text-grey-dark">{{ item.duration }}</time>
+                </div>
+                <div class="text-base text-gray-700">
+                  <p class="text-gray-700">{{ item.title }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
           <small class="text-xs uppercase text-gray-600">presione ESC o click fuera del panel para salir</small>
         </div>
       </div>
@@ -87,7 +108,7 @@
 <script>
 import { constants } from 'crypto';
 export default {
-  props: ['fixed'],
+  props: ['fixed', 'type'],
   data: () => ({
     domain: config.domain,
     show: false,
@@ -97,15 +118,28 @@ export default {
     data: []
   }),
   created () {
-    this.fetchData()
+    if ( this.type == 'learn' )
+      this.fetchData()
+    else
+      this.fetchPosts()
   },
   computed: {
-    filteredData (){
-      if(this.query){
-        return this.data.filter((item)=>{
+    filteredData () {
+      if(this.query) {
+        return this.data.filter((item) => {
           return item.title.toLowerCase().startsWith(this.query) || item.course.title.toLowerCase().startsWith(this.query);
         })
-      } else{
+      } else {
+        return [];
+      }
+    },
+
+    filteredDataPost () {
+      if(this.query) {
+        return this.data.filter((item) => {
+          return item.title.toLowerCase().startsWith(this.query) || item.category.title.toLowerCase().startsWith(this.query);
+        })
+      } else {
         return [];
       }
     }
@@ -130,8 +164,26 @@ export default {
         })
     },
 
+    fetchPosts: function () {
+      this.loading = true
+      $http.post('/api/data/search/post')
+        .then(response => {
+          this.data = response.data.data
+        })
+        .catch(error => {
+          message = error.response.data.message || error.message
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    },
+
     showLesson: function (course, order) {
       window.location = this.domain + 'course/'+ course +'/lesson/' + order;
+    },
+
+    showPost: function (slug) {
+      window.location = this.domain + slug;
     },
   }
 }
