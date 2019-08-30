@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', ' - Nuevo Curso')
+@section('title', ' - Editar Curso')
 
 @section ('menu')
 

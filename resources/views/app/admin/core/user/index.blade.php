@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', ' - Usuarios')
+
 @section('menu')
   @include('component.menu', [
     'option'  =>  'users'

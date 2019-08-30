@@ -41,9 +41,19 @@
     background-size: cover;
 }
 
+.blog {
+    background-color: #edf2f7d9;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
 @media (min-width: 769px) {
     .hero-home {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+    }
+    .blog {
+        clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
     }
 }
 
@@ -448,6 +458,22 @@
 
 .post-content {
     max-width: 870px;
+}
+
+.post figure {
+    overflow: hidden;
+}
+
+.post figure img {
+    -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+
+.post figure img:hover {
+    -webkit-transform: scale(1.3);
+	transform: scale(1.3);
 }
 
 @import 'github-markdown.css';

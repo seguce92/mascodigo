@@ -45,15 +45,7 @@
 
     <div class="flex flex-wrap self-start w-full lg:w-3/12 bg-white border rounded shadow p-2">
       <div class="w-full mb-1">
-        <label class="form-label">estado de post</label>
-        <label class="inline-flex items-center mr-5">
-          <input type="radio" class="form-radio h-6 w-6" name="is_publish" value="1" checked>
-          <span class="ml-2">Publicar</span>
-        </label>
-        <label class="inline-flex items-center">
-          <input type="radio" class="form-radio h-6 w-6" name="is_publish" value="0">
-          <span class="ml-2">Borrador</span>
-        </label>
+        <img src="{{ $post->image }}" alt="">
       </div>
 
     </div>

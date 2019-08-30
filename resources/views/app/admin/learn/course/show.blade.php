@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', ' - Nuva Lección')
+@section('title', ' - Nueva Lección')
 
 @push('style')
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tail.writer@latest/css/tail.writer-white.min.css">

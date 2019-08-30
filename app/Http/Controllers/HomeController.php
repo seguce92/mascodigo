@@ -19,8 +19,11 @@ class HomeController extends Controller
     {
         $skills = \App\Entities\Learn\Skill::with('courses.lessons')->get();
 
+        $posts = \App\Entities\Blog\Post::orderByDesc('view_count')->limit(3)->get();
+
         return view('app::index', [
-            'skills'    =>  $skills
+            'skills'    =>  $skills,
+            'posts'     =>  $posts
         ]);
     }
 

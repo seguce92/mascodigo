@@ -2397,10 +2397,21 @@ video {
   background-size: cover;
 }
 
+.blog {
+  background-color: #edf2f7d9;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 @media (min-width: 769px) {
   .hero-home {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+  }
+
+  .blog {
+    -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
+            clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
   }
 }
 
@@ -2941,6 +2952,19 @@ video {
 
 .post-content {
   max-width: 870px;
+}
+
+.post figure {
+  overflow: hidden;
+}
+
+.post figure img {
+  transform: scale(1);
+  transition: .3s ease-in-out;
+}
+
+.post figure img:hover {
+  transform: scale(1.3);
 }
 
 .appearance-none {

@@ -2,9 +2,19 @@
 
 @section('title', config('app.name', 'Laravel'))
 
+@section('menu-component')
+  <menu-component type="learn"></menu-component>
+@endsection
+
+@section('menu')
+  @include('component.home-menu', [
+    'opt' =>  'courses'
+  ])
+@endsection
+
 @section('content')
-<section class="py-10 mt-10">
-    <div class="container mx-auto flex flex-wrap pt-4 py-12 max-900 justify-center">
+<section class="lg:py-10 lg:mt-10">
+    <div class="container mx-auto flex flex-wrap pt-4 lg:py-12 max-900 justify-center">
 
         <div class="w-full max-w-sm mt-10">
             <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">

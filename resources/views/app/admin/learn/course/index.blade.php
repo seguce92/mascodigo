@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Cursos')
+@section('title', ' - Cursos')
 
 @section('menu')
   @include('component.menu', [

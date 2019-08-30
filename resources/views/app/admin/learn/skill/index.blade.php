@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', ' - Habilidades')
+
 @section('menu')
   @include('component.menu', [
     'option'  =>  'skills'
