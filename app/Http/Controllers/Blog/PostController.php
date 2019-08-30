@@ -96,7 +96,8 @@ class PostController extends Controller
         abort_unless($post, 404);
 
         return view('admin::blog.post.edit', [
-            'post'  =>  $this->post
+            'post'  =>  $post,
+            'categories'    =>  \App\Entities\Blog\Category::all()
         ]);
     }
 
@@ -136,6 +137,16 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = $this->entity->find($id);
+
+        abort_unless($post, 404);
+
+        if ( $post->delete() ) {
+            session()->flash('message', 'Post Eliminado exitosamente');
+        } else {
+            session()->flash('danger', 'Lo siento se produjo un error al eliminar el Post');
+        }
+
+        return redirect()->route('posts.index');
     }
 }

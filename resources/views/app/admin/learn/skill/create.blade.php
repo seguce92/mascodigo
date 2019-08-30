@@ -16,7 +16,7 @@
       @csrf
       <div class="flex flex-wrap">
         <div class="w-full">
-          <label class="form-label" for="title">Habilidad</label>
+          <label class="form-label" for="name">Habilidad</label>
           <input class="form-input" id="name" name="name" type="text" placeholder="Habilidad" onkeyup="generateSlug()" value="{{ old('name') }}">
         </div>
         

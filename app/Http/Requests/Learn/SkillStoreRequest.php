@@ -25,7 +25,7 @@ class SkillStoreRequest extends FormRequest
     {
         return [
             'name'  =>  'required|min:2|max:255',
-            'slug'  =>  'required|min:2|max:255|unique:skills.slug',
+            'slug'  =>  'required|min:2|max:255|unique:skills,slug',
             'icon'  =>  'required|min:100',
             'description'   =>  'required|min:50'
         ];

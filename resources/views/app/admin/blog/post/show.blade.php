@@ -23,10 +23,11 @@
           <i class="fa fa-arrow-left mr-2"></i>
           <span>Atras</span>
         </a>
-        <button type="submit" class="form-button-yellow">
+        <a href="{{ route('posts.edit', $post->id) }}" class="form-button-yellow">
           <i class="fa fa-pencil-alt mr-2"></i>
           <span>Editar</span>
-        </button>
+        </a>
+        @delete(['route' => route('posts.destroy', $post->id), 'type' => 'text'])  @enddelete
       </div>
       <div class="w-full">
         <h1 class="font-bold text-lg mt-4">{{ $post->title }}</h1>

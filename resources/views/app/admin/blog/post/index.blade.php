@@ -57,9 +57,7 @@
               <a class="hover:text-yellow-600 mr-2" href="{{ route('posts.edit', $post->id) }}">
                 <i class="fa fa-pencil-alt"></i>
               </a>
-              <a href="#" class="delete hover:text-red-600" data-route="{{ route('posts.destroy', $post->id) }}">
-                <i class="fa fa-trash-alt"></i>
-              </a>
+              @delete(['route' => route('posts.destroy', $post->id)])  @enddelete
             </td>
           </tr>
         @endforeach

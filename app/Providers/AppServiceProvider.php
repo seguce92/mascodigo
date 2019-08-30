@@ -30,5 +30,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::component('component.alert', 'alert');
         Blade::component('component.error', 'error');
+        Blade::component('component.delete', 'delete');
     }
 }

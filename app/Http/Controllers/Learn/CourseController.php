@@ -37,6 +37,14 @@ class CourseController extends Controller
      */
     public function create()
     {
+        $skills = \App\Entities\Learn\Skill::all()->count();
+
+        if ( $skills == 0 ) {
+            session()->flash('danger', 'Primero debe registrar un Habilidad.');
+            return redirect()->back();
+        }
+
+
         return view('admin::learn.course.create', [
             'skills'    =>  \App\Entities\Learn\Skill::all()
         ]);
