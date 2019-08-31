@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function home () {
-        return view('admin::home');
+
+        return view('admin::home', [
+            'posts' =>  \App\Entities\Blog\Post::all(),
+            'courses'   =>  \App\Entities\Learn\Course::all()
+        ]);
     }
 
     /**
@@ -75,9 +79,13 @@ class HomeController extends Controller
         ]);
     }
 
-    public function me()
+    public function me($username)
     {
-        return view('app::me');
+        $user = \App\User::whereUsername($username)->first();
+
+        return view('app::me', [
+            'user'  =>  $user
+        ]);
     }
 
     public function blog (Request $request) {
@@ -90,6 +98,8 @@ class HomeController extends Controller
         $post = \App\Entities\Blog\Post::whereSlug($slug)->where('is_publish', 1)->first();
 
         abort_unless($post, 404);
+
+        $post->increment('view_count');
 
         $related = \App\Entities\Blog\Post::where('category_id', $post->category_id)
             ->where('is_publish', 1)

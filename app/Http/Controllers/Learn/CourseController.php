@@ -138,6 +138,13 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = $this->entity->find($id);
+
+        if ( $course->lessons->count() == 0 && $course->delete() )
+            session()->flash('message', 'Curso Eliminado');
+        else 
+            session()->flash('danger', 'Lo siento se produjo un error al ejecutar petición');
+
+        return redirect()->route('courses.index');
     }
 }

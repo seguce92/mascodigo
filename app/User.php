@@ -39,6 +39,10 @@ class User extends Authenticatable
         'end_suscription_at' => 'datetime'
     ];
 
+    public function information () {
+        return $this->hasOne(\App\Entities\Core\Information::class);
+    }
+
     public function courses () {
         return $this->hasMany(\App\Entities\Learn\Course::class);
     }

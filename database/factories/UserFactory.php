@@ -25,3 +25,10 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->define(\App\Entities\Core\Information::class, function (Faker $faker) {
+    return [
+        'portlet'   =>  'https://mascodigo.com.bo/img/portlet/image4.jpg',
+        'user_id'   =>  1
+    ];
+});

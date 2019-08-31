@@ -2,6 +2,8 @@
 
 return [
 
+  'description' =>  'Más Código es una plataforma virtual de aprendizaje y publicacion de contenido referente a la tecnologia actual.',
+
   'colors'  =>  [
     'red',
     'pink',

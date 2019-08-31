@@ -40,6 +40,11 @@
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="content">Contenido de Post</label>
         <textarea name="content" id="content">{{ old('content') }}</textarea>
       </div>
+
+      <div class="w-full mt-2">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="description">Descripción</label>
+        <textarea class="form-input" name="description" id="description" maxlength="180">{{ old('description') }}</textarea>
+      </div>
     </div>
 
     <div class="flex flex-wrap self-start w-full lg:w-3/12 bg-white border rounded shadow p-2">

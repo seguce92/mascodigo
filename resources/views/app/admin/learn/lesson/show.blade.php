@@ -21,10 +21,8 @@
 @endsection
 
 @section('content')
-  <form class="flex flex-wrap lg:flex-no-wrap w-full" action="{{ route('lessons.update', $lesson->id) }}" method="POST">
-    @csrf
-    @method('PATCH')
-    <input type="hidden" name="course_id" value="{{ $lesson->course->id }}">
+  <div class="flex flex-wrap lg:flex-no-wrap w-full">
+    
     <div class="flex flex-wrap w-full lg:w-8/12 bg-white border rounded shadow p-2 mr-0 lg:mr-2">
       <div class="w-full my-2 flex content-between">
         <div class="flex-1">
@@ -37,6 +35,10 @@
           <span class="font-bold">EDITAR LECCIÓN</span>
         </div>
       </div>
+      <form class="flex flex-wrap w-full bg-white" action="{{ route('lessons.update', $lesson->id) }}" method="POST">
+      @csrf
+      @method('PATCH')
+      <input type="hidden" name="course_id" value="{{ $lesson->course->id }}">
       <div class="w-full">
         <label class="form-label" for="title">Título de Lección</label>
         <input class="form-input" id="title" name="title" type="text" autofocus="true" placeholder="Titulo de Lección" value="{{ old('title') ? old('title') : $lesson->title }}">
@@ -105,6 +107,7 @@
           <span>Actualizar Lección</span>
         </button>
       </div>
+      </form>
     </div>
 
     <div class="flex flex-wrap self-start justify-start w-full lg:w-4/12 rounded">
@@ -151,7 +154,7 @@
       </div>
       
     </div>
-  </form>
+  </div>
 @endsection
 
 @push('script')

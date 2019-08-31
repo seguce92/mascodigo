@@ -117,6 +117,13 @@ class SkillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $skill = $this->entity->find($id);
+
+        if ( $skill->courses->count() == 0 && $skill->delete() )
+            session()->flash('message', 'Habilidad Eliminada');
+        else 
+            session()->flash('danger', 'Lo siento se produjo un error al ejecutar petición');
+
+        return redirect()->route('skills.index');
     }
 }

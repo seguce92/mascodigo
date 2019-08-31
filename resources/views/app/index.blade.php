@@ -5,6 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ config('app.name', 'Laravel') }}</title>
+  <meta property="fb:app_id" content="334747354108904">
+  <meta property="og:url" content="{{ url('/') }}" />
+  <meta property="og:site_name" content="Más Código">
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:title" content="Más Código" />
+  <meta property="og:description" content="{{ config('seguce92.data.description') }}" />
+  
+  <meta property="og:image" content="{{ asset('img/mc_logo.png') }}" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1200" />
+
+  <meta itemprop="name" content="Más Código">
+  <meta itemprop="description" content="{{ config('seguce92.data.description') }}">
+  <meta itemprop="image" content="{{ asset('img/mc_logo.png') }}">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@seguce92">
+  <meta name="twitter:title" content="Más Código">
+  <meta name="twitter:description" content="{{ config('seguce92.data.description') }}">
+  <meta name="twitter:creator" content="@seguce92">
+  <meta name="twitter:image:src" content="{{ asset('img/mc_logo.png') }}">
+
   @include('component.icons')
 </head>
 <body class="leading-normal tracking-normal font-sans">
@@ -18,7 +42,7 @@
         <h1 class="my-4 text-5xl font-bold leading-tight">LA FORTUNA JUEGA A FAVOR DE LA GENTE PREPARADA</h1>
         <p class="leading-normal text-2xl mb-8">Escoge un curso, mira las lecciones las veces que tu desees...</p>
         <div class="w-full">
-          <a href="#" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
+          <a href="{{ route('register') }}" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
             Suscribete
           </a>
           <a href="{{ route('courses') }}" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
@@ -78,7 +102,7 @@
                     </p>
                   </div>
                   <div class="flex items-center">
-                    <img class="w-10 h-10 rounded-full mr-4" src="{{ asset('img/user.jpg') }}" alt="">
+                    <img class="w-10 h-10 rounded-full mr-4" src="{{ $post->author->photo }}" alt="">
                     <div class="text-sm">
                       <a href="{{ url('/') }}" class="text-gray-900 leading-none hover:text-gray-700">{{ $post->author->fullname }}</a>
                       <p class="text-gray-600">{{ format_date_post($post->published_at) }}</p>

@@ -26,8 +26,9 @@ class PostStoreRequest extends FormRequest
         return [
             'title' =>  'required|min:3|max:255',
             'slug'  =>  'required|min:3|max:255|unique:posts,slug',
-            'content'   =>  'required',
-            'image'     =>  'required',
+            'content'       =>  'required',
+            'description'   =>  'required|min:40|max:180',
+            'image'         =>  'required',
             'is_publish'    =>  'required',
             'category_id'   =>  'required|numeric'
         ];

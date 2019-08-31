@@ -1,6 +1,29 @@
 @extends('layouts.app')
 
-@section('title', config('app.name', 'Laravel'))
+@section('title', $course->title)
+
+@section('seo')
+  <meta property="fb:app_id" content="334747354108904">
+  <meta property="og:url" content="{{ route('course', $course->slug) }}" />
+  <meta property="og:site_name" content="Más Código">
+  <meta property="og:type" content="object" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:title" content="{{ $course->title }}" />
+  <meta property="og:description" content="{{ config('seguce92.data.description') }}" />
+  
+  <meta property="og:image" content="{{ $course->icon }}" />
+
+  <meta itemprop="name" content="{{ $course->title }}">
+  <meta itemprop="description" content="{{ config('seguce92.data.description') }}">
+  <meta itemprop="image" content="{{ $course->icon }}">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@seguce92">
+  <meta name="twitter:title" content="{{ $course->title }}">
+  <meta name="twitter:description" content="{{ config('seguce92.data.description') }}">
+  <meta name="twitter:creator" content="@seguce92">
+  <meta name="twitter:image:src" content="{{ $course->icon }}">
+@endsection
 
 @section('menu-component')
   <menu-component type="learn"></menu-component>

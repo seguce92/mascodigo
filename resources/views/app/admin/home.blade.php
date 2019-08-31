@@ -22,7 +22,7 @@
                 </div>
                 <div class="flex-1 text-right md:text-center">
                     <h5 class="font-bold uppercase text-gray-500">Total Posts</h5>
-                    <h3 class="font-bold text-3xl">0 <span class="text-green-500"><i class="fas fa-caret-up"></i></span></h3>
+                    <h3 class="font-bold text-3xl">{{ $posts->count() }}</h3>
                 </div>
             </div>
         </div>
@@ -36,8 +36,8 @@
                     </div>
                 </div>
                 <div class="flex-1 text-right md:text-center">
-                    <h5 class="font-bold uppercase text-gray-500">Total Proyectos</h5>
-                    <h3 class="font-bold text-3xl">0 <span class="text-orange-500"><i class="fas fa-exchange-alt"></i></span></h3>
+                    <h5 class="font-bold uppercase text-gray-500">Total Cursos</h5>
+                    <h3 class="font-bold text-3xl">{{ $courses->count() }}</h3>
                 </div>
             </div>
         </div>
@@ -52,20 +52,20 @@
                 </div>
                 <div class="flex-1 text-right md:text-center">
                     <h5 class="font-bold uppercase text-gray-500">Total Visitas</h5>
-                    <h3 class="font-bold text-3xl">0 <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></h3>
+                    <h3 class="font-bold text-3xl">{{ $posts->sum('view_count') }}</h3>
                 </div>
             </div>
         </div>
     </div>
     <div class="w-full p-3">
         <div class="bg-white border rounded shadow p-2">
-            {{--@foreach ( $posts->limit(10)->get() as $post )
+            @foreach ( $posts->take(10) as $post )
             <div class="flex">
                 <div class="flex-initial text-gray-700 text-center bg-gray-200 px-4 py-2 m-2">
                     {{ $loop->iteration }}
                 </div>
                 <div class="flex-initial text-gray-700 text-center bg-gray-200 px-4 py-2 m-2">
-                    {{ $post->visit }}
+                    {{ $post->view_count }}
                 </div>
                 <div class="flex-auto text-gray-700 bg-gray-200 px-4 py-2 m-2">
                     {{ $post->title }}
@@ -74,7 +74,7 @@
                     {{ url('/'.$post->slug) }}
                 </div>
             </div>
-            @endforeach--}}
+            @endforeach
         </div>
     </div>
 </div>

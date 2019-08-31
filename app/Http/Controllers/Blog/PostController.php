@@ -55,6 +55,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->content = $request->content;
         $post->image = $request->image;
+        $post->description = $request->description;
         $post->is_publish = $request->is_publish;
         $post->author_id = \Auth::id();
         $post->category_id = $request->category_id;
@@ -117,6 +118,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->content = $request->content;
         $post->image = $request->image;
+        $post->description = $request->description;
         $post->is_publish = $request->is_publish;
         $post->author_id = \Auth::id();
         $post->category_id = $request->category_id;
