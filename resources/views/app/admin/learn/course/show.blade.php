@@ -33,7 +33,7 @@
             <i class="fa fa-arrow-left mr-2"></i>
             <span>Atras</span>
           </a>
-          @if ( \Auth::id() == $corse->author_id )
+          @if ( \Auth::id() == $course->author_id )
             @can('editar cursos')
             <a href="{{ route('courses.edit', $course->id) }}" class="form-button-yellow">
               <i class="fa fa-pencil-alt mr-2"></i>
