@@ -16,7 +16,7 @@ class CreateInformationTable extends Migration
         Schema::create('information', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('facebook')->nullable();
+            $table->string('facebook')->nullable(); 
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
             $table->string('linkedin')->nullable();

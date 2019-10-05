@@ -24,20 +24,31 @@ Route::get('/blog', 'HomeController@blog')->name('blog');
 
 Route::get('/category/{slug}', 'HomeController@category')->name('category');
 
+Route::get('sergiocruzes.com', function () {
+  abort(404);
+});
+
 Route::group(['middleware' => 'auth'], function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-  Route::resource('users', 'Core\UserController');
+  Route::resource('users', 'Core\UserController')->except(['destroy']);
+  Route::resource('roles', 'Core\RoleController');
   Route::resource('skills', 'Learn\SkillController');
   Route::resource('courses', 'Learn\CourseController');
   Route::resource('lessons', 'Learn\LessonController')->except(['create', 'edit']);
 
+  Route::get('profile', 'Core\ProfileController@index')->name('profile');
+  Route::post('profile/{user}', 'Core\ProfileController@store')->name('profile.store');
+  Route::get('profile/password', 'Core\ProfileController@passwordIndex')->name('password.index');
+  Route::post('profile/password/store', 'Core\ProfileController@passwordStore')->name('password.store');
+
   Route::group(['prefix' => 'media'], function () {
     Route::post('icon/course', 'Media\FileController@iconCourse')->name('file.icon');
     Route::post('icon/post', 'Media\FileController@coverPost')->name('file.post');
+    Route::post('icon/user', 'Media\FileController@photoProfile')->name('file.user');
   });
 
   Route::resource('categories', 'Blog\CategoryController');

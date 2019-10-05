@@ -12,10 +12,12 @@
   <div class="bg-white border rounded shadow p-2">
     <div class="flex mb-4">
       <div class="w-1/3 h-7">
+        @can('crear categorias')
         <a href="{{ route('categories.create') }}" class="form-button-blue">
           <i class="fa fa-plus mr-2"></i>
           <span>Nueva Categoría</span>
         </a>
+        @endcan
       </div>
       <div class="w-1/3 h-7"></div>
       <div class="w-1/3 h-7 text-right">
@@ -49,12 +51,16 @@
               <a class="hover:text-blue-600" href="{{ route('categories.show', $category->id) }}">
                 <i class="fas fa-eye mr-2"></i>
               </a>
+              @can('editar categorias')
               <a class="hover:text-yellow-600 mr-2" href="{{ route('categories.edit', $category->id) }}">
                 <i class="fa fa-pencil-alt"></i>
               </a>
+              @endcan
+              @can('eliminar categorias')
               <a href="#" class="delete hover:text-red-600" data-route="{{ route('categories.destroy', $category->id) }}">
                 <i class="fa fa-trash-alt"></i>
               </a>
+              @endcan
             </td>
           </tr>
         @endforeach

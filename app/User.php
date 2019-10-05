@@ -2,13 +2,17 @@
 
 namespace App;
 
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use Notifiable;
+
+    protected $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username', 'fullname', 'email', 'password', 'photo', 'xp', 'profile', 'status',
-        'provider', 'verified', 'verification_token', 'plan', 'end_suscription_at'
+        'provider', 'email_verified_at', 'verification_token', 'plan', 'end_suscription_at'
     ];
 
     /**
@@ -39,6 +43,10 @@ class User extends Authenticatable
         'end_suscription_at' => 'datetime'
     ];
 
+    public function getPhotoAttribute ($value) {
+        return $value != null && strlen($value) > 0 ? $value : asset('img/default.png');
+    }
+
     public function information () {
         return $this->hasOne(\App\Entities\Core\Information::class);
     }
@@ -48,6 +56,6 @@ class User extends Authenticatable
     }
 
     public function posts () {
-        return $this->hasMany(\App\Entities\Blog\Post::class);
+        return $this->hasMany(\App\Entities\Blog\Post::class, 'author_id');
     }
 }

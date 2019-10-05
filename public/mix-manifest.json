@@ -1,10 +1,10 @@
 {
-    "/js/manifest.js": "/js/manifest.js?id=7db827d654313dce4250",
-    "/js/app.js": "/js/app.js?id=c78f9888309135f7dcdb",
-    "/css/app.css": "/css/app.css?id=72d784c9751350294732",
-    "/js/es.js": "/js/es.js?id=ae6f60db7c0fa824332c",
-    "/js/prism.js": "/js/prism.js?id=ac5749d111c8dad945cc",
-    "/js/vendor.js": "/js/vendor.js?id=c71c56562bf4acdfcc93",
-    "/css/error.css": "/css/error.css?id=d265f59800b3e58bf13e",
-    "/css/prism.css": "/css/prism.css?id=4aeed17be4399411f931"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/es.js": "/js/es.js",
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/prism.js": "/js/prism.js",
+    "/js/vendor.js": "/js/vendor.js",
+    "/css/error.css": "/css/error.css",
+    "/css/prism.css": "/css/prism.css"
 }

@@ -23,11 +23,17 @@
           <i class="fa fa-arrow-left mr-2"></i>
           <span>Atras</span>
         </a>
-        <a href="{{ route('posts.edit', $post->id) }}" class="form-button-yellow">
-          <i class="fa fa-pencil-alt mr-2"></i>
-          <span>Editar</span>
-        </a>
-        @delete(['route' => route('posts.destroy', $post->id), 'type' => 'text'])  @enddelete
+        @if ( \Auth::id() == $post->author_id || \Auth::user()->hasRole('administrador') )
+          @can('editar posts')
+            <a href="{{ route('posts.edit', $post->id) }}" class="form-button-yellow">
+              <i class="fa fa-pencil-alt mr-2"></i>
+              <span>Editar</span>
+            </a>
+          @endcan
+          @can('editar posts')
+            @delete(['route' => route('posts.destroy', $post->id), 'type' => 'text'])  @enddelete
+          @endcan
+        @endif
       </div>
       <div class="w-full">
         <h1 class="font-bold text-lg mt-4">{{ $post->title }}</h1>

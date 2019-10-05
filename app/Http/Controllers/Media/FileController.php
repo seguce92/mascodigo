@@ -73,4 +73,39 @@ class FileController extends Controller
         return response()
             ->setStatusCode(404);
     }
+
+    public function photoProfile (Request $request) {
+        $this->validate($request, [
+            'image' => 'required|file|mimes:' . $this->entity->getAllExtensions().'|max:'.$this->entity->getMaxSize()
+        ]);
+        
+        if (!$request->hasFile('image')) {
+            return response()->json([
+                'success' => false,
+                'error' => 'no file found.',
+            ]);
+        }
+
+        $file = $request->file('image');
+        $name = \Carbon\Carbon::now()->format('dmY') .'_'. time();
+        $path = 'users/';
+        $extension = $file->getClientOriginalExtension();
+        $full_name = $name . '.' . $extension;
+
+        $imagethumb = \Image::make($file);
+        
+        $imagethumb->resize(250, 250, function ($constraint) {
+            $constraint->aspectRatio();                 
+        });
+
+        $imagethumb->stream();
+        
+        if ( \Storage::disk('upload_files')->put($path.$full_name, $imagethumb) )
+            return response()->json([
+                'url'   =>  url('/').'/storage/users/'.$full_name
+            ]);
+
+        return response()
+            ->setStatusCode(404);
+    }
 }

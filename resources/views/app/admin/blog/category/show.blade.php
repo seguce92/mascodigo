@@ -19,10 +19,12 @@
             <i class="fa fa-arrow-left mr-2"></i>
             <span>Atras</span>
           </a>
-          <button type="submit" class="form-button-yellow">
+          @can('editar categorias')
+          <a href="{{ route('categorias.edit', $categoria->id) }}" class="form-button-yellow">
             <i class="fa fa-pencil-alt mr-2"></i>
             <span>Editar</span>
-          </button>
+          </a>
+          @endcan
         </div>
         <div class="w-full">
           <label class="form-label" for="title">Título</label>

@@ -10,6 +10,11 @@ class LessonController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar lecciones|crear lecciones|editar lecciones|eliminar lecciones', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear lecciones', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar lecciones', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar lecciones', ['only' => ['destroy']]);
+
         $this->entity = app(\App\Entities\Learn\Lesson::class);
     }
 

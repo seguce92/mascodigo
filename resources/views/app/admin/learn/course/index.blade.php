@@ -12,10 +12,12 @@
   <div class="bg-white border rounded shadow p-2">
     <div class="flex mb-4">
       <div class="w-1/3 h-7">
+        @can('crear cursos')
         <a href="{{ route('courses.create') }}" class="g-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded inline-flex items-center">
           <i class="fa fa-plus mr-2"></i>
           <span>Nuevo Curso</span>
         </a>
+        @endcan
       </div>
       <div class="w-1/3 h-7"></div>
       <div class="w-1/3 h-7 text-right">
@@ -54,10 +56,16 @@
               <a class="hover:text-blue-600" href="{{ route('courses.show', $course->id) }}">
                 <i class="fas fa-eye mr-2"></i>
               </a>
-              <a class="hover:text-yellow-600 mr-2" href="{{ route('courses.edit', $course->id) }}">
-                <i class="fa fa-pencil-alt"></i>
-              </a>
-              @delete(['route' => route('courses.destroy', $course->id)]) @enddelete
+              @if ( \Auth::id() == $course->author_id )
+                @can('editar cursos')
+                <a class="hover:text-yellow-600 mr-2" href="{{ route('courses.edit', $course->id) }}">
+                  <i class="fa fa-pencil-alt"></i>
+                </a>
+                @endcan
+                @can ('eliminar cursos')
+                  @delete(['route' => route('courses.destroy', $course->id)]) @enddelete
+                @endcan
+              @endif
             </td>
           </tr>
         @endforeach

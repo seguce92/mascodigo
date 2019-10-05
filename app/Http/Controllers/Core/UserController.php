@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Core;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
+use DB;
 
 class UserController extends Controller
 {
@@ -11,6 +13,11 @@ class UserController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar usuarios|crear usuarios|editar usuarios|eliminar roles', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear usuarios', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar usuarios', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar usuarios', ['only' => ['destroy']]);
+
         $this->entity = app(\App\User::class);
     }
     /**
@@ -18,10 +25,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ( $request->q )
+            $data = $this->entity
+            ->where('username', 'like', '%'.$request->q.'%')
+            ->orWhere('email', 'like', '%'.$request->q.'%')
+            ->orWhere('fullname', 'like', '%'.$request->q.'%')
+            ->orderByDesc('created_at')->paginate(12);
+        else
+            $data = $this->entity->orderByDesc('created_at')->paginate(12);
+
         return view('admin::core.user.index', [
-            'users' =>  $this->entity->paginate(12)
+            'users' =>  $data,
+            'q'     =>  $request->q
         ]);
     }
 
@@ -32,7 +49,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin::core.user.create');
+        $roles = Role::pluck('name', 'name')->all();
+
+        return view('admin::core.user.create', [
+            'roles' =>  $roles
+        ]);
     }
 
     /**
@@ -41,9 +62,25 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\Core\UserStoreRequest $request)
     {
-        //
+        $user = new $this->entity;
+        $user->username =   strtolower($request->username);
+        $user->fullname =   $request->fullname;
+        $user->email    =   $request->email;
+        $user->email_verified_at = now();
+        $user->password =   bcrypt('password_'.$request->username);
+        $user->save();
+
+        $information = new \App\Entities\Core\Information();
+        $information->user_id   =   $user->id;
+        $information->save();
+
+        $user->assignRole($request->roles);
+
+        session()->flash('message', 'Usuario Registrado Exitosamente');
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -54,7 +91,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = $this->entity->find($id);
+
+        abort_unless($user, 404);
+
+        return view('admin::core.user.show', [
+            'user'  =>  $user
+        ]);   
     }
 
     /**
@@ -65,7 +108,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->entity->find($id);
+
+        abort_unless($user, 404);
+
+        $roles = Role::pluck('name', 'name')->all();
+
+        return view('admin::core.user.edit', [
+            'user'  =>  $user,
+            'roles' =>  $roles
+        ]);
     }
 
     /**
@@ -75,9 +127,23 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(\App\Http\Requests\Core\UserUpdateRequest $request, $id)
     {
-        //
+        $user = $this->entity->find($id);
+        $user->username =   $request->username;
+        $user->fullname =   $request->fullname;
+        $user->email    =   $request->email;
+        $user->password =   bcrypt('password_'.$request->username);
+        $user->status   =   $request->status;
+        $user->save();
+
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->roles);
+
+        session()->flash('message', 'Usuario Actualizado Exitosamente');
+
+        return redirect()->route('users.index');
     }
 
     /**

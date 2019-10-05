@@ -12,10 +12,12 @@
   <div class="bg-white border rounded shadow p-2">
     <div class="flex mb-4">
       <div class="w-1/3 h-7">
+        @can('crear habilidades')
         <a href="{{ route('skills.create') }}" class="form-button-blue">
           <i class="fa fa-plus mr-2"></i>
           <span>Nueva Habilidad</span>
         </a>
+        @endcan
       </div>
       <div class="w-1/3 h-7"></div>
       <div class="w-1/3 h-7 text-right">
@@ -49,9 +51,11 @@
               <a class="hover:text-blue-600" href="{{ route('skills.show', $skill->id) }}">
                 <i class="fas fa-eye mr-2"></i>
               </a>
+              @can('editar habilidades')
               <a class="hover:text-yellow-600 mr-2" href="{{ route('skills.edit', $skill->id) }}">
                 <i class="fa fa-pencil-alt"></i>
               </a>
+              @endcan
               @delete(['route' => route('skills.destroy', $skill->id)]) @enddelete
             </td>
           </tr>

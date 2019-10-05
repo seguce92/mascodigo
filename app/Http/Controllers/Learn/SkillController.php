@@ -10,6 +10,11 @@ class SkillController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar habilidades|crear habilidades|editar habilidades|eliminar habilidades', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear habilidades', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar habilidades', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar habilidades', ['only' => ['destroy']]);
+
         $this->entity = app(\App\Entities\Learn\Skill::class);
     }
 

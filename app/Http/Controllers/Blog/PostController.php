@@ -10,6 +10,11 @@ class PostController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar posts|crear posts|editar posts|eliminar posts', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear posts', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar posts', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar posts', ['only' => ['destroy']]);
+
         $this->entity = app(\App\Entities\Blog\Post::class);
     }
 

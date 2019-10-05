@@ -33,15 +33,20 @@
             <i class="fa fa-arrow-left mr-2"></i>
             <span>Atras</span>
           </a>
-          <a href="{{ route('courses.edit', $course->id) }}" class="form-button-yellow">
-            <i class="fa fa-pencil-alt mr-2"></i>
-            <span>Editar Curso</span>
-          </a>
+          @if ( \Auth::id() == $corse->author_id )
+            @can('editar cursos')
+            <a href="{{ route('courses.edit', $course->id) }}" class="form-button-yellow">
+              <i class="fa fa-pencil-alt mr-2"></i>
+              <span>Editar Curso</span>
+            </a>
+            @endcan
+          @endif
         </div>
         <div class="flex-1 text-right">
           <span class="font-bold">NUEVA LECCIÓN</span>
         </div>
       </div>
+      @can('crear lecciones')
       <div class="w-full">
         <label class="form-label" for="title">Título de Lección</label>
         <input class="form-input" id="title" name="title" type="text" autofocus="true" placeholder="Titulo de Lección" value="{{ old('title') }}">
@@ -103,16 +108,19 @@
             <input class="form-input" id="points" name="points" type="number" min="0" placeholder="0" value="{{ old('points') ? old('points') : '0' }}">
         </div>
       </div>
+      @endcan
 
       <div class="w-full mt-2">
         <button type="reset" class="form-button-red">
           <i class="fa fa-times mr-2"></i>
           <span>Reiniciar</span>
         </button>
+        @can('crear lecciones')
         <button type="submit" class="form-button-blue">
           <i class="fa fa-paper-plane mr-2"></i>
           <span>Enviar</span>
         </button>
+        @endcan
       </div>
     </div>
 
@@ -147,7 +155,11 @@
                   <time class="text-xs text-grey-dark">{{ $lesson->duration }}</time>
                 </div>
                 <div class="text-sm text-grey-dark truncate">
-                  <a href="{{ route('lessons.show', $lesson->id) }}" class="text-lg font-bold hover:underline">{{ $lesson->title }}</a>
+                  @if( auth()->user()->can('editar lecciones') )
+                    <a href="{{ route('lessons.show', $lesson->id) }}" class="text-lg font-bold hover:underline">{{ $lesson->title }}</a>
+                  @else
+                    <a class="text-lg font-bold hover:underline">{{ $lesson->title }}</a>
+                  @endif
                 </div>
               </div>
             </li>

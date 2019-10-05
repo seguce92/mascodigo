@@ -10,6 +10,11 @@ class CourseController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar cursos|crear cursos|editar cursos|eliminar cursos', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear cursos', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar cursos', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar cursos', ['only' => ['destroy']]);
+
         $this->entity = app(\App\Entities\Learn\Course::class);
     }
 

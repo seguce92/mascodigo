@@ -10,6 +10,11 @@ class CategoryController extends Controller
     protected $entity;
 
     public function __construct () {
+        $this->middleware('permission:listar categorias|crear categorias|editar categorias|eliminar categorias', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear categorias', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar categorias', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar categorias', ['only' => ['destroy']]);
+
         $this->entity = app(\App\Entities\Blog\Category::class);
     }
 
