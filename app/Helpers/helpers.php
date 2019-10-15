@@ -47,3 +47,9 @@ if (! function_exists ('excerpt') ) {
     return app(\App\Helpers\Helper::class)->excerpt($content);
   }
 }
+
+if (! function_exists ('social_share') ) {
+  function social_share ($type, $slug, $title) {
+    return app(\App\Helpers\Helper::class)->socialShare($type, $slug, $title);
+  }
+}

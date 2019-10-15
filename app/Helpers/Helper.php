@@ -88,4 +88,15 @@ class Helper {
     return strip_tags(substr($content, 0, 180)).'...';
   }
 
+  public function socialShare ( $type, $slug, $title) {
+    $url = url('/').'/'.$slug;
+
+    switch ( $type ) {
+      case 'facebook': return 'https://www.facebook.com/sharer/sharer.php?u='.$url.'&t='.$title;
+      case 'twitter': return 'https://twitter.com/intent/tweet?url='.$url.'&text='.$title;
+      case 'telegram': return 'https://t.me/share/url?url='.$url.'&text='.$title;
+      default: return 'https://www.facebook.com/sharer/sharer.php?u='.$url.'&t='.$title;
+    }
+  }
+
 }
