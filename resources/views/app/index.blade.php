@@ -42,10 +42,10 @@
         <h1 class="my-4 text-5xl font-bold leading-tight">LA FORTUNA JUEGA A FAVOR DE LA GENTE PREPARADA</h1>
         <p class="leading-normal text-2xl mb-8">Escoge un curso, mira las lecciones las veces que tu desees...</p>
         <div class="w-full">
-          <a href="{{ route('register') }}" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
+          <a href="{{ route('register') }}" class="mr-4 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full inline-block mb-4">
             Suscribete
           </a>
-          <a href="{{ route('courses') }}" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full">
+          <a href="{{ route('courses') }}" class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-3 px-8 border border-white hover:border-transparent rounded-full inline-block">
             Ver todos los Cursos
           </a>
         </div>
