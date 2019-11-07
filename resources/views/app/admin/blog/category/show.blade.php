@@ -20,7 +20,7 @@
             <span>Atras</span>
           </a>
           @can('editar categorias')
-          <a href="{{ route('categorias.edit', $categoria->id) }}" class="form-button-yellow">
+          <a href="{{ route('categories.edit', $category->id) }}" class="form-button-yellow">
             <i class="fa fa-pencil-alt mr-2"></i>
             <span>Editar</span>
           </a>

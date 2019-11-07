@@ -29,6 +29,8 @@ Vue.component('menu-component', require('./components/Menu.vue').default);
 Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('courses', require('./components/Courses.vue').default);
 
+Vue.component('portlet-component', require('./components/PortletComponent.vue').default);
+
 const app = new Vue({
     //store
 }).$mount('#app');

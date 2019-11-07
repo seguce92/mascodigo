@@ -143,7 +143,7 @@
         </div>
         <ul class="flex flex-col w-full list-reset select-none shadow">
           @foreach ( $course->lessons as $lesson )
-            <li class="lesson {{ $course->skill->slug }} flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-3">
+            <li class="lesson {{ $course->color }} flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-3">
               <div class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
                 {{ $lesson->order }}
               </div>

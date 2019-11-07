@@ -136,6 +136,11 @@
       </div>
 
       <div class="w-full mb-1">
+        <label class="form-label" for="portlet">Imagen de Portada</label>
+        <portlet-component :value="'{{ $user->information->portlet }}'"></portlet-component>
+      </div>
+
+      <div class="w-full mb-1">
         <label class="form-label">Tipo de Perfil</label>
         <label class="inline-flex items-center mr-5">
           <input type="radio" class="form-radio h-6 w-6" name="profile" value="public" {{ $user->profile == 'public' ? 'checked' : '' }}>

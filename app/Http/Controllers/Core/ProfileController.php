@@ -28,6 +28,7 @@ class ProfileController extends Controller
         $user->profile  =   $request->profile;
         $user->save();
 
+        $user->information->portlet     =   $request->portlet;
         $user->information->facebook    =   $request->facebook;
         $user->information->twitter     =   $request->twitter;
         $user->information->youtube     =   $request->youtube;
