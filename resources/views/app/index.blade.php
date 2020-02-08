@@ -48,7 +48,6 @@
           <div id="userMenu" class="bg-white rounded shadow-md mt-2 absolute mt-8 top-0 right-0 min-w-full overflow-auto z-30 invisible">
             <ul class="list-reset">
               <li><a href="{{ route('profile') }}" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Mi Cuenta</a></li>
-              <li><a href="{{ route('password.index') }}" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline">Contraseña</a></li>
               <li><hr class="border-t mx-2 border-gray-400"></li>
               <li>
                 <a href="{{ route('logout') }}" class="px-4 py-2 block text-gray-900 hover:bg-gray-400 no-underline hover:no-underline"
@@ -159,25 +158,9 @@
 
   @include ('component.footer-home')
   <script>
-    var ab = document.getElementById("userMenu");
-    var userMenu = document.getElementById("userButton");
-    document.onclick = check;
-    function check(e){
-      var target = (e && e.target) || (event && event.srcElement);
-      if (!checkParent(target, ab)) { 
-        if (checkParent(target, userMenu)) { 
-          if (ab.classList.contains("invisible")) { 
-            ab.classList.remove("invisible");
-          } 
-          else {
-            ab.classList.add("invisible");
-          } 
-        } else { 
-          ab.classList.add("invisible"); 
-        }
-      }
-    }
-    function checkParent(t,elm){while(t.parentNode) { if( t == elm ) {return true;} t = t.parentNode; } return false;}
+    var ab=document.getElementById("userMenu");var userMenu=document.getElementById("userButton");document.onclick=check;
+    function check(e){var target=(e&&e.target)||(event&&event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}}
+    function checkParent(t,elm){while(t.parentNode){if(t==elm){return true;}t=t.parentNode;}return false}
   </script>
 </body>
 </html>

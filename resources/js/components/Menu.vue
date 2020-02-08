@@ -107,7 +107,18 @@
 <script>
 import { constants } from 'crypto';
 export default {
-  props: ['fixed', 'type', 'logged'],
+  props: {
+    fixed: {
+      type: Boolean
+    },
+    type: {
+      type: String
+    },
+    logged: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     domain: config.domain,
     show: false,

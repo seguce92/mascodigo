@@ -36,7 +36,7 @@
   @stack('style')
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-  <nav id="header" class="bg-white fixed w-full z-10 top-0 shadow">
+  <nav id="header" class="bg-white fixed w-full z-40 top-0 shadow">
 		<div class="w-full container px-2 lg:px-0 mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
 			<div class="w-1/2 pl-2 md:pl-0">
 				<a href="{{ url('/') }}" class="text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold"  href="#"> 
@@ -97,9 +97,9 @@
 	</footer>
 
 <script>
-	var ab = document.getElementById("userMenu");var userMenu = document.getElementById("userButton");var z = document.getElementById("nav-content");var x = document.getElementById("nav-toggle");document.onclick = check;
-	function check(e){var target = (e && e.target) || (event && event.srcElement);if (!checkParent(target, ab)) { if (checkParent(target, userMenu)) { if (ab.classList.contains("invisible")) { ab.classList.remove("invisible");} else {ab.classList.add("invisible");} } else { ab.classList.add("invisible"); }}if (!checkParent(target, z)) { if (checkParent(target, x)) { if (z.classList.contains("hidden")) { z.classList.remove("hidden");} else {z.classList.add("hidden");} } else { z.classList.add("hidden"); }}}
-	function checkParent(t,elm){while(t.parentNode) { if( t == elm ) {return true;} t = t.parentNode; } return false;}
+	var ab=document.getElementById("userMenu");var userMenu=document.getElementById("userButton");var z=document.getElementById("nav-content");var x=document.getElementById("nav-toggle");document.onclick=check;
+	function check(e){var target=(e&&e.target)||(event&&event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}if(!checkParent(target,z)){if(checkParent(target,x)){if(z.classList.contains("hidden")){z.classList.remove("hidden")}else{z.classList.add("hidden")}}else{z.classList.add("hidden")}}}
+	function checkParent(t,elm){while(t.parentNode){if(t==elm){return true}t=t.parentNode}return false}
 </script>
 @stack('script')
 </body>

@@ -4855,7 +4855,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['fixed', 'type', 'logged'],
+  props: {
+    fixed: {
+      type: Boolean
+    },
+    type: {
+      type: String
+    },
+    logged: {
+      type: Boolean,
+      "default": false
+    }
+  },
   data: function data() {
     return {
       domain: config.domain,

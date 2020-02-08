@@ -29,7 +29,11 @@
 @endsection
 
 @section('menu-component')
-  <menu-component type="blog"></menu-component>
+  @if (\Auth::check())
+    <menu-component type="blog" :logged="true"></menu-component>
+  @else
+    <menu-component type="blog" :logged="false"></menu-component>
+  @endif
 @endsection
 
 @section('menu')

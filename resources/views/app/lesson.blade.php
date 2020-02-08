@@ -26,7 +26,11 @@
 @endsection
 
 @section('menu-component')
-  <menu-component type="learn"></menu-component>
+  @if (\Auth::check())
+    <menu-component type="learn" :logged="true"></menu-component>
+  @else
+    <menu-component type="learn" :logged="false"></menu-component>
+  @endif
 @endsection
 
 @section('menu')
