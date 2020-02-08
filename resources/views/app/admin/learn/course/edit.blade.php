@@ -11,8 +11,9 @@
 @endsection
 
 @section('content')
-  <form class="flex flex-wrap lg:flex-no-wrap w-full" action="{{ route('courses.store') }}" method="POST">
+  <form class="flex flex-wrap lg:flex-no-wrap w-full" action="{{ route('courses.update', $course->id) }}" method="POST">
     @csrf
+    @method('PATCH')
     <div class="flex flex-wrap w-full lg:w-9/12 bg-white border rounded shadow p-2 mr-0 lg:mr-2">
       <div class="w-full">
         <label class="form-label" for="title">Título de Curso</label>

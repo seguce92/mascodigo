@@ -23,6 +23,7 @@ class ProfileController extends Controller
 
         $user = $this->entity->find(\Auth::id());
         $user->username =   $request->username;
+        $user->photo    =   $request->image;
         $user->fullname =   $request->fullname;
         $user->email    =   $request->email;
         $user->profile  =   $request->profile;

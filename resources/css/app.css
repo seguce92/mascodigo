@@ -477,5 +477,5 @@
 }
 
 @import 'github-markdown.css';
-
+@import 'skill.css';
 @tailwind utilities;

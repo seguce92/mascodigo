@@ -49,7 +49,7 @@
          - <a href="{{ route('category', $post->category->slug) }}" class="underline hover:text-gray-900 font-bold">{{ $post->category->title }}</a>
       </h6>
       <div class="markdown-body leading-loose">
-        {!! \Illuminate\Mail\Markdown::parse($post->content) !!}
+        {{ \Illuminate\Mail\Markdown::parse($post->content) }}
       </div>
     </article>
     

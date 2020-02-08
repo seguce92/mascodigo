@@ -46,6 +46,7 @@ return [
         'upload_files' => [
             'driver' => 'local',
             'root' => public_path().'/storage',
+            'visibility'    =>  'public'
         ],
         
         'local' => [

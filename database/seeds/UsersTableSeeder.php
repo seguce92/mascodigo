@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
         factory(\App\User::class)
             ->times(1)
             ->create([
-                'photo'     =>  'https://mascodigo.com.bo/storage/users/seguce92.jpg',
+                'photo'     =>  'https://mascodigo.app/storage/users/seguce92.jpg',
                 'username'  =>  'seguce92',
                 'fullname'  =>  'Sergio Gualberto Cruz Espinoza',
                 'email'     =>  'sergio.cruz@mascodigo.com.bo',
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
                 'twitter'   =>  'https://twitter.com/seguce92',
                 'github'    =>  'https://github.com/seguce92',
                 'gitlab'    =>  'https://gitlab.com/seguce',
-                'portlet'   =>  'https:/mascodigo.com.bo/img/portlet/image10.jpg',
+                'portlet'   =>  'image10.jpg',
                 'user_id'   =>  1
             ]);
     }

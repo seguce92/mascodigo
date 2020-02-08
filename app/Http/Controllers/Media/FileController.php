@@ -50,13 +50,14 @@ class FileController extends Controller
 
     public function iconCourse (Request $request) {
         $this->validate($request, [
-            'image' => 'required|file|mimes:' . $this->entity->getAllExtensions().'|max:'.$this->entity->getMaxSize()
+            //'image' => 'required|file|mimes:' . $this->entity->getAllExtensions() . '|max:' . $this->entity->getMaxSize()
+            'image' => 'required|file|max:' . $this->entity->getMaxSize()
         ]);
         
         if (!$request->hasFile('image')) {
             return response()->json([
-                'success' => false,
-                'error' => 'no file found.',
+                'success'   =>  false,
+                'error'     =>  'no file found.',
             ]);
         }
 
@@ -76,7 +77,7 @@ class FileController extends Controller
 
     public function photoProfile (Request $request) {
         $this->validate($request, [
-            'image' => 'required|file|mimes:' . $this->entity->getAllExtensions().'|max:'.$this->entity->getMaxSize()
+            'image' => 'required|file|mimes:' . $this->entity->getAllExtensions() . '|max:' . $this->entity->getMaxSize()
         ]);
         
         if (!$request->hasFile('image')) {
@@ -87,8 +88,8 @@ class FileController extends Controller
         }
 
         $file = $request->file('image');
-        $name = \Carbon\Carbon::now()->format('dmY') .'_'. time();
         $path = 'users/';
+        $name = \Carbon\Carbon::now()->format('dmY') .'_'. time();
         $extension = $file->getClientOriginalExtension();
         $full_name = $name . '.' . $extension;
 

@@ -26,7 +26,8 @@ class CourseUpdateRequest extends FormRequest
         return [
             'title' =>  'required|min:3|max:255',
             'slug'  =>  'required|min:3|max:255|unique:courses,slug,'.$this->route('course'),
-            'icon'  =>  'required',
+            'content'   =>  'required',
+            'image'  =>  'required',
             'color' =>  'required',
             'is_publish'    =>  'required',
             'level' =>  'required',

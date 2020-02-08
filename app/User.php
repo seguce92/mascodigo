@@ -6,6 +6,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Storage;
 
 class User extends Authenticatable
 {
@@ -44,7 +45,10 @@ class User extends Authenticatable
     ];
 
     public function getPhotoAttribute ($value) {
-        return $value != null && strlen($value) > 0 ? $value : asset('img/default.png');
+        /*return Storage::disk('upload_files')->exists('users/'.$this->username) 
+            ? asset('storage/users/'.$this->username) : asset('img/default.png');*/
+        
+        return strlen($value) && \strlen($value) > 5 ? $value : asset('img/default.png');
     }
 
     public function information () {

@@ -16,7 +16,7 @@
     @method('PATCH')
     <div class="flex flex-wrap self-start w-full lg:w-9/12 bg-white border rounded shadow p-2 mr-0 lg:mr-2">
       <div class="w-full">
-        <label class="font-bold">EDITAR INFORMACION DE ROL</label>
+        <label class="font-bold">EDITAR INFORMACIÓN DE ROL</label>
       </div>
 
       <div class="w-full">
