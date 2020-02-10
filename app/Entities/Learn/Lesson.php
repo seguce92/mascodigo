@@ -3,11 +3,15 @@
 namespace App\Entities\Learn;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Lesson extends Model
 {
     protected $fillable = [
-        'title', 'url', 'content', 'repository', 'is_publish', 'is_private', 'duration', 'points', 'order', 'course_id', 'author_id', 'editor_id', 'published_at'
+        'title', 'url', 'content', 'repository', 
+        'is_publish', 'is_private', 'is_premium', 
+        'duration', 'points', 'order', 'course_id', 
+        'author_id', 'editor_id', 'published_at'
     ];
 
     protected $dates = [
@@ -17,6 +21,7 @@ class Lesson extends Model
     protected $casts = [
         'is_publish'    =>  'boolean',
         'is_private'    =>  'boolean',
+        'is_premium'    =>  'boolean'
     ];
 
     protected $appends = [
@@ -24,7 +29,12 @@ class Lesson extends Model
     ];
 
     public function getServerAttribute () {
-        return 'youtube';
+        if ( Str::contains($this->url, 'youtube') )
+            return 'youtube';
+        else if ( Str::contains($this->url, 'vimeo') )
+            return 'vimeo';
+        else
+            return 'local';
     }
 
     public function author () {

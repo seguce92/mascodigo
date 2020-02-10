@@ -21,7 +21,7 @@ class ProfileController extends Controller
 
     public function store (\App\Http\Requests\Core\ProfileUpdateRequest $request, $user) {
 
-        $user = $this->entity->find(\Auth::id());
+        $user           =   $this->entity->find(\Auth::id());
         $user->username =   $request->username;
         $user->photo    =   $request->image;
         $user->fullname =   $request->fullname;

@@ -42,6 +42,8 @@ return [
     'medium'  =>  'Medio',
     'advanced'  =>  'Avanzado',
     'expert'  =>  'Experto'
-  ]
+  ],
+
+  'message' =>  'Bienvenido. Gracias por elegirnos, esperamos aproveches al maximo todo el contenido de Más Código.'
 
 ];

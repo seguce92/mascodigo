@@ -9,12 +9,22 @@
   <div class="flex-1 min-w-0">
     <div class="flex justify-between mb-1">
       <h2 class="font-semibold text-sm">
-        Lección {{ $lesson->order }}
+        Lección {{ $lesson->order }} 
+        @if ( $lesson->is_private && $lesson->is_premium )
+          <span class="ml-4 bg-yellow-500 text-yellow-800 border border-yellow-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Premium</span>
+        @elseif ($lesson->is_private)
+          <span class="ml-4 bg-blue-500 text-gray-100 border border-blue-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Estandar</span>
+        @else
+          <span class="ml-4 bg-transparent border border-gray-600 text-gray-800 rounded-full px-3 py-05 text-xss font-normal italic shadow">Gratis</span>
+        @endif
       </h2>
       <time class="text-xs text-grey-dark">{{ $lesson->duration }}</time>
     </div>
     <div class="text-sm text-grey-dark truncate">
-      <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $course->slug]) }}" class="text-lg font-bold hover:underline">{{ $lesson->title }}</a>
+      <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $course->slug]) }}" 
+        class="text-lg font-bold hover:underline">
+        {{ $lesson->title }}
+      </a>
     </div>
   </div>
 </li>

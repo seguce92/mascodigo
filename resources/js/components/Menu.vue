@@ -62,7 +62,7 @@
                 :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
                 v-on:click="showLesson(item.course.slug, item.order)">
                 <a :href="domain + 'skill/' + item.course.skill.slug" :class="item.course.color" class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
-                  <img :src="item.course.icon" alt="">
+                  <img :src="item.course.icon" :alt="item.course.title">
                 </a>
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between mb-1">
@@ -80,15 +80,20 @@
                 <div class="loader">Cargando...</div>
               </li>
               <li v-for="(item, index) in filteredDataPost"
-                :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
-                v-on:click="showPost(item.course.slug, item.order)">
+                :key="index" 
+                class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
+                v-on:click="showPost(item.slug)">
                 <a :href="domain + 'category/' + item.category.slug" class="red flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 mr-3">
-                  <img :src="item.image" alt="">
+                  <img :src="item.image" :alt="item.category.title">
                 </a>
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between mb-1">
-                    <a :href="domain + 'category/' + item.category.slug" class="font-semibold text-base uppercase">{{ item.category.title }}</a>
-                    <time class="text-xs text-grey-dark">{{ item.duration }}</time>
+                    <a :href="domain + 'category/' + item.category.slug" class="font-semibold text-base uppercase">
+                      {{ item.category.title }}
+                    </a>
+                    <span class="text-xs text-grey-dark">
+                      {{ item.published_at }}
+                    </span>
                   </div>
                   <div class="text-base text-gray-700">
                     <p class="text-gray-700">{{ item.title }}</p>
@@ -234,5 +239,11 @@ export default {
 	  border-radius: 10px;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(224, 95, 95)), color-stop(0.72, rgb(180, 43, 94)), color-stop(0.86, rgb(226, 37, 54)));
     background-image: gradient(linear, left bottom, left top, color-stop(0.44, rgb(224, 95, 95)), color-stop(0.72, rgb(180, 43, 94)), color-stop(0.86, rgb(226, 37, 54)));
+  }
+  .icon svg {
+    width: 75%;
+  }
+  .img-post {
+    height: 100%!important;
   }
 </style>

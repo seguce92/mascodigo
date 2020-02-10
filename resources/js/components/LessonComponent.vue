@@ -21,15 +21,20 @@
               </div>
             </li>
             <li v-for="(row, index) in course.lessons"
-                :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer"
-                :class="row.id == lesson.id ? 'bg-gray-200' : ''" v-on:click="showLesson(course.slug, row.order)">
+              :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer"
+              :class="row.id == lesson.id ? 'bg-gray-200' : ''" v-on:click="showLesson(course.slug, row.order)">
               <div class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
                 <svg v-if="row.id == lesson.id" class="fa h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
-                <svg v-else class="fa h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
+                <svg v-else-if="row.is_private" class="fa h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"/></svg>
+                <svg v-else class="fa h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M423.5 0C339.5.3 272 69.5 272 153.5V224H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48h-48v-71.1c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v80c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-80C576 68 507.5-.3 423.5 0z"/></svg>
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex justify-between mb-1">
-                  <h2 class="font-semibold text-xs">Lección {{ row.order }}</h2>
+                  <h2 class="font-semibold text-xs">Lección {{ row.order }}
+                    <span v-if="row.is_private && row.is_premium" class="ml-4 bg-yellow-500 text-yellow-800 border border-yellow-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Premium</span>
+                    <span v-else-if="row.is_private" class="ml-4 bg-blue-500 text-gray-100 border border-blue-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Estandar</span>
+                    <span v-else class="ml-4 bg-transparent border border-gray-600 text-gray-800 rounded-full px-3 py-05 text-xss font-normal italic shadow">Gratis</span>
+                  </h2>
                   <time class="text-xs text-grey-dark">{{ row.duration }}</time>
                 </div>
                 <div class="text-sm text-grey-dark truncate">
@@ -40,7 +45,7 @@
           </ul>
         </div>
         
-        <div class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg">
+        <div v-if="init" class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg">
           <vue-plyr v-if="lesson.server == 'youtube' || lesson.server == 'vimeo'" ref="plyr" :emit="['ended']" @ended="ended" class="rounded-none lg:rounded-lg">
             <div :data-plyr-provider="lesson.server" :data-plyr-embed-id="lesson.url"></div>
           </vue-plyr>
@@ -48,6 +53,45 @@
           <vue-plyr v-else ref="plyr" :emit="['ended']" @ended="ended" class="rounded-none lg:rounded-lg">
             <video poster="poster.png" :src="lesson.url"></video>
           </vue-plyr>
+        </div>
+        <div v-else class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg relative">
+          <div v-if="lesson.is_private && logged && lesson.is_premium || lesson.is_private && !logged && lesson.is_premium"
+            class="flex justify-center px-3 mx-auto text-white course rounded"
+            :class="course.color">
+              <div class="w-full lg:w-4/5 xl:w-3/5 py-20 lg:py-32">
+                <svg class="w-20 h-20 fill-current mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm80 168c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zm-160 0c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zm170.2 218.2C315.8 367.4 282.9 352 248 352s-67.8 15.4-90.2 42.2c-13.5 16.3-38.1-4.2-24.6-20.5C161.7 339.6 203.6 320 248 320s86.3 19.6 114.7 53.8c13.6 16.2-11 36.7-24.5 20.4z"/></svg>
+                <h2 class="font-hairline text-2xl mb-3">
+                  Necesitas una Membresia
+                </h2>
+                <p class="sm:leading-normal text-base mb-8">Lo siento, para acceder a esta lección es necesario tener un <strong class="italic">plan</strong> o una <strong class="italic">membresia</strong> en <strong class="italic">Más Código</strong>.</p>
+                <a href="/register" 
+                  class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-6 border border-white hover:border-transparent rounded-full inline-block mb-4">
+                  Suscribete
+                </a>
+                <a href="/login" 
+                  class="ml-3 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-6 border border-white hover:border-transparent rounded-full inline-block mb-4">
+                  Iniciar Sesión
+                </a>
+              </div>
+          </div>
+          
+          <div v-else
+            class="flex justify-center px-3 mx-auto text-white course rounded"
+            :class="course.color">
+              <div class="w-full lg:w-4/5 xl:w-3/5 py-20 lg:py-32">
+                <svg class="w-20 h-20 fill-current mb-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zM136 208c0-17.7 14.3-32 32-32s32 14.3 32 32-14.3 32-32 32-32-14.3-32-32zm187.3 183.3c-31.2-9.6-59.4-15.3-75.3-15.3s-44.1 5.7-75.3 15.3c-11.5 3.5-22.5-6.3-20.5-18.1 7-40 60.1-61.2 95.8-61.2s88.8 21.3 95.8 61.2c2 11.9-9.1 21.6-20.5 18.1zM328 240c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/></svg>
+                <h2 class="font-hairline text-2xl mb-3">Necesitas Iniciar Sesión</h2>
+                <p class="sm:leading-normal text-base mb-8">Lo siento, para acceder a esta lección es necesario tener una <strong class="italic">cuenta</strong> o una <strong class="italic">membresia</strong> en <strong class="italic">Más Código</strong>.</p>
+                <a href="/register" 
+                  class="bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-6 border border-white hover:border-transparent rounded-full inline-block mb-4">
+                  Suscribete
+                </a>
+                <a href="/login" 
+                  class="ml-3 bg-transparent shadow hover:bg-white text-white-700 font-semibold hover:text-black py-2 px-6 border border-white hover:border-transparent rounded-full inline-block mb-4">
+                  Iniciar Sesión
+                </a>
+              </div>
+          </div>
         </div>
 
       </div>
@@ -95,7 +139,7 @@
         <div class="flex flex-wrap w-full lg:2-4/5 xl:w-4/5  items-start content-start mx-auto">
           <input type="checkbox" name="panel" id="panel-1" class="hidden" checked>
           <label for="panel-1" class="panel-header relative w-full lg:rounded-t uppercase font-bold px-4 py-2 bg-gray-300 mt-3">Notas de la lección</label>
-          <div v-show="lesson.content != null && lesson.content != ''" 
+          <div v-show="lesson.content != null && lesson.content != '' && init" 
             class="lesson-about accordion__content overflow-hidden w-full bg-white lg:rounded-b px-4 py-2 leading-relaxed lg:border markdown-body" v-html="parse">
           </div>
 
@@ -182,7 +226,21 @@ window.hljs = hljs;
 
 Vue.use(VuePlyr)
 export default {
-  props: ["course", 'lesson'],
+  props: {
+    course: {
+      type: Object
+    },
+    lesson: {
+      type: Object
+    },
+    logged: {
+      type: Boolean,
+      default: false
+    },
+    user: {
+      type: Object
+    }
+  },
   data : () => ({
     domain: config.domain,
     total: 0,
@@ -198,7 +256,7 @@ export default {
   }),
   mounted () {
     this.total = this.course.lessons.length
-    this.player.config.autoplay = true
+    if ( this.init ) this.player.config.autoplay = true
   },
   computed: {
     player () { 
@@ -212,6 +270,11 @@ export default {
         sanitize: true
       })
       return this.lesson.content != null ? marked(this.lesson.content) : marked('')
+    },
+    init () {
+      return !this.lesson.is_private || 
+        this.lesson.is_private && this.logged && !this.lesson.is_premium || 
+        this.lesson.is_private && this.logged && this.lesson.is_premium && this.user.is_premium
     }
   },
   methods: {
@@ -242,6 +305,9 @@ export default {
           allowOutsideClick: false
         })
       }
+    },
+    validPlayer: function () {
+      return true;
     }
   }
 }
@@ -278,5 +344,12 @@ export default {
   input[name='panel']:checked ~ .accordion__content {
     max-height: 100em;
     display: inline-block;
+  }
+
+  .message-standar {
+
+  }
+  .message-premium {
+
   }
 </style>

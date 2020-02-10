@@ -26,12 +26,13 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         if ( $request->q ) $data = $this->entity->where('title', 'like', '%'.$request->q.'%')
-            ->orWhere('content', 'like', '%'.$request->q.'%')->orderByDesc('created_at')->paginate(12);
+            ->orWhere('content', 'like', '%'.$request->q.'%')
+            ->orderByDesc('created_at')->paginate(12);
         else $data = $this->entity->orderByDesc('created_at')->paginate(12);
 
         return view('admin::learn.course.index', [
             'courses'   =>  $data,
-            'q' =>  $request->q
+            'q'         =>  $request->q
         ]);
     }
 
@@ -63,16 +64,16 @@ class CourseController extends Controller
      */
     public function store(\App\Http\Requests\Learn\CourseStoreRequest $request)
     {
-        $course = new $this->entity;
-        $course->title = $request->title;
-        $course->slug = $request->slug;
-        $course->icon = $request->image;
-        $course->color = $request->color;
-        $course->content = $request->content;
-        $course->is_publish = $request->is_publish;
-        $course->level = $request->level;
-        $course->skill_id = $request->skill_id;
-        $course->author_id = \Auth::id();
+        $course         =   new $this->entity;
+        $course->title  =   $request->title;
+        $course->slug   =   $request->slug;
+        $course->icon   =   $request->image;
+        $course->color  =   $request->color;
+        $course->content    =   $request->content;
+        $course->is_publish =   $request->is_publish;
+        $course->level      =   $request->level;
+        $course->skill_id   =   $request->skill_id;
+        $course->author_id  =   \Auth::id();
         $course->save();
 
         session()->flash('message', 'Curso registrado.');
@@ -118,16 +119,16 @@ class CourseController extends Controller
      */
     public function update(\App\Http\Requests\Learn\CourseUpdateRequest $request, $id)
     {
-        $course = $this->entity->find($id);
-        $course->title = $request->title;
-        $course->slug = $request->slug;
-        $course->icon = $request->image;
-        $course->color = $request->color;
-        $course->content = $request->content;
-        $course->is_publish = $request->is_publish;
-        $course->level = $request->level;
-        $course->skill_id = $request->skill_id;
-        $course->editor_id = \Auth::id();
+        $course         =   $this->entity->find($id);
+        $course->title  =   $request->title;
+        $course->slug   =   $request->slug;
+        $course->icon   =   $request->image;
+        $course->color  =   $request->color;
+        $course->content    =   $request->content;
+        $course->is_publish =   $request->is_publish;
+        $course->level      =   $request->level;
+        $course->skill_id   =   $request->skill_id;
+        $course->editor_id  =   \Auth::id();
         $course->save();
 
         session()->flash('message', 'Curso actualizado.');

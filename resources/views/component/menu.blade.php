@@ -52,3 +52,16 @@
   </a>
 </li>
 @endcan
+{{-- Learn Academy Section --}}
+<li class="mr-6 my-2 md:my-0">
+  <a href="{{ route('posts.index') }}" class="{{ $option == 'posts' ? 'menu-active' : 'menu-item' }} md:py-3 hover:text-gray-900 hover:border-red-600">
+    <i class="fas fa-newspaper mr-3"></i>
+    <span class="pb-1 md:pb-0 text-sm">Mis Cursos</span>
+  </a>
+</li>
+<li class="mr-6 my-2 md:my-0">
+  <a href="{{ route('posts.index') }}" class="{{ $option == 'posts' ? 'menu-active' : 'menu-item' }} md:py-3 hover:text-gray-900 hover:border-red-600">
+    <i class="fas fa-newspaper mr-3"></i>
+    <span class="pb-1 md:pb-0 text-sm">Perfil Académico</span>
+  </a>
+</li>

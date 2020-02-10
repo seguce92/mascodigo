@@ -64,15 +64,15 @@ class UserController extends Controller
      */
     public function store(\App\Http\Requests\Core\UserStoreRequest $request)
     {
-        $user = new $this->entity;
+        $user           =   new $this->entity;
         $user->username =   strtolower($request->username);
         $user->fullname =   $request->fullname;
         $user->email    =   $request->email;
-        $user->email_verified_at = now();
+        $user->email_verified_at    =   now();
         $user->password =   bcrypt('password_'.$request->username);
         $user->save();
 
-        $information = new \App\Entities\Core\Information();
+        $information            =   new \App\Entities\Core\Information();
         $information->user_id   =   $user->id;
         $information->save();
 
@@ -129,7 +129,7 @@ class UserController extends Controller
      */
     public function update(\App\Http\Requests\Core\UserUpdateRequest $request, $id)
     {
-        $user = $this->entity->find($id);
+        $user           =   $this->entity->find($id);
         $user->username =   $request->username;
         $user->fullname =   $request->fullname;
         $user->email    =   $request->email;

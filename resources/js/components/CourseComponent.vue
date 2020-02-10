@@ -27,12 +27,9 @@ export default {
   data: () => ({
     domain: config.domain
   }),
-  created () {
-    
-  },
   computed: {
     pluralize () {
-      let lessons = this.course.lessons.legth;
+      let lessons = this.course.lessons.length;
       if ( lessons > 1 || lessons < 1 )
         return 'Lecciones';
       return 'Lección';
@@ -54,7 +51,8 @@ export default {
     .circle {
       padding: 4px;
       img {
-        z-index: 1
+        z-index: 1;
+        width: 75%;
       }
     }
   }

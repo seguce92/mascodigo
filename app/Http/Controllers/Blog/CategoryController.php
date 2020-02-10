@@ -53,9 +53,9 @@ class CategoryController extends Controller
      */
     public function store(\App\Http\Requests\Blog\CategoryStoreRequest $request)
     {
-        $category = $this->entity;
-        $category->title = $request->title;
-        $category->slug = $request->slug;
+        $category           =   $this->entity;
+        $category->title    =   $request->title;
+        $category->slug     =   $request->slug;
         $category->save();
 
         session()->flash('message', 'Categoría Registrada');
@@ -106,10 +106,10 @@ class CategoryController extends Controller
      */
     public function update(\App\Http\Requests\Blog\CategoryUpdateRequest $request, $id)
     {
-        $category = $this->entity->find($id);
+        $category   =   $this->entity->find($id);
         abort_unless($category, 404);
-        $category->title = $request->title;
-        $category->slug = $request->slug;
+        $category->title    =   $request->title;
+        $category->slug     =   $request->slug;
         $category->save();
 
         session()->flash('message', 'Categoría Actualizada');

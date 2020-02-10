@@ -2,6 +2,7 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Collection;
+use App\Entities\Learn\Course;
 
 class Helper {
 
@@ -17,7 +18,13 @@ class Helper {
   }
 
   public function skillLessons ($skill) {
-    return 0;
+    $lessons = 0;
+
+    foreach ( $skill->courses as $course )  {
+      $lessons += $course->lessons->count();
+    }
+
+    return $lessons;
   }
 
   public function skillTime ($skill) {
@@ -25,6 +32,30 @@ class Helper {
 
     foreach ( $skill->courses as $course )  {
       foreach ( $course->lessons as $lesson ) {
+        $seconds += $this->toSeconds($lesson->duration);
+      }
+    }
+
+    return $this->toTime($seconds);
+  }
+
+  public function totalLessons () {
+    $courses = Course::with('lessons')->where('is_publish', 1)->get();
+    $lessons = 0;
+    
+    foreach ( $courses as $course ) {
+      $lessons += $course->lessons->where('is_publish', 1)->count();
+    }
+
+    return $lessons;
+  }
+
+  public function totalTime () {
+    $courses = Course::with('lessons')->where('is_publish', 1)->get();
+    $seconds = 0;
+
+    foreach ( $courses as $course )  {
+      foreach ( $course->lessons->where('is_publish', 1) as $lesson ) {
         $seconds += $this->toSeconds($lesson->duration);
       }
     }
@@ -97,6 +128,11 @@ class Helper {
       case 'telegram': return 'https://t.me/share/url?url='.$url.'&text='.$title;
       default: return 'https://www.facebook.com/sharer/sharer.php?u='.$url.'&t='.$title;
     }
+  }
+
+  public function firstName ($name) {
+    $name = explode(' ', $name);
+    return $name[0];
   }
 
 }

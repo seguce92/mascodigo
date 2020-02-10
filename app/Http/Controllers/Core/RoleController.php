@@ -60,9 +60,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $role = new  $this->entity;
-        $role->name = $request->name;
-        $role->guard_name = 'web';
+        $role       =   new  $this->entity;
+        $role->name =   $request->name;
+        $role->guard_name   =   'web';
         $role->save();
 
         $role->syncPermissions($request->permission);
@@ -127,8 +127,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = $this->entity->find($id);
-        $role->name = $request->name;
+        $role       =   $this->entity->find($id);
+        $role->name =   $request->name;
         $role->save();
 
         session()->flash('message', 'Rol Actualizado Exitosamente');

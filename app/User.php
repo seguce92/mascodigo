@@ -22,7 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username', 'fullname', 'email', 'password', 'photo', 'xp', 'profile', 'status',
-        'provider', 'email_verified_at', 'verification_token', 'plan', 'end_suscription_at'
+        'provider', 'email_verified_at', 'verification_token', 'plan', 'end_suscription_at', 'is_premium'
     ];
 
     /**
@@ -40,8 +40,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'end_suscription_at' => 'datetime'
+        'email_verified_at'     =>  'datetime',
+        'end_suscription_at'    =>  'datetime',
+        'is_premium'            =>  'boolean'
     ];
 
     public function getPhotoAttribute ($value) {

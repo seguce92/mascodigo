@@ -98,9 +98,22 @@
           <span class="ml-2">Público</span>
         </label>
       </div>
-      <div class="w-1/3 flex">
+
+      <div class="w-1/3">
+        <label class="form-label">Acceso</label>
+        <label class="inline-flex items-center mr-5">
+          <input type="radio" class="form-radio h-6 w-6" name="is_premium" value="1">
+          <span class="ml-2">Premium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" class="form-radio h-6 w-6" name="is_premium" value="0" checked>
+          <span class="ml-2">Estandar</span>
+        </label>
+      </div>
+
+      <div class="w-1/2 flex">
         <div class="mr-1">
-            <label class="form-label" for="duration">Duracion</label>
+            <label class="form-label" for="duration">Duración <span class="italic">(HH:mm:ss)</span></label>
             <input class="form-input" id="duration" name="duration" type="text" placeholder="00:00:00" value="{{ old('duration') ? old('duration') : '00:00:00' }}">
         </div>
         <div>

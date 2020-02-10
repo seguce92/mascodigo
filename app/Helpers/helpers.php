@@ -24,6 +24,18 @@ if (! function_exists ('course_time') ) {
   }
 }
 
+if (! function_exists ('total_time') ) {
+  function total_time () {
+    return app(\App\Helpers\Helper::class)->totalTime();
+  }
+}
+
+if (! function_exists ('total_lessons') ) {
+  function total_lessons () {
+    return app(\App\Helpers\Helper::class)->totalLessons();
+  }
+}
+
 if (! function_exists ('to_seconds') ) {
   function to_seconds ($time) {
     return app(\App\Helpers\Helper::class)->toSeconds($time);
@@ -51,5 +63,11 @@ if (! function_exists ('excerpt') ) {
 if (! function_exists ('social_share') ) {
   function social_share ($type, $slug, $title) {
     return app(\App\Helpers\Helper::class)->socialShare($type, $slug, $title);
+  }
+}
+
+if (! function_exists ('first_name') ) {
+  function first_name ($name) {
+    return app(\App\Helpers\Helper::class)->firstName($name);
   }
 }

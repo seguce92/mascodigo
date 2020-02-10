@@ -15,7 +15,7 @@
   @if (\Auth::check())
   <div id="header_menu" class="w-full px-2 lg:px-0 mx-auto flex flex-wrap items-center h-10 bg-gray-800" style="z-index:51">
     <div class="hidden lg:inline-block w-full lg:w-1/2 pl-2 md:pl-0">
-      <span class="text-gray-400 ml-2 text-xs italic">Bienvenido. Gracias por elegirnos, esperamos que tu estadia en Más Código sea de tu agrado.</span>
+      <span class="text-gray-400 ml-2 text-xs italic">{{ config('seguce92.data.message') }}</span>
     </div>
     <div class="w-full lg:w-1/2  pr-0">
       <div class="flex relative inline-block float-right">
@@ -63,15 +63,17 @@
     @yield('content')
   </div>
   @include ('component.footer')
+  @if (\Auth::check() )
   <script>
     var ab=document.getElementById("userMenu");var userMenu=document.getElementById("userButton");//document.onclick=check;
     document.onclick=check;
-    document.addEventListener("header_menu", function(evt){
+    document.addEventListener("#header_menu", function(evt){
       check()
     });
-    function check(e){console.log("error to log");var target=(e&&e.target)||(event && event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}}
+    function check(e){var target=(e&&e.target)||(event && event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}}
     function checkParent(t,elm){while(t.parentNode){if(t==elm){return true}t=t.parentNode}return false}
   </script>
+  @endif
   @stack('script')
 </body>
 </html>

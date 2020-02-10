@@ -26,7 +26,8 @@ class PostController extends Controller
     public function index(Request $request)
     {
         if ( $request->q ) $data = $this->entity->where('title', 'like', '%'.$request->q.'%')
-            ->orderByDesc('created_at')->paginate(12);
+            ->orderByDesc('created_at')
+            ->paginate(12);
         else $data = $this->entity->orderByDesc('created_at')->paginate(12);
 
         return view('admin::blog.post.index', [
@@ -55,17 +56,17 @@ class PostController extends Controller
      */
     public function store(\App\Http\Requests\Blog\PostStoreRequest $request)
     {
-        $post = $this->entity;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->content = $request->content;
-        $post->image = $request->image;
-        $post->description = $request->description;
-        $post->is_publish = $request->is_publish;
-        $post->author_id = \Auth::id();
-        $post->category_id = $request->category_id;
-        $post->editor_id = \Auth::id();
-        $post->published_at = \Carbon\Carbon::now();
+        $post           =   $this->entity;
+        $post->title    =   $request->title;
+        $post->slug     =   $request->slug;
+        $post->content  =   $request->content;
+        $post->image    =   $request->image;
+        $post->description  =   $request->description;
+        $post->is_publish   =   $request->is_publish;
+        $post->author_id    =   \Auth::id();
+        $post->category_id  =   $request->category_id;
+        $post->editor_id    =   \Auth::id();
+        $post->published_at =   \Carbon\Carbon::now();
         $post->save();
 
         session()->flash('message', 'Post Registrado');
@@ -107,7 +108,7 @@ class PostController extends Controller
         ]);
     }
 
-    /**
+    /**$lesson->is_private = $request->is_private;
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -119,16 +120,16 @@ class PostController extends Controller
         $post = $this->entity->find($id);
         abort_unless($post, 404);
 
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->content = $request->content;
-        $post->image = $request->image;
-        $post->description = $request->description;
-        $post->is_publish = $request->is_publish;
-        $post->author_id = \Auth::id();
-        $post->category_id = $request->category_id;
-        $post->editor_id = \Auth::id();
-        $post->published_at = \Carbon\Carbon::now();
+        $post->title        =   $request->title;
+        $post->slug         =   $request->slug;
+        $post->content      =   $request->content;
+        $post->image        =   $request->image;
+        $post->description  =   $request->description;
+        $post->is_publish   =   $request->is_publish;
+        $post->author_id    =   \Auth::id();
+        $post->category_id  =   $request->category_id;
+        $post->editor_id    =   \Auth::id();
+        $post->published_at =   \Carbon\Carbon::now();
         $post->save();
 
         session()->flash('message', 'Post Actualizado');

@@ -26,14 +26,16 @@ class SkillController extends Controller
     public function index(Request $request)
     {
         if ( $request->q )
-            $data = $this->entity->where('name', 'like', '%'.$request->q.'%')->orderByDesc('created_at')->paginate(12);
+            $data = $this->entity->where('name', 'like', '%'.$request->q.'%')
+                    ->orderByDesc('created_at')
+                    ->paginate(12);
         else
             $data = $this->entity->orderByDesc('created_at')->paginate(12);
         
 
         return view('admin::learn.skill.index', [
             'skills'    =>  $data,
-            'q' =>  $request->q
+            'q'         =>  $request->q
         ]);
     }
 
@@ -55,11 +57,11 @@ class SkillController extends Controller
      */
     public function store(\App\Http\Requests\Learn\SkillStoreRequest $request)
     {
-        $skill = new $this->entity;
-        $skill->name = $request->name;
-        $skill->slug = $request->slug;
-        $skill->description = $request->description;
-        $skill->icon = $request->icon;
+        $skill          =   new $this->entity;
+        $skill->name    =   $request->name;
+        $skill->slug    =   $request->slug;
+        $skill->description =   $request->description;
+        $skill->icon        =   $request->icon;
         $skill->save();
 
         session()->flash('message', 'Habilidad guardada');
@@ -102,11 +104,11 @@ class SkillController extends Controller
      */
     public function update(\App\Http\Requests\Learn\SkillUpdateRequest $request, $id)
     {
-        $skill = $this->entity->find($id);
-        $skill->name = $request->name;
-        $skill->slug = $request->slug;
-        $skill->description = $request->description;
-        $skill->icon = $request->icon;
+        $skill          =   $this->entity->find($id);
+        $skill->name    =   $request->name;
+        $skill->slug    =   $request->slug;
+        $skill->description =   $request->description;
+        $skill->icon        =   $request->icon;
         $skill->save();
 
         session()->flash('message', 'Habilidad actualizada');

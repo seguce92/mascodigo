@@ -36,8 +36,8 @@
         <tr class="bg-gray-200">
           <th class="table-head">ID</th>
           <th class="table-head">CURSO</th>
-          <th class="table-head">Habilidad</th>
-          <th class="table-head text-center">Publicado</th>
+          <th class="table-head">HABILIDAD</th>
+          <th class="table-head text-center">PUBLICADO</th>
           <th class="table-head">F. REGISTRO</th>
           <th class="table-head"></th>
         </tr>
@@ -46,7 +46,11 @@
         @foreach ( $courses as $course )
           <tr class="hover:bg-gray-200">
             <td class="table-content">{{ $course->id }}</td>
-            <td class="table-content">{{ $course->title }}</td>
+            <td class="table-content">
+              <a href="{{ route('courses.show', $course->id) }}" class="text-blue-400 hover:text-blue-500 hover:underline">
+                {{ $course->title }}
+              </a>
+            </td>
             <td class="table-content">
               <span class="rounded-lg px-2 py-1 course {{ $course->skill->slug }}">{{ $course->skill->name }}</span>
             </td>
