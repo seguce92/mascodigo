@@ -59,8 +59,15 @@ class MarkdownButtonElement extends HTMLElement {
 class MarkdownHeaderButtonElement extends MarkdownButtonElement {
   constructor() {
     super();
+    const level = parseInt(this.getAttribute('level') || 3, 10);
+
+    if (level < 1 || level > 6) {
+      return;
+    }
+
+    const prefix = "".concat('#'.repeat(level), " ");
     styles.set(this, {
-      prefix: '### '
+      prefix
     });
   }
 
@@ -171,6 +178,24 @@ class MarkdownLinkButtonElement extends MarkdownButtonElement {
 if (!window.customElements.get('md-link')) {
   window.MarkdownLinkButtonElement = MarkdownLinkButtonElement;
   window.customElements.define('md-link', MarkdownLinkButtonElement);
+}
+
+class MarkdownImageButtonElement extends MarkdownButtonElement {
+  constructor() {
+    super();
+    styles.set(this, {
+      prefix: '![',
+      suffix: '](url)',
+      replaceNext: 'url',
+      scanFor: 'https?://'
+    });
+  }
+
+}
+
+if (!window.customElements.get('md-image')) {
+  window.MarkdownImageButtonElement = MarkdownImageButtonElement;
+  window.customElements.define('md-image', MarkdownImageButtonElement);
 }
 
 class MarkdownUnorderedListButtonElement extends MarkdownButtonElement {
@@ -5239,7 +5264,8 @@ function toByteArray (b64) {
     ? validLen - 4
     : validLen
 
-  for (var i = 0; i < len; i += 4) {
+  var i
+  for (i = 0; i < len; i += 4) {
     tmp =
       (revLookup[b64.charCodeAt(i)] << 18) |
       (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -10593,7 +10619,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * The buffer module from node.js, for the browser.
  *
- * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @author   Feross Aboukhadijeh <http://feross.org>
  * @license  MIT
  */
 /* eslint-disable no-proto */
@@ -13048,10 +13074,10 @@ exports.constants = {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13098,7 +13124,7 @@ exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-shown{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon::before{display:flex;align-items:center;font-size:2em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon::before{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-shown{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent}body.swal2-no-backdrop .swal2-shown>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-shown.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-shown.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{right:0;bottom:0}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;background-color:transparent;-webkit-overflow-scrolling:touch}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-container.swal2-fade{transition:background-color .1s}.swal2-container.swal2-shown{background-color:rgba(0,0,0,.4)}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{box-sizing:border-box;width:2.5em;height:2.5em;margin:.46875em;padding:0;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{content:\"\";display:inline-block;width:15px;height:15px;margin-left:5px;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff}.swal2-styled{margin:.3125em;padding:.625em 2em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:0;outline:initial;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:300;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-file::-webkit-input-placeholder,.swal2-input::-webkit-input-placeholder,.swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:inherit}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:inherit;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;zoom:normal;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;zoom:normal;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon::before{display:flex;align-items:center;height:92%;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-warning::before{content:\"!\"}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-info::before{content:\"i\"}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-question::before{content:\"?\"}.swal2-icon.swal2-question.swal2-arabic-question-mark::before{content:\"\\61F\"}.swal2-icon.swal2-success{border-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.875em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-progress-steps{align-items:center;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#3085d6}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;width:2.5em;height:.4em;margin:0 -1px;background:#3085d6}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-show.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-hide.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-animate-success-icon .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-animate-error-icon{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-animate-error-icon .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}", ""]);
+exports.push([module.i, "@charset \"UTF-8\";.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon::before{display:flex;align-items:center;font-size:2em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon::before{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;background-color:transparent;-webkit-overflow-scrolling:touch}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-container.swal2-shown{background-color:rgba(0,0,0,.4)}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{box-sizing:border-box;width:2.5em;height:2.5em;margin:.46875em;padding:0;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{content:\"\";display:inline-block;width:15px;height:15px;margin-left:5px;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff}.swal2-styled{margin:.3125em;padding:.625em 2em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:0;outline:initial;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-file::-webkit-input-placeholder,.swal2-input::-webkit-input-placeholder,.swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:inherit}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:inherit;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon::before{display:flex;align-items:center;height:92%;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-warning::before{content:\"!\"}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-info::before{content:\"i\"}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-question::before{content:\"?\"}.swal2-icon.swal2-question.swal2-arabic-question-mark::before{content:\"\\61F\"}.swal2-icon.swal2-success{border-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.875em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-progress-steps{align-items:center;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#3085d6}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;width:2.5em;height:.4em;margin:0 -1px;background:#3085d6}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-show.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-hide.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-animate-success-icon .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-animate-error-icon{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-animate-error-icon .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-shown{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent}body.swal2-no-backdrop .swal2-shown>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-shown.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-shown.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-shown{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}", ""]);
 
 // exports
 
@@ -13511,9 +13537,8 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 var assert = __webpack_require__(/*! minimalistic-assert */ "./node_modules/minimalistic-assert/index.js");
 var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 
-var des = __webpack_require__(/*! ../des */ "./node_modules/des.js/lib/des.js");
-var utils = des.utils;
-var Cipher = des.Cipher;
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/des.js/lib/des/utils.js");
+var Cipher = __webpack_require__(/*! ./cipher */ "./node_modules/des.js/lib/des/cipher.js");
 
 function DESState() {
   this.tmp = new Array(2);
@@ -13666,9 +13691,8 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 var assert = __webpack_require__(/*! minimalistic-assert */ "./node_modules/minimalistic-assert/index.js");
 var inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 
-var des = __webpack_require__(/*! ../des */ "./node_modules/des.js/lib/des.js");
-var Cipher = des.Cipher;
-var DES = des.DES;
+var Cipher = __webpack_require__(/*! ./cipher */ "./node_modules/des.js/lib/des/cipher.js");
+var DES = __webpack_require__(/*! ./des */ "./node_modules/des.js/lib/des/des.js");
 
 function EDEState(type, key) {
   assert.equal(key.length, 24, 'Invalid key length');
@@ -14408,6 +14432,8 @@ function BaseCurve(type, conf) {
   this._wnafT3 = new Array(4);
   this._wnafT4 = new Array(4);
 
+  this._bitLength = this.n ? this.n.bitLength() : 0;
+
   // Generalized Greg Maxwell's trick
   var adjustCount = this.n && this.p.div(this.n);
   if (!adjustCount || adjustCount.cmpn(100) > 0) {
@@ -14431,7 +14457,7 @@ BaseCurve.prototype._fixedNafMul = function _fixedNafMul(p, k) {
   assert(p.precomputed);
   var doubles = p._getDoubles();
 
-  var naf = getNAF(k, 1);
+  var naf = getNAF(k, 1, this._bitLength);
   var I = (1 << (doubles.step + 1)) - (doubles.step % 2 === 0 ? 2 : 1);
   I /= 3;
 
@@ -14468,7 +14494,7 @@ BaseCurve.prototype._wnafMul = function _wnafMul(p, k) {
   var wnd = nafPoints.points;
 
   // Get NAF form
-  var naf = getNAF(k, w);
+  var naf = getNAF(k, w, this._bitLength);
 
   // Add `this`*(N+1) for every w-NAF index
   var acc = this.jpoint(null, null, null);
@@ -14524,8 +14550,8 @@ BaseCurve.prototype._wnafMulAdd = function _wnafMulAdd(defW,
     var a = i - 1;
     var b = i;
     if (wndWidth[a] !== 1 || wndWidth[b] !== 1) {
-      naf[a] = getNAF(coeffs[a], wndWidth[a]);
-      naf[b] = getNAF(coeffs[b], wndWidth[b]);
+      naf[a] = getNAF(coeffs[a], wndWidth[a], this._bitLength);
+      naf[b] = getNAF(coeffs[b], wndWidth[b], this._bitLength);
       max = Math.max(naf[a].length, max);
       max = Math.max(naf[b].length, max);
       continue;
@@ -15841,8 +15867,9 @@ Point.prototype.getY = function getY() {
 
 Point.prototype.mul = function mul(k) {
   k = new BN(k, 16);
-
-  if (this._hasDoubles(k))
+  if (this.isInfinity())
+    return this;
+  else if (this._hasDoubles(k))
     return this.curve._fixedNafMul(this, k);
   else if (this.curve.endo)
     return this.curve._endoWnafMulAdd([ this ], [ k ]);
@@ -18232,14 +18259,17 @@ utils.toHex = minUtils.toHex;
 utils.encode = minUtils.encode;
 
 // Represent num in a w-NAF form
-function getNAF(num, w) {
-  var naf = [];
+function getNAF(num, w, bits) {
+  var naf = new Array(Math.max(num.bitLength(), bits) + 1);
+  naf.fill(0);
+
   var ws = 1 << (w + 1);
   var k = num.clone();
-  while (k.cmpn(1) >= 0) {
+
+  for (var i = 0; i < naf.length; i++) {
     var z;
+    var mod = k.andln(ws - 1);
     if (k.isOdd()) {
-      var mod = k.andln(ws - 1);
       if (mod > (ws >> 1) - 1)
         z = (ws >> 1) - mod;
       else
@@ -18248,13 +18278,9 @@ function getNAF(num, w) {
     } else {
       z = 0;
     }
-    naf.push(z);
 
-    // Optimization, shift by word if possible
-    var shift = (k.cmpn(0) !== 0 && k.andln(ws - 1) === 0) ? (w + 1) : 1;
-    for (var i = 1; i < shift; i++)
-      naf.push(0);
-    k.iushrn(shift);
+    naf[i] = z;
+    k.iushrn(1);
   }
 
   return naf;
@@ -18346,10 +18372,10 @@ utils.intFromLE = intFromLE;
 /*!********************************************!*\
   !*** ./node_modules/elliptic/package.json ***!
   \********************************************/
-/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"elliptic@6.5.0\",\"/media/seguce92/code/projects/web/mascodigo\"]],\"_development\":true,\"_from\":\"elliptic@6.5.0\",\"_id\":\"elliptic@6.5.0\",\"_inBundle\":false,\"_integrity\":\"sha512-eFOJTMyCYb7xtE/caJ6JJu+bhi67WCYNbkGSknu20pmM8Ke/bqOfdnZWxyoGN26JgfxTbXrsCkEw4KheCT/KGg==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"elliptic@6.5.0\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"6.5.0\",\"saveSpec\":null,\"fetchSpec\":\"6.5.0\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.0.tgz\",\"_spec\":\"6.5.0\",\"_where\":\"/media/seguce92/code/projects/web/mascodigo\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^2.11.3\",\"grunt\":\"^0.4.5\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^8.6.2\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^2.9.0\",\"jshint\":\"^2.6.0\",\"mocha\":\"^2.1.0\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.0\"}");
+module.exports = JSON.parse("{\"_from\":\"elliptic@^6.0.0\",\"_id\":\"elliptic@6.5.2\",\"_inBundle\":false,\"_integrity\":\"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"elliptic@^6.0.0\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"^6.0.0\",\"saveSpec\":null,\"fetchSpec\":\"^6.0.0\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz\",\"_shasum\":\"05c5678d7173c049d8ca433552224a495d0e3762\",\"_spec\":\"elliptic@^6.0.0\",\"_where\":\"/media/seguce92/code/projects/web/mascodigo/node_modules/browserify-sign\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"deprecated\":false,\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^3.0.8\",\"grunt\":\"^1.0.4\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^3.0.7\",\"jshint\":\"^2.10.3\",\"mocha\":\"^6.2.2\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.2\"}");
 
 /***/ }),
 
@@ -18429,6 +18455,12 @@ EventEmitter.prototype._maxListeners = undefined;
 // added to it. This is a useful default which helps finding memory leaks.
 var defaultMaxListeners = 10;
 
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
 Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
   enumerable: true,
   get: function() {
@@ -18463,14 +18495,14 @@ EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
   return this;
 };
 
-function $getMaxListeners(that) {
+function _getMaxListeners(that) {
   if (that._maxListeners === undefined)
     return EventEmitter.defaultMaxListeners;
   return that._maxListeners;
 }
 
 EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
-  return $getMaxListeners(this);
+  return _getMaxListeners(this);
 };
 
 EventEmitter.prototype.emit = function emit(type) {
@@ -18522,9 +18554,7 @@ function _addListener(target, type, listener, prepend) {
   var events;
   var existing;
 
-  if (typeof listener !== 'function') {
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-  }
+  checkListener(listener);
 
   events = target._events;
   if (events === undefined) {
@@ -18561,7 +18591,7 @@ function _addListener(target, type, listener, prepend) {
     }
 
     // Check for listener leak
-    m = $getMaxListeners(target);
+    m = _getMaxListeners(target);
     if (m > 0 && existing.length > m && !existing.warned) {
       existing.warned = true;
       // No error code for this since it is a Warning
@@ -18593,12 +18623,12 @@ EventEmitter.prototype.prependListener =
     };
 
 function onceWrapper() {
-  var args = [];
-  for (var i = 0; i < arguments.length; i++) args.push(arguments[i]);
   if (!this.fired) {
     this.target.removeListener(this.type, this.wrapFn);
     this.fired = true;
-    ReflectApply(this.listener, this.target, args);
+    if (arguments.length === 0)
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
   }
 }
 
@@ -18611,18 +18641,14 @@ function _onceWrap(target, type, listener) {
 }
 
 EventEmitter.prototype.once = function once(type, listener) {
-  if (typeof listener !== 'function') {
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-  }
+  checkListener(listener);
   this.on(type, _onceWrap(this, type, listener));
   return this;
 };
 
 EventEmitter.prototype.prependOnceListener =
     function prependOnceListener(type, listener) {
-      if (typeof listener !== 'function') {
-        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-      }
+      checkListener(listener);
       this.prependListener(type, _onceWrap(this, type, listener));
       return this;
     };
@@ -18632,9 +18658,7 @@ EventEmitter.prototype.removeListener =
     function removeListener(type, listener) {
       var list, events, position, i, originalListener;
 
-      if (typeof listener !== 'function') {
-        throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
-      }
+      checkListener(listener);
 
       events = this._events;
       if (events === undefined)
@@ -20373,16 +20397,21 @@ https://highlightjs.org/
   var languages = {},
       aliases   = {};
 
+  // safe/production mode - swallows more errors, tries to keep running
+  // even if a single syntax or parse hits a fatal error
+  var SAFE_MODE = true;
+
   // Regular expressions used throughout the highlight.js library.
   var noHighlightRe    = /^(no-?highlight|plain|text)$/i,
       languagePrefixRe = /\blang(?:uage)?-([\w-]+)\b/i,
       fixMarkupRe      = /((^(<[^>]+>|\t|)+|(?:\n)))/gm;
 
-  // The object will be assigned by the build tool. It used to synchronize API 
+  // The object will be assigned by the build tool. It used to synchronize API
   // of external language files with minified version of the highlight.js library.
   var API_REPLACES;
 
   var spanEndTag = '</span>';
+  var LANGUAGE_NOT_FOUND = "Could not find the language '{}', did you forget to load/include a language module?";
 
   // Global options used when within external APIs. This is modified when
   // calling the `hljs.configure` function.
@@ -20392,6 +20421,9 @@ https://highlightjs.org/
     useBR: false,
     languages: undefined
   };
+
+  // keywords that should have no default relevance value
+  var COMMON_KEYWORDS = 'of and for in not or if then'.split(' ');
 
 
   /* Utility functions */
@@ -20422,7 +20454,12 @@ https://highlightjs.org/
     // language-* takes precedence over non-prefixed class names.
     match = languagePrefixRe.exec(classes);
     if (match) {
-      return getLanguage(match[1]) ? match[1] : 'no-highlight';
+      var language = getLanguage(match[1]);
+      if (!language) {
+        console.warn(LANGUAGE_NOT_FOUND.replace("{}", match[1]));
+        console.warn("Falling back to no-highlight mode for this block.", block);
+      }
+      return language ? match[1] : 'no-highlight';
     }
 
     classes = classes.split(/\s+/);
@@ -20436,6 +20473,12 @@ https://highlightjs.org/
     }
   }
 
+  /**
+   * performs a shallow merge of multiple objects into one
+   *
+   * @arguments list of objects with properties to merge
+   * @returns a single new object
+   */
   function inherit(parent) {  // inherit(parent, override_obj, override_obj, ...)
     var key;
     var result = {};
@@ -20514,7 +20557,9 @@ https://highlightjs.org/
     }
 
     function open(node) {
-      function attr_str(a) {return ' ' + a.nodeName + '="' + escape(a.value).replace('"', '&quot;') + '"';}
+      function attr_str(a) {
+        return ' ' + a.nodeName + '="' + escape(a.value).replace(/"/g, '&quot;') + '"';
+      }
       result += '<' + tag(node) + ArrayProto.map.call(node.attributes, attr_str).join('') + '>';
     }
 
@@ -20557,22 +20602,87 @@ https://highlightjs.org/
 
   /* Initialization */
 
-  function expand_mode(mode) {
+  function dependencyOnParent(mode) {
+    if (!mode) return false;
+
+    return mode.endsWithParent || dependencyOnParent(mode.starts);
+  }
+
+  function expand_or_clone_mode(mode) {
     if (mode.variants && !mode.cached_variants) {
       mode.cached_variants = mode.variants.map(function(variant) {
         return inherit(mode, {variants: null}, variant);
       });
     }
-    return mode.cached_variants || (mode.endsWithParent && [inherit(mode)]) || [mode];
+
+    // EXPAND
+    // if we have variants then essentially "replace" the mode with the variants
+    // this happens in compileMode, where this function is called from
+    if (mode.cached_variants)
+      return mode.cached_variants;
+
+    // CLONE
+    // if we have dependencies on parents then we need a unique
+    // instance of ourselves, so we can be reused with many
+    // different parents without issue
+    if (dependencyOnParent(mode))
+      return [inherit(mode, { starts: mode.starts ? inherit(mode.starts) : null })];
+
+    if (Object.isFrozen(mode))
+      return [inherit(mode)];
+
+    // no special dependency issues, just return ourselves
+    return [mode];
   }
 
   function restoreLanguageApi(obj) {
     if(API_REPLACES && !obj.langApiRestored) {
       obj.langApiRestored = true;
-      for(var key in API_REPLACES)
-        obj[key] && (obj[API_REPLACES[key]] = obj[key]);
+      for(var key in API_REPLACES) {
+        if (obj[key]) {
+          obj[API_REPLACES[key]] = obj[key];
+        }
+      }
       (obj.contains || []).concat(obj.variants || []).forEach(restoreLanguageApi);
     }
+  }
+
+  function compileKeywords(rawKeywords, case_insensitive) {
+      var compiled_keywords = {};
+
+      if (typeof rawKeywords === 'string') { // string
+        splitAndCompile('keyword', rawKeywords);
+      } else {
+        objectKeys(rawKeywords).forEach(function (className) {
+          splitAndCompile(className, rawKeywords[className]);
+        });
+      }
+    return compiled_keywords;
+
+    // ---
+
+    function splitAndCompile(className, str) {
+      if (case_insensitive) {
+        str = str.toLowerCase();
+      }
+      str.split(' ').forEach(function(keyword) {
+        var pair = keyword.split('|');
+        compiled_keywords[pair[0]] = [className, scoreForKeyword(pair[0], pair[1])];
+      });
+    }
+  }
+
+  function scoreForKeyword(keyword, providedScore) {
+    // manual scores always win over common keywords
+    // so you can force a score of 1 if you really insist
+    if (providedScore)
+      return Number(providedScore);
+
+    return commonKeyword(keyword) ? 0 : 1;
+  }
+
+  function commonKeyword(word) {
+    return COMMON_KEYWORDS.indexOf(word.toLowerCase()) != -1;
   }
 
   function compileLanguage(language) {
@@ -20588,8 +20698,15 @@ https://highlightjs.org/
       );
     }
 
+    function reCountMatchGroups(re) {
+      return (new RegExp(re.toString() + '|')).exec('').length - 1;
+    }
+
     // joinRe logically computes regexps.join(separator), but fixes the
     // backreferences so they continue to match.
+    // it also places each individual regular expression into it's own
+    // match group, keeping track of the sequencing of those match groups
+    // is currently an exercise for the caller. :-)
     function joinRe(regexps, separator) {
       // backreferenceRe matches an open parenthesis or backreference. To avoid
       // an incorrect parse, it additionally matches the following:
@@ -20602,11 +20719,13 @@ https://highlightjs.org/
       var numCaptures = 0;
       var ret = '';
       for (var i = 0; i < regexps.length; i++) {
+        numCaptures += 1;
         var offset = numCaptures;
         var re = reStr(regexps[i]);
         if (i > 0) {
           ret += separator;
         }
+        ret += "(";
         while (re.length > 0) {
           var match = backreferenceRe.exec(re);
           if (match == null) {
@@ -20625,8 +20744,73 @@ https://highlightjs.org/
             }
           }
         }
+        ret += ")";
       }
       return ret;
+    }
+
+    function buildModeRegex(mode) {
+
+      var matchIndexes = {};
+      var matcherRe;
+      var regexes = [];
+      var matcher = {};
+      var matchAt = 1;
+
+      function addRule(rule, regex) {
+        matchIndexes[matchAt] = rule;
+        regexes.push([rule, regex]);
+        matchAt += reCountMatchGroups(regex) + 1;
+      }
+
+      var term;
+      for (var i=0; i < mode.contains.length; i++) {
+        var re;
+        term = mode.contains[i];
+        if (term.beginKeywords) {
+          re = '\\.?(?:' + term.begin + ')\\.?';
+        } else {
+          re = term.begin;
+        }
+        addRule(term, re);
+      }
+      if (mode.terminator_end)
+        addRule("end", mode.terminator_end);
+      if (mode.illegal)
+        addRule("illegal", mode.illegal);
+
+      var terminators = regexes.map(function(el) { return el[1]; });
+      matcherRe = langRe(joinRe(terminators, '|'), true);
+
+      matcher.lastIndex = 0;
+      matcher.exec = function(s) {
+        var rule;
+
+        if( regexes.length === 0) return null;
+
+        matcherRe.lastIndex = matcher.lastIndex;
+        var match = matcherRe.exec(s);
+        if (!match) { return null; }
+
+        for(var i = 0; i<match.length; i++) {
+          if (match[i] != undefined && matchIndexes["" +i] != undefined ) {
+            rule = matchIndexes[""+i];
+            break;
+          }
+        }
+
+        // illegal or end match
+        if (typeof rule === "string") {
+          match.type = rule;
+          match.extra = [mode.illegal, mode.terminator_end];
+        } else {
+          match.type = "begin";
+          match.rule = rule;
+        }
+        return match;
+      };
+
+      return matcher;
     }
 
     function compileMode(mode, parent) {
@@ -20635,28 +20819,9 @@ https://highlightjs.org/
       mode.compiled = true;
 
       mode.keywords = mode.keywords || mode.beginKeywords;
-      if (mode.keywords) {
-        var compiled_keywords = {};
+      if (mode.keywords)
+        mode.keywords = compileKeywords(mode.keywords, language.case_insensitive);
 
-        var flatten = function(className, str) {
-          if (language.case_insensitive) {
-            str = str.toLowerCase();
-          }
-          str.split(' ').forEach(function(kw) {
-            var pair = kw.split('|');
-            compiled_keywords[pair[0]] = [className, pair[1] ? Number(pair[1]) : 1];
-          });
-        };
-
-        if (typeof mode.keywords === 'string') { // string
-          flatten('keyword', mode.keywords);
-        } else {
-          objectKeys(mode.keywords).forEach(function (className) {
-            flatten(className, mode.keywords[className]);
-          });
-        }
-        mode.keywords = compiled_keywords;
-      }
       mode.lexemesRe = langRe(mode.lexemes || /\w+/, true);
 
       if (parent) {
@@ -20684,7 +20849,7 @@ https://highlightjs.org/
         mode.contains = [];
       }
       mode.contains = Array.prototype.concat.apply([], mode.contains.map(function(c) {
-        return expand_mode(c === 'self' ? mode : c);
+        return expand_or_clone_mode(c === 'self' ? mode : c);
       }));
       mode.contains.forEach(function(c) {compileMode(c, mode);});
 
@@ -20692,45 +20857,44 @@ https://highlightjs.org/
         compileMode(mode.starts, parent);
       }
 
-      var terminators =
-        mode.contains.map(function(c) {
-          return c.beginKeywords ? '\\.?(?:' + c.begin + ')\\.?' : c.begin;
-        })
-        .concat([mode.terminator_end, mode.illegal])
-        .map(reStr)
-        .filter(Boolean);
-      mode.terminators = terminators.length ? langRe(joinRe(terminators, '|'), true) : {exec: function(/*s*/) {return null;}};
+      mode.terminators = buildModeRegex(mode);
     }
-    
+
+    // self is not valid at the top-level
+    if (language.contains && language.contains.indexOf('self') != -1) {
+      if (!SAFE_MODE) {
+        throw new Error("ERR: contains `self` is not supported at the top-level of a language.  See documentation.")
+      } else {
+        // silently remove the broken rule (effectively ignoring it), this has historically
+        // been the behavior in the past, so this removal preserves compatibility with broken
+        // grammars when running in Safe Mode
+        language.contains = language.contains.filter(function(mode) { return mode != 'self'; });
+      }
+    }
     compileMode(language);
   }
 
-  /*
-  Core highlighting function. Accepts a language name, or an alias, and a
-  string with the code to highlight. Returns an object with the following
-  properties:
 
-  - relevance (int)
-  - value (an HTML string with highlighting markup)
-
+  /**
+   * Core highlighting function.
+   *
+   * @param {string} languageName - the language to use for highlighting
+   * @param {string} code - the code to highlight
+   * @param {boolean} ignore_illegals - whether to ignore illegal matches, default is to bail
+   * @param {array<mode>} continuation - array of continuation modes
+   *
+   * @returns an object that represents the result
+   * @property {string} language - the language name
+   * @property {number} relevance - the relevance score
+   * @property {string} value - the highlighted HTML code
+   * @property {mode} top - top of the current mode stack
+   * @property {boolean} illegal - indicates whether any illegal matches were found
   */
-  function highlight(name, value, ignore_illegals, continuation) {
+  function highlight(languageName, code, ignore_illegals, continuation) {
+    var codeToHighlight = code;
 
     function escapeRe(value) {
       return new RegExp(value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'm');
-    }
-
-    function subMode(lexeme, mode) {
-      var i, length;
-
-      for (i = 0, length = mode.contains.length; i < length; i++) {
-        if (testRe(mode.contains[i].beginRe, lexeme)) {
-          if (mode.contains[i].endSameAsBegin) {
-            mode.contains[i].endRe = escapeRe( mode.contains[i].beginRe.exec(lexeme)[0] );
-          }
-          return mode.contains[i];
-        }
-      }
     }
 
     function endOfMode(mode, lexeme) {
@@ -20745,23 +20909,21 @@ https://highlightjs.org/
       }
     }
 
-    function isIllegal(lexeme, mode) {
-      return !ignore_illegals && testRe(mode.illegalRe, lexeme);
-    }
-
     function keywordMatch(mode, match) {
       var match_str = language.case_insensitive ? match[0].toLowerCase() : match[0];
       return mode.keywords.hasOwnProperty(match_str) && mode.keywords[match_str];
     }
 
-    function buildSpan(classname, insideSpan, leaveOpen, noPrefix) {
+    function buildSpan(className, insideSpan, leaveOpen, noPrefix) {
+      if (!leaveOpen && insideSpan === '') return '';
+      if (!className) return insideSpan;
+
       var classPrefix = noPrefix ? '' : options.classPrefix,
           openSpan    = '<span class="' + classPrefix,
           closeSpan   = leaveOpen ? '' : spanEndTag;
 
-      openSpan += classname + '">';
+      openSpan += className + '">';
 
-      if (!classname) return insideSpan;
       return openSpan + insideSpan + closeSpan;
     }
 
@@ -20802,7 +20964,7 @@ https://highlightjs.org/
                    highlightAuto(mode_buffer, top.subLanguage.length ? top.subLanguage : undefined);
 
       // Counting embedded language score towards the host language may be disabled
-      // with zeroing the containing mode relevance. Usecase in point is Markdown that
+      // with zeroing the containing mode relevance. Use case in point is Markdown that
       // allows XML everywhere and makes every XML snippet to have a much larger Markdown
       // score.
       if (top.relevance > 0) {
@@ -20824,79 +20986,121 @@ https://highlightjs.org/
       top = Object.create(mode, {parent: {value: top}});
     }
 
-    function processLexeme(buffer, lexeme) {
 
-      mode_buffer += buffer;
+    function doBeginMatch(match) {
+      var lexeme = match[0];
+      var new_mode = match.rule;
+
+      if (new_mode && new_mode.endSameAsBegin) {
+        new_mode.endRe = escapeRe( lexeme );
+      }
+
+      if (new_mode.skip) {
+        mode_buffer += lexeme;
+      } else {
+        if (new_mode.excludeBegin) {
+          mode_buffer += lexeme;
+        }
+        processBuffer();
+        if (!new_mode.returnBegin && !new_mode.excludeBegin) {
+          mode_buffer = lexeme;
+        }
+      }
+      startNewMode(new_mode);
+      return new_mode.returnBegin ? 0 : lexeme.length;
+    }
+
+    function doEndMatch(match) {
+      var lexeme = match[0];
+      var matchPlusRemainder = codeToHighlight.substr(match.index);
+      var end_mode = endOfMode(top, matchPlusRemainder);
+      if (!end_mode) { return; }
+
+      var origin = top;
+      if (origin.skip) {
+        mode_buffer += lexeme;
+      } else {
+        if (!(origin.returnEnd || origin.excludeEnd)) {
+          mode_buffer += lexeme;
+        }
+        processBuffer();
+        if (origin.excludeEnd) {
+          mode_buffer = lexeme;
+        }
+      }
+      do {
+        if (top.className) {
+          result += spanEndTag;
+        }
+        if (!top.skip && !top.subLanguage) {
+          relevance += top.relevance;
+        }
+        top = top.parent;
+      } while (top !== end_mode.parent);
+      if (end_mode.starts) {
+        if (end_mode.endSameAsBegin) {
+          end_mode.starts.endRe = end_mode.endRe;
+        }
+        startNewMode(end_mode.starts);
+      }
+      return origin.returnEnd ? 0 : lexeme.length;
+    }
+
+    var lastMatch = {};
+    function processLexeme(text_before_match, match) {
+
+      var lexeme = match && match[0];
+
+      // add non-matched text to the current mode buffer
+      mode_buffer += text_before_match;
 
       if (lexeme == null) {
         processBuffer();
         return 0;
       }
 
-      var new_mode = subMode(lexeme, top);
-      if (new_mode) {
-        if (new_mode.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (new_mode.excludeBegin) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (!new_mode.returnBegin && !new_mode.excludeBegin) {
-            mode_buffer = lexeme;
-          }
-        }
-        startNewMode(new_mode, lexeme);
-        return new_mode.returnBegin ? 0 : lexeme.length;
+      // we've found a 0 width match and we're stuck, so we need to advance
+      // this happens when we have badly behaved rules that have optional matchers to the degree that
+      // sometimes they can end up matching nothing at all
+      // Ref: https://github.com/highlightjs/highlight.js/issues/2140
+      if (lastMatch.type=="begin" && match.type=="end" && lastMatch.index == match.index && lexeme === "") {
+        // spit the "skipped" character that our regex choked on back into the output sequence
+        mode_buffer += codeToHighlight.slice(match.index, match.index + 1);
+        return 1;
       }
+      lastMatch = match;
 
-      var end_mode = endOfMode(top, lexeme);
-      if (end_mode) {
-        var origin = top;
-        if (origin.skip) {
-          mode_buffer += lexeme;
-        } else {
-          if (!(origin.returnEnd || origin.excludeEnd)) {
-            mode_buffer += lexeme;
-          }
-          processBuffer();
-          if (origin.excludeEnd) {
-            mode_buffer = lexeme;
-          }
-        }
-        do {
-          if (top.className) {
-            result += spanEndTag;
-          }
-          if (!top.skip && !top.subLanguage) {
-            relevance += top.relevance;
-          }
-          top = top.parent;
-        } while (top !== end_mode.parent);
-        if (end_mode.starts) {
-          if (end_mode.endSameAsBegin) {
-            end_mode.starts.endRe = end_mode.endRe;
-          }
-          startNewMode(end_mode.starts, '');
-        }
-        return origin.returnEnd ? 0 : lexeme.length;
-      }
-
-      if (isIllegal(lexeme, top))
+      if (match.type==="begin") {
+        return doBeginMatch(match);
+      } else if (match.type==="illegal" && !ignore_illegals) {
+        // illegal match, we do not continue processing
         throw new Error('Illegal lexeme "' + lexeme + '" for mode "' + (top.className || '<unnamed>') + '"');
+      } else if (match.type==="end") {
+        var processed = doEndMatch(match);
+        if (processed != undefined)
+          return processed;
+      }
 
       /*
-      Parser should not reach this point as all types of lexemes should be caught
-      earlier, but if it does due to some bug make sure it advances at least one
-      character forward to prevent infinite looping.
+      Why might be find ourselves here?  Only one occasion now.  An end match that was
+      triggered but could not be completed.  When might this happen?  When an `endSameasBegin`
+      rule sets the end rule to a specific match.  Since the overall mode termination rule that's
+      being used to scan the text isn't recompiled that means that any match that LOOKS like
+      the end (but is not, because it is not an exact match to the beginning) will
+      end up here.  A definite end match, but when `doEndMatch` tries to "reapply"
+      the end rule and fails to match, we wind up here, and just silently ignore the end.
+
+      This causes no real harm other than stopping a few times too many.
       */
+
       mode_buffer += lexeme;
-      return lexeme.length || 1;
+      return lexeme.length;
     }
 
-    var language = getLanguage(name);
+    var language = getLanguage(languageName);
     if (!language) {
-      throw new Error('Unknown language: "' + name + '"');
+      console.error(LANGUAGE_NOT_FOUND.replace("{}", languageName));
+      throw new Error('Unknown language: "' + languageName + '"');
     }
 
     compileLanguage(language);
@@ -20914,13 +21118,13 @@ https://highlightjs.org/
       var match, count, index = 0;
       while (true) {
         top.terminators.lastIndex = index;
-        match = top.terminators.exec(value);
+        match = top.terminators.exec(codeToHighlight);
         if (!match)
           break;
-        count = processLexeme(value.substring(index, match.index), match[0]);
+        count = processLexeme(codeToHighlight.substring(index, match.index), match);
         index = match.index + count;
       }
-      processLexeme(value.substr(index));
+      processLexeme(codeToHighlight.substr(index));
       for(current = top; current.parent; current = current.parent) { // close dangling modes
         if (current.className) {
           result += spanEndTag;
@@ -20929,17 +21133,27 @@ https://highlightjs.org/
       return {
         relevance: relevance,
         value: result,
-        language: name,
+        illegal:false,
+        language: languageName,
         top: top
       };
-    } catch (e) {
-      if (e.message && e.message.indexOf('Illegal') !== -1) {
+    } catch (err) {
+      if (err.message && err.message.indexOf('Illegal') !== -1) {
+        return {
+          illegal: true,
+          relevance: 0,
+          value: escape(codeToHighlight)
+        };
+      } else if (SAFE_MODE) {
         return {
           relevance: 0,
-          value: escape(value)
+          value: escape(codeToHighlight),
+          language: languageName,
+          top: top,
+          errorRaised: err
         };
       } else {
-        throw e;
+        throw err;
       }
     }
   }
@@ -20955,15 +21169,15 @@ https://highlightjs.org/
     detected language, may be absent)
 
   */
-  function highlightAuto(text, languageSubset) {
+  function highlightAuto(code, languageSubset) {
     languageSubset = languageSubset || options.languages || objectKeys(languages);
     var result = {
       relevance: 0,
-      value: escape(text)
+      value: escape(code)
     };
     var second_best = result;
     languageSubset.filter(getLanguage).filter(autoDetection).forEach(function(name) {
-      var current = highlight(name, text, false);
+      var current = highlight(name, code, false);
       current.language = name;
       if (current.relevance > second_best.relevance) {
         second_best = current;
@@ -20987,16 +21201,18 @@ https://highlightjs.org/
 
   */
   function fixMarkup(value) {
-    return !(options.tabReplace || options.useBR)
-      ? value
-      : value.replace(fixMarkupRe, function(match, p1) {
-          if (options.useBR && match === '\n') {
-            return '<br>';
-          } else if (options.tabReplace) {
-            return p1.replace(/\t/g, options.tabReplace);
-          }
-          return '';
-      });
+    if (!(options.tabReplace || options.useBR)) {
+      return value;
+    }
+
+    return value.replace(fixMarkupRe, function(match, p1) {
+        if (options.useBR && match === '\n') {
+          return '<br>';
+        } else if (options.tabReplace) {
+          return p1.replace(/\t/g, options.tabReplace);
+        }
+        return '';
+    });
   }
 
   function buildClassName(prevClassName, currentLang, resultLang) {
@@ -21026,7 +21242,7 @@ https://highlightjs.org/
         return;
 
     if (options.useBR) {
-      node = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
+      node = document.createElement('div');
       node.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ \/]*>/g, '\n');
     } else {
       node = block;
@@ -21036,7 +21252,7 @@ https://highlightjs.org/
 
     originalStream = nodeStream(node);
     if (originalStream.length) {
-      resultNode = document.createElementNS('http://www.w3.org/1999/xhtml', 'div');
+      resultNode = document.createElement('div');
       resultNode.innerHTML = result.value;
       result.value = mergeStreams(originalStream, nodeStream(resultNode), text);
     }
@@ -21079,13 +21295,29 @@ https://highlightjs.org/
   Attaches highlighting to the page load event.
   */
   function initHighlightingOnLoad() {
-    addEventListener('DOMContentLoaded', initHighlighting, false);
-    addEventListener('load', initHighlighting, false);
+    window.addEventListener('DOMContentLoaded', initHighlighting, false);
+    window.addEventListener('load', initHighlighting, false);
   }
 
+  var PLAINTEXT_LANGUAGE = { disableAutodetect: true };
+
   function registerLanguage(name, language) {
-    var lang = languages[name] = language(hljs);
+    var lang;
+    try { lang = language(hljs); }
+    catch (error) {
+      console.error("Language definition for '{}' could not be registered.".replace("{}", name));
+      // hard or soft error
+      if (!SAFE_MODE) { throw error; } else { console.error(error); }
+      // languages that have serious errors are replaced with essentially a
+      // "plaintext" stand-in so that the code blocks will still get normal
+      // css classes applied to them - and one bad language won't break the
+      // entire highlighter
+      lang = PLAINTEXT_LANGUAGE;
+    }
+    languages[name] = lang;
     restoreLanguageApi(lang);
+    lang.rawDefinition = language.bind(null,hljs);
+
     if (lang.aliases) {
       lang.aliases.forEach(function(alias) {aliases[alias] = name;});
     }
@@ -21093,6 +21325,20 @@ https://highlightjs.org/
 
   function listLanguages() {
     return objectKeys(languages);
+  }
+
+  /*
+    intended usage: When one language truly requires another
+
+    Unlike `getLanguage`, this will throw when the requested language
+    is not available.
+  */
+  function requireLanguage(name) {
+    var lang = getLanguage(name);
+    if (lang) { return lang; }
+
+    var err = new Error('The \'{}\' language is required, but not loaded.'.replace('{}',name));
+    throw err;
   }
 
   function getLanguage(name) {
@@ -21117,8 +21363,10 @@ https://highlightjs.org/
   hljs.registerLanguage = registerLanguage;
   hljs.listLanguages = listLanguages;
   hljs.getLanguage = getLanguage;
+  hljs.requireLanguage = requireLanguage;
   hljs.autoDetection = autoDetection;
   hljs.inherit = inherit;
+  hljs.debugMode = function() { SAFE_MODE = false; }
 
   // Common regexps
   hljs.IDENT_RE = '[a-zA-Z]\\w*';
@@ -21223,6 +21471,48 @@ https://highlightjs.org/
     begin: '\\.\\s*' + hljs.UNDERSCORE_IDENT_RE,
     relevance: 0
   };
+
+  var constants = [
+    hljs.BACKSLASH_ESCAPE,
+    hljs.APOS_STRING_MODE,
+    hljs.QUOTE_STRING_MODE,
+    hljs.PHRASAL_WORDS_MODE,
+    hljs.COMMENT,
+    hljs.C_LINE_COMMENT_MODE,
+    hljs.C_BLOCK_COMMENT_MODE,
+    hljs.HASH_COMMENT_MODE,
+    hljs.NUMBER_MODE,
+    hljs.C_NUMBER_MODE,
+    hljs.BINARY_NUMBER_MODE,
+    hljs.CSS_NUMBER_MODE,
+    hljs.REGEXP_MODE,
+    hljs.TITLE_MODE,
+    hljs.UNDERSCORE_TITLE_MODE,
+    hljs.METHOD_GUARD
+  ]
+  constants.forEach(function(obj) { deepFreeze(obj); });
+
+  // https://github.com/substack/deep-freeze/blob/master/index.js
+  function deepFreeze (o) {
+    Object.freeze(o);
+
+    var objIsFunction = typeof o === 'function';
+
+    Object.getOwnPropertyNames(o).forEach(function (prop) {
+      if (o.hasOwnProperty(prop)
+      && o[prop] !== null
+      && (typeof o[prop] === "object" || typeof o[prop] === "function")
+      // IE11 fix: https://github.com/highlightjs/highlight.js/issues/2318
+      // TODO: remove in the future
+      && (objIsFunction ? prop !== 'caller' && prop !== 'callee' && prop !== 'arguments' : true)
+      && !Object.isFrozen(o[prop])) {
+        deepFreeze(o[prop]);
+      }
+    });
+
+    return o;
+  };
+
 
   return hljs;
 }));
@@ -22003,11 +22293,8 @@ module.exports = function(hljs) {
     };
 
     var ruleDeclarationMode = {
-        begin: regexes.ruleDeclaration + '\\s*=',
-        returnBegin: true,
-        end: /=/,
-        relevance: 0,
-        contains: [{className: "attribute", begin: regexes.ruleDeclaration}]
+        className: "attribute",
+        begin: regexes.ruleDeclaration + '(?=\\s*=)',
     };
 
     return {
@@ -22036,12 +22323,17 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+  var HTTP_VERBS = [
+    "GET", "POST", "HEAD", "PUT", "DELETE", "CONNECT", "OPTIONS", "PATCH", "TRACE"
+  ]
   return {
     contains: [
       // IP
       {
         className: 'number',
-        begin: '\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b'
+        begin: '^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(:\\d{1,5})?\\b',
+        relevance:5
       },
       // Other numbers
       {
@@ -22052,22 +22344,44 @@ module.exports = function(hljs) {
       // Requests
       {
         className: 'string',
-        begin: '"(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|PATCH|TRACE)', end: '"',
-        keywords: 'GET POST HEAD PUT DELETE CONNECT OPTIONS PATCH TRACE',
+        begin: '"(' + HTTP_VERBS.join("|") + ')', end: '"',
+        keywords: HTTP_VERBS.join(" "),
         illegal: '\\n',
-        relevance: 10
+        relevance: 5,
+        contains: [{
+          begin: 'HTTP/[12]\\.\\d',
+          relevance:5
+        }]
       },
       // Dates
       {
         className: 'string',
+        // dates must have a certain length, this prevents matching
+        // simple array accesses a[123] and [] and other common patterns
+        // found in other languages
+        begin: /\[\d[^\]\n]{8,}\]/,
+        illegal: '\\n',
+        relevance: 1
+      },
+      {
+        className: 'string',
         begin: /\[/, end: /\]/,
-        illegal: '\\n'
+        illegal: '\\n',
+        relevance: 0
+      },
+      // User agent / relevance boost
+      {
+        className: 'string',
+        begin: '"Mozilla/\\d\\.\\d \\\(', end: '"',
+        illegal: '\\n',
+        relevance: 3
       },
       // Strings
       {
         className: 'string',
         begin: '"', end: '"',
-        illegal: '\\n'
+        illegal: '\\n',
+        relevance: 0
       }
     ]
   };
@@ -22374,7 +22688,7 @@ module.exports = function(hljs) {
       'for in|0 break continue while do|0 return if else case switch namespace is cast ' +
       'or and xor not get|0 in inout|10 out override set|0 private public const default|0 ' +
       'final shared external mixin|10 enum typedef funcdef this super import from interface ' +
-      'abstract|0 try catch protected explicit',
+      'abstract|0 try catch protected explicit property',
 
     // avoid close detection with C# and JS
     illegal: '(^using\\s+[A-Za-z0-9_\\.]+;$|\\bfunction\s*[^\\(])',
@@ -22619,23 +22933,24 @@ module.exports = function(hljs) {
     keyword:
       'if for while var new function do return void else break',
     literal:
-      'true false null undefined NaN Infinity PI BackSlash DoubleQuote ForwardSlash NewLine SingleQuote Tab',
+      'BackSlash DoubleQuote false ForwardSlash Infinity NaN NewLine null PI SingleQuote Tab TextFormatting true undefined',
     built_in:
-      'Abs Acos Area AreaGeodetic Asin Atan Atan2 Average Boolean Buffer BufferGeodetic ' +
+      'Abs Acos Angle Attachments Area AreaGeodetic Asin Atan Atan2 Average Bearing Boolean Buffer BufferGeodetic ' +
       'Ceil Centroid Clip Console Constrain Contains Cos Count Crosses Cut Date DateAdd ' +
-      'DateDiff Day Decode DefaultValue Dictionary Difference Disjoint Distance Distinct ' +
-      'DomainCode DomainName Equals Exp Extent Feature FeatureSet FeatureSetById FeatureSetByTitle ' +
-      'FeatureSetByUrl Filter First Floor Geometry Guid HasKey Hour IIf IndexOf Intersection ' +
-      'Intersects IsEmpty Length LengthGeodetic Log Max Mean Millisecond Min Minute Month ' +
+      'DateDiff Day Decode DefaultValue Dictionary Difference Disjoint Distance DistanceGeodetic Distinct ' +
+      'DomainCode DomainName Equals Exp Extent Feature FeatureSet FeatureSetByAssociation FeatureSetById FeatureSetByPortalItem ' +
+      'FeatureSetByRelationshipName FeatureSetByTitle FeatureSetByUrl Filter First Floor Geometry GroupBy Guid HasKey Hour IIf IndexOf ' +
+      'Intersection Intersects IsEmpty IsNan IsSelfIntersecting Length LengthGeodetic Log Max Mean Millisecond Min Minute Month ' +
       'MultiPartToSinglePart Multipoint NextSequenceValue Now Number OrderBy Overlaps Point Polygon ' +
-      'Polyline Pow Random Relate Reverse Round Second SetGeometry Sin Sort Sqrt Stdev Sum ' +
-      'SymmetricDifference Tan Text Timestamp Today ToLocal Top Touches ToUTC TypeOf Union Variance ' +
+      'Polyline Portal Pow Random Relate Reverse RingIsClockWise Round Second SetGeometry Sin Sort Sqrt Stdev Sum ' +
+      'SymmetricDifference Tan Text Timestamp Today ToLocal Top Touches ToUTC TrackCurrentTime ' +
+      'TrackGeometryWindow TrackIndex TrackStartTime TrackWindow TypeOf Union UrlEncode Variance ' +
       'Weekday When Within Year '
   };
   var EXPRESSIONS;
   var SYMBOL = {
     className: 'symbol',
-    begin: '\\$[feature|layer|map|value|view]+'
+    begin: '\\$[datastore|feature|layer|map|measure|sourcefeature|sourcelayer|targetfeature|targetlayer|value|view]+'
   };
   var NUMBER = {
     className: 'number',
@@ -22760,14 +23075,12 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
-  var CPP = hljs.getLanguage('cpp').exports;
-	return {
-    keywords: {
+
+	var ARDUINO_KW = {
       keyword:
-        'boolean byte word string String array ' + CPP.keywords.keyword,
+        'boolean byte word String',
       built_in:
-        'setup loop while catch for if do goto try switch case else ' +
-        'default break continue return ' +
+        'setup loop' +
         'KeyboardController MouseController SoftwareSerial ' +
         'EthernetServer EthernetClient LiquidCrystal ' +
         'RobotControl GSMVoiceCall EthernetUDP EsploraTFT ' +
@@ -22847,16 +23160,17 @@ module.exports = function(hljs) {
         'SET_PIN_MODE INTERNAL2V56 SYSTEM_RESET LED_BUILTIN ' +
         'INTERNAL1V1 SYSEX_START INTERNAL EXTERNAL ' +
         'DEFAULT OUTPUT INPUT HIGH LOW'
-    },
-    contains: [
-      CPP.preprocessor,
-      hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
-      hljs.APOS_STRING_MODE,
-      hljs.QUOTE_STRING_MODE,
-      hljs.C_NUMBER_MODE
-    ]
   };
+
+  var ARDUINO = hljs.requireLanguage('cpp').rawDefinition();
+
+  var kws = ARDUINO.keywords;
+
+  kws.keyword += ' ' + ARDUINO_KW.keyword;
+  kws.literal += ' ' + ARDUINO_KW.literal;
+  kws.built_in += ' ' + ARDUINO_KW.built_in;
+
+  return ARDUINO;
 };
 
 /***/ }),
@@ -23586,7 +23900,7 @@ module.exports = function(hljs) {
       },
       {className: 'symbol',  begin: '^[A-Za-z0-9_.$]+:'},
       {className: 'meta', begin: '#', end: '$'},
-      {  // подстановка в «.macro»
+      {  // substitution within a macro
         className: 'subst',
         begin: '@[0-9]+'
       }
@@ -23807,7 +24121,7 @@ module.exports = function(hljs) {
           'CLEAR CLOSE CLS COLOR COM COMMON CONT COS CSNG CSRLIN CVD CVI CVS DATA DATE$ ' +
           'DEFDBL DEFINT DEFSNG DEFSTR DEF|0 SEG USR DELETE DIM DRAW EDIT END ENVIRON ENVIRON$ ' +
           'EOF EQV ERASE ERDEV ERDEV$ ERL ERR ERROR EXP FIELD FILES FIX FOR|0 FRE GET GOSUB|10 GOTO ' +
-          'HEX$ IF|0 THEN ELSE|0 INKEY$ INP INPUT INPUT# INPUT$ INSTR IMP INT IOCTL IOCTL$ KEY ON ' +
+          'HEX$ IF THEN ELSE|0 INKEY$ INP INPUT INPUT# INPUT$ INSTR IMP INT IOCTL IOCTL$ KEY ON ' +
           'OFF LIST KILL LEFT$ LEN LET LINE LLIST LOAD LOC LOCATE LOF LOG LPRINT USING LSET ' +
           'MERGE MID$ MKDIR MKD$ MKI$ MKS$ MOD NAME NEW NEXT NOISE NOT OCT$ ON OR PEN PLAY STRIG OPEN OPTION ' +
           'BASE OUT PAINT PALETTE PCOPY PEEK PMAP POINT POKE POS PRINT PRINT] PSET PRESET ' +
@@ -23922,7 +24236,7 @@ module.exports = function(hljs){
       },
       {
         // this mode works as the only relevance counter
-        begin: /\+\+|\-\-/, returnBegin: true,
+        begin: /(?:\+\+|\-\-)/,
         contains: [LITERAL]
       },
       LITERAL
@@ -24443,13 +24757,13 @@ module.exports = function(hljs) {
           contains: [SUBST, hljs.HASH_COMMENT_MODE]
         },
         {
-          begin: '//[gim]*',
+          begin: '//[gim]{0,3}(?=\\W)',
           relevance: 0
         },
         {
           // regex can't start with space to parse x / 2 / 3 as two divisions
           // regex can't start with *, and it supports an "illegal" in the main mode
-          begin: /\/(?![ *])(\\\/|.)*?\/[gim]*(?=\W|$)/
+          begin: /\/(?![ *]).*?(?![\\]).\/[gim]{0,3}(?=\W)/
         }
       ]
     },
@@ -24548,7 +24862,7 @@ module.exports = function(hljs) {
   return {
     keywords: {
       keyword:
-        '_ as at cofix else end exists exists2 fix for forall fun if IF in let ' +
+        '_|0 as at cofix else end exists exists2 fix for forall fun if IF in let ' +
         'match mod Prop return Set then Type using where with ' +
         'Abort About Add Admit Admitted All Arguments Assumptions Axiom Back BackTo ' +
         'Backtrack Bind Blacklist Canonical Cd Check Class Classes Close Coercion ' +
@@ -24754,11 +25068,24 @@ module.exports = function cos (hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  function optional(s) {
+    return '(?:' + s + ')?';
+  }
+  var DECLTYPE_AUTO_RE = 'decltype\\(auto\\)'
+  var NAMESPACE_RE = '[a-zA-Z_]\\w*::'
+  var TEMPLATE_ARGUMENT_RE = '<.*?>';
+  var FUNCTION_TYPE_RE = '(' +
+    DECLTYPE_AUTO_RE + '|' +
+    optional(NAMESPACE_RE) +'[a-zA-Z_]\\w*' + optional(TEMPLATE_ARGUMENT_RE) +
+  ')';
   var CPP_PRIMITIVE_TYPES = {
     className: 'keyword',
     begin: '\\b[a-z\\d_]*_t\\b'
   };
 
+  // https://en.cppreference.com/w/cpp/language/escape
+  // \\ \x \xFF \u2837 \u00323747 \374
+  var CHARACTER_ESCAPES = '\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4,8}|[0-7]{3}|\\S)'
   var STRINGS = {
     className: 'string',
     variants: [
@@ -24767,11 +25094,11 @@ module.exports = function(hljs) {
         illegal: '\\n',
         contains: [hljs.BACKSLASH_ESCAPE]
       },
-      { begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\((?:.|\n)*?\)\1"/ },
       {
-        begin: '\'\\\\?.', end: '\'',
+        begin: '(u8?|U|L)?\'(' + CHARACTER_ESCAPES + "|.)", end: '\'',
         illegal: '.'
-      }
+      },
+      { begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\((?:.|\n)*?\)\1"/ }
     ]
   };
 
@@ -24791,7 +25118,7 @@ module.exports = function(hljs) {
     keywords: {
       'meta-keyword':
         'if else elif endif define undef warning error line ' +
-        'pragma ifdef ifndef include'
+        'pragma _Pragma ifdef ifndef include'
     },
     contains: [
       {
@@ -24800,7 +25127,7 @@ module.exports = function(hljs) {
       hljs.inherit(STRINGS, {className: 'meta-string'}),
       {
         className: 'meta-string',
-        begin: /<[^\n>]*>/, end: /$/,
+        begin: /<.*?>/, end: /$/,
         illegal: '\\n',
       },
       hljs.C_LINE_COMMENT_MODE,
@@ -24808,29 +25135,36 @@ module.exports = function(hljs) {
     ]
   };
 
-  var FUNCTION_TITLE = hljs.IDENT_RE + '\\s*\\(';
+  var TITLE_MODE = {
+    className: 'title',
+    begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
+    relevance: 0
+  };
+
+  var FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
 
   var CPP_KEYWORDS = {
-    keyword: 'int float while private char catch import module export virtual operator sizeof ' +
+    keyword: 'int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof ' +
       'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
       'unsigned long volatile static protected bool template mutable if public friend ' +
-      'do goto auto void enum else break extern using asm case typeid ' +
+      'do goto auto void enum else break extern using asm case typeid wchar_t' +
       'short reinterpret_cast|10 default double register explicit signed typename try this ' +
-      'switch continue inline delete alignof constexpr decltype ' +
-      'noexcept static_assert thread_local restrict _Bool complex _Complex _Imaginary ' +
+      'switch continue inline delete alignas alignof constexpr consteval constinit decltype ' +
+      'concept co_await co_return co_yield requires ' +
+      'noexcept static_assert thread_local restrict final override ' +
       'atomic_bool atomic_char atomic_schar ' +
       'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
       'atomic_ullong new throw return ' +
-      'and or not',
-    built_in: 'std string cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
+      'and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq',
+    built_in: 'std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
       'auto_ptr deque list queue stack vector map set bitset multiset multimap unordered_set ' +
-      'unordered_map unordered_multiset unordered_multimap array shared_ptr abort abs acos ' +
+      'unordered_map unordered_multiset unordered_multimap array shared_ptr abort terminate abs acos ' +
       'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
-      'fscanf isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
+      'fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
       'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
       'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
       'strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan ' +
-      'vfprintf vprintf vsprintf endl initializer_list unique_ptr',
+      'vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary',
     literal: 'true false nullptr NULL'
   };
 
@@ -24842,11 +25176,89 @@ module.exports = function(hljs) {
     STRINGS
   ];
 
+  var EXPRESSION_CONTEXT = {
+    // This mode covers expression context where we can't expect a function
+    // definition and shouldn't highlight anything that looks like one:
+    // `return some()`, `else if()`, `(x*sum(1, 2))`
+    variants: [
+      {begin: /=/, end: /;/},
+      {begin: /\(/, end: /\)/},
+      {beginKeywords: 'new throw return else', end: /;/}
+    ],
+    keywords: CPP_KEYWORDS,
+    contains: EXPRESSION_CONTAINS.concat([
+      {
+        begin: /\(/, end: /\)/,
+        keywords: CPP_KEYWORDS,
+        contains: EXPRESSION_CONTAINS.concat(['self']),
+        relevance: 0
+      }
+    ]),
+    relevance: 0
+  };
+
+  var FUNCTION_DECLARATION = {
+    className: 'function',
+    begin: '(' + FUNCTION_TYPE_RE + '[\\*&\\s]+)+' + FUNCTION_TITLE,
+    returnBegin: true, end: /[{;=]/,
+    excludeEnd: true,
+    keywords: CPP_KEYWORDS,
+    illegal: /[^\w\s\*&:<>]/,
+    contains: [
+
+      { // to prevent it from being confused as the function title
+        begin: DECLTYPE_AUTO_RE,
+        keywords: CPP_KEYWORDS,
+        relevance: 0,
+      },
+      {
+        begin: FUNCTION_TITLE, returnBegin: true,
+        contains: [TITLE_MODE],
+        relevance: 0
+      },
+      {
+        className: 'params',
+        begin: /\(/, end: /\)/,
+        keywords: CPP_KEYWORDS,
+        relevance: 0,
+        contains: [
+          hljs.C_LINE_COMMENT_MODE,
+          hljs.C_BLOCK_COMMENT_MODE,
+          STRINGS,
+          NUMBERS,
+          CPP_PRIMITIVE_TYPES,
+          // Count matching parentheses.
+          {
+            begin: /\(/, end: /\)/,
+            keywords: CPP_KEYWORDS,
+            relevance: 0,
+            contains: [
+              'self',
+              hljs.C_LINE_COMMENT_MODE,
+              hljs.C_BLOCK_COMMENT_MODE,
+              STRINGS,
+              NUMBERS,
+              CPP_PRIMITIVE_TYPES
+            ]
+          }
+        ]
+      },
+      CPP_PRIMITIVE_TYPES,
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      PREPROCESSOR
+    ]
+  };
+
   return {
     aliases: ['c', 'cc', 'h', 'c++', 'h++', 'hpp', 'hh', 'hxx', 'cxx'],
     keywords: CPP_KEYWORDS,
     illegal: '</',
-    contains: EXPRESSION_CONTAINS.concat([
+    contains: [].concat(
+      EXPRESSION_CONTEXT,
+      FUNCTION_DECLARATION,
+      EXPRESSION_CONTAINS,
+      [
       PREPROCESSOR,
       {
         begin: '\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<', end: '>',
@@ -24856,71 +25268,6 @@ module.exports = function(hljs) {
       {
         begin: hljs.IDENT_RE + '::',
         keywords: CPP_KEYWORDS
-      },
-      {
-        // This mode covers expression context where we can't expect a function
-        // definition and shouldn't highlight anything that looks like one:
-        // `return some()`, `else if()`, `(x*sum(1, 2))`
-        variants: [
-          {begin: /=/, end: /;/},
-          {begin: /\(/, end: /\)/},
-          {beginKeywords: 'new throw return else', end: /;/}
-        ],
-        keywords: CPP_KEYWORDS,
-        contains: EXPRESSION_CONTAINS.concat([
-          {
-            begin: /\(/, end: /\)/,
-            keywords: CPP_KEYWORDS,
-            contains: EXPRESSION_CONTAINS.concat(['self']),
-            relevance: 0
-          }
-        ]),
-        relevance: 0
-      },
-      {
-        className: 'function',
-        begin: '(' + hljs.IDENT_RE + '[\\*&\\s]+)+' + FUNCTION_TITLE,
-        returnBegin: true, end: /[{;=]/,
-        excludeEnd: true,
-        keywords: CPP_KEYWORDS,
-        illegal: /[^\w\s\*&]/,
-        contains: [
-          {
-            begin: FUNCTION_TITLE, returnBegin: true,
-            contains: [hljs.TITLE_MODE],
-            relevance: 0
-          },
-          {
-            className: 'params',
-            begin: /\(/, end: /\)/,
-            keywords: CPP_KEYWORDS,
-            relevance: 0,
-            contains: [
-              hljs.C_LINE_COMMENT_MODE,
-              hljs.C_BLOCK_COMMENT_MODE,
-              STRINGS,
-              NUMBERS,
-              CPP_PRIMITIVE_TYPES,
-              // Count matching parentheses.
-              {
-                begin: /\(/, end: /\)/,
-                keywords: CPP_KEYWORDS,
-                relevance: 0,
-                contains: [
-                  'self',
-                  hljs.C_LINE_COMMENT_MODE,
-                  hljs.C_BLOCK_COMMENT_MODE,
-                  STRINGS,
-                  NUMBERS,
-                  CPP_PRIMITIVE_TYPES
-                ]
-              }
-            ]
-          },
-          hljs.C_LINE_COMMENT_MODE,
-          hljs.C_BLOCK_COMMENT_MODE,
-          PREPROCESSOR
-        ]
       },
       {
         className: 'class',
@@ -25055,7 +25402,7 @@ module.exports = function(hljs) {
   var INT_SUFFIX = '(_*[ui](8|16|32|64|128))?';
   var FLOAT_SUFFIX = '(_*f(32|64))?';
   var CRYSTAL_IDENT_RE = '[a-zA-Z_]\\w*[!?=]?';
-  var CRYSTAL_METHOD_RE = '[a-zA-Z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~|]|//|//=|&[-+*]=?|&\\*\\*|\\[\\][=?]?';
+  var CRYSTAL_METHOD_RE = '[a-zA-Z_]\\w*[!?=]?|[-+~]\\@|<<|>>|[=!]~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~|]|//|//=|&[-+*]=?|&\\*\\*|\\[\\][=?]?';
   var CRYSTAL_PATH_RE = '[A-Za-z_]\\w*(::\\w+)*(\\?|\\!)?';
   var CRYSTAL_KEYWORDS = {
     keyword:
@@ -25254,13 +25601,13 @@ module.exports = function(hljs) {
       // Normal keywords.
       'abstract as base bool break byte case catch char checked const continue decimal ' +
       'default delegate do double enum event explicit extern finally fixed float ' +
-      'for foreach goto if implicit in int interface internal is lock long nameof ' +
+      'for foreach goto if implicit in int interface internal is lock long ' +
       'object operator out override params private protected public readonly ref sbyte ' +
       'sealed short sizeof stackalloc static string struct switch this try typeof ' +
       'uint ulong unchecked unsafe ushort using virtual void volatile while ' +
       // Contextual keywords.
       'add alias ascending async await by descending dynamic equals from get global group into join ' +
-      'let on orderby partial remove select set value var where yield',
+      'let nameof on orderby partial remove select set value var when where yield',
     literal:
       'null false true'
   };
@@ -25449,7 +25796,7 @@ module.exports = function(hljs) {
     keywords: {
       keyword: 'base-uri child-src connect-src default-src font-src form-action' +
         ' frame-ancestors frame-src img-src media-src object-src plugin-types' +
-        ' report-uri sandbox script-src style-src', 
+        ' report-uri sandbox script-src style-src',
     },
     contains: [
     {
@@ -25474,45 +25821,52 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  var FUNCTION_LIKE = {
+    begin: /[\w-]+\(/, returnBegin: true,
+    contains: [
+      {
+        className: 'built_in',
+        begin: /[\w-]+/
+      },
+      {
+        begin: /\(/, end: /\)/,
+        contains: [
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE,
+          hljs.CSS_NUMBER_MODE,
+        ]
+      }
+    ]
+  }
+  var ATTRIBUTE = {
+    className: 'attribute',
+    begin: /\S/, end: ':', excludeEnd: true,
+    starts: {
+      endsWithParent: true, excludeEnd: true,
+      contains: [
+        FUNCTION_LIKE,
+        hljs.CSS_NUMBER_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        {
+          className: 'number', begin: '#[0-9A-Fa-f]+'
+        },
+        {
+          className: 'meta', begin: '!important'
+        }
+      ]
+    }
+  }
+  var AT_IDENTIFIER = '@[a-z-]+' // @font-face
+  var AT_MODIFIERS = "and or not only"
+  var MEDIA_TYPES = "all print screen speech"
+  var AT_PROPERTY_RE = /@\-?\w[\w]*(\-\w+)*/ // @-webkit-keyframes
   var IDENT_RE = '[a-zA-Z-][a-zA-Z0-9_-]*';
   var RULE = {
     begin: /(?:[A-Z\_\.\-]+|--[a-zA-Z0-9_-]+)\s*:/, returnBegin: true, end: ';', endsWithParent: true,
     contains: [
-      {
-        className: 'attribute',
-        begin: /\S/, end: ':', excludeEnd: true,
-        starts: {
-          endsWithParent: true, excludeEnd: true,
-          contains: [
-            {
-              begin: /[\w-]+\(/, returnBegin: true,
-              contains: [
-                {
-                  className: 'built_in',
-                  begin: /[\w-]+/
-                },
-                {
-                  begin: /\(/, end: /\)/,
-                  contains: [
-                    hljs.APOS_STRING_MODE,
-                    hljs.QUOTE_STRING_MODE
-                  ]
-                }
-              ]
-            },
-            hljs.CSS_NUMBER_MODE,
-            hljs.QUOTE_STRING_MODE,
-            hljs.APOS_STRING_MODE,
-            hljs.C_BLOCK_COMMENT_MODE,
-            {
-              className: 'number', begin: '#[0-9A-Fa-f]+'
-            },
-            {
-              className: 'meta', begin: '!important'
-            }
-          ]
-        }
-      }
+      ATTRIBUTE
     ]
   };
 
@@ -25530,16 +25884,23 @@ module.exports = function(hljs) {
       {
         className: 'selector-attr',
         begin: /\[/, end: /\]/,
-        illegal: '$'
+        illegal: '$',
+        contains: [
+          hljs.APOS_STRING_MODE,
+          hljs.QUOTE_STRING_MODE,
+        ]
       },
       {
         className: 'selector-pseudo',
         begin: /:(:)?[a-zA-Z0-9\_\-\+\(\)"'.]+/
       },
+      // matching these here allows us to treat them more like regular CSS
+      // rules so everything between the {} gets regular rule highlighting,
+      // which is what we want for page and font-face
       {
-        begin: '@(font-face|page)',
-        lexemes: '[a-z-]+',
-        keywords: 'font-face page'
+        begin: '@(page|font-face)',
+        lexemes: AT_IDENTIFIER,
+        keywords: '@page @font-face'
       },
       {
         begin: '@', end: '[{;]', // at_rule eating first "{" is a good thing
@@ -25547,16 +25908,23 @@ module.exports = function(hljs) {
                                  // a rule set but instead drops parser into
                                  // the default mode which is how it should be.
         illegal: /:/, // break on Less variables @var: ...
+        returnBegin: true,
         contains: [
           {
             className: 'keyword',
-            begin: /\w+/
+            begin: AT_PROPERTY_RE
           },
           {
             begin: /\s/, endsWithParent: true, excludeEnd: true,
             relevance: 0,
+            keywords: AT_MODIFIERS,
             contains: [
-              hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE,
+              {
+                begin: /[a-z-]+:/,
+                className:"attribute"
+              },
+              hljs.APOS_STRING_MODE,
+              hljs.QUOTE_STRING_MODE,
               hljs.CSS_NUMBER_MODE
             ]
           }
@@ -25854,54 +26222,62 @@ function(hljs) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function (hljs) {
+module.exports = function(hljs) {
   var SUBST = {
     className: 'subst',
-    variants: [
-       {begin: '\\$[A-Za-z0-9_]+'}
-    ],
+    variants: [{
+      begin: '\\$[A-Za-z0-9_]+'
+    }],
   };
 
   var BRACED_SUBST = {
     className: 'subst',
-    variants: [
-       {begin: '\\${', end: '}'},
-    ],
+    variants: [{
+      begin: '\\${',
+      end: '}'
+    }, ],
     keywords: 'true false null this is new super',
   };
 
   var STRING = {
     className: 'string',
-    variants: [
-      {
-        begin: 'r\'\'\'', end: '\'\'\''
+    variants: [{
+        begin: 'r\'\'\'',
+        end: '\'\'\''
       },
       {
-        begin: 'r"""', end: '"""'
+        begin: 'r"""',
+        end: '"""'
       },
       {
-        begin: 'r\'', end: '\'',
+        begin: 'r\'',
+        end: '\'',
         illegal: '\\n'
       },
       {
-        begin: 'r"', end: '"',
+        begin: 'r"',
+        end: '"',
         illegal: '\\n'
       },
       {
-        begin: '\'\'\'', end: '\'\'\'',
+        begin: '\'\'\'',
+        end: '\'\'\'',
         contains: [hljs.BACKSLASH_ESCAPE, SUBST, BRACED_SUBST]
       },
       {
-        begin: '"""', end: '"""',
+        begin: '"""',
+        end: '"""',
         contains: [hljs.BACKSLASH_ESCAPE, SUBST, BRACED_SUBST]
       },
       {
-        begin: '\'', end: '\'',
+        begin: '\'',
+        end: '\'',
         illegal: '\\n',
         contains: [hljs.BACKSLASH_ESCAPE, SUBST, BRACED_SUBST]
       },
       {
-        begin: '"', end: '"',
+        begin: '"',
+        end: '"',
         illegal: '\\n',
         contains: [hljs.BACKSLASH_ESCAPE, SUBST, BRACED_SUBST]
       }
@@ -25912,15 +26288,16 @@ module.exports = function (hljs) {
   ];
 
   var KEYWORDS = {
-    keyword: 'assert async await break case catch class const continue default do else enum extends false final ' +
-      'finally for if in is new null rethrow return super switch sync this throw true try var void while with yield ' +
-      'abstract as dynamic export external factory get implements import library operator part set static typedef',
+    keyword: 'abstract as assert async await break case catch class const continue covariant default deferred do ' +
+      'dynamic else enum export extends extension external factory false final finally for Function get hide if ' +
+      'implements import in inferface is library mixin new null on operator part rethrow return set show static ' +
+      'super switch sync this throw true try typedef var void while with yield',
     built_in:
       // dart:core
-      'print Comparable DateTime Duration Function Iterable Iterator List Map Match Null Object Pattern RegExp Set ' +
-      'Stopwatch String StringBuffer StringSink Symbol Type Uri bool double int num ' +
+      'Comparable DateTime Duration Function Iterable Iterator List Map Match Null Object Pattern RegExp Set ' +
+      'Stopwatch String StringBuffer StringSink Symbol Type Uri bool double dynamic int num print ' +
       // dart:html
-      'document window querySelector querySelectorAll Element ElementList'
+      'Element ElementList document querySelector querySelectorAll window'
   };
 
   return {
@@ -25929,25 +26306,28 @@ module.exports = function (hljs) {
       STRING,
       hljs.COMMENT(
         '/\\*\\*',
-        '\\*/',
-        {
+        '\\*/', {
           subLanguage: 'markdown'
         }
       ),
       hljs.COMMENT(
-        '///',
-        '$',
-        {
-          subLanguage: 'markdown'
+        '///+\\s*',
+        '$', {
+          contains: [{
+            subLanguage: 'markdown',
+            begin: '.',
+            end: '$',
+          }]
         }
       ),
       hljs.C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE,
       {
         className: 'class',
-        beginKeywords: 'class interface', end: '{', excludeEnd: true,
-        contains: [
-          {
+        beginKeywords: 'class interface',
+        end: '{',
+        excludeEnd: true,
+        contains: [{
             beginKeywords: 'extends implements'
           },
           hljs.UNDERSCORE_TITLE_MODE
@@ -25955,7 +26335,8 @@ module.exports = function (hljs) {
       },
       hljs.C_NUMBER_MODE,
       {
-        className: 'meta', begin: '@[A-Za-z]+'
+        className: 'meta',
+        begin: '@[A-Za-z]+'
       },
       {
         begin: '=>' // No markup, just a relevance booster
@@ -26072,7 +26453,7 @@ module.exports = function(hljs) {
           {begin: /^\-{3}/, end: /$/},
           {begin: /^\*{3} /, end: /$/},
           {begin: /^\+{3}/, end: /$/},
-          {begin: /\*{5}/, end: /\*{5}$/}
+          {begin: /^\*{15}$/ }
         ]
       },
       {
@@ -26538,7 +26919,7 @@ module.exports = function(hljs) {
 
     var nonTerminalMode = {
         className: "attribute",
-        begin: /^[ ]*[a-zA-Z][a-zA-Z-]*([\s-]+[a-zA-Z][a-zA-Z]*)*/
+        begin: /^[ ]*[a-zA-Z][a-zA-Z-_]*([\s-_]+[a-zA-Z][a-zA-Z]*)*/
     };
 
     var specialSequenceMode = {
@@ -26547,12 +26928,19 @@ module.exports = function(hljs) {
     };
 
     var ruleBodyMode = {
-        begin: /=/, end: /;/,
+        begin: /=/, end: /[.;]/,
         contains: [
             commentMode,
             specialSequenceMode,
-            // terminals
-            hljs.APOS_STRING_MODE, hljs.QUOTE_STRING_MODE
+            {
+              // terminals
+              className: 'string',
+              variants: [
+                hljs.APOS_STRING_MODE,
+                hljs.QUOTE_STRING_MODE,
+                {begin: '`', end: '`'},
+              ]
+            },
         ]
     };
 
@@ -26588,16 +26976,78 @@ module.exports = function(hljs) {
     lexemes: ELIXIR_IDENT_RE,
     keywords: ELIXIR_KEYWORDS
   };
+
+  var SIGIL_DELIMITERS = '[/|([{<"\']'
+  var LOWERCASE_SIGIL = {
+    className: 'string',
+    begin: '~[a-z]' + '(?=' + SIGIL_DELIMITERS + ')',
+    contains: [
+      {
+        endsParent:true,
+        contains: [{
+          contains: [hljs.BACKSLASH_ESCAPE, SUBST],
+          variants: [
+            { begin: /"/, end: /"/ },
+            { begin: /'/, end: /'/ },
+            { begin: /\//, end: /\// },
+            { begin: /\|/, end: /\|/ },
+            { begin: /\(/, end: /\)/ },
+            { begin: /\[/, end: /\]/ },
+            { begin: /\{/, end: /\}/ },
+            { begin: /</, end: />/ }
+          ]
+        }]
+      },
+    ],
+  };
+
+  var UPCASE_SIGIL = {
+    className: 'string',
+    begin: '~[A-Z]' + '(?=' + SIGIL_DELIMITERS + ')',
+    contains: [
+      { begin: /"/, end: /"/ },
+      { begin: /'/, end: /'/ },
+      { begin: /\//, end: /\// },
+      { begin: /\|/, end: /\|/ },
+      { begin: /\(/, end: /\)/ },
+      { begin: /\[/, end: /\]/ },
+      { begin: /\{/, end: /\}/ },
+      { begin: /\</, end: /\>/ }
+    ]
+  };
+
   var STRING = {
     className: 'string',
     contains: [hljs.BACKSLASH_ESCAPE, SUBST],
     variants: [
       {
+        begin: /"""/, end: /"""/,
+      },
+      {
+        begin: /'''/, end: /'''/,
+      },
+      {
+        begin: /~S"""/, end: /"""/,
+        contains: []
+      },
+      {
+        begin: /~S"/, end: /"/,
+        contains: []
+      },
+      {
+        begin: /~S'''/, end: /'''/,
+        contains: []
+      },
+      {
+        begin: /~S'/, end: /'/,
+        contains: []
+      },
+      {
         begin: /'/, end: /'/
       },
       {
         begin: /"/, end: /"/
-      }
+      },
     ]
   };
   var FUNCTION = {
@@ -26616,6 +27066,8 @@ module.exports = function(hljs) {
   });
   var ELIXIR_DEFAULT_CONTAINS = [
     STRING,
+    UPCASE_SIGIL,
+    LOWERCASE_SIGIL,
     hljs.HASH_COMMENT_MODE,
     CLASS,
     FUNCTION,
@@ -26635,7 +27087,7 @@ module.exports = function(hljs) {
     },
     {
       className: 'number',
-      begin: '(\\b0[0-7_]+)|(\\b0x[0-9a-fA-F_]+)|(\\b[1-9][0-9_]*(\\.[0-9_]+)?)|[0_]\\b',
+      begin: '(\\b0o[0-7_]+)|(\\b0b[01_]+)|(\\b0x[0-9a-fA-F_]+)|(-?\\b[1-9][0-9_]*(.[0-9_]+([eE][-+]?[0-9]+)?)?)',
       relevance: 0
     },
     {
@@ -27024,11 +27476,11 @@ module.exports = function(hljs) {
     lexemes: /[a-zA-Z][\w\.]*/,
     // built-in functions imported from https://web.archive.org/web/20160513042710/https://support.office.com/en-us/article/Excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188
     keywords: {
-        built_in: 'ABS ACCRINT ACCRINTM ACOS ACOSH ACOT ACOTH AGGREGATE ADDRESS AMORDEGRC AMORLINC AND ARABIC AREAS ASC ASIN ASINH ATAN ATAN2 ATANH AVEDEV AVERAGE AVERAGEA AVERAGEIF AVERAGEIFS BAHTTEXT BASE BESSELI BESSELJ BESSELK BESSELY BETADIST BETA.DIST BETAINV BETA.INV BIN2DEC BIN2HEX BIN2OCT BINOMDIST BINOM.DIST BINOM.DIST.RANGE BINOM.INV BITAND BITLSHIFT BITOR BITRSHIFT BITXOR CALL CEILING CEILING.MATH CEILING.PRECISE CELL CHAR CHIDIST CHIINV CHITEST CHISQ.DIST CHISQ.DIST.RT CHISQ.INV CHISQ.INV.RT CHISQ.TEST CHOOSE CLEAN CODE COLUMN COLUMNS COMBIN COMBINA COMPLEX CONCAT CONCATENATE CONFIDENCE CONFIDENCE.NORM CONFIDENCE.T CONVERT CORREL COS COSH COT COTH COUNT COUNTA COUNTBLANK COUNTIF COUNTIFS COUPDAYBS COUPDAYS COUPDAYSNC COUPNCD COUPNUM COUPPCD COVAR COVARIANCE.P COVARIANCE.S CRITBINOM CSC CSCH CUBEKPIMEMBER CUBEMEMBER CUBEMEMBERPROPERTY CUBERANKEDMEMBER CUBESET CUBESETCOUNT CUBEVALUE CUMIPMT CUMPRINC DATE DATEDIF DATEVALUE DAVERAGE DAY DAYS DAYS360 DB DBCS DCOUNT DCOUNTA DDB DEC2BIN DEC2HEX DEC2OCT DECIMAL DEGREES DELTA DEVSQ DGET DISC DMAX DMIN DOLLAR DOLLARDE DOLLARFR DPRODUCT DSTDEV DSTDEVP DSUM DURATION DVAR DVARP EDATE EFFECT ENCODEURL EOMONTH ERF ERF.PRECISE ERFC ERFC.PRECISE ERROR.TYPE EUROCONVERT EVEN EXACT EXP EXPON.DIST EXPONDIST FACT FACTDOUBLE FALSE|0 F.DIST FDIST F.DIST.RT FILTERXML FIND FINDB F.INV F.INV.RT FINV FISHER FISHERINV FIXED FLOOR FLOOR.MATH FLOOR.PRECISE FORECAST FORECAST.ETS FORECAST.ETS.CONFINT FORECAST.ETS.SEASONALITY FORECAST.ETS.STAT FORECAST.LINEAR FORMULATEXT FREQUENCY F.TEST FTEST FV FVSCHEDULE GAMMA GAMMA.DIST GAMMADIST GAMMA.INV GAMMAINV GAMMALN GAMMALN.PRECISE GAUSS GCD GEOMEAN GESTEP GETPIVOTDATA GROWTH HARMEAN HEX2BIN HEX2DEC HEX2OCT HLOOKUP HOUR HYPERLINK HYPGEOM.DIST HYPGEOMDIST IF|0 IFERROR IFNA IFS IMABS IMAGINARY IMARGUMENT IMCONJUGATE IMCOS IMCOSH IMCOT IMCSC IMCSCH IMDIV IMEXP IMLN IMLOG10 IMLOG2 IMPOWER IMPRODUCT IMREAL IMSEC IMSECH IMSIN IMSINH IMSQRT IMSUB IMSUM IMTAN INDEX INDIRECT INFO INT INTERCEPT INTRATE IPMT IRR ISBLANK ISERR ISERROR ISEVEN ISFORMULA ISLOGICAL ISNA ISNONTEXT ISNUMBER ISODD ISREF ISTEXT ISO.CEILING ISOWEEKNUM ISPMT JIS KURT LARGE LCM LEFT LEFTB LEN LENB LINEST LN LOG LOG10 LOGEST LOGINV LOGNORM.DIST LOGNORMDIST LOGNORM.INV LOOKUP LOWER MATCH MAX MAXA MAXIFS MDETERM MDURATION MEDIAN MID MIDBs MIN MINIFS MINA MINUTE MINVERSE MIRR MMULT MOD MODE MODE.MULT MODE.SNGL MONTH MROUND MULTINOMIAL MUNIT N NA NEGBINOM.DIST NEGBINOMDIST NETWORKDAYS NETWORKDAYS.INTL NOMINAL NORM.DIST NORMDIST NORMINV NORM.INV NORM.S.DIST NORMSDIST NORM.S.INV NORMSINV NOT NOW NPER NPV NUMBERVALUE OCT2BIN OCT2DEC OCT2HEX ODD ODDFPRICE ODDFYIELD ODDLPRICE ODDLYIELD OFFSET OR PDURATION PEARSON PERCENTILE.EXC PERCENTILE.INC PERCENTILE PERCENTRANK.EXC PERCENTRANK.INC PERCENTRANK PERMUT PERMUTATIONA PHI PHONETIC PI PMT POISSON.DIST POISSON POWER PPMT PRICE PRICEDISC PRICEMAT PROB PRODUCT PROPER PV QUARTILE QUARTILE.EXC QUARTILE.INC QUOTIENT RADIANS RAND RANDBETWEEN RANK.AVG RANK.EQ RANK RATE RECEIVED REGISTER.ID REPLACE REPLACEB REPT RIGHT RIGHTB ROMAN ROUND ROUNDDOWN ROUNDUP ROW ROWS RRI RSQ RTD SEARCH SEARCHB SEC SECH SECOND SERIESSUM SHEET SHEETS SIGN SIN SINH SKEW SKEW.P SLN SLOPE SMALL SQL.REQUEST SQRT SQRTPI STANDARDIZE STDEV STDEV.P STDEV.S STDEVA STDEVP STDEVPA STEYX SUBSTITUTE SUBTOTAL SUM SUMIF SUMIFS SUMPRODUCT SUMSQ SUMX2MY2 SUMX2PY2 SUMXMY2 SWITCH SYD T TAN TANH TBILLEQ TBILLPRICE TBILLYIELD T.DIST T.DIST.2T T.DIST.RT TDIST TEXT TEXTJOIN TIME TIMEVALUE T.INV T.INV.2T TINV TODAY TRANSPOSE TREND TRIM TRIMMEAN TRUE|0 TRUNC T.TEST TTEST TYPE UNICHAR UNICODE UPPER VALUE VAR VAR.P VAR.S VARA VARP VARPA VDB VLOOKUP WEBSERVICE WEEKDAY WEEKNUM WEIBULL WEIBULL.DIST WORKDAY WORKDAY.INTL XIRR XNPV XOR YEAR YEARFRAC YIELD YIELDDISC YIELDMAT Z.TEST ZTEST'
+        built_in: 'ABS ACCRINT ACCRINTM ACOS ACOSH ACOT ACOTH AGGREGATE ADDRESS AMORDEGRC AMORLINC AND ARABIC AREAS ASC ASIN ASINH ATAN ATAN2 ATANH AVEDEV AVERAGE AVERAGEA AVERAGEIF AVERAGEIFS BAHTTEXT BASE BESSELI BESSELJ BESSELK BESSELY BETADIST BETA.DIST BETAINV BETA.INV BIN2DEC BIN2HEX BIN2OCT BINOMDIST BINOM.DIST BINOM.DIST.RANGE BINOM.INV BITAND BITLSHIFT BITOR BITRSHIFT BITXOR CALL CEILING CEILING.MATH CEILING.PRECISE CELL CHAR CHIDIST CHIINV CHITEST CHISQ.DIST CHISQ.DIST.RT CHISQ.INV CHISQ.INV.RT CHISQ.TEST CHOOSE CLEAN CODE COLUMN COLUMNS COMBIN COMBINA COMPLEX CONCAT CONCATENATE CONFIDENCE CONFIDENCE.NORM CONFIDENCE.T CONVERT CORREL COS COSH COT COTH COUNT COUNTA COUNTBLANK COUNTIF COUNTIFS COUPDAYBS COUPDAYS COUPDAYSNC COUPNCD COUPNUM COUPPCD COVAR COVARIANCE.P COVARIANCE.S CRITBINOM CSC CSCH CUBEKPIMEMBER CUBEMEMBER CUBEMEMBERPROPERTY CUBERANKEDMEMBER CUBESET CUBESETCOUNT CUBEVALUE CUMIPMT CUMPRINC DATE DATEDIF DATEVALUE DAVERAGE DAY DAYS DAYS360 DB DBCS DCOUNT DCOUNTA DDB DEC2BIN DEC2HEX DEC2OCT DECIMAL DEGREES DELTA DEVSQ DGET DISC DMAX DMIN DOLLAR DOLLARDE DOLLARFR DPRODUCT DSTDEV DSTDEVP DSUM DURATION DVAR DVARP EDATE EFFECT ENCODEURL EOMONTH ERF ERF.PRECISE ERFC ERFC.PRECISE ERROR.TYPE EUROCONVERT EVEN EXACT EXP EXPON.DIST EXPONDIST FACT FACTDOUBLE FALSE|0 F.DIST FDIST F.DIST.RT FILTERXML FIND FINDB F.INV F.INV.RT FINV FISHER FISHERINV FIXED FLOOR FLOOR.MATH FLOOR.PRECISE FORECAST FORECAST.ETS FORECAST.ETS.CONFINT FORECAST.ETS.SEASONALITY FORECAST.ETS.STAT FORECAST.LINEAR FORMULATEXT FREQUENCY F.TEST FTEST FV FVSCHEDULE GAMMA GAMMA.DIST GAMMADIST GAMMA.INV GAMMAINV GAMMALN GAMMALN.PRECISE GAUSS GCD GEOMEAN GESTEP GETPIVOTDATA GROWTH HARMEAN HEX2BIN HEX2DEC HEX2OCT HLOOKUP HOUR HYPERLINK HYPGEOM.DIST HYPGEOMDIST IF IFERROR IFNA IFS IMABS IMAGINARY IMARGUMENT IMCONJUGATE IMCOS IMCOSH IMCOT IMCSC IMCSCH IMDIV IMEXP IMLN IMLOG10 IMLOG2 IMPOWER IMPRODUCT IMREAL IMSEC IMSECH IMSIN IMSINH IMSQRT IMSUB IMSUM IMTAN INDEX INDIRECT INFO INT INTERCEPT INTRATE IPMT IRR ISBLANK ISERR ISERROR ISEVEN ISFORMULA ISLOGICAL ISNA ISNONTEXT ISNUMBER ISODD ISREF ISTEXT ISO.CEILING ISOWEEKNUM ISPMT JIS KURT LARGE LCM LEFT LEFTB LEN LENB LINEST LN LOG LOG10 LOGEST LOGINV LOGNORM.DIST LOGNORMDIST LOGNORM.INV LOOKUP LOWER MATCH MAX MAXA MAXIFS MDETERM MDURATION MEDIAN MID MIDBs MIN MINIFS MINA MINUTE MINVERSE MIRR MMULT MOD MODE MODE.MULT MODE.SNGL MONTH MROUND MULTINOMIAL MUNIT N NA NEGBINOM.DIST NEGBINOMDIST NETWORKDAYS NETWORKDAYS.INTL NOMINAL NORM.DIST NORMDIST NORMINV NORM.INV NORM.S.DIST NORMSDIST NORM.S.INV NORMSINV NOT NOW NPER NPV NUMBERVALUE OCT2BIN OCT2DEC OCT2HEX ODD ODDFPRICE ODDFYIELD ODDLPRICE ODDLYIELD OFFSET OR PDURATION PEARSON PERCENTILE.EXC PERCENTILE.INC PERCENTILE PERCENTRANK.EXC PERCENTRANK.INC PERCENTRANK PERMUT PERMUTATIONA PHI PHONETIC PI PMT POISSON.DIST POISSON POWER PPMT PRICE PRICEDISC PRICEMAT PROB PRODUCT PROPER PV QUARTILE QUARTILE.EXC QUARTILE.INC QUOTIENT RADIANS RAND RANDBETWEEN RANK.AVG RANK.EQ RANK RATE RECEIVED REGISTER.ID REPLACE REPLACEB REPT RIGHT RIGHTB ROMAN ROUND ROUNDDOWN ROUNDUP ROW ROWS RRI RSQ RTD SEARCH SEARCHB SEC SECH SECOND SERIESSUM SHEET SHEETS SIGN SIN SINH SKEW SKEW.P SLN SLOPE SMALL SQL.REQUEST SQRT SQRTPI STANDARDIZE STDEV STDEV.P STDEV.S STDEVA STDEVP STDEVPA STEYX SUBSTITUTE SUBTOTAL SUM SUMIF SUMIFS SUMPRODUCT SUMSQ SUMX2MY2 SUMX2PY2 SUMXMY2 SWITCH SYD T TAN TANH TBILLEQ TBILLPRICE TBILLYIELD T.DIST T.DIST.2T T.DIST.RT TDIST TEXT TEXTJOIN TIME TIMEVALUE T.INV T.INV.2T TINV TODAY TRANSPOSE TREND TRIM TRIMMEAN TRUE|0 TRUNC T.TEST TTEST TYPE UNICHAR UNICODE UPPER VALUE VAR VAR.P VAR.S VARA VARP VARPA VDB VLOOKUP WEBSERVICE WEEKDAY WEEKNUM WEIBULL WEIBULL.DIST WORKDAY WORKDAY.INTL XIRR XNPV XOR YEAR YEARFRAC YIELD YIELDDISC YIELDMAT Z.TEST ZTEST'
     },
     contains: [
       {
-        /* matches a beginning equal sign found in Excel formula examples */ 
+        /* matches a beginning equal sign found in Excel formula examples */
         begin: /^=/,
         end: /[^=]/, returnEnd: true, illegal: /=/, /* only allow single equal sign at front of line */
         relevance: 10
@@ -27175,7 +27627,7 @@ module.exports = function(hljs) {
   var F_KEYWORDS = {
     literal: '.False. .True.',
     keyword: 'kind do while private call intrinsic where elsewhere ' +
-      'type endtype endmodule endselect endinterface end enddo endif if forall endforall only contains default return stop then ' +
+      'type endtype endmodule endselect endinterface end enddo endif if forall endforall only contains default return stop then block endblock ' +
       'public subroutine|10 function program .and. .or. .not. .le. .eq. .ge. .gt. .lt. ' +
       'goto save else use module select case ' +
       'access blank direct exist file fmt form formatted iostat name named nextrec number opened rec recl sequential status unformatted unit ' +
@@ -28027,7 +28479,7 @@ module.exports = function(hljs) {
 
 module.exports = function(hljs) {
   var GML_KEYWORDS = {
-    keywords: 'begin end if then else while do for break continue with until ' +
+    keyword: 'begin end if then else while do for break continue with until ' +
       'repeat exit and or xor not return mod div switch case default var ' +
       'globalvar enum #macro #region #endregion',
     built_in: 'is_real is_string is_array is_undefined is_int32 is_int64 ' +
@@ -28930,7 +29382,7 @@ module.exports = function(hljs) {
         className: 'string',
         variants: [
           hljs.QUOTE_STRING_MODE,
-          {begin: '\'', end: '[^\\\\]\''},
+          hljs.APOS_STRING_MODE,
           {begin: '`', end: '`'},
         ]
       },
@@ -28946,7 +29398,7 @@ module.exports = function(hljs) {
       },
       {
         className: 'function',
-        beginKeywords: 'func', end: /\s*\{/, excludeEnd: true,
+        beginKeywords: 'func', end: '\\s*(\\{|$)', excludeEnd: true,
         contains: [
           hljs.TITLE_MODE,
           {
@@ -29265,35 +29717,76 @@ function(hljs) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function(hljs) {
-  var BUILT_INS = {'builtin-name': 'each in with if else unless bindattr action collection debugger log outlet template unbound view yield'};
+module.exports = function (hljs) {
+  var BUILT_INS = {'builtin-name': 'each in with if else unless bindattr action collection debugger log outlet template unbound view yield lookup'};
+
+  var IDENTIFIER_PLAIN_OR_QUOTED = {
+    begin: /".*?"|'.*?'|\[.*?\]|\w+/
+  };
+
+  var EXPRESSION_OR_HELPER_CALL = hljs.inherit(IDENTIFIER_PLAIN_OR_QUOTED, {
+    keywords: BUILT_INS,
+    starts: {
+      // helper params
+      endsWithParent: true,
+      relevance: 0,
+      contains: [hljs.inherit(IDENTIFIER_PLAIN_OR_QUOTED, {relevance: 0})]
+    }
+  });
+
+  var BLOCK_MUSTACHE_CONTENTS = hljs.inherit(EXPRESSION_OR_HELPER_CALL, {
+    className: 'name'
+  });
+
+  var BASIC_MUSTACHE_CONTENTS = hljs.inherit(EXPRESSION_OR_HELPER_CALL, {
+    // relevance 0 for backward compatibility concerning auto-detection
+    relevance: 0
+  });
+
+  var ESCAPE_MUSTACHE_WITH_PRECEEDING_BACKSLASH = {begin: /\\\{\{/, skip: true};
+  var PREVENT_ESCAPE_WITH_ANOTHER_PRECEEDING_BACKSLASH = {begin: /\\\\(?=\{\{)/, skip: true};
+
   return {
     aliases: ['hbs', 'html.hbs', 'html.handlebars'],
     case_insensitive: true,
     subLanguage: 'xml',
     contains: [
-    hljs.COMMENT('{{!(--)?', '(--)?}}'),
+      ESCAPE_MUSTACHE_WITH_PRECEEDING_BACKSLASH,
+      PREVENT_ESCAPE_WITH_ANOTHER_PRECEEDING_BACKSLASH,
+      hljs.COMMENT(/\{\{!--/, /--\}\}/),
+      hljs.COMMENT(/\{\{!/, /\}\}/),
       {
+        // open raw block "{{{{raw}}}} content not evaluated {{{{/raw}}}}"
         className: 'template-tag',
-        begin: /\{\{[#\/]/, end: /\}\}/,
-        contains: [
-          {
-            className: 'name',
-            begin: /[a-zA-Z\.-]+/,
-            keywords: BUILT_INS,
-            starts: {
-              endsWithParent: true, relevance: 0,
-              contains: [
-                hljs.QUOTE_STRING_MODE
-              ]
-            }
-          }
-        ]
+        begin: /\{\{\{\{(?!\/)/, end: /\}\}\}\}/,
+        contains: [BLOCK_MUSTACHE_CONTENTS],
+        starts: {end: /\{\{\{\{\//, returnEnd: true, subLanguage: 'xml'}
       },
       {
+        // close raw block
+        className: 'template-tag',
+        begin: /\{\{\{\{\//, end: /\}\}\}\}/,
+        contains: [BLOCK_MUSTACHE_CONTENTS]
+      },
+      {
+        // open block statement
+        className: 'template-tag',
+        begin: /\{\{[#\/]/, end: /\}\}/,
+        contains: [BLOCK_MUSTACHE_CONTENTS],
+      },
+      {
+        // template variable or helper-call that is NOT html-escaped
+        className: 'template-variable',
+        begin: /\{\{\{/, end: /\}\}\}/,
+        keywords: BUILT_INS,
+        contains: [BASIC_MUSTACHE_CONTENTS]
+      },
+      {
+        // template variable or helper-call that is html-escaped
         className: 'template-variable',
         begin: /\{\{/, end: /\}\}/,
-        keywords: BUILT_INS
+        keywords: BUILT_INS,
+        contains: [BASIC_MUSTACHE_CONTENTS]
       }
     ]
   };
@@ -29923,68 +30416,77 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
-  var STRING = {
+  var NUMBERS = {
+    className: 'number',
+    relevance: 0,
+    variants: [
+      { begin: /([\+\-]+)?[\d]+_[\d_]+/ },
+      { begin: hljs.NUMBER_RE }
+    ]
+  };
+  var COMMENTS = hljs.COMMENT();
+  COMMENTS.variants = [
+    {begin: /;/, end: /$/},
+    {begin: /#/, end: /$/},
+  ];
+  var VARIABLES = {
+    className: 'variable',
+    variants: [
+      { begin: /\$[\w\d"][\w\d_]*/ },
+      { begin: /\$\{(.*?)}/ }
+    ]
+  };
+  var LITERALS = {
+    className: 'literal',
+    begin: /\bon|off|true|false|yes|no\b/
+  };
+  var STRINGS = {
     className: "string",
     contains: [hljs.BACKSLASH_ESCAPE],
     variants: [
-      {
-        begin: "'''", end: "'''",
-        relevance: 10
-      }, {
-        begin: '"""', end: '"""',
-        relevance: 10
-      }, {
-        begin: '"', end: '"'
-      }, {
-        begin: "'", end: "'"
-      }
+      { begin: "'''", end: "'''", relevance: 10 },
+      { begin: '"""', end: '"""', relevance: 10 },
+      { begin: '"', end: '"' },
+      { begin: "'", end: "'" }
     ]
   };
+  var ARRAY = {
+    begin: /\[/, end: /\]/,
+    contains: [
+      COMMENTS,
+      LITERALS,
+      VARIABLES,
+      STRINGS,
+      NUMBERS,
+      'self'
+    ],
+    relevance:0
+  };
+
   return {
     aliases: ['toml'],
     case_insensitive: true,
     illegal: /\S/,
     contains: [
-      hljs.COMMENT(';', '$'),
-      hljs.HASH_COMMENT_MODE,
+      COMMENTS,
       {
         className: 'section',
-        begin: /^\s*\[+/, end: /\]+/
+        begin: /\[+/, end: /\]+/
       },
       {
-        begin: /^[a-z0-9\[\]_\.-]+\s*=\s*/, end: '$',
-        returnBegin: true,
-        contains: [
-          {
-            className: 'attr',
-            begin: /[a-z0-9\[\]_\.-]+/
-          },
-          {
-            begin: /=/, endsWithParent: true,
-            relevance: 0,
-            contains: [
-              hljs.COMMENT(';', '$'),
-              hljs.HASH_COMMENT_MODE,
-              {
-                className: 'literal',
-                begin: /\bon|off|true|false|yes|no\b/
-              },
-              {
-                className: 'variable',
-                variants: [
-                  {begin: /\$[\w\d"][\w\d_]*/},
-                  {begin: /\$\{(.*?)}/}
-                ]
-              },
-              STRING,
-              {
-                className: 'number',
-                begin: /([\+\-]+)?[\d]+_[\d_]+/
-              },
-              hljs.NUMBER_MODE
-            ]
-          }
-        ]
+        begin: /^[a-z0-9\[\]_\.-]+(?=\s*=\s*)/,
+        className: 'attr',
+        starts: {
+          end: /$/,
+          contains: [
+            COMMENTS,
+            ARRAY,
+            LITERALS,
+            VARIABLES,
+            STRINGS,
+            NUMBERS
+          ]
+        }
       }
     ]
   };
@@ -33384,6 +33886,14 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  var FRAGMENT = {
+    begin: '<>',
+    end: '</>'
+  };
+  var XML_TAG = {
+    begin: /<[A-Za-z0-9\\._:-]+/,
+    end: /\/[A-Za-z0-9\\._:-]+>|\/>/
+  };
   var IDENT_RE = '[A-Za-z$_][0-9A-Za-z$_]*';
   var KEYWORDS = {
     keyword:
@@ -33408,9 +33918,9 @@ module.exports = function(hljs) {
   var NUMBER = {
     className: 'number',
     variants: [
-      { begin: '\\b(0[bB][01]+)' },
-      { begin: '\\b(0[oO][0-7]+)' },
-      { begin: hljs.C_NUMBER_RE }
+      { begin: '\\b(0[bB][01]+)n?' },
+      { begin: '\\b(0[oO][0-7]+)n?' },
+      { begin: hljs.C_NUMBER_RE + 'n?' }
     ],
     relevance: 0
   };
@@ -33465,7 +33975,7 @@ module.exports = function(hljs) {
   ]);
 
   return {
-    aliases: ['js', 'jsx'],
+    aliases: ['js', 'jsx', 'mjs', 'cjs'],
     keywords: KEYWORDS,
     contains: [
       {
@@ -33483,10 +33993,43 @@ module.exports = function(hljs) {
       CSS_TEMPLATE,
       TEMPLATE_STRING,
       hljs.C_LINE_COMMENT_MODE,
+      hljs.COMMENT(
+        '/\\*\\*',
+        '\\*/',
+        {
+          relevance : 0,
+          contains : [
+            {
+              className : 'doctag',
+              begin : '@[A-Za-z]+',
+              contains : [
+                {
+                  className: 'type',
+                  begin: '\\{',
+                  end: '\\}',
+                  relevance: 0
+                },
+                {
+                  className: 'variable',
+                  begin: IDENT_RE + '(?=\\s*(-)|$)',
+                  endsParent: true,
+                  relevance: 0
+                },
+                // eat spaces (not newlines) so we can find
+                // types or variables
+                {
+                  begin: /(?=[^\n])\s/,
+                  relevance: 0
+                },
+              ]
+            }
+          ]
+        }
+      ),
       hljs.C_BLOCK_COMMENT_MODE,
       NUMBER,
       { // object attr container
-        begin: /[{,]\s*/, relevance: 0,
+        begin: /[{,\n]\s*/, relevance: 0,
         contains: [
           {
             begin: IDENT_RE + '\\s*:', returnBegin: true,
@@ -33532,20 +34075,19 @@ module.exports = function(hljs) {
             end: /\s*/,
             skip: true,
           },
-          { // E4X / JSX
-            begin: /</, end: /(\/[A-Za-z0-9\\._:-]+|[A-Za-z0-9\\._:-]+\/)>/,
+          { // JSX
+            variants: [
+              { begin: FRAGMENT.begin, end: FRAGMENT.end },
+              { begin: XML_TAG.begin, end: XML_TAG.end }
+            ],
             subLanguage: 'xml',
             contains: [
-              { begin: /<[A-Za-z0-9\\._:-]+\s*\/>/, skip: true },
               {
-                begin: /<[A-Za-z0-9\\._:-]+/, end: /(\/[A-Za-z0-9\\._:-]+|[A-Za-z0-9\\._:-]+\/)>/, skip: true,
-                contains: [
-                  { begin: /<[A-Za-z0-9\\._:-]+\s*\/>/, skip: true },
-                  'self'
-                ]
+                begin: XML_TAG.begin, end: XML_TAG.end, skip: true,
+                contains: ['self']
               }
             ]
-          }
+          },
         ],
         relevance: 0
       },
@@ -33652,6 +34194,10 @@ module.exports = function (hljs) {
 
 module.exports = function(hljs) {
   var LITERALS = {literal: 'true false null'};
+  var ALLOWED_COMMENTS = [
+    hljs.C_LINE_COMMENT_MODE,
+    hljs.C_BLOCK_COMMENT_MODE
+  ]
   var TYPES = [
     hljs.QUOTE_STRING_MODE,
     hljs.C_NUMBER_MODE
@@ -33671,7 +34217,7 @@ module.exports = function(hljs) {
         illegal: '\\n',
       },
       hljs.inherit(VALUE_CONTAINER, {begin: /:/})
-    ],
+    ].concat(ALLOWED_COMMENTS),
     illegal: '\\S'
   };
   var ARRAY = {
@@ -33679,7 +34225,10 @@ module.exports = function(hljs) {
     contains: [hljs.inherit(VALUE_CONTAINER)], // inherit is a workaround for a bug that makes shared modes with endsWithParent compile only the ending of one of the parents
     illegal: '\\S'
   };
-  TYPES.splice(TYPES.length, 0, OBJECT, ARRAY);
+  TYPES.push(OBJECT, ARRAY);
+  ALLOWED_COMMENTS.forEach(function(rule) {
+    TYPES.push(rule)
+  })
   return {
     contains: TYPES,
     keywords: LITERALS,
@@ -33934,7 +34483,7 @@ module.exports = function(hljs) {
   // for string templates
   var SUBST = {
     className: 'subst',
-    begin: '\\${', end: '}', contains: [hljs.APOS_STRING_MODE, hljs.C_NUMBER_MODE]
+    begin: '\\${', end: '}', contains: [hljs.C_NUMBER_MODE]
   };
   var VARIABLE = {
     className: 'variable', begin: '\\$' + hljs.UNDERSCORE_IDENT_RE
@@ -33943,7 +34492,7 @@ module.exports = function(hljs) {
     className: 'string',
     variants: [
       {
-        begin: '"""', end: '"""',
+        begin: '"""', end: '"""(?=[^"])',
         contains: [VARIABLE, SUBST]
       },
       // Can't use built-in modes easily, as we want to use STRING in the meta
@@ -33961,6 +34510,7 @@ module.exports = function(hljs) {
       }
     ]
   };
+  SUBST.contains.push(STRING)
 
   var ANNOTATION_USE_SITE = {
     className: 'meta', begin: '@(?:file|property|field|get|set|receiver|param|setparam|delegate)\\s*:(?:\\s*' + hljs.UNDERSCORE_IDENT_RE + ')?'
@@ -34817,7 +35367,7 @@ module.exports = function(hljs) {
       'switch continue typeof delete debugger case default function var with ' +
       // LiveScript keywords
       'then unless until loop of by when and or is isnt not it that otherwise from to til fallthrough super ' +
-      'case default function var void const let enum export import native ' +
+      'case default function var void const let enum export import native list map ' +
       '__hasProp __extends __slice __bind __indexOf',
     literal:
       // JS literals
@@ -34882,7 +35432,7 @@ module.exports = function(hljs) {
         {
           // regex can't start with space to parse x / 2 / 3 as two divisions
           // regex can't start with *, and it supports an "illegal" in the main mode
-          begin: /\/(?![ *])(\\\/|.)*?\/[gim]*(?=\W|$)/
+          begin: /\/(?![ *])(\\\/|.)*?\/[gim]*(?=\W)/
         }
       ]
     },
@@ -34911,6 +35461,10 @@ module.exports = function(hljs) {
     ]
   };
 
+  var SYMBOLS = {
+    begin: '(#=>|=>|\\|>>|-?->|\\!->)'
+  };
+
   return {
     aliases: ['ls'],
     keywords: KEYWORDS,
@@ -34918,6 +35472,7 @@ module.exports = function(hljs) {
     contains: EXPRESSIONS.concat([
       hljs.COMMENT('\\/\\*', '\\*\\/'),
       hljs.HASH_COMMENT_MODE,
+      SYMBOLS, // relevance booster
       {
         className: 'function',
         contains: [TITLE, PARAMS],
@@ -35093,7 +35648,7 @@ module.exports = function(hljs) {
                 begin: '\\b(?:PI|TWO_PI|PI_BY_TWO|DEG_TO_RAD|RAD_TO_DEG|SQRT2)\\b'
             },
             {
-                begin: '\\b(?:XP_ERROR_(?:EXPERIENCES_DISABLED|EXPERIENCE_(?:DISABLED|SUSPENDED)|INVALID_(?:EXPERIENCE|PARAMETERS)|KEY_NOT_FOUND|MATURITY_EXCEEDED|NONE|NOT_(?:FOUND|PERMITTED(?:_LAND)?)|NO_EXPERIENCE|QUOTA_EXCEEDED|RETRY_UPDATE|STORAGE_EXCEPTION|STORE_DISABLED|THROTTLED|UNKNOWN_ERROR)|JSON_APPEND|STATUS_(?:PHYSICS|ROTATE_[XYZ]|PHANTOM|SANDBOX|BLOCK_GRAB(?:_OBJECT)?|(?:DIE|RETURN)_AT_EDGE|CAST_SHADOWS|OK|MALFORMED_PARAMS|TYPE_MISMATCH|BOUNDS_ERROR|NOT_(?:FOUND|SUPPORTED)|INTERNAL_ERROR|WHITELIST_FAILED)|AGENT(?:_(?:BY_(?:LEGACY_|USER)NAME|FLYING|ATTACHMENTS|SCRIPTED|MOUSELOOK|SITTING|ON_OBJECT|AWAY|WALKING|IN_AIR|TYPING|CROUCHING|BUSY|ALWAYS_RUN|AUTOPILOT|LIST_(?:PARCEL(?:_OWNER)?|REGION)))?|CAMERA_(?:PITCH|DISTANCE|BEHINDNESS_(?:ANGLE|LAG)|(?:FOCUS|POSITION)(?:_(?:THRESHOLD|LOCKED|LAG))?|FOCUS_OFFSET|ACTIVE)|ANIM_ON|LOOP|REVERSE|PING_PONG|SMOOTH|ROTATE|SCALE|ALL_SIDES|LINK_(?:ROOT|SET|ALL_(?:OTHERS|CHILDREN)|THIS)|ACTIVE|PASS(?:IVE|_(?:ALWAYS|IF_NOT_HANDLED|NEVER))|SCRIPTED|CONTROL_(?:FWD|BACK|(?:ROT_)?(?:LEFT|RIGHT)|UP|DOWN|(?:ML_)?LBUTTON)|PERMISSION_(?:RETURN_OBJECTS|DEBIT|OVERRIDE_ANIMATIONS|SILENT_ESTATE_MANAGEMENT|TAKE_CONTROLS|TRIGGER_ANIMATION|ATTACH|CHANGE_LINKS|(?:CONTROL|TRACK)_CAMERA|TELEPORT)|INVENTORY_(?:TEXTURE|SOUND|OBJECT|SCRIPT|LANDMARK|CLOTHING|NOTECARD|BODYPART|ANIMATION|GESTURE|ALL|NONE)|CHANGED_(?:INVENTORY|COLOR|SHAPE|SCALE|TEXTURE|LINK|ALLOWED_DROP|OWNER|REGION(?:_START)?|TELEPORT|MEDIA)|OBJECT_(?:CLICK_ACTION|HOVER_HEIGHT|LAST_OWNER_ID|(?:PHYSICS|SERVER|STREAMING)_COST|UNKNOWN_DETAIL|CHARACTER_TIME|PHANTOM|PHYSICS|TEMP_ON_REZ|NAME|DESC|POS|PRIM_(?:COUNT|EQUIVALENCE)|RETURN_(?:PARCEL(?:_OWNER)?|REGION)|REZZER_KEY|ROO?T|VELOCITY|OMEGA|OWNER|GROUP|CREATOR|ATTACHED_POINT|RENDER_WEIGHT|(?:BODY_SHAPE|PATHFINDING)_TYPE|(?:RUNNING|TOTAL)_SCRIPT_COUNT|TOTAL_INVENTORY_COUNT|SCRIPT_(?:MEMORY|TIME))|TYPE_(?:INTEGER|FLOAT|STRING|KEY|VECTOR|ROTATION|INVALID)|(?:DEBUG|PUBLIC)_CHANNEL|ATTACH_(?:AVATAR_CENTER|CHEST|HEAD|BACK|PELVIS|MOUTH|CHIN|NECK|NOSE|BELLY|[LR](?:SHOULDER|HAND|FOOT|EAR|EYE|[UL](?:ARM|LEG)|HIP)|(?:LEFT|RIGHT)_PEC|HUD_(?:CENTER_[12]|TOP_(?:RIGHT|CENTER|LEFT)|BOTTOM(?:_(?:RIGHT|LEFT))?)|[LR]HAND_RING1|TAIL_(?:BASE|TIP)|[LR]WING|FACE_(?:JAW|[LR]EAR|[LR]EYE|TOUNGE)|GROIN|HIND_[LR]FOOT)|LAND_(?:LEVEL|RAISE|LOWER|SMOOTH|NOISE|REVERT)|DATA_(?:ONLINE|NAME|BORN|SIM_(?:POS|STATUS|RATING)|PAYINFO)|PAYMENT_INFO_(?:ON_FILE|USED)|REMOTE_DATA_(?:CHANNEL|REQUEST|REPLY)|PSYS_(?:PART_(?:BF_(?:ZERO|ONE(?:_MINUS_(?:DEST_COLOR|SOURCE_(ALPHA|COLOR)))?|DEST_COLOR|SOURCE_(ALPHA|COLOR))|BLEND_FUNC_(DEST|SOURCE)|FLAGS|(?:START|END)_(?:COLOR|ALPHA|SCALE|GLOW)|MAX_AGE|(?:RIBBON|WIND|INTERP_(?:COLOR|SCALE)|BOUNCE|FOLLOW_(?:SRC|VELOCITY)|TARGET_(?:POS|LINEAR)|EMISSIVE)_MASK)|SRC_(?:MAX_AGE|PATTERN|ANGLE_(?:BEGIN|END)|BURST_(?:RATE|PART_COUNT|RADIUS|SPEED_(?:MIN|MAX))|ACCEL|TEXTURE|TARGET_KEY|OMEGA|PATTERN_(?:DROP|EXPLODE|ANGLE(?:_CONE(?:_EMPTY)?)?)))|VEHICLE_(?:REFERENCE_FRAME|TYPE_(?:NONE|SLED|CAR|BOAT|AIRPLANE|BALLOON)|(?:LINEAR|ANGULAR)_(?:FRICTION_TIMESCALE|MOTOR_DIRECTION)|LINEAR_MOTOR_OFFSET|HOVER_(?:HEIGHT|EFFICIENCY|TIMESCALE)|BUOYANCY|(?:LINEAR|ANGULAR)_(?:DEFLECTION_(?:EFFICIENCY|TIMESCALE)|MOTOR_(?:DECAY_)?TIMESCALE)|VERTICAL_ATTRACTION_(?:EFFICIENCY|TIMESCALE)|BANKING_(?:EFFICIENCY|MIX|TIMESCALE)|FLAG_(?:NO_DEFLECTION_UP|LIMIT_(?:ROLL_ONLY|MOTOR_UP)|HOVER_(?:(?:WATER|TERRAIN|UP)_ONLY|GLOBAL_HEIGHT)|MOUSELOOK_(?:STEER|BANK)|CAMERA_DECOUPLED))|PRIM_(?:ALPHA_MODE(?:_(?:BLEND|EMISSIVE|MASK|NONE))?|NORMAL|SPECULAR|TYPE(?:_(?:BOX|CYLINDER|PRISM|SPHERE|TORUS|TUBE|RING|SCULPT))?|HOLE_(?:DEFAULT|CIRCLE|SQUARE|TRIANGLE)|MATERIAL(?:_(?:STONE|METAL|GLASS|WOOD|FLESH|PLASTIC|RUBBER))?|SHINY_(?:NONE|LOW|MEDIUM|HIGH)|BUMP_(?:NONE|BRIGHT|DARK|WOOD|BARK|BRICKS|CHECKER|CONCRETE|TILE|STONE|DISKS|GRAVEL|BLOBS|SIDING|LARGETILE|STUCCO|SUCTION|WEAVE)|TEXGEN_(?:DEFAULT|PLANAR)|SCULPT_(?:TYPE_(?:SPHERE|TORUS|PLANE|CYLINDER|MASK)|FLAG_(?:MIRROR|INVERT))|PHYSICS(?:_(?:SHAPE_(?:CONVEX|NONE|PRIM|TYPE)))?|(?:POS|ROT)_LOCAL|SLICE|TEXT|FLEXIBLE|POINT_LIGHT|TEMP_ON_REZ|PHANTOM|POSITION|SIZE|ROTATION|TEXTURE|NAME|OMEGA|DESC|LINK_TARGET|COLOR|BUMP_SHINY|FULLBRIGHT|TEXGEN|GLOW|MEDIA_(?:ALT_IMAGE_ENABLE|CONTROLS|(?:CURRENT|HOME)_URL|AUTO_(?:LOOP|PLAY|SCALE|ZOOM)|FIRST_CLICK_INTERACT|(?:WIDTH|HEIGHT)_PIXELS|WHITELIST(?:_ENABLE)?|PERMS_(?:INTERACT|CONTROL)|PARAM_MAX|CONTROLS_(?:STANDARD|MINI)|PERM_(?:NONE|OWNER|GROUP|ANYONE)|MAX_(?:URL_LENGTH|WHITELIST_(?:SIZE|COUNT)|(?:WIDTH|HEIGHT)_PIXELS)))|MASK_(?:BASE|OWNER|GROUP|EVERYONE|NEXT)|PERM_(?:TRANSFER|MODIFY|COPY|MOVE|ALL)|PARCEL_(?:MEDIA_COMMAND_(?:STOP|PAUSE|PLAY|LOOP|TEXTURE|URL|TIME|AGENT|UNLOAD|AUTO_ALIGN|TYPE|SIZE|DESC|LOOP_SET)|FLAG_(?:ALLOW_(?:FLY|(?:GROUP_)?SCRIPTS|LANDMARK|TERRAFORM|DAMAGE|CREATE_(?:GROUP_)?OBJECTS)|USE_(?:ACCESS_(?:GROUP|LIST)|BAN_LIST|LAND_PASS_LIST)|LOCAL_SOUND_ONLY|RESTRICT_PUSHOBJECT|ALLOW_(?:GROUP|ALL)_OBJECT_ENTRY)|COUNT_(?:TOTAL|OWNER|GROUP|OTHER|SELECTED|TEMP)|DETAILS_(?:NAME|DESC|OWNER|GROUP|AREA|ID|SEE_AVATARS))|LIST_STAT_(?:MAX|MIN|MEAN|MEDIAN|STD_DEV|SUM(?:_SQUARES)?|NUM_COUNT|GEOMETRIC_MEAN|RANGE)|PAY_(?:HIDE|DEFAULT)|REGION_FLAG_(?:ALLOW_DAMAGE|FIXED_SUN|BLOCK_TERRAFORM|SANDBOX|DISABLE_(?:COLLISIONS|PHYSICS)|BLOCK_FLY|ALLOW_DIRECT_TELEPORT|RESTRICT_PUSHOBJECT)|HTTP_(?:METHOD|MIMETYPE|BODY_(?:MAXLENGTH|TRUNCATED)|CUSTOM_HEADER|PRAGMA_NO_CACHE|VERBOSE_THROTTLE|VERIFY_CERT)|STRING_(?:TRIM(?:_(?:HEAD|TAIL))?)|CLICK_ACTION_(?:NONE|TOUCH|SIT|BUY|PAY|OPEN(?:_MEDIA)?|PLAY|ZOOM)|TOUCH_INVALID_FACE|PROFILE_(?:NONE|SCRIPT_MEMORY)|RC_(?:DATA_FLAGS|DETECT_PHANTOM|GET_(?:LINK_NUM|NORMAL|ROOT_KEY)|MAX_HITS|REJECT_(?:TYPES|AGENTS|(?:NON)?PHYSICAL|LAND))|RCERR_(?:CAST_TIME_EXCEEDED|SIM_PERF_LOW|UNKNOWN)|ESTATE_ACCESS_(?:ALLOWED_(?:AGENT|GROUP)_(?:ADD|REMOVE)|BANNED_AGENT_(?:ADD|REMOVE))|DENSITY|FRICTION|RESTITUTION|GRAVITY_MULTIPLIER|KFM_(?:COMMAND|CMD_(?:PLAY|STOP|PAUSE)|MODE|FORWARD|LOOP|PING_PONG|REVERSE|DATA|ROTATION|TRANSLATION)|ERR_(?:GENERIC|PARCEL_PERMISSIONS|MALFORMED_PARAMS|RUNTIME_PERMISSIONS|THROTTLED)|CHARACTER_(?:CMD_(?:(?:SMOOTH_)?STOP|JUMP)|DESIRED_(?:TURN_)?SPEED|RADIUS|STAY_WITHIN_PARCEL|LENGTH|ORIENTATION|ACCOUNT_FOR_SKIPPED_FRAMES|AVOIDANCE_MODE|TYPE(?:_(?:[ABCD]|NONE))?|MAX_(?:DECEL|TURN_RADIUS|(?:ACCEL|SPEED)))|PURSUIT_(?:OFFSET|FUZZ_FACTOR|GOAL_TOLERANCE|INTERCEPT)|REQUIRE_LINE_OF_SIGHT|FORCE_DIRECT_PATH|VERTICAL|HORIZONTAL|AVOID_(?:CHARACTERS|DYNAMIC_OBSTACLES|NONE)|PU_(?:EVADE_(?:HIDDEN|SPOTTED)|FAILURE_(?:DYNAMIC_PATHFINDING_DISABLED|INVALID_(?:GOAL|START)|NO_(?:NAVMESH|VALID_DESTINATION)|OTHER|TARGET_GONE|(?:PARCEL_)?UNREACHABLE)|(?:GOAL|SLOWDOWN_DISTANCE)_REACHED)|TRAVERSAL_TYPE(?:_(?:FAST|NONE|SLOW))?|CONTENT_TYPE_(?:ATOM|FORM|HTML|JSON|LLSD|RSS|TEXT|XHTML|XML)|GCNP_(?:RADIUS|STATIC)|(?:PATROL|WANDER)_PAUSE_AT_WAYPOINTS|OPT_(?:AVATAR|CHARACTER|EXCLUSION_VOLUME|LEGACY_LINKSET|MATERIAL_VOLUME|OTHER|STATIC_OBSTACLE|WALKABLE)|SIM_STAT_PCT_CHARS_STEPPED)\\b'
+                begin: '\\b(?:XP_ERROR_(?:EXPERIENCES_DISABLED|EXPERIENCE_(?:DISABLED|SUSPENDED)|INVALID_(?:EXPERIENCE|PARAMETERS)|KEY_NOT_FOUND|MATURITY_EXCEEDED|NONE|NOT_(?:FOUND|PERMITTED(?:_LAND)?)|NO_EXPERIENCE|QUOTA_EXCEEDED|RETRY_UPDATE|STORAGE_EXCEPTION|STORE_DISABLED|THROTTLED|UNKNOWN_ERROR)|JSON_APPEND|STATUS_(?:PHYSICS|ROTATE_[XYZ]|PHANTOM|SANDBOX|BLOCK_GRAB(?:_OBJECT)?|(?:DIE|RETURN)_AT_EDGE|CAST_SHADOWS|OK|MALFORMED_PARAMS|TYPE_MISMATCH|BOUNDS_ERROR|NOT_(?:FOUND|SUPPORTED)|INTERNAL_ERROR|WHITELIST_FAILED)|AGENT(?:_(?:BY_(?:LEGACY_|USER)NAME|FLYING|ATTACHMENTS|SCRIPTED|MOUSELOOK|SITTING|ON_OBJECT|AWAY|WALKING|IN_AIR|TYPING|CROUCHING|BUSY|ALWAYS_RUN|AUTOPILOT|LIST_(?:PARCEL(?:_OWNER)?|REGION)))?|CAMERA_(?:PITCH|DISTANCE|BEHINDNESS_(?:ANGLE|LAG)|(?:FOCUS|POSITION)(?:_(?:THRESHOLD|LOCKED|LAG))?|FOCUS_OFFSET|ACTIVE)|ANIM_ON|LOOP|REVERSE|PING_PONG|SMOOTH|ROTATE|SCALE|ALL_SIDES|LINK_(?:ROOT|SET|ALL_(?:OTHERS|CHILDREN)|THIS)|ACTIVE|PASS(?:IVE|_(?:ALWAYS|IF_NOT_HANDLED|NEVER))|SCRIPTED|CONTROL_(?:FWD|BACK|(?:ROT_)?(?:LEFT|RIGHT)|UP|DOWN|(?:ML_)?LBUTTON)|PERMISSION_(?:RETURN_OBJECTS|DEBIT|OVERRIDE_ANIMATIONS|SILENT_ESTATE_MANAGEMENT|TAKE_CONTROLS|TRIGGER_ANIMATION|ATTACH|CHANGE_LINKS|(?:CONTROL|TRACK)_CAMERA|TELEPORT)|INVENTORY_(?:TEXTURE|SOUND|OBJECT|SCRIPT|LANDMARK|CLOTHING|NOTECARD|BODYPART|ANIMATION|GESTURE|ALL|NONE)|CHANGED_(?:INVENTORY|COLOR|SHAPE|SCALE|TEXTURE|LINK|ALLOWED_DROP|OWNER|REGION(?:_START)?|TELEPORT|MEDIA)|OBJECT_(?:CLICK_ACTION|HOVER_HEIGHT|LAST_OWNER_ID|(?:PHYSICS|SERVER|STREAMING)_COST|UNKNOWN_DETAIL|CHARACTER_TIME|PHANTOM|PHYSICS|TEMP_(?:ATTACHED|ON_REZ)|NAME|DESC|POS|PRIM_(?:COUNT|EQUIVALENCE)|RETURN_(?:PARCEL(?:_OWNER)?|REGION)|REZZER_KEY|ROO?T|VELOCITY|OMEGA|OWNER|GROUP(?:_TAG)?|CREATOR|ATTACHED_(?:POINT|SLOTS_AVAILABLE)|RENDER_WEIGHT|(?:BODY_SHAPE|PATHFINDING)_TYPE|(?:RUNNING|TOTAL)_SCRIPT_COUNT|TOTAL_INVENTORY_COUNT|SCRIPT_(?:MEMORY|TIME))|TYPE_(?:INTEGER|FLOAT|STRING|KEY|VECTOR|ROTATION|INVALID)|(?:DEBUG|PUBLIC)_CHANNEL|ATTACH_(?:AVATAR_CENTER|CHEST|HEAD|BACK|PELVIS|MOUTH|CHIN|NECK|NOSE|BELLY|[LR](?:SHOULDER|HAND|FOOT|EAR|EYE|[UL](?:ARM|LEG)|HIP)|(?:LEFT|RIGHT)_PEC|HUD_(?:CENTER_[12]|TOP_(?:RIGHT|CENTER|LEFT)|BOTTOM(?:_(?:RIGHT|LEFT))?)|[LR]HAND_RING1|TAIL_(?:BASE|TIP)|[LR]WING|FACE_(?:JAW|[LR]EAR|[LR]EYE|TOUNGE)|GROIN|HIND_[LR]FOOT)|LAND_(?:LEVEL|RAISE|LOWER|SMOOTH|NOISE|REVERT)|DATA_(?:ONLINE|NAME|BORN|SIM_(?:POS|STATUS|RATING)|PAYINFO)|PAYMENT_INFO_(?:ON_FILE|USED)|REMOTE_DATA_(?:CHANNEL|REQUEST|REPLY)|PSYS_(?:PART_(?:BF_(?:ZERO|ONE(?:_MINUS_(?:DEST_COLOR|SOURCE_(ALPHA|COLOR)))?|DEST_COLOR|SOURCE_(ALPHA|COLOR))|BLEND_FUNC_(DEST|SOURCE)|FLAGS|(?:START|END)_(?:COLOR|ALPHA|SCALE|GLOW)|MAX_AGE|(?:RIBBON|WIND|INTERP_(?:COLOR|SCALE)|BOUNCE|FOLLOW_(?:SRC|VELOCITY)|TARGET_(?:POS|LINEAR)|EMISSIVE)_MASK)|SRC_(?:MAX_AGE|PATTERN|ANGLE_(?:BEGIN|END)|BURST_(?:RATE|PART_COUNT|RADIUS|SPEED_(?:MIN|MAX))|ACCEL|TEXTURE|TARGET_KEY|OMEGA|PATTERN_(?:DROP|EXPLODE|ANGLE(?:_CONE(?:_EMPTY)?)?)))|VEHICLE_(?:REFERENCE_FRAME|TYPE_(?:NONE|SLED|CAR|BOAT|AIRPLANE|BALLOON)|(?:LINEAR|ANGULAR)_(?:FRICTION_TIMESCALE|MOTOR_DIRECTION)|LINEAR_MOTOR_OFFSET|HOVER_(?:HEIGHT|EFFICIENCY|TIMESCALE)|BUOYANCY|(?:LINEAR|ANGULAR)_(?:DEFLECTION_(?:EFFICIENCY|TIMESCALE)|MOTOR_(?:DECAY_)?TIMESCALE)|VERTICAL_ATTRACTION_(?:EFFICIENCY|TIMESCALE)|BANKING_(?:EFFICIENCY|MIX|TIMESCALE)|FLAG_(?:NO_DEFLECTION_UP|LIMIT_(?:ROLL_ONLY|MOTOR_UP)|HOVER_(?:(?:WATER|TERRAIN|UP)_ONLY|GLOBAL_HEIGHT)|MOUSELOOK_(?:STEER|BANK)|CAMERA_DECOUPLED))|PRIM_(?:ALLOW_UNSIT|ALPHA_MODE(?:_(?:BLEND|EMISSIVE|MASK|NONE))?|NORMAL|SPECULAR|TYPE(?:_(?:BOX|CYLINDER|PRISM|SPHERE|TORUS|TUBE|RING|SCULPT))?|HOLE_(?:DEFAULT|CIRCLE|SQUARE|TRIANGLE)|MATERIAL(?:_(?:STONE|METAL|GLASS|WOOD|FLESH|PLASTIC|RUBBER))?|SHINY_(?:NONE|LOW|MEDIUM|HIGH)|BUMP_(?:NONE|BRIGHT|DARK|WOOD|BARK|BRICKS|CHECKER|CONCRETE|TILE|STONE|DISKS|GRAVEL|BLOBS|SIDING|LARGETILE|STUCCO|SUCTION|WEAVE)|TEXGEN_(?:DEFAULT|PLANAR)|SCRIPTED_SIT_ONLY|SCULPT_(?:TYPE_(?:SPHERE|TORUS|PLANE|CYLINDER|MASK)|FLAG_(?:MIRROR|INVERT))|PHYSICS(?:_(?:SHAPE_(?:CONVEX|NONE|PRIM|TYPE)))?|(?:POS|ROT)_LOCAL|SLICE|TEXT|FLEXIBLE|POINT_LIGHT|TEMP_ON_REZ|PHANTOM|POSITION|SIT_TARGET|SIZE|ROTATION|TEXTURE|NAME|OMEGA|DESC|LINK_TARGET|COLOR|BUMP_SHINY|FULLBRIGHT|TEXGEN|GLOW|MEDIA_(?:ALT_IMAGE_ENABLE|CONTROLS|(?:CURRENT|HOME)_URL|AUTO_(?:LOOP|PLAY|SCALE|ZOOM)|FIRST_CLICK_INTERACT|(?:WIDTH|HEIGHT)_PIXELS|WHITELIST(?:_ENABLE)?|PERMS_(?:INTERACT|CONTROL)|PARAM_MAX|CONTROLS_(?:STANDARD|MINI)|PERM_(?:NONE|OWNER|GROUP|ANYONE)|MAX_(?:URL_LENGTH|WHITELIST_(?:SIZE|COUNT)|(?:WIDTH|HEIGHT)_PIXELS)))|MASK_(?:BASE|OWNER|GROUP|EVERYONE|NEXT)|PERM_(?:TRANSFER|MODIFY|COPY|MOVE|ALL)|PARCEL_(?:MEDIA_COMMAND_(?:STOP|PAUSE|PLAY|LOOP|TEXTURE|URL|TIME|AGENT|UNLOAD|AUTO_ALIGN|TYPE|SIZE|DESC|LOOP_SET)|FLAG_(?:ALLOW_(?:FLY|(?:GROUP_)?SCRIPTS|LANDMARK|TERRAFORM|DAMAGE|CREATE_(?:GROUP_)?OBJECTS)|USE_(?:ACCESS_(?:GROUP|LIST)|BAN_LIST|LAND_PASS_LIST)|LOCAL_SOUND_ONLY|RESTRICT_PUSHOBJECT|ALLOW_(?:GROUP|ALL)_OBJECT_ENTRY)|COUNT_(?:TOTAL|OWNER|GROUP|OTHER|SELECTED|TEMP)|DETAILS_(?:NAME|DESC|OWNER|GROUP|AREA|ID|SEE_AVATARS))|LIST_STAT_(?:MAX|MIN|MEAN|MEDIAN|STD_DEV|SUM(?:_SQUARES)?|NUM_COUNT|GEOMETRIC_MEAN|RANGE)|PAY_(?:HIDE|DEFAULT)|REGION_FLAG_(?:ALLOW_DAMAGE|FIXED_SUN|BLOCK_TERRAFORM|SANDBOX|DISABLE_(?:COLLISIONS|PHYSICS)|BLOCK_FLY|ALLOW_DIRECT_TELEPORT|RESTRICT_PUSHOBJECT)|HTTP_(?:METHOD|MIMETYPE|BODY_(?:MAXLENGTH|TRUNCATED)|CUSTOM_HEADER|PRAGMA_NO_CACHE|VERBOSE_THROTTLE|VERIFY_CERT)|SIT_(?:INVALID_(?:AGENT|LINK_OBJECT)|NO(?:T_EXPERIENCE|_(?:ACCESS|EXPERIENCE_PERMISSION|SIT_TARGET)))|STRING_(?:TRIM(?:_(?:HEAD|TAIL))?)|CLICK_ACTION_(?:NONE|TOUCH|SIT|BUY|PAY|OPEN(?:_MEDIA)?|PLAY|ZOOM)|TOUCH_INVALID_FACE|PROFILE_(?:NONE|SCRIPT_MEMORY)|RC_(?:DATA_FLAGS|DETECT_PHANTOM|GET_(?:LINK_NUM|NORMAL|ROOT_KEY)|MAX_HITS|REJECT_(?:TYPES|AGENTS|(?:NON)?PHYSICAL|LAND))|RCERR_(?:CAST_TIME_EXCEEDED|SIM_PERF_LOW|UNKNOWN)|ESTATE_ACCESS_(?:ALLOWED_(?:AGENT|GROUP)_(?:ADD|REMOVE)|BANNED_AGENT_(?:ADD|REMOVE))|DENSITY|FRICTION|RESTITUTION|GRAVITY_MULTIPLIER|KFM_(?:COMMAND|CMD_(?:PLAY|STOP|PAUSE)|MODE|FORWARD|LOOP|PING_PONG|REVERSE|DATA|ROTATION|TRANSLATION)|ERR_(?:GENERIC|PARCEL_PERMISSIONS|MALFORMED_PARAMS|RUNTIME_PERMISSIONS|THROTTLED)|CHARACTER_(?:CMD_(?:(?:SMOOTH_)?STOP|JUMP)|DESIRED_(?:TURN_)?SPEED|RADIUS|STAY_WITHIN_PARCEL|LENGTH|ORIENTATION|ACCOUNT_FOR_SKIPPED_FRAMES|AVOIDANCE_MODE|TYPE(?:_(?:[ABCD]|NONE))?|MAX_(?:DECEL|TURN_RADIUS|(?:ACCEL|SPEED)))|PURSUIT_(?:OFFSET|FUZZ_FACTOR|GOAL_TOLERANCE|INTERCEPT)|REQUIRE_LINE_OF_SIGHT|FORCE_DIRECT_PATH|VERTICAL|HORIZONTAL|AVOID_(?:CHARACTERS|DYNAMIC_OBSTACLES|NONE)|PU_(?:EVADE_(?:HIDDEN|SPOTTED)|FAILURE_(?:DYNAMIC_PATHFINDING_DISABLED|INVALID_(?:GOAL|START)|NO_(?:NAVMESH|VALID_DESTINATION)|OTHER|TARGET_GONE|(?:PARCEL_)?UNREACHABLE)|(?:GOAL|SLOWDOWN_DISTANCE)_REACHED)|TRAVERSAL_TYPE(?:_(?:FAST|NONE|SLOW))?|CONTENT_TYPE_(?:ATOM|FORM|HTML|JSON|LLSD|RSS|TEXT|XHTML|XML)|GCNP_(?:RADIUS|STATIC)|(?:PATROL|WANDER)_PAUSE_AT_WAYPOINTS|OPT_(?:AVATAR|CHARACTER|EXCLUSION_VOLUME|LEGACY_LINKSET|MATERIAL_VOLUME|OTHER|STATIC_OBSTACLE|WALKABLE)|SIM_STAT_PCT_CHARS_STEPPED)\\b'
             },
             {
                 begin: '\\b(?:FALSE|TRUE)\\b'
@@ -35112,7 +35667,7 @@ module.exports = function(hljs) {
 
     var LSL_FUNCTIONS = {
         className: 'built_in',
-        begin: '\\b(?:ll(?:AgentInExperience|(?:Create|DataSize|Delete|KeyCount|Keys|Read|Update)KeyValue|GetExperience(?:Details|ErrorMessage)|ReturnObjectsBy(?:ID|Owner)|Json(?:2List|[GS]etValue|ValueType)|Sin|Cos|Tan|Atan2|Sqrt|Pow|Abs|Fabs|Frand|Floor|Ceil|Round|Vec(?:Mag|Norm|Dist)|Rot(?:Between|2(?:Euler|Fwd|Left|Up))|(?:Euler|Axes)2Rot|Whisper|(?:Region|Owner)?Say|Shout|Listen(?:Control|Remove)?|Sensor(?:Repeat|Remove)?|Detected(?:Name|Key|Owner|Type|Pos|Vel|Grab|Rot|Group|LinkNumber)|Die|Ground|Wind|(?:[GS]et)(?:AnimationOverride|MemoryLimit|PrimMediaParams|ParcelMusicURL|Object(?:Desc|Name)|PhysicsMaterial|Status|Scale|Color|Alpha|Texture|Pos|Rot|Force|Torque)|ResetAnimationOverride|(?:Scale|Offset|Rotate)Texture|(?:Rot)?Target(?:Remove)?|(?:Stop)?MoveToTarget|Apply(?:Rotational)?Impulse|Set(?:KeyframedMotion|ContentType|RegionPos|(?:Angular)?Velocity|Buoyancy|HoverHeight|ForceAndTorque|TimerEvent|ScriptState|Damage|TextureAnim|Sound(?:Queueing|Radius)|Vehicle(?:Type|(?:Float|Vector|Rotation)Param)|(?:Touch|Sit)?Text|Camera(?:Eye|At)Offset|PrimitiveParams|ClickAction|Link(?:Alpha|Color|PrimitiveParams(?:Fast)?|Texture(?:Anim)?|Camera|Media)|RemoteScriptAccessPin|PayPrice|LocalRot)|ScaleByFactor|Get(?:(?:Max|Min)ScaleFactor|ClosestNavPoint|StaticPath|SimStats|Env|PrimitiveParams|Link(?:PrimitiveParams|Number(?:OfSides)?|Key|Name|Media)|HTTPHeader|FreeURLs|Object(?:Details|PermMask|PrimCount)|Parcel(?:MaxPrims|Details|Prim(?:Count|Owners))|Attached(?:List)?|(?:SPMax|Free|Used)Memory|Region(?:Name|TimeDilation|FPS|Corner|AgentCount)|Root(?:Position|Rotation)|UnixTime|(?:Parcel|Region)Flags|(?:Wall|GMT)clock|SimulatorHostname|BoundingBox|GeometricCenter|Creator|NumberOf(?:Prims|NotecardLines|Sides)|Animation(?:List)?|(?:Camera|Local)(?:Pos|Rot)|Vel|Accel|Omega|Time(?:stamp|OfDay)|(?:Object|CenterOf)?Mass|MassMKS|Energy|Owner|(?:Owner)?Key|SunDirection|Texture(?:Offset|Scale|Rot)|Inventory(?:Number|Name|Key|Type|Creator|PermMask)|Permissions(?:Key)?|StartParameter|List(?:Length|EntryType)|Date|Agent(?:Size|Info|Language|List)|LandOwnerAt|NotecardLine|Script(?:Name|State))|(?:Get|Reset|GetAndReset)Time|PlaySound(?:Slave)?|LoopSound(?:Master|Slave)?|(?:Trigger|Stop|Preload)Sound|(?:(?:Get|Delete)Sub|Insert)String|To(?:Upper|Lower)|Give(?:InventoryList|Money)|RezObject|(?:Stop)?LookAt|Sleep|CollisionFilter|(?:Take|Release)Controls|DetachFromAvatar|AttachToAvatar(?:Temp)?|InstantMessage|(?:GetNext)?Email|StopHover|MinEventDelay|RotLookAt|String(?:Length|Trim)|(?:Start|Stop)Animation|TargetOmega|Request(?:Experience)?Permissions|(?:Create|Break)Link|BreakAllLinks|(?:Give|Remove)Inventory|Water|PassTouches|Request(?:Agent|Inventory)Data|TeleportAgent(?:Home|GlobalCoords)?|ModifyLand|CollisionSound|ResetScript|MessageLinked|PushObject|PassCollisions|AxisAngle2Rot|Rot2(?:Axis|Angle)|A(?:cos|sin)|AngleBetween|AllowInventoryDrop|SubStringIndex|List2(?:CSV|Integer|Json|Float|String|Key|Vector|Rot|List(?:Strided)?)|DeleteSubList|List(?:Statistics|Sort|Randomize|(?:Insert|Find|Replace)List)|EdgeOfWorld|AdjustSoundVolume|Key2Name|TriggerSoundLimited|EjectFromLand|(?:CSV|ParseString)2List|OverMyLand|SameGroup|UnSit|Ground(?:Slope|Normal|Contour)|GroundRepel|(?:Set|Remove)VehicleFlags|(?:AvatarOn)?(?:Link)?SitTarget|Script(?:Danger|Profiler)|Dialog|VolumeDetect|ResetOtherScript|RemoteLoadScriptPin|(?:Open|Close)RemoteDataChannel|SendRemoteData|RemoteDataReply|(?:Integer|String)ToBase64|XorBase64|Log(?:10)?|Base64To(?:String|Integer)|ParseStringKeepNulls|RezAtRoot|RequestSimulatorData|ForceMouselook|(?:Load|Release|(?:E|Une)scape)URL|ParcelMedia(?:CommandList|Query)|ModPow|MapDestination|(?:RemoveFrom|AddTo|Reset)Land(?:Pass|Ban)List|(?:Set|Clear)CameraParams|HTTP(?:Request|Response)|TextBox|DetectedTouch(?:UV|Face|Pos|(?:N|Bin)ormal|ST)|(?:MD5|SHA1|DumpList2)String|Request(?:Secure)?URL|Clear(?:Prim|Link)Media|(?:Link)?ParticleSystem|(?:Get|Request)(?:Username|DisplayName)|RegionSayTo|CastRay|GenerateKey|TransferLindenDollars|ManageEstateAccess|(?:Create|Delete)Character|ExecCharacterCmd|Evade|FleeFrom|NavigateTo|PatrolPoints|Pursue|UpdateCharacter|WanderWithin))\\b'
+        begin: '\\b(?:ll(?:AgentInExperience|(?:Create|DataSize|Delete|KeyCount|Keys|Read|Update)KeyValue|GetExperience(?:Details|ErrorMessage)|ReturnObjectsBy(?:ID|Owner)|Json(?:2List|[GS]etValue|ValueType)|Sin|Cos|Tan|Atan2|Sqrt|Pow|Abs|Fabs|Frand|Floor|Ceil|Round|Vec(?:Mag|Norm|Dist)|Rot(?:Between|2(?:Euler|Fwd|Left|Up))|(?:Euler|Axes)2Rot|Whisper|(?:Region|Owner)?Say|Shout|Listen(?:Control|Remove)?|Sensor(?:Repeat|Remove)?|Detected(?:Name|Key|Owner|Type|Pos|Vel|Grab|Rot|Group|LinkNumber)|Die|Ground|Wind|(?:[GS]et)(?:AnimationOverride|MemoryLimit|PrimMediaParams|ParcelMusicURL|Object(?:Desc|Name)|PhysicsMaterial|Status|Scale|Color|Alpha|Texture|Pos|Rot|Force|Torque)|ResetAnimationOverride|(?:Scale|Offset|Rotate)Texture|(?:Rot)?Target(?:Remove)?|(?:Stop)?MoveToTarget|Apply(?:Rotational)?Impulse|Set(?:KeyframedMotion|ContentType|RegionPos|(?:Angular)?Velocity|Buoyancy|HoverHeight|ForceAndTorque|TimerEvent|ScriptState|Damage|TextureAnim|Sound(?:Queueing|Radius)|Vehicle(?:Type|(?:Float|Vector|Rotation)Param)|(?:Touch|Sit)?Text|Camera(?:Eye|At)Offset|PrimitiveParams|ClickAction|Link(?:Alpha|Color|PrimitiveParams(?:Fast)?|Texture(?:Anim)?|Camera|Media)|RemoteScriptAccessPin|PayPrice|LocalRot)|ScaleByFactor|Get(?:(?:Max|Min)ScaleFactor|ClosestNavPoint|StaticPath|SimStats|Env|PrimitiveParams|Link(?:PrimitiveParams|Number(?:OfSides)?|Key|Name|Media)|HTTPHeader|FreeURLs|Object(?:Details|PermMask|PrimCount)|Parcel(?:MaxPrims|Details|Prim(?:Count|Owners))|Attached(?:List)?|(?:SPMax|Free|Used)Memory|Region(?:Name|TimeDilation|FPS|Corner|AgentCount)|Root(?:Position|Rotation)|UnixTime|(?:Parcel|Region)Flags|(?:Wall|GMT)clock|SimulatorHostname|BoundingBox|GeometricCenter|Creator|NumberOf(?:Prims|NotecardLines|Sides)|Animation(?:List)?|(?:Camera|Local)(?:Pos|Rot)|Vel|Accel|Omega|Time(?:stamp|OfDay)|(?:Object|CenterOf)?Mass|MassMKS|Energy|Owner|(?:Owner)?Key|SunDirection|Texture(?:Offset|Scale|Rot)|Inventory(?:Number|Name|Key|Type|Creator|PermMask)|Permissions(?:Key)?|StartParameter|List(?:Length|EntryType)|Date|Agent(?:Size|Info|Language|List)|LandOwnerAt|NotecardLine|Script(?:Name|State))|(?:Get|Reset|GetAndReset)Time|PlaySound(?:Slave)?|LoopSound(?:Master|Slave)?|(?:Trigger|Stop|Preload)Sound|(?:(?:Get|Delete)Sub|Insert)String|To(?:Upper|Lower)|Give(?:InventoryList|Money)|RezObject|(?:Stop)?LookAt|Sleep|CollisionFilter|(?:Take|Release)Controls|DetachFromAvatar|AttachToAvatar(?:Temp)?|InstantMessage|(?:GetNext)?Email|StopHover|MinEventDelay|RotLookAt|String(?:Length|Trim)|(?:Start|Stop)Animation|TargetOmega|Request(?:Experience)?Permissions|(?:Create|Break)Link|BreakAllLinks|(?:Give|Remove)Inventory|Water|PassTouches|Request(?:Agent|Inventory)Data|TeleportAgent(?:Home|GlobalCoords)?|ModifyLand|CollisionSound|ResetScript|MessageLinked|PushObject|PassCollisions|AxisAngle2Rot|Rot2(?:Axis|Angle)|A(?:cos|sin)|AngleBetween|AllowInventoryDrop|SubStringIndex|List2(?:CSV|Integer|Json|Float|String|Key|Vector|Rot|List(?:Strided)?)|DeleteSubList|List(?:Statistics|Sort|Randomize|(?:Insert|Find|Replace)List)|EdgeOfWorld|AdjustSoundVolume|Key2Name|TriggerSoundLimited|EjectFromLand|(?:CSV|ParseString)2List|OverMyLand|SameGroup|UnSit|Ground(?:Slope|Normal|Contour)|GroundRepel|(?:Set|Remove)VehicleFlags|SitOnLink|(?:AvatarOn)?(?:Link)?SitTarget|Script(?:Danger|Profiler)|Dialog|VolumeDetect|ResetOtherScript|RemoteLoadScriptPin|(?:Open|Close)RemoteDataChannel|SendRemoteData|RemoteDataReply|(?:Integer|String)ToBase64|XorBase64|Log(?:10)?|Base64To(?:String|Integer)|ParseStringKeepNulls|RezAtRoot|RequestSimulatorData|ForceMouselook|(?:Load|Release|(?:E|Une)scape)URL|ParcelMedia(?:CommandList|Query)|ModPow|MapDestination|(?:RemoveFrom|AddTo|Reset)Land(?:Pass|Ban)List|(?:Set|Clear)CameraParams|HTTP(?:Request|Response)|TextBox|DetectedTouch(?:UV|Face|Pos|(?:N|Bin)ormal|ST)|(?:MD5|SHA1|DumpList2)String|Request(?:Secure)?URL|Clear(?:Prim|Link)Media|(?:Link)?ParticleSystem|(?:Get|Request)(?:Username|DisplayName)|RegionSayTo|CastRay|GenerateKey|TransferLindenDollars|ManageEstateAccess|(?:Create|Delete)Character|ExecCharacterCmd|Evade|FleeFrom|NavigateTo|PatrolPoints|Pursue|UpdateCharacter|WanderWithin))\\b'
     };
 
     return {
@@ -35124,7 +35679,8 @@ module.exports = function(hljs) {
                 variants: [
                     hljs.COMMENT('//', '$'),
                     hljs.COMMENT('/\\*', '\\*/')
-                ]
+                ],
+                relevance: 0
             },
             LSL_NUMBERS,
             {
@@ -35271,16 +35827,8 @@ module.exports = function(hljs) {
     ]
   };
   /* Variable assignment */
-  var VAR_ASSIG = {
-    begin: '^' + hljs.UNDERSCORE_IDENT_RE + '\\s*[:+?]?=',
-    illegal: '\\n',
-    returnBegin: true,
-    contains: [
-      {
-        begin: '^' + hljs.UNDERSCORE_IDENT_RE, end: '[:+?]?=',
-        excludeEnd: true,
-      }
-    ]
+  var ASSIGNMENT = {
+    begin: '^' + hljs.UNDERSCORE_IDENT_RE + '\\s*(?=[:+?]?=)'
   };
   /* Meta targets (.PHONY) */
   var META = {
@@ -35306,7 +35854,7 @@ module.exports = function(hljs) {
       VARIABLE,
       QUOTE_STRING,
       FUNC,
-      VAR_ASSIG,
+      ASSIGNMENT,
       META,
       TARGET,
     ]
@@ -35370,13 +35918,13 @@ module.exports = function(hljs) {
         className: 'code',
         variants: [
           {
-            begin: '^```\w*\s*$', end: '^```\s*$'
+            begin: '^```\\w*\\s*$', end: '^```[ ]*$'
           },
           {
             begin: '`.+?`'
           },
           {
-            begin: '^( {4}|\t)', end: '$',
+            begin: '^( {4}|\\t)', end: '$',
             relevance: 0
           }
         ]
@@ -36295,6 +36843,7 @@ module.exports = function(hljs) {
     begin: '\\\\[abfnrtv]\\|\\\\x[0-9a-fA-F]*\\\\\\|%[-+# *.0-9]*[dioxXucsfeEgGp]',
     relevance: 0
   };
+  STRING.contains = STRING.contains.slice() // we need our own copy of contains
   STRING.contains.push(STRING_FMT);
 
   var IMPLICATION = {
@@ -36328,7 +36877,8 @@ module.exports = function(hljs) {
       hljs.NUMBER_MODE,
       ATOM,
       STRING,
-      {begin: /:-/} // relevance booster
+      {begin: /:-/}, // relevance booster
+      {begin: /\.$/} // relevance booster
     ]
   };
 };
@@ -36391,7 +36941,8 @@ module.exports = function(hljs) {
         ')',
         end: '\\s'
       },
-      hljs.COMMENT('[;#]', '$'),
+      // lines ending with ; or # aren't really comments, probably auto-detect fail
+      hljs.COMMENT('[;#](?!\s*$)', '$'),
       hljs.C_BLOCK_COMMENT_MODE,
       hljs.QUOTE_STRING_MODE,
       {
@@ -37168,6 +37719,7 @@ module.exports = function(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       hljs.C_NUMBER_MODE,
       hljs.QUOTE_STRING_MODE,
+      hljs.APOS_STRING_MODE,
       {
         className: 'string',
         variants: [
@@ -37175,25 +37727,29 @@ module.exports = function(hljs) {
             begin: '@"', end: '"',
             illegal: '\\n',
             contains: [hljs.BACKSLASH_ESCAPE]
-          },
-          {
-            begin: '\'', end: '[^\\\\]\'',
-            illegal: '[^\\\\][^\']'
           }
         ]
       },
       {
         className: 'meta',
-        begin: '#',
-        end: '$',
+        begin: /#\s*[a-z]+\b/, end: /$/,
+        keywords: {
+          'meta-keyword':
+            'if else elif endif define undef warning error line ' +
+            'pragma ifdef ifndef include'
+        },
         contains: [
           {
+            begin: /\\\n/, relevance: 0
+          },
+          hljs.inherit(hljs.QUOTE_STRING_MODE, {className: 'meta-string'}),
+          {
             className: 'meta-string',
-            variants: [
-              { begin: '\"', end: '\"' },
-              { begin: '<', end: '>' }
-            ]
-          }
+            begin: /<.*?>/, end: /$/,
+            illegal: '\\n',
+          },
+          hljs.C_LINE_COMMENT_MODE,
+          hljs.C_BLOCK_COMMENT_MODE
         ]
       },
       {
@@ -37736,7 +38292,7 @@ module.exports = function(hljs) {
   var DOLLAR_STRING = '\\$([a-zA-Z_]?|[a-zA-Z_][a-zA-Z_0-9]*)\\$';
   var LABEL = '<<\\s*' + UNQUOTED_IDENT + '\\s*>>';
 
-  var SQL_KW = 
+  var SQL_KW =
     // https://www.postgresql.org/docs/11/static/sql-keywords-appendix.html
     // https://www.postgresql.org/docs/11/static/sql-commands.html
     // SQL commands (starting words)
@@ -37786,7 +38342,7 @@ module.exports = function(hljs) {
     'SUPERUSER NOSUPERUSER CREATEDB NOCREATEDB CREATEROLE NOCREATEROLE INHERIT NOINHERIT ' +
     'LOGIN NOLOGIN REPLICATION NOREPLICATION BYPASSRLS NOBYPASSRLS ';
 
-  var PLPGSQL_KW = 
+  var PLPGSQL_KW =
     'ALIAS BEGIN CONSTANT DECLARE END EXCEPTION RETURN PERFORM|10 RAISE GET DIAGNOSTICS ' +
     'STACKED|10 FOREACH LOOP ELSIF EXIT WHILE REVERSE SLICE DEBUG LOG INFO NOTICE WARNING ASSERT ' +
     'OPEN ';
@@ -37809,8 +38365,8 @@ module.exports = function(hljs) {
     'REGNAMESPACE|10 REGCONFIG|10 REGDICTIONARY|10 ';// +
     // some types from standard extensions
     'HSTORE|10 LO LTREE|10 ';
-    
-  var TYPES_RE = 
+
+  var TYPES_RE =
     TYPES.trim()
          .split(' ')
          .map( function(val) { return val.split('|')[0]; } )
@@ -37997,7 +38553,7 @@ module.exports = function(hljs) {
     //
     'GROUPING CAST ';
 
-    var FUNCTIONS_RE = 
+    var FUNCTIONS_RE =
       FUNCTIONS.trim()
                .split(' ')
                .map( function(val) { return val.split('|')[0]; } )
@@ -38421,6 +38977,12 @@ module.exports = function(hljs) {
     begin: hljs.IDENT_RE + '\'', relevance: 0
   };
 
+  var NUMBER_MODE = {
+    className: 'number',
+    begin: '(-?)(\\b0[xX][a-fA-F0-9]+|\\b0[bB][01]+|(\\b\\d+(_\\d+)?(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)',
+    relevance: 0
+  };
+
   /**
    * The `FUNCTION` and `CLASS` modes were intentionally removed to simplify
    * highlighting and fix cases like
@@ -38440,7 +39002,7 @@ module.exports = function(hljs) {
       QUOTE_STRING_MODE,
       SINGLE_QUOTE_CHAR_MODE,
       PRIMED_NAME,
-      hljs.C_NUMBER_MODE,
+      NUMBER_MODE,
       hljs.C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE
     ]
@@ -38457,18 +39019,62 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs){
+
+  var TYPES =
+    ["string", "char", "byte", "int", "long", "bool",  "decimal",  "single",
+     "double", "DateTime", "xml", "array", "hashtable", "void"];
+
+  // https://msdn.microsoft.com/en-us/library/ms714428(v=vs.85).aspx
+  var VALID_VERBS =
+    'Add|Clear|Close|Copy|Enter|Exit|Find|Format|Get|Hide|Join|Lock|' +
+    'Move|New|Open|Optimize|Pop|Push|Redo|Remove|Rename|Reset|Resize|' +
+    'Search|Select|Set|Show|Skip|Split|Step|Switch|Undo|Unlock|' +
+    'Watch|Backup|Checkpoint|Compare|Compress|Convert|ConvertFrom|' +
+    'ConvertTo|Dismount|Edit|Expand|Export|Group|Import|Initialize|' +
+    'Limit|Merge|New|Out|Publish|Restore|Save|Sync|Unpublish|Update|' +
+    'Approve|Assert|Complete|Confirm|Deny|Disable|Enable|Install|Invoke|Register|' +
+    'Request|Restart|Resume|Start|Stop|Submit|Suspend|Uninstall|' +
+    'Unregister|Wait|Debug|Measure|Ping|Repair|Resolve|Test|Trace|Connect|' +
+    'Disconnect|Read|Receive|Send|Write|Block|Grant|Protect|Revoke|Unblock|' +
+    'Unprotect|Use|ForEach|Sort|Tee|Where';
+
+  var COMPARISON_OPERATORS =
+    '-and|-as|-band|-bnot|-bor|-bxor|-casesensitive|-ccontains|-ceq|-cge|-cgt|' +
+    '-cle|-clike|-clt|-cmatch|-cne|-cnotcontains|-cnotlike|-cnotmatch|-contains|' +
+    '-creplace|-csplit|-eq|-exact|-f|-file|-ge|-gt|-icontains|-ieq|-ige|-igt|' +
+    '-ile|-ilike|-ilt|-imatch|-in|-ine|-inotcontains|-inotlike|-inotmatch|' +
+    '-ireplace|-is|-isnot|-isplit|-join|-le|-like|-lt|-match|-ne|-not|' +
+    '-notcontains|-notin|-notlike|-notmatch|-or|-regex|-replace|-shl|-shr|' +
+    '-split|-wildcard|-xor';
+
+  var KEYWORDS = {
+    keyword: 'if else foreach return do while until elseif begin for trap data dynamicparam ' +
+    'end break throw param continue finally in switch exit filter try process catch ' +
+    'hidden static parameter'
+    // TODO: 'validate[A-Z]+' can't work in keywords
+  };
+
+  var TITLE_NAME_RE = /\w[\w\d]*((-)[\w\d]+)*/;
+
   var BACKTICK_ESCAPE = {
-    begin: "`[\\s\\S]",
-    relevance: 0,
+    begin: '`[\\s\\S]',
+    relevance: 0
   };
+
   var VAR = {
-    className: "variable",
-    variants: [{ begin: /\$[\w\d][\w\d_:]*/ }],
+    className: 'variable',
+    variants: [
+      { begin: /\$\B/ },
+      { className: 'keyword', begin: /\$this/ },
+      { begin: /\$[\w\d][\w\d_:]*/ }
+    ]
   };
+
   var LITERAL = {
-    className: "literal",
-    begin: /\$(null|true|false)\b/,
+    className: 'literal',
+    begin: /\$(null|true|false)\b/
   };
+
   var QUOTE_STRING = {
     className: "string",
     variants: [{ begin: /"/, end: /"/ }, { begin: /@"/, end: /^"@/ }],
@@ -38476,255 +39082,182 @@ module.exports = function(hljs){
       BACKTICK_ESCAPE,
       VAR,
       {
-        className: "variable",
-        begin: /\$[A-z]/,
-        end: /[^A-z]/,
-      },
-    ],
+        className: 'variable',
+        begin: /\$[A-z]/, end: /[^A-z]/
+      }
+    ]
   };
+
   var APOS_STRING = {
-    className: "string",
-    variants: [{ begin: /'/, end: /'/ }, { begin: /@'/, end: /^'@/ }],
+    className: 'string',
+    variants: [
+      { begin: /'/, end: /'/ },
+      { begin: /@'/, end: /^'@/ }
+    ]
   };
 
   var PS_HELPTAGS = {
     className: "doctag",
     variants: [
       /* no paramater help tags */
-
       {
-        begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/,
+        begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/
       },
       /* one parameter help tags */
-      {
-        begin: /\.(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+\S+/,
-      },
-    ],
+      { begin: /\.(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+\S+/ }
+    ]
   };
-  var PS_COMMENT = hljs.inherit(hljs.COMMENT(null, null), {
-    variants: [
-      /* single-line comment */
-      { begin: /#/, end: /$/ },
-      /* multi-line comment */
-      { begin: /<#/, end: /#>/ },
-    ],
-    contains: [PS_HELPTAGS],
-  });
 
-  return {
-    aliases: ["ps"],
-    lexemes: /-?[A-z\.\-]+/,
-    case_insensitive: true,
-    keywords: {
-      keyword:
-        "if else foreach return function do while until elseif begin for trap data dynamicparam end break throw param continue finally in switch exit filter try process catch" +
-        "ValidateNoCircleInNodeResources ValidateNodeExclusiveResources ValidateNodeManager ValidateNodeResources ValidateNodeResourceSource ValidateNoNameNodeResources ThrowError IsHiddenResource" +
-        "IsPatternMatched ",
-      built_in:
-        "Add-Computer Add-Content Add-History Add-JobTrigger Add-Member Add-PSSnapin Add-Type Checkpoint-Computer Clear-Content " +
-        "Clear-EventLog Clear-History Clear-Host Clear-Item Clear-ItemProperty Clear-Variable Compare-Object Complete-Transaction Connect-PSSession " +
-        "Connect-WSMan Convert-Path ConvertFrom-Csv ConvertFrom-Json ConvertFrom-SecureString ConvertFrom-StringData ConvertTo-Csv ConvertTo-Html " +
-        "ConvertTo-Json ConvertTo-SecureString ConvertTo-Xml Copy-Item Copy-ItemProperty Debug-Process Disable-ComputerRestore Disable-JobTrigger " +
-        "Disable-PSBreakpoint Disable-PSRemoting Disable-PSSessionConfiguration Disable-WSManCredSSP Disconnect-PSSession Disconnect-WSMan " +
-        "Disable-ScheduledJob Enable-ComputerRestore Enable-JobTrigger Enable-PSBreakpoint Enable-PSRemoting Enable-PSSessionConfiguration " +
-        "Enable-ScheduledJob Enable-WSManCredSSP Enter-PSSession Exit-PSSession Export-Alias Export-Clixml Export-Console Export-Counter Export-Csv " +
-        "Export-FormatData Export-ModuleMember Export-PSSession ForEach-Object Format-Custom Format-List Format-Table Format-Wide Get-Acl Get-Alias " +
-        "Get-AuthenticodeSignature Get-ChildItem Get-Command Get-ComputerRestorePoint Get-Content Get-ControlPanelItem Get-Counter Get-Credential " +
-        "Get-Culture Get-Date Get-Event Get-EventLog Get-EventSubscriber Get-ExecutionPolicy Get-FormatData Get-Host Get-HotFix Get-Help Get-History " +
-        "Get-IseSnippet Get-Item Get-ItemProperty Get-Job Get-JobTrigger Get-Location Get-Member Get-Module Get-PfxCertificate Get-Process " +
-        "Get-PSBreakpoint Get-PSCallStack Get-PSDrive Get-PSProvider Get-PSSession Get-PSSessionConfiguration Get-PSSnapin Get-Random Get-ScheduledJob " +
-        "Get-ScheduledJobOption Get-Service Get-TraceSource Get-Transaction Get-TypeData Get-UICulture Get-Unique Get-Variable Get-Verb Get-WinEvent " +
-        "Get-WmiObject Get-WSManCredSSP Get-WSManInstance Group-Object Import-Alias Import-Clixml Import-Counter Import-Csv Import-IseSnippet " +
-        "Import-LocalizedData Import-PSSession Import-Module Invoke-AsWorkflow Invoke-Command Invoke-Expression Invoke-History Invoke-Item " +
-        "Invoke-RestMethod Invoke-WebRequest Invoke-WmiMethod Invoke-WSManAction Join-Path Limit-EventLog Measure-Command Measure-Object Move-Item " +
-        "Move-ItemProperty New-Alias New-Event New-EventLog New-IseSnippet New-Item New-ItemProperty New-JobTrigger New-Object New-Module " +
-        "New-ModuleManifest New-PSDrive New-PSSession New-PSSessionConfigurationFile New-PSSessionOption New-PSTransportOption " +
-        "New-PSWorkflowExecutionOption New-PSWorkflowSession New-ScheduledJobOption New-Service New-TimeSpan New-Variable New-WebServiceProxy " +
-        "New-WinEvent New-WSManInstance New-WSManSessionOption Out-Default Out-File Out-GridView Out-Host Out-Null Out-Printer Out-String Pop-Location " +
-        "Push-Location Read-Host Receive-Job Register-EngineEvent Register-ObjectEvent Register-PSSessionConfiguration Register-ScheduledJob " +
-        "Register-WmiEvent Remove-Computer Remove-Event Remove-EventLog Remove-Item Remove-ItemProperty Remove-Job Remove-JobTrigger Remove-Module " +
-        "Remove-PSBreakpoint Remove-PSDrive Remove-PSSession Remove-PSSnapin Remove-TypeData Remove-Variable Remove-WmiObject Remove-WSManInstance " +
-        "Rename-Computer Rename-Item Rename-ItemProperty Reset-ComputerMachinePassword Resolve-Path Restart-Computer Restart-Service Restore-Computer " +
-        "Resume-Job Resume-Service Save-Help Select-Object Select-String Select-Xml Send-MailMessage Set-Acl Set-Alias Set-AuthenticodeSignature " +
-        "Set-Content Set-Date Set-ExecutionPolicy Set-Item Set-ItemProperty Set-JobTrigger Set-Location Set-PSBreakpoint Set-PSDebug " +
-        "Set-PSSessionConfiguration Set-ScheduledJob Set-ScheduledJobOption Set-Service Set-StrictMode Set-TraceSource Set-Variable Set-WmiInstance " +
-        "Set-WSManInstance Set-WSManQuickConfig Show-Command Show-ControlPanelItem Show-EventLog Sort-Object Split-Path Start-Job Start-Process " +
-        "Start-Service Start-Sleep Start-Transaction Start-Transcript Stop-Computer Stop-Job Stop-Process Stop-Service Stop-Transcript Suspend-Job " +
-        "Suspend-Service Tee-Object Test-ComputerSecureChannel Test-Connection Test-ModuleManifest Test-Path Test-PSSessionConfigurationFile " +
-        "Trace-Command Unblock-File Undo-Transaction Unregister-Event Unregister-PSSessionConfiguration Unregister-ScheduledJob Update-FormatData " +
-        "Update-Help Update-List Update-TypeData Use-Transaction Wait-Event Wait-Job Wait-Process Where-Object Write-Debug Write-Error Write-EventLog " +
-        "Write-Host Write-Output Write-Progress Write-Verbose Write-Warning Add-MDTPersistentDrive Disable-MDTMonitorService Enable-MDTMonitorService " +
-        "Get-MDTDeploymentShareStatistics Get-MDTMonitorData Get-MDTOperatingSystemCatalog Get-MDTPersistentDrive Import-MDTApplication " +
-        "Import-MDTDriver Import-MDTOperatingSystem Import-MDTPackage Import-MDTTaskSequence New-MDTDatabase Remove-MDTMonitorData " +
-        "Remove-MDTPersistentDrive Restore-MDTPersistentDrive Set-MDTMonitorData Test-MDTDeploymentShare Test-MDTMonitorData Update-MDTDatabaseSchema " +
-        "Update-MDTDeploymentShare Update-MDTLinkedDS Update-MDTMedia Add-VamtProductKey Export-VamtData Find-VamtManagedMachine " +
-        "Get-VamtConfirmationId Get-VamtProduct Get-VamtProductKey Import-VamtData Initialize-VamtData Install-VamtConfirmationId " +
-        "Install-VamtProductActivation Install-VamtProductKey Update-VamtProduct Add-CIDatastore Add-KeyManagementServer Add-NodeKeys " +
-        "Add-NsxDynamicCriteria Add-NsxDynamicMemberSet Add-NsxEdgeInterfaceAddress Add-NsxFirewallExclusionListMember Add-NsxFirewallRuleMember " +
-        "Add-NsxIpSetMember Add-NsxLicense Add-NsxLoadBalancerPoolMember Add-NsxLoadBalancerVip Add-NsxSecondaryManager Add-NsxSecurityGroupMember " +
-        "Add-NsxSecurityPolicyRule Add-NsxSecurityPolicyRuleGroup Add-NsxSecurityPolicyRuleService Add-NsxServiceGroupMember " +
-        "Add-NsxTransportZoneMember Add-PassthroughDevice Add-VDSwitchPhysicalNetworkAdapter Add-VDSwitchVMHost Add-VMHost Add-VMHostNtpServer " +
-        "Add-VirtualSwitchPhysicalNetworkAdapter Add-XmlElement Add-vRACustomForm Add-vRAPrincipalToTenantRole Add-vRAReservationNetwork " +
-        "Add-vRAReservationStorage Clear-NsxEdgeInterface Clear-NsxManagerTimeSettings Compress-Archive Connect-CIServer Connect-CisServer " +
-        "Connect-HCXServer Connect-NIServer Connect-NsxLogicalSwitch Connect-NsxServer Connect-NsxtServer Connect-SrmServer Connect-VIServer " +
-        "Connect-Vmc Connect-vRAServer Connect-vRNIServer ConvertFrom-Markdown ConvertTo-MOFInstance Copy-DatastoreItem Copy-HardDisk Copy-NsxEdge " +
-        "Copy-VDisk Copy-VMGuestFile Debug-Runspace Disable-NsxEdgeSsh Disable-RunspaceDebug Disable-vRNIDataSource Disconnect-CIServer " +
-        "Disconnect-CisServer Disconnect-HCXServer Disconnect-NsxLogicalSwitch Disconnect-NsxServer Disconnect-NsxtServer Disconnect-SrmServer " +
-        "Disconnect-VIServer Disconnect-Vmc Disconnect-vRAServer Disconnect-vRNIServer Dismount-Tools Enable-NsxEdgeSsh Enable-RunspaceDebug " +
-        "Enable-vRNIDataSource Expand-Archive Export-NsxObject Export-SpbmStoragePolicy Export-VApp Export-VDPortGroup Export-VDSwitch " +
-        "Export-VMHostProfile Export-vRAIcon Export-vRAPackage Find-Command Find-DscResource Find-Module Find-NsxWhereVMUsed Find-Package " +
-        "Find-PackageProvider Find-RoleCapability Find-Script Format-Hex Format-VMHostDiskPartition Format-XML Generate-VersionInfo " +
-        "Get-AdvancedSetting Get-AlarmAction Get-AlarmActionTrigger Get-AlarmDefinition Get-Annotation Get-CDDrive Get-CIAccessControlRule " +
-        "Get-CIDatastore Get-CINetworkAdapter Get-CIRole Get-CIUser Get-CIVApp Get-CIVAppNetwork Get-CIVAppStartRule Get-CIVAppTemplate Get-CIVM " +
-        "Get-CIVMTemplate Get-CIView Get-Catalog Get-CisCommand Get-CisService Get-CloudCommand Get-Cluster Get-CompatibleVersionAddtionaPropertiesStr " +
-        "Get-ComplexResourceQualifier Get-ConfigurationErrorCount Get-ContentLibraryItem Get-CustomAttribute Get-DSCResourceModules Get-Datacenter " +
-        "Get-Datastore Get-DatastoreCluster Get-DrsClusterGroup Get-DrsRecommendation Get-DrsRule Get-DrsVMHostRule Get-DscResource Get-EdgeGateway " +
-        "Get-EncryptedPassword Get-ErrorReport Get-EsxCli Get-EsxTop Get-ExternalNetwork Get-FileHash Get-FloppyDrive Get-Folder Get-HAPrimaryVMHost " +
-        "Get-HCXAppliance Get-HCXApplianceCompute Get-HCXApplianceDVS Get-HCXApplianceDatastore Get-HCXApplianceNetwork Get-HCXContainer " +
-        "Get-HCXDatastore Get-HCXGateway Get-HCXInterconnectStatus Get-HCXJob Get-HCXMigration Get-HCXNetwork Get-HCXNetworkExtension " +
-        "Get-HCXReplication Get-HCXReplicationSnapshot Get-HCXService Get-HCXSite Get-HCXSitePairing Get-HCXVM Get-HardDisk Get-IScsiHbaTarget " +
-        "Get-InnerMostErrorRecord Get-InstallPath Get-InstalledModule Get-InstalledScript Get-Inventory Get-ItemPropertyValue Get-KeyManagementServer " +
-        "Get-KmipClientCertificate Get-KmsCluster Get-Log Get-LogType Get-MarkdownOption Get-Media Get-MofInstanceName Get-MofInstanceText Get-NetworkAdapter Get-NetworkPool " +
-        "Get-NfsUser Get-NicTeamingPolicy Get-NsxApplicableMember Get-NsxApplicableSecurityAction Get-NsxBackingDVSwitch Get-NsxBackingPortGroup Get-NsxCliDfwAddrSet " +
-        "Get-NsxCliDfwFilter Get-NsxCliDfwRule Get-NsxClusterStatus Get-NsxController Get-NsxDynamicCriteria Get-NsxDynamicMemberSet Get-NsxEdge Get-NsxEdgeBgp " +
-        "Get-NsxEdgeBgpNeighbour Get-NsxEdgeCertificate Get-NsxEdgeCsr Get-NsxEdgeFirewall Get-NsxEdgeFirewallRule Get-NsxEdgeInterface Get-NsxEdgeInterfaceAddress " +
-        "Get-NsxEdgeNat Get-NsxEdgeNatRule Get-NsxEdgeOspf Get-NsxEdgeOspfArea Get-NsxEdgeOspfInterface Get-NsxEdgePrefix Get-NsxEdgeRedistributionRule Get-NsxEdgeRouting " +
-        "Get-NsxEdgeStaticRoute Get-NsxEdgeSubInterface Get-NsxFirewallExclusionListMember Get-NsxFirewallGlobalConfiguration Get-NsxFirewallPublishStatus Get-NsxFirewallRule " +
-        "Get-NsxFirewallRuleMember Get-NsxFirewallSavedConfiguration Get-NsxFirewallSection Get-NsxFirewallThreshold Get-NsxIpPool Get-NsxIpSet Get-NsxLicense Get-NsxLoadBalancer " +
-        "Get-NsxLoadBalancerApplicationProfile Get-NsxLoadBalancerApplicationRule Get-NsxLoadBalancerMonitor Get-NsxLoadBalancerPool Get-NsxLoadBalancerPoolMember Get-NsxLoadBalancerStats " +
-        "Get-NsxLoadBalancerVip Get-NsxLogicalRouter Get-NsxLogicalRouterBgp Get-NsxLogicalRouterBgpNeighbour Get-NsxLogicalRouterBridge Get-NsxLogicalRouterBridging " +
-        "Get-NsxLogicalRouterInterface Get-NsxLogicalRouterOspf Get-NsxLogicalRouterOspfArea Get-NsxLogicalRouterOspfInterface Get-NsxLogicalRouterPrefix " +
-        "Get-NsxLogicalRouterRedistributionRule Get-NsxLogicalRouterRouting Get-NsxLogicalRouterStaticRoute Get-NsxLogicalSwitch Get-NsxMacSet Get-NsxManagerBackup " +
-        "Get-NsxManagerCertificate Get-NsxManagerComponentSummary Get-NsxManagerNetwork Get-NsxManagerRole Get-NsxManagerSsoConfig Get-NsxManagerSyncStatus Get-NsxManagerSyslogServer " +
-        "Get-NsxManagerSystemSummary Get-NsxManagerTimeSettings Get-NsxManagerVcenterConfig Get-NsxSecondaryManager Get-NsxSecurityGroup Get-NsxSecurityGroupEffectiveIpAddress " +
-        "Get-NsxSecurityGroupEffectiveMacAddress Get-NsxSecurityGroupEffectiveMember Get-NsxSecurityGroupEffectiveVirtualMachine Get-NsxSecurityGroupEffectiveVnic " +
-        "Get-NsxSecurityGroupMemberTypes Get-NsxSecurityPolicy Get-NsxSecurityPolicyHighestUsedPrecedence Get-NsxSecurityPolicyRule Get-NsxSecurityTag Get-NsxSecurityTagAssignment " +
-        "Get-NsxSegmentIdRange Get-NsxService Get-NsxServiceDefinition Get-NsxServiceGroup Get-NsxServiceGroupMember Get-NsxServiceProfile Get-NsxSpoofguardNic Get-NsxSpoofguardPolicy " +
-        "Get-NsxSslVpn Get-NsxSslVpnAuthServer Get-NsxSslVpnClientInstallationPackage Get-NsxSslVpnIpPool Get-NsxSslVpnPrivateNetwork Get-NsxSslVpnUser Get-NsxTransportZone " +
-        "Get-NsxUserRole Get-NsxVdsContext Get-NsxtPolicyService Get-NsxtService Get-OSCustomizationNicMapping Get-OSCustomizationSpec Get-Org Get-OrgNetwork Get-OrgVdc " +
-        "Get-OrgVdcNetwork Get-OvfConfiguration Get-PSCurrentConfigurationNode Get-PSDefaultConfigurationDocument Get-PSMetaConfigDocumentInstVersionInfo Get-PSMetaConfigurationProcessed " +
-        "Get-PSReadLineKeyHandler Get-PSReadLineOption Get-PSRepository Get-PSTopConfigurationName Get-PSVersion Get-Package Get-PackageProvider Get-PackageSource Get-PassthroughDevice " +
-        "Get-PositionInfo Get-PowerCLICommunity Get-PowerCLIConfiguration Get-PowerCLIHelp Get-PowerCLIVersion Get-PowerNsxVersion Get-ProviderVdc Get-PublicKeyFromFile " +
-        "Get-PublicKeyFromStore Get-ResourcePool Get-Runspace Get-RunspaceDebug Get-ScsiController Get-ScsiLun Get-ScsiLunPath Get-SecurityInfo Get-SecurityPolicy Get-Snapshot " +
-        "Get-SpbmCapability Get-SpbmCompatibleStorage Get-SpbmEntityConfiguration Get-SpbmFaultDomain Get-SpbmPointInTimeReplica Get-SpbmReplicationGroup Get-SpbmReplicationPair " +
-        "Get-SpbmStoragePolicy Get-Stat Get-StatInterval Get-StatType Get-Tag Get-TagAssignment Get-TagCategory Get-Task Get-Template Get-TimeZone Get-Uptime Get-UsbDevice Get-VAIOFilter " +
-        "Get-VApp Get-VDBlockedPolicy Get-VDPort Get-VDPortgroup Get-VDPortgroupOverridePolicy Get-VDSecurityPolicy Get-VDSwitch Get-VDSwitchPrivateVlan Get-VDTrafficShapingPolicy " +
-        "Get-VDUplinkLacpPolicy Get-VDUplinkTeamingPolicy Get-VDisk Get-VIAccount Get-VICommand Get-VICredentialStoreItem Get-VIEvent Get-VIObjectByVIView Get-VIPermission Get-VIPrivilege " +
-        "Get-VIProperty Get-VIRole Get-VM Get-VMGuest Get-VMHost Get-VMHostAccount Get-VMHostAdvancedConfiguration Get-VMHostAuthentication Get-VMHostAvailableTimeZone " +
-        "Get-VMHostDiagnosticPartition Get-VMHostDisk Get-VMHostDiskPartition Get-VMHostFirewallDefaultPolicy Get-VMHostFirewallException Get-VMHostFirmware Get-VMHostHardware " +
-        "Get-VMHostHba Get-VMHostModule Get-VMHostNetwork Get-VMHostNetworkAdapter Get-VMHostNtpServer Get-VMHostPatch Get-VMHostPciDevice Get-VMHostProfile " +
-        "Get-VMHostProfileImageCacheConfiguration Get-VMHostProfileRequiredInput Get-VMHostProfileStorageDeviceConfiguration Get-VMHostProfileUserConfiguration " +
-        "Get-VMHostProfileVmPortGroupConfiguration Get-VMHostRoute Get-VMHostService Get-VMHostSnmp Get-VMHostStartPolicy Get-VMHostStorage Get-VMHostSysLogServer Get-VMQuestion " +
-        "Get-VMResourceConfiguration Get-VMStartPolicy Get-VTpm Get-VTpmCSR Get-VTpmCertificate Get-VasaProvider Get-VasaStorageArray Get-View Get-VirtualPortGroup Get-VirtualSwitch " +
-        "Get-VmcSddcNetworkService Get-VmcService Get-VsanClusterConfiguration Get-VsanComponent Get-VsanDisk Get-VsanDiskGroup Get-VsanEvacuationPlan Get-VsanFaultDomain " +
-        "Get-VsanIscsiInitiatorGroup Get-VsanIscsiInitiatorGroupTargetAssociation Get-VsanIscsiLun Get-VsanIscsiTarget Get-VsanObject Get-VsanResyncingComponent Get-VsanRuntimeInfo " +
-        "Get-VsanSpaceUsage Get-VsanStat Get-VsanView Get-vRAApplianceServiceStatus Get-vRAAuthorizationRole Get-vRABlueprint Get-vRABusinessGroup Get-vRACatalogItem " +
-        "Get-vRACatalogItemRequestTemplate Get-vRACatalogPrincipal Get-vRAComponentRegistryService Get-vRAComponentRegistryServiceEndpoint Get-vRAComponentRegistryServiceStatus " +
-        "Get-vRAContent Get-vRAContentData Get-vRAContentType Get-vRACustomForm Get-vRAEntitledCatalogItem Get-vRAEntitledService Get-vRAEntitlement Get-vRAExternalNetworkProfile " +
-        "Get-vRAGroupPrincipal Get-vRAIcon Get-vRANATNetworkProfile Get-vRANetworkProfileIPAddressList Get-vRANetworkProfileIPRangeSummary Get-vRAPackage Get-vRAPackageContent " +
-        "Get-vRAPropertyDefinition Get-vRAPropertyGroup Get-vRARequest Get-vRARequestDetail Get-vRAReservation Get-vRAReservationComputeResource Get-vRAReservationComputeResourceMemory " +
-        "Get-vRAReservationComputeResourceNetwork Get-vRAReservationComputeResourceResourcePool Get-vRAReservationComputeResourceStorage Get-vRAReservationPolicy " +
-        "Get-vRAReservationTemplate Get-vRAReservationType Get-vRAResource Get-vRAResourceAction Get-vRAResourceActionRequestTemplate Get-vRAResourceMetric Get-vRAResourceOperation " +
-        "Get-vRAResourceType Get-vRARoutedNetworkProfile Get-vRAService Get-vRAServiceBlueprint Get-vRASourceMachine Get-vRAStorageReservationPolicy Get-vRATenant Get-vRATenantDirectory " +
-        "Get-vRATenantDirectoryStatus Get-vRATenantRole Get-vRAUserPrincipal Get-vRAUserPrincipalGroupMembership Get-vRAVersion Get-vRNIAPIVersion Get-vRNIApplication " +
-        "Get-vRNIApplicationTier Get-vRNIDataSource Get-vRNIDataSourceSNMPConfig Get-vRNIDatastore Get-vRNIDistributedSwitch Get-vRNIDistributedSwitchPortGroup Get-vRNIEntity " +
-        "Get-vRNIEntityName Get-vRNIFirewallRule Get-vRNIFlow Get-vRNIHost Get-vRNIHostVMKNic Get-vRNIIPSet Get-vRNIL2Network Get-vRNINSXManager Get-vRNINodes Get-vRNIProblem " +
-        "Get-vRNIRecommendedRules Get-vRNIRecommendedRulesNsxBundle Get-vRNISecurityGroup Get-vRNISecurityTag Get-vRNIService Get-vRNIServiceGroup Get-vRNIVM Get-vRNIVMvNIC " +
-        "Get-vRNIvCenter Get-vRNIvCenterCluster Get-vRNIvCenterDatacenter Get-vRNIvCenterFolder Grant-NsxSpoofguardNicApproval Import-CIVApp Import-CIVAppTemplate Import-NsxObject " +
-        "Import-PackageProvider Import-PowerShellDataFile Import-SpbmStoragePolicy Import-VApp Import-VMHostProfile Import-vRAContentData Import-vRAIcon Import-vRAPackage " +
-        "Initialize-ConfigurationRuntimeState Install-Module Install-NsxCluster Install-Package Install-PackageProvider Install-Script Install-VMHostPatch Invoke-DrsRecommendation " +
-        "Invoke-NsxCli Invoke-NsxClusterResolveAll Invoke-NsxManagerSync Invoke-NsxRestMethod Invoke-NsxWebRequest Invoke-VMHostProfile Invoke-VMScript Invoke-XpathQuery " +
-        "Invoke-vRADataCollection Invoke-vRARestMethod Invoke-vRATenantDirectorySync Invoke-vRNIRestMethod Join-String Mount-Tools Move-Cluster Move-Datacenter Move-Datastore Move-Folder " +
-        "Move-HardDisk Move-Inventory Move-NsxSecurityPolicyRule Move-ResourcePool Move-Template Move-VApp Move-VDisk Move-VM Move-VMHost New-AdvancedSetting New-AlarmAction " +
-        "New-AlarmActionTrigger New-CDDrive New-CIAccessControlRule New-CIVApp New-CIVAppNetwork New-CIVAppTemplate New-CIVM New-Cluster New-CustomAttribute New-Datacenter New-Datastore " +
-        "New-DatastoreCluster New-DatastoreDrive New-DrsClusterGroup New-DrsRule New-DrsVMHostRule New-DscChecksum New-FloppyDrive New-Folder New-Guid New-HCXAppliance New-HCXMigration " +
-        "New-HCXNetworkExtension New-HCXNetworkMapping New-HCXReplication New-HCXSitePairing New-HCXStaticRoute New-HardDisk New-IScsiHbaTarget New-KmipClientCertificate " +
-        "New-NetworkAdapter New-NfsUser New-NsxAddressSpec New-NsxClusterVxlanConfig New-NsxController New-NsxDynamicCriteriaSpec New-NsxEdge New-NsxEdgeBgpNeighbour New-NsxEdgeCsr " +
-        "New-NsxEdgeFirewallRule New-NsxEdgeInterfaceSpec New-NsxEdgeNatRule New-NsxEdgeOspfArea New-NsxEdgeOspfInterface New-NsxEdgePrefix New-NsxEdgeRedistributionRule " +
-        "New-NsxEdgeSelfSignedCertificate New-NsxEdgeStaticRoute New-NsxEdgeSubInterface New-NsxEdgeSubInterfaceSpec New-NsxFirewallRule New-NsxFirewallSavedConfiguration " +
-        "New-NsxFirewallSection New-NsxIpPool New-NsxIpSet New-NsxLoadBalancerApplicationProfile New-NsxLoadBalancerApplicationRule New-NsxLoadBalancerMemberSpec " +
-        "New-NsxLoadBalancerMonitor New-NsxLoadBalancerPool New-NsxLogicalRouter New-NsxLogicalRouterBgpNeighbour New-NsxLogicalRouterBridge New-NsxLogicalRouterInterface " +
-        "New-NsxLogicalRouterInterfaceSpec New-NsxLogicalRouterOspfArea New-NsxLogicalRouterOspfInterface New-NsxLogicalRouterPrefix New-NsxLogicalRouterRedistributionRule " +
-        "New-NsxLogicalRouterStaticRoute New-NsxLogicalSwitch New-NsxMacSet New-NsxManager New-NsxSecurityGroup New-NsxSecurityPolicy New-NsxSecurityPolicyAssignment " +
-        "New-NsxSecurityPolicyFirewallRuleSpec New-NsxSecurityPolicyGuestIntrospectionSpec New-NsxSecurityPolicyNetworkIntrospectionSpec New-NsxSecurityTag New-NsxSecurityTagAssignment " +
-        "New-NsxSegmentIdRange New-NsxService New-NsxServiceGroup New-NsxSpoofguardPolicy New-NsxSslVpnAuthServer New-NsxSslVpnClientInstallationPackage New-NsxSslVpnIpPool " +
-        "New-NsxSslVpnPrivateNetwork New-NsxSslVpnUser New-NsxTransportZone New-NsxVdsContext New-OSCustomizationNicMapping New-OSCustomizationSpec New-Org New-OrgNetwork New-OrgVdc " +
-        "New-OrgVdcNetwork New-ResourcePool New-ScriptFileInfo New-ScsiController New-Snapshot New-SpbmRule New-SpbmRuleSet New-SpbmStoragePolicy New-StatInterval New-Tag " +
-        "New-TagAssignment New-TagCategory New-Template New-TemporaryFile New-VAIOFilter New-VApp New-VDPortgroup New-VDSwitch New-VDSwitchPrivateVlan New-VDisk " +
-        "New-VICredentialStoreItem New-VIInventoryDrive New-VIPermission New-VIProperty New-VIRole New-VISamlSecurityContext New-VM New-VMHostAccount New-VMHostNetworkAdapter " +
-        "New-VMHostProfile New-VMHostProfileVmPortGroupConfiguration New-VMHostRoute New-VTpm New-VasaProvider New-VcsOAuthSecurityContext New-VirtualPortGroup New-VirtualSwitch " +
-        "New-VsanDisk New-VsanDiskGroup New-VsanFaultDomain New-VsanIscsiInitiatorGroup New-VsanIscsiInitiatorGroupTargetAssociation New-VsanIscsiLun New-VsanIscsiTarget " +
-        "New-vRABusinessGroup New-vRAEntitlement New-vRAExternalNetworkProfile New-vRAGroupPrincipal New-vRANATNetworkProfile New-vRANetworkProfileIPRangeDefinition New-vRAPackage " +
-        "New-vRAPropertyDefinition New-vRAPropertyGroup New-vRAReservation New-vRAReservationNetworkDefinition New-vRAReservationPolicy New-vRAReservationStorageDefinition " +
-        "New-vRARoutedNetworkProfile New-vRAService New-vRAStorageReservationPolicy New-vRATenant New-vRATenantDirectory New-vRAUserPrincipal New-vRNIApplication New-vRNIApplicationTier " +
-        "New-vRNIDataSource Open-VMConsoleWindow Publish-Module Publish-NsxSpoofguardPolicy Publish-Script Register-PSRepository Register-PackageSource Remove-AdvancedSetting " +
-        "Remove-AlarmAction Remove-AlarmActionTrigger Remove-Alias Remove-CDDrive Remove-CIAccessControlRule Remove-CIVApp Remove-CIVAppNetwork Remove-CIVAppTemplate Remove-Cluster " +
-        "Remove-CustomAttribute Remove-Datacenter Remove-Datastore Remove-DatastoreCluster Remove-DrsClusterGroup Remove-DrsRule Remove-DrsVMHostRule Remove-FloppyDrive Remove-Folder " +
-        "Remove-HCXAppliance Remove-HCXNetworkExtension Remove-HCXReplication Remove-HCXSitePairing Remove-HardDisk Remove-IScsiHbaTarget Remove-Inventory Remove-KeyManagementServer " +
-        "Remove-NetworkAdapter Remove-NfsUser Remove-NsxCluster Remove-NsxClusterVxlanConfig Remove-NsxController Remove-NsxDynamicCriteria Remove-NsxDynamicMemberSet Remove-NsxEdge " +
-        "Remove-NsxEdgeBgpNeighbour Remove-NsxEdgeCertificate Remove-NsxEdgeCsr Remove-NsxEdgeFirewallRule Remove-NsxEdgeInterfaceAddress Remove-NsxEdgeNatRule Remove-NsxEdgeOspfArea " +
-        "Remove-NsxEdgeOspfInterface Remove-NsxEdgePrefix Remove-NsxEdgeRedistributionRule Remove-NsxEdgeStaticRoute Remove-NsxEdgeSubInterface Remove-NsxFirewallExclusionListMember " +
-        "Remove-NsxFirewallRule Remove-NsxFirewallRuleMember Remove-NsxFirewallSavedConfiguration Remove-NsxFirewallSection Remove-NsxIpPool Remove-NsxIpSet Remove-NsxIpSetMember " +
-        "Remove-NsxLoadBalancerApplicationProfile Remove-NsxLoadBalancerMonitor Remove-NsxLoadBalancerPool Remove-NsxLoadBalancerPoolMember Remove-NsxLoadBalancerVip " +
-        "Remove-NsxLogicalRouter Remove-NsxLogicalRouterBgpNeighbour Remove-NsxLogicalRouterBridge Remove-NsxLogicalRouterInterface Remove-NsxLogicalRouterOspfArea " +
-        "Remove-NsxLogicalRouterOspfInterface Remove-NsxLogicalRouterPrefix Remove-NsxLogicalRouterRedistributionRule Remove-NsxLogicalRouterStaticRoute Remove-NsxLogicalSwitch " +
-        "Remove-NsxMacSet Remove-NsxSecondaryManager Remove-NsxSecurityGroup Remove-NsxSecurityGroupMember Remove-NsxSecurityPolicy Remove-NsxSecurityPolicyAssignment " +
-        "Remove-NsxSecurityPolicyRule Remove-NsxSecurityPolicyRuleGroup Remove-NsxSecurityPolicyRuleService Remove-NsxSecurityTag Remove-NsxSecurityTagAssignment " +
-        "Remove-NsxSegmentIdRange Remove-NsxService Remove-NsxServiceGroup Remove-NsxSpoofguardPolicy Remove-NsxSslVpnClientInstallationPackage Remove-NsxSslVpnIpPool " +
-        "Remove-NsxSslVpnPrivateNetwork Remove-NsxSslVpnUser Remove-NsxTransportZone Remove-NsxTransportZoneMember Remove-NsxVdsContext Remove-OSCustomizationNicMapping " +
-        "Remove-OSCustomizationSpec Remove-Org Remove-OrgNetwork Remove-OrgVdc Remove-OrgVdcNetwork Remove-PSReadLineKeyHandler Remove-PassthroughDevice Remove-ResourcePool " +
-        "Remove-Snapshot Remove-SpbmStoragePolicy Remove-StatInterval Remove-Tag Remove-TagAssignment Remove-TagCategory Remove-Template Remove-UsbDevice Remove-VAIOFilter Remove-VApp " +
-        "Remove-VDPortGroup Remove-VDSwitch Remove-VDSwitchPhysicalNetworkAdapter Remove-VDSwitchPrivateVlan Remove-VDSwitchVMHost Remove-VDisk Remove-VICredentialStoreItem " +
-        "Remove-VIPermission Remove-VIProperty Remove-VIRole Remove-VM Remove-VMHost Remove-VMHostAccount Remove-VMHostNetworkAdapter Remove-VMHostNtpServer Remove-VMHostProfile " +
-        "Remove-VMHostProfileVmPortGroupConfiguration Remove-VMHostRoute Remove-VTpm Remove-VasaProvider Remove-VirtualPortGroup Remove-VirtualSwitch " +
-        "Remove-VirtualSwitchPhysicalNetworkAdapter Remove-VsanDisk Remove-VsanDiskGroup Remove-VsanFaultDomain Remove-VsanIscsiInitiatorGroup " +
-        "Remove-VsanIscsiInitiatorGroupTargetAssociation Remove-VsanIscsiLun Remove-VsanIscsiTarget Remove-vRABusinessGroup Remove-vRACustomForm Remove-vRAExternalNetworkProfile " +
-        "Remove-vRAGroupPrincipal Remove-vRAIcon Remove-vRANATNetworkProfile Remove-vRAPackage Remove-vRAPrincipalFromTenantRole Remove-vRAPropertyDefinition Remove-vRAPropertyGroup " +
-        "Remove-vRAReservation Remove-vRAReservationNetwork Remove-vRAReservationPolicy Remove-vRAReservationStorage Remove-vRARoutedNetworkProfile Remove-vRAService " +
-        "Remove-vRAStorageReservationPolicy Remove-vRATenant Remove-vRATenantDirectory Remove-vRAUserPrincipal Remove-vRNIApplication Remove-vRNIApplicationTier Remove-vRNIDataSource " +
-        "Repair-NsxEdge Repair-VsanObject Request-vRACatalogItem Request-vRAResourceAction Restart-CIVApp Restart-CIVAppGuest Restart-CIVM Restart-CIVMGuest Restart-VM Restart-VMGuest " +
-        "Restart-VMHost Restart-VMHostService Resume-HCXReplication Revoke-NsxSpoofguardNicApproval Save-Module Save-Package Save-Script Search-Cloud Set-AdvancedSetting " +
-        "Set-AlarmDefinition Set-Annotation Set-CDDrive Set-CIAccessControlRule Set-CINetworkAdapter Set-CIVApp Set-CIVAppNetwork Set-CIVAppStartRule Set-CIVAppTemplate Set-Cluster " +
-        "Set-CustomAttribute Set-Datacenter Set-Datastore Set-DatastoreCluster Set-DrsClusterGroup Set-DrsRule Set-DrsVMHostRule Set-FloppyDrive Set-Folder Set-HCXAppliance " +
-        "Set-HCXMigration Set-HCXReplication Set-HardDisk Set-IScsiHbaTarget Set-KeyManagementServer Set-KmsCluster Set-MarkdownOption Set-NetworkAdapter Set-NfsUser Set-NicTeamingPolicy " +
-        "Set-NodeExclusiveResources Set-NodeManager Set-NodeResourceSource Set-NodeResources Set-NsxEdge Set-NsxEdgeBgp Set-NsxEdgeFirewall Set-NsxEdgeInterface Set-NsxEdgeNat " +
-        "Set-NsxEdgeOspf Set-NsxEdgeRouting Set-NsxFirewallGlobalConfiguration Set-NsxFirewallRule Set-NsxFirewallSavedConfiguration Set-NsxFirewallThreshold Set-NsxLoadBalancer " +
-        "Set-NsxLoadBalancerPoolMember Set-NsxLogicalRouter Set-NsxLogicalRouterBgp Set-NsxLogicalRouterBridging Set-NsxLogicalRouterInterface Set-NsxLogicalRouterOspf " +
-        "Set-NsxLogicalRouterRouting Set-NsxManager Set-NsxManagerRole Set-NsxManagerTimeSettings Set-NsxSecurityPolicy Set-NsxSecurityPolicyFirewallRule Set-NsxSslVpn " +
-        "Set-OSCustomizationNicMapping Set-OSCustomizationSpec Set-Org Set-OrgNetwork Set-OrgVdc Set-OrgVdcNetwork Set-PSCurrentConfigurationNode Set-PSDefaultConfigurationDocument " +
-        "Set-PSMetaConfigDocInsProcessedBeforeMeta Set-PSMetaConfigVersionInfoV2 Set-PSReadLineKeyHandler Set-PSReadLineOption Set-PSRepository Set-PSTopConfigurationName " +
-        "Set-PackageSource Set-PowerCLIConfiguration Set-ResourcePool Set-ScsiController Set-ScsiLun Set-ScsiLunPath Set-SecurityPolicy Set-Snapshot Set-SpbmEntityConfiguration " +
-        "Set-SpbmStoragePolicy Set-StatInterval Set-Tag Set-TagCategory Set-Template Set-VAIOFilter Set-VApp Set-VDBlockedPolicy Set-VDPort Set-VDPortgroup Set-VDPortgroupOverridePolicy " +
-        "Set-VDSecurityPolicy Set-VDSwitch Set-VDTrafficShapingPolicy Set-VDUplinkLacpPolicy Set-VDUplinkTeamingPolicy Set-VDVlanConfiguration Set-VDisk Set-VIPermission Set-VIRole Set-VM " +
-        "Set-VMHost Set-VMHostAccount Set-VMHostAdvancedConfiguration Set-VMHostAuthentication Set-VMHostDiagnosticPartition Set-VMHostFirewallDefaultPolicy Set-VMHostFirewallException " +
-        "Set-VMHostFirmware Set-VMHostHba Set-VMHostModule Set-VMHostNetwork Set-VMHostNetworkAdapter Set-VMHostProfile Set-VMHostProfileImageCacheConfiguration " +
-        "Set-VMHostProfileStorageDeviceConfiguration Set-VMHostProfileUserConfiguration Set-VMHostProfileVmPortGroupConfiguration Set-VMHostRoute Set-VMHostService Set-VMHostSnmp " +
-        "Set-VMHostStartPolicy Set-VMHostStorage Set-VMHostSysLogServer Set-VMQuestion Set-VMResourceConfiguration Set-VMStartPolicy Set-VTpm Set-VirtualPortGroup Set-VirtualSwitch " +
-        "Set-VsanClusterConfiguration Set-VsanFaultDomain Set-VsanIscsiInitiatorGroup Set-VsanIscsiLun Set-VsanIscsiTarget Set-vRABusinessGroup Set-vRACatalogItem Set-vRACustomForm " +
-        "Set-vRAEntitlement Set-vRAExternalNetworkProfile Set-vRANATNetworkProfile Set-vRAReservation Set-vRAReservationNetwork Set-vRAReservationPolicy Set-vRAReservationStorage " +
-        "Set-vRARoutedNetworkProfile Set-vRAService Set-vRAStorageReservationPolicy Set-vRATenant Set-vRATenantDirectory Set-vRAUserPrincipal Set-vRNIDataSourceSNMPConfig Show-Markdown " +
-        "Start-CIVApp Start-CIVM Start-HCXMigration Start-HCXReplication Start-SpbmReplicationFailover Start-SpbmReplicationPrepareFailover Start-SpbmReplicationPromote " +
-        "Start-SpbmReplicationReverse Start-SpbmReplicationTestFailover Start-ThreadJob Start-VApp Start-VM Start-VMHost Start-VMHostService Start-VsanClusterDiskUpdate " +
-        "Start-VsanClusterRebalance Start-VsanEncryptionConfiguration Stop-CIVApp Stop-CIVAppGuest Stop-CIVM Stop-CIVMGuest Stop-SpbmReplicationTestFailover Stop-Task Stop-VApp Stop-VM " +
-        "Stop-VMGuest Stop-VMHost Stop-VMHostService Stop-VsanClusterRebalance Suspend-CIVApp Suspend-CIVM Suspend-HCXReplication Suspend-VM Suspend-VMGuest Suspend-VMHost " +
-        "Sync-SpbmReplicationGroup Test-ConflictingResources Test-HCXMigration Test-HCXReplication Test-Json Test-ModuleReloadRequired Test-MofInstanceText Test-NodeManager " +
-        "Test-NodeResourceSource Test-NodeResources Test-ScriptFileInfo Test-VMHostProfileCompliance Test-VMHostSnmp Test-VsanClusterHealth Test-VsanNetworkPerformance " +
-        "Test-VsanStoragePerformance Test-VsanVMCreation Test-vRAPackage Uninstall-Module Uninstall-Package Uninstall-Script Unlock-VM Unregister-PSRepository Unregister-PackageSource " +
-        "Update-ConfigurationDocumentRef Update-ConfigurationErrorCount Update-DependsOn Update-LocalConfigManager Update-Module Update-ModuleManifest Update-ModuleVersion Update-PowerNsx " +
-        "Update-Script Update-ScriptFileInfo Update-Tools Update-VsanHclDatabase ValidateUpdate-ConfigurationData Wait-Debugger Wait-NsxControllerJob Wait-NsxGenericJob Wait-NsxJob " +
-        "Wait-Task Wait-Tools Write-Information Write-Log Write-MetaConfigFile Write-NodeMOFFile",
-      nomarkup:
-        "-ne -eq -lt -gt -ge -le -not -like -notlike -match -notmatch -contains -notcontains -in -notin -replace",
-    },
+  var PS_COMMENT = hljs.inherit(
+    hljs.COMMENT(null, null),
+    {
+      variants: [
+        /* single-line comment */
+        { begin: /#/, end: /$/ },
+        /* multi-line comment */
+        { begin: /<#/, end: /#>/ }
+      ],
+      contains: [PS_HELPTAGS]
+    }
+  );
+
+  var CMDLETS = {
+    className: 'built_in',
+    variants: [
+      { begin: '('.concat(VALID_VERBS, ')+(-)[\\w\\d]+') }
+    ]
+  };
+
+  var PS_CLASS = {
+    className: 'class',
+    beginKeywords: 'class enum', end: /\s*[{]/, excludeEnd: true,
+    relevance: 0,
+    contains: [hljs.TITLE_MODE]
+  };
+
+  var PS_FUNCTION = {
+    className: 'function',
+    begin: /function\s+/, end: /\s*\{|$/,
+    excludeEnd: true,
+    returnBegin: true,
+    relevance: 0,
     contains: [
-      BACKTICK_ESCAPE,
-      hljs.NUMBER_MODE,
+      { begin: "function", relevance: 0, className: "keyword" },
+      { className: "title",
+        begin: TITLE_NAME_RE, relevance:0 },
+      { begin: /\(/, end: /\)/, className: "params",
+        relevance: 0,
+        contains: [VAR] }
+      // CMDLETS
+    ]
+  };
+
+  // Using statment, plus type, plus assembly name.
+  var PS_USING = {
+    begin: /using\s/, end: /$/,
+    returnBegin: true,
+    contains: [
       QUOTE_STRING,
       APOS_STRING,
-      LITERAL,
-      VAR,
-      PS_COMMENT,
-    ],
+      { className: 'keyword', begin: /(using|assembly|command|module|namespace|type)/ }
+    ]
+  };
+
+  // Comperison operators & function named parameters.
+  var PS_ARGUMENTS = {
+    variants: [
+      // PS literals are pretty verbose so it's a good idea to accent them a bit.
+      { className: 'operator', begin: '('.concat(COMPARISON_OPERATORS, ')\\b') },
+      { className: 'literal', begin: /(-)[\w\d]+/, relevance:0 }
+    ]
+  };
+
+  var STATIC_MEMBER = {
+    className: 'selector-tag',
+    begin: /::\w+\b/, end: /$/,
+    returnBegin: true,
+    contains: [
+      { className: 'attribute', begin: /\w+/, endsParent: true }
+    ]
+  };
+
+  var HASH_SIGNS = {
+    className: 'selector-tag',
+    begin: /\@\B/,
+    relevance: 0
+  };
+
+  var PS_NEW_OBJECT_TYPE = {
+    className: 'built_in',
+    begin: /New-Object\s+\w/, end: /$/,
+    returnBegin: true,
+    contains: [
+      { begin: /New-Object\s+/, relevance: 0 },
+      { className: 'meta', begin: /([\w\.])+/, endsParent: true }
+    ]
+  };
+
+  // It's a very general rule so I'll narrow it a bit with some strict boundaries
+  // to avoid any possible false-positive collisions!
+  var PS_METHODS = {
+    className: 'function',
+    begin: /\[.*\]\s*[\w]+[ ]??\(/, end: /$/,
+    returnBegin: true,
+    relevance: 0,
+    contains: [
+      {
+        className: 'keyword', begin: '('.concat(
+        KEYWORDS.keyword.toString().replace(/\s/g, '|'
+        ), ')\\b'),
+        endsParent: true,
+        relevance: 0
+      },
+      hljs.inherit(hljs.TITLE_MODE, { endsParent: true })
+    ]
+  };
+
+  var GENTLEMANS_SET = [
+    // STATIC_MEMBER,
+    PS_METHODS,
+    PS_COMMENT,
+    BACKTICK_ESCAPE,
+    hljs.NUMBER_MODE,
+    QUOTE_STRING,
+    APOS_STRING,
+    // PS_NEW_OBJECT_TYPE,
+    CMDLETS,
+    VAR,
+    LITERAL,
+    HASH_SIGNS
+  ];
+
+  var PS_TYPE = {
+    begin: /\[/, end: /\]/,
+    excludeBegin: true,
+    excludeEnd: true,
+    relevance: 0,
+    contains: [].concat(
+      'self',
+      GENTLEMANS_SET,
+      { begin: "(" + TYPES.join("|") + ")", className: "built_in", relevance:0 },
+      { className: 'type', begin: /[\.\w\d]+/, relevance: 0 }
+    )
+  };
+
+  PS_METHODS.contains.unshift(PS_TYPE)
+
+  return {
+    aliases: ["ps", "ps1"],
+    lexemes: /-?[A-z\.\-]+/,
+    case_insensitive: true,
+    keywords: KEYWORDS,
+    contains: GENTLEMANS_SET.concat(
+      PS_CLASS,
+      PS_FUNCTION,
+      PS_USING,
+      PS_ARGUMENTS,
+      PS_TYPE
+    )
   };
 };
 
@@ -39242,7 +39775,7 @@ function(hljs) {
 }
 
 /*  ==============================================================================
-                                      CHANGELOG                                   
+                                      CHANGELOG
     ==============================================================================
     - v.1.2 (2017-05-12)
         -- BUG-FIX: Some keywords were accidentally joyned together. Now fixed.
@@ -39291,6 +39824,10 @@ module.exports = function(hljs) {
     keywords: KEYWORDS,
     illegal: /#/
   };
+  var LITERAL_BRACKET = {
+    begin: /\{\{/,
+    relevance: 0
+  };
   var STRING = {
     className: 'string',
     contains: [hljs.BACKSLASH_ESCAPE],
@@ -39307,11 +39844,11 @@ module.exports = function(hljs) {
       },
       {
         begin: /(fr|rf|f)'''/, end: /'''/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, SUBST]
+        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, LITERAL_BRACKET, SUBST]
       },
       {
         begin: /(fr|rf|f)"""/, end: /"""/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, SUBST]
+        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, LITERAL_BRACKET, SUBST]
       },
       {
         begin: /(u|r|ur)'/, end: /'/,
@@ -39329,11 +39866,11 @@ module.exports = function(hljs) {
       },
       {
         begin: /(fr|rf|f)'/, end: /'/,
-        contains: [hljs.BACKSLASH_ESCAPE, SUBST]
+        contains: [hljs.BACKSLASH_ESCAPE, LITERAL_BRACKET, SUBST]
       },
       {
         begin: /(fr|rf|f)"/, end: /"/,
-        contains: [hljs.BACKSLASH_ESCAPE, SUBST]
+        contains: [hljs.BACKSLASH_ESCAPE, LITERAL_BRACKET, SUBST]
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE
@@ -39350,7 +39887,7 @@ module.exports = function(hljs) {
   var PARAMS = {
     className: 'params',
     begin: /\(/, end: /\)/,
-    contains: ['self', PROMPT, NUMBER, STRING]
+    contains: ['self', PROMPT, NUMBER, STRING, hljs.HASH_COMMENT_MODE]
   };
   SUBST.contains = [STRING, NUMBER, PROMPT];
   return {
@@ -39360,6 +39897,9 @@ module.exports = function(hljs) {
     contains: [
       PROMPT,
       NUMBER,
+      // eat "if" prior to string so that it won't accidentally be
+      // labeled as an f-string as in:
+      { beginKeywords: "if", relevance: 0 },
       STRING,
       hljs.HASH_COMMENT_MODE,
       {
@@ -40133,7 +40673,7 @@ function(hljs) {
   // ToDo: var PARAMETERS_PRINT = 'append as-value brief detail count-only file follow follow-only from interval terse value-list without-paging where info';
   // ToDo: var OPERATORS = '&& and ! not || or in ~ ^ & << >> + - * /';
   // ToDo: var TYPES = 'num number bool boolean str string ip ip6-prefix id time array';
-  // ToDo: The following tokens serve as delimiters in the grammar: ()  []  {}  :   ;   $   / 
+  // ToDo: The following tokens serve as delimiters in the grammar: ()  []  {}  :   ;   $   /
 
   var VAR_PREFIX = 'global local set for foreach';
 
@@ -40144,7 +40684,7 @@ function(hljs) {
       {begin: /\$\{(.*?)}/}
     ]
   };
-  
+
   var QUOTE_STRING = {
     className: 'string',
     begin: /"/, end: /"/,
@@ -40158,12 +40698,12 @@ function(hljs) {
       }
     ]
   };
-  
+
   var APOS_STRING = {
     className: 'string',
     begin: /'/, end: /'/
   };
-  
+
   var IPADDR = '((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\b';
   var IPADDR_wBITMASK =  IPADDR+'/(3[0-2]|[1-2][0-9]|\\d)';
   //////////////////////////////////////////////////////////////////////
@@ -40187,7 +40727,7 @@ function(hljs) {
           { begin: /^\[\</, end: /\>\]$/, },        // F# class declaration?
           { begin: /<\//, end: />/, },              // HTML tags
           { begin: /^facet /, end: /\}/, },         // roboconf - лютый костыль )))
-          { begin: '^1\\.\\.(\\d+)$', end: /$/, },  // tap  
+          { begin: '^1\\.\\.(\\d+)$', end: /$/, },  // tap
         ],
         illegal: /./,
       },
@@ -40196,7 +40736,7 @@ function(hljs) {
       APOS_STRING,
       VAR,
       { // attribute=value
-        begin: /[\w-]+\=([^\s\{\}\[\]\(\)]+)/, 
+        begin: /[\w-]+\=([^\s\{\}\[\]\(\)]+)/,
         relevance: 0,
         returnBegin: true,
         contains: [
@@ -40205,7 +40745,7 @@ function(hljs) {
             begin: /[^=]+/
           },
           {
-            begin: /=/, 
+            begin: /=/,
             endsWithParent:  true,
             relevance: 0,
             contains: [
@@ -40232,7 +40772,7 @@ function(hljs) {
               }, //*/
               {
                 // Не форматировать не классифицированные значения. Необходимо для исключения подсветки значений как built_in.
-                // className: 'number',  
+                // className: 'number',
                 begin: /("[^"]*"|[^\s\{\}\[\]]+)/,
               }, //*/
             ]
@@ -40245,7 +40785,7 @@ function(hljs) {
         begin: /\*[0-9a-fA-F]+/,
       }, //*/
 
-      { 
+      {
         begin: '\\b(' + COMMON_COMMANDS.split(' ').join('|') + ')([\\s\[\(]|\])',
         returnBegin: true,
         contains: [
@@ -40253,10 +40793,10 @@ function(hljs) {
             className: 'builtin-name', //'function',
             begin: /\w+/,
           },
-        ],  
+        ],
       },
-      
-      { 
+
+      {
         className: 'built_in',
         variants: [
           {begin: '(\\.\\./|/|\\s)((' + OBJECTS.split(' ').join('|') + ');?\\s)+',relevance: 10,},
@@ -41178,6 +41718,8 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  var AT_IDENTIFIER = '@[a-z-]+' // @font-face
+  var AT_MODIFIERS = "and or not only"
   var IDENT_RE = '[a-zA-Z-][a-zA-Z0-9_-]*';
   var VARIABLE = {
     className: 'variable',
@@ -41229,15 +41771,17 @@ module.exports = function(hljs) {
         relevance: 0
       },
       {
+        className: 'selector-pseudo',
         begin: ':(visited|valid|root|right|required|read-write|read-only|out-range|optional|only-of-type|only-child|nth-of-type|nth-last-of-type|nth-last-child|nth-child|not|link|left|last-of-type|last-child|lang|invalid|indeterminate|in-range|hover|focus|first-of-type|first-line|first-letter|first-child|first|enabled|empty|disabled|default|checked|before|after|active)'
       },
       {
+        className: 'selector-pseudo',
         begin: '::(after|before|choices|first-letter|first-line|repeat-index|repeat-item|selection|value)'
       },
       VARIABLE,
       {
         className: 'attribute',
-        begin: '\\b(z-index|word-wrap|word-spacing|word-break|width|widows|white-space|visibility|vertical-align|unicode-bidi|transition-timing-function|transition-property|transition-duration|transition-delay|transition|transform-style|transform-origin|transform|top|text-underline-position|text-transform|text-shadow|text-rendering|text-overflow|text-indent|text-decoration-style|text-decoration-line|text-decoration-color|text-decoration|text-align-last|text-align|tab-size|table-layout|right|resize|quotes|position|pointer-events|perspective-origin|perspective|page-break-inside|page-break-before|page-break-after|padding-top|padding-right|padding-left|padding-bottom|padding|overflow-y|overflow-x|overflow-wrap|overflow|outline-width|outline-style|outline-offset|outline-color|outline|orphans|order|opacity|object-position|object-fit|normal|none|nav-up|nav-right|nav-left|nav-index|nav-down|min-width|min-height|max-width|max-height|mask|marks|margin-top|margin-right|margin-left|margin-bottom|margin|list-style-type|list-style-position|list-style-image|list-style|line-height|letter-spacing|left|justify-content|initial|inherit|ime-mode|image-orientation|image-resolution|image-rendering|icon|hyphens|height|font-weight|font-variant-ligatures|font-variant|font-style|font-stretch|font-size-adjust|font-size|font-language-override|font-kerning|font-feature-settings|font-family|font|float|flex-wrap|flex-shrink|flex-grow|flex-flow|flex-direction|flex-basis|flex|filter|empty-cells|display|direction|cursor|counter-reset|counter-increment|content|column-width|column-span|column-rule-width|column-rule-style|column-rule-color|column-rule|column-gap|column-fill|column-count|columns|color|clip-path|clip|clear|caption-side|break-inside|break-before|break-after|box-sizing|box-shadow|box-decoration-break|bottom|border-width|border-top-width|border-top-style|border-top-right-radius|border-top-left-radius|border-top-color|border-top|border-style|border-spacing|border-right-width|border-right-style|border-right-color|border-right|border-radius|border-left-width|border-left-style|border-left-color|border-left|border-image-width|border-image-source|border-image-slice|border-image-repeat|border-image-outset|border-image|border-color|border-collapse|border-bottom-width|border-bottom-style|border-bottom-right-radius|border-bottom-left-radius|border-bottom-color|border-bottom|border|background-size|background-repeat|background-position|background-origin|background-image|background-color|background-clip|background-attachment|background-blend-mode|background|backface-visibility|auto|animation-timing-function|animation-play-state|animation-name|animation-iteration-count|animation-fill-mode|animation-duration|animation-direction|animation-delay|animation|align-self|align-items|align-content)\\b',
+        begin: '\\b(src|z-index|word-wrap|word-spacing|word-break|width|widows|white-space|visibility|vertical-align|unicode-bidi|transition-timing-function|transition-property|transition-duration|transition-delay|transition|transform-style|transform-origin|transform|top|text-underline-position|text-transform|text-shadow|text-rendering|text-overflow|text-indent|text-decoration-style|text-decoration-line|text-decoration-color|text-decoration|text-align-last|text-align|tab-size|table-layout|right|resize|quotes|position|pointer-events|perspective-origin|perspective|page-break-inside|page-break-before|page-break-after|padding-top|padding-right|padding-left|padding-bottom|padding|overflow-y|overflow-x|overflow-wrap|overflow|outline-width|outline-style|outline-offset|outline-color|outline|orphans|order|opacity|object-position|object-fit|normal|none|nav-up|nav-right|nav-left|nav-index|nav-down|min-width|min-height|max-width|max-height|mask|marks|margin-top|margin-right|margin-left|margin-bottom|margin|list-style-type|list-style-position|list-style-image|list-style|line-height|letter-spacing|left|justify-content|initial|inherit|ime-mode|image-orientation|image-resolution|image-rendering|icon|hyphens|height|font-weight|font-variant-ligatures|font-variant|font-style|font-stretch|font-size-adjust|font-size|font-language-override|font-kerning|font-feature-settings|font-family|font|float|flex-wrap|flex-shrink|flex-grow|flex-flow|flex-direction|flex-basis|flex|filter|empty-cells|display|direction|cursor|counter-reset|counter-increment|content|column-width|column-span|column-rule-width|column-rule-style|column-rule-color|column-rule|column-gap|column-fill|column-count|columns|color|clip-path|clip|clear|caption-side|break-inside|break-before|break-after|box-sizing|box-shadow|box-decoration-break|bottom|border-width|border-top-width|border-top-style|border-top-right-radius|border-top-left-radius|border-top-color|border-top|border-style|border-spacing|border-right-width|border-right-style|border-right-color|border-right|border-radius|border-left-width|border-left-style|border-left-color|border-left|border-image-width|border-image-source|border-image-slice|border-image-repeat|border-image-outset|border-image|border-color|border-collapse|border-bottom-width|border-bottom-style|border-bottom-right-radius|border-bottom-left-radius|border-bottom-color|border-bottom|border|background-size|background-repeat|background-position|background-origin|background-image|background-color|background-clip|background-attachment|background-blend-mode|background|backface-visibility|auto|animation-timing-function|animation-play-state|animation-name|animation-iteration-count|animation-fill-mode|animation-duration|animation-direction|animation-delay|animation|align-self|align-items|align-content)\\b',
         illegal: '[^\\s]'
       },
       {
@@ -41256,19 +41800,32 @@ module.exports = function(hljs) {
           }
         ]
       },
+      // matching these here allows us to treat them more like regular CSS
+      // rules so everything between the {} gets regular rule highlighting,
+      // which is what we want for page and font-face
+      {
+        begin: '@(page|font-face)',
+        lexemes: AT_IDENTIFIER,
+        keywords: '@page @font-face'
+      },
       {
         begin: '@', end: '[{;]',
-        keywords: 'mixin include extend for if else each while charset import debug media page content font-face namespace warn',
+        returnBegin: true,
+        keywords: AT_MODIFIERS,
         contains: [
+          {
+            begin: AT_IDENTIFIER,
+            className: "keyword"
+          },
           VARIABLE,
           hljs.QUOTE_STRING_MODE,
           hljs.APOS_STRING_MODE,
           HEXCOLOR,
           hljs.CSS_NUMBER_MODE,
-          {
-            begin: '\\s[A-Za-z0-9_.-]+',
-            relevance: 0
-          }
+          // {
+          //   begin: '\\s[A-Za-z0-9_.-]+',
+          //   relevance: 0
+          // }
         ]
       }
     ]
@@ -41290,7 +41847,7 @@ module.exports = function(hljs) {
     contains: [
       {
         className: 'meta',
-        begin: '^\\s{0,3}[\\w\\d\\[\\]()@-]*[>%$#]',
+        begin: '^\\s{0,3}[/\\w\\d\\[\\]()@-]*[>%$#]',
         starts: {
           end: '$', subLanguage: 'bash'
         }
@@ -41508,8 +42065,6 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
-  var CPP = hljs.getLanguage('cpp').exports;
-
   // In SQF, a variable start with _
   var VARIABLE = {
     className: 'variable',
@@ -41538,6 +42093,30 @@ module.exports = function(hljs) {
         end: '\'',
         contains: [{begin: '\'\'', relevance: 0}]
       }
+    ]
+  };
+
+  // list of keywords from:
+  // https://community.bistudio.com/wiki/PreProcessor_Commands
+  var PREPROCESSOR = {
+    className: 'meta',
+    begin: /#\s*[a-z]+\b/, end: /$/,
+    keywords: {
+      'meta-keyword':
+        'define undef ifdef ifndef else endif include'
+    },
+    contains: [
+      {
+        begin: /\\\n/, relevance: 0
+      },
+      hljs.inherit(STRINGS, {className: 'meta-string'}),
+      {
+        className: 'meta-string',
+        begin: /<[^\n>]*>/, end: /$/,
+        illegal: '\\n',
+      },
+      hljs.C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE
     ]
   };
 
@@ -41906,7 +42485,7 @@ module.exports = function(hljs) {
       VARIABLE,
       FUNCTION,
       STRINGS,
-      CPP.preprocessor
+      PREPROCESSOR
     ],
     illegal: /#|^\$ /
   };
@@ -42052,23 +42631,22 @@ module.exports = function(hljs) {
             'true false null unknown',
           built_in:
             'array bigint binary bit blob bool boolean char character date dec decimal float int int8 integer interval number ' +
-            'numeric real record serial serial8 smallint text time timestamp tinyint varchar varying void'
+            'numeric real record serial serial8 smallint text time timestamp tinyint varchar varchar2 varying void'
         },
         contains: [
           {
             className: 'string',
             begin: '\'', end: '\'',
-            contains: [hljs.BACKSLASH_ESCAPE, {begin: '\'\''}]
+            contains: [{begin: '\'\''}]
           },
           {
             className: 'string',
             begin: '"', end: '"',
-            contains: [hljs.BACKSLASH_ESCAPE, {begin: '""'}]
+            contains: [{begin: '""'}]
           },
           {
             className: 'string',
-            begin: '`', end: '`',
-            contains: [hljs.BACKSLASH_ESCAPE]
+            begin: '`', end: '`'
           },
           hljs.C_NUMBER_MODE,
           hljs.C_BLOCK_COMMENT_MODE,
@@ -42093,86 +42671,223 @@ module.exports = function(hljs) {
 /***/ (function(module, exports) {
 
 module.exports = function(hljs) {
+  // variable names cannot conflict with block identifiers
+  var BLOCKS = [
+    'functions',
+    'model',
+    'data',
+    'parameters',
+    'quantities',
+    'transformed',
+    'generated'
+  ];
+  var STATEMENTS = [
+    'for',
+    'in',
+    'if',
+    'else',
+    'while',
+    'break',
+    'continue',
+    'return'
+  ];
+  var SPECIAL_FUNCTIONS = [
+    'print',
+    'reject',
+    'increment_log_prob|10',
+    'integrate_ode|10',
+    'integrate_ode_rk45|10',
+    'integrate_ode_bdf|10',
+    'algebra_solver'
+  ];
+  var VAR_TYPES = [
+    'int',
+    'real',
+    'vector',
+    'ordered',
+    'positive_ordered',
+    'simplex',
+    'unit_vector',
+    'row_vector',
+    'matrix',
+    'cholesky_factor_corr|10',
+    'cholesky_factor_cov|10',
+    'corr_matrix|10',
+    'cov_matrix|10',
+    'void'
+  ];
+  var FUNCTIONS = [
+    'Phi', 'Phi_approx', 'abs', 'acos', 'acosh', 'algebra_solver', 'append_array',
+    'append_col', 'append_row', 'asin', 'asinh', 'atan', 'atan2', 'atanh',
+    'bernoulli_cdf', 'bernoulli_lccdf', 'bernoulli_lcdf', 'bernoulli_logit_lpmf',
+    'bernoulli_logit_rng', 'bernoulli_lpmf', 'bernoulli_rng', 'bessel_first_kind',
+    'bessel_second_kind', 'beta_binomial_cdf', 'beta_binomial_lccdf',
+    'beta_binomial_lcdf', 'beta_binomial_lpmf', 'beta_binomial_rng', 'beta_cdf',
+    'beta_lccdf', 'beta_lcdf', 'beta_lpdf', 'beta_rng', 'binary_log_loss',
+    'binomial_cdf', 'binomial_coefficient_log', 'binomial_lccdf', 'binomial_lcdf',
+    'binomial_logit_lpmf', 'binomial_lpmf', 'binomial_rng', 'block',
+    'categorical_logit_lpmf', 'categorical_logit_rng', 'categorical_lpmf',
+    'categorical_rng', 'cauchy_cdf', 'cauchy_lccdf', 'cauchy_lcdf', 'cauchy_lpdf',
+    'cauchy_rng', 'cbrt', 'ceil', 'chi_square_cdf', 'chi_square_lccdf',
+    'chi_square_lcdf', 'chi_square_lpdf', 'chi_square_rng', 'cholesky_decompose',
+    'choose', 'col', 'cols', 'columns_dot_product', 'columns_dot_self', 'cos',
+    'cosh', 'cov_exp_quad', 'crossprod', 'csr_extract_u', 'csr_extract_v',
+    'csr_extract_w', 'csr_matrix_times_vector', 'csr_to_dense_matrix',
+    'cumulative_sum', 'determinant', 'diag_matrix', 'diag_post_multiply',
+    'diag_pre_multiply', 'diagonal', 'digamma', 'dims', 'dirichlet_lpdf',
+    'dirichlet_rng', 'distance', 'dot_product', 'dot_self',
+    'double_exponential_cdf', 'double_exponential_lccdf', 'double_exponential_lcdf',
+    'double_exponential_lpdf', 'double_exponential_rng', 'e', 'eigenvalues_sym',
+    'eigenvectors_sym', 'erf', 'erfc', 'exp', 'exp2', 'exp_mod_normal_cdf',
+    'exp_mod_normal_lccdf', 'exp_mod_normal_lcdf', 'exp_mod_normal_lpdf',
+    'exp_mod_normal_rng', 'expm1', 'exponential_cdf', 'exponential_lccdf',
+    'exponential_lcdf', 'exponential_lpdf', 'exponential_rng', 'fabs',
+    'falling_factorial', 'fdim', 'floor', 'fma', 'fmax', 'fmin', 'fmod',
+    'frechet_cdf', 'frechet_lccdf', 'frechet_lcdf', 'frechet_lpdf', 'frechet_rng',
+    'gamma_cdf', 'gamma_lccdf', 'gamma_lcdf', 'gamma_lpdf', 'gamma_p', 'gamma_q',
+    'gamma_rng', 'gaussian_dlm_obs_lpdf', 'get_lp', 'gumbel_cdf', 'gumbel_lccdf',
+    'gumbel_lcdf', 'gumbel_lpdf', 'gumbel_rng', 'head', 'hypergeometric_lpmf',
+    'hypergeometric_rng', 'hypot', 'inc_beta', 'int_step', 'integrate_ode',
+    'integrate_ode_bdf', 'integrate_ode_rk45', 'inv', 'inv_Phi',
+    'inv_chi_square_cdf', 'inv_chi_square_lccdf', 'inv_chi_square_lcdf',
+    'inv_chi_square_lpdf', 'inv_chi_square_rng', 'inv_cloglog', 'inv_gamma_cdf',
+    'inv_gamma_lccdf', 'inv_gamma_lcdf', 'inv_gamma_lpdf', 'inv_gamma_rng',
+    'inv_logit', 'inv_sqrt', 'inv_square', 'inv_wishart_lpdf', 'inv_wishart_rng',
+    'inverse', 'inverse_spd', 'is_inf', 'is_nan', 'lbeta', 'lchoose', 'lgamma',
+    'lkj_corr_cholesky_lpdf', 'lkj_corr_cholesky_rng', 'lkj_corr_lpdf',
+    'lkj_corr_rng', 'lmgamma', 'lmultiply', 'log', 'log10', 'log1m', 'log1m_exp',
+    'log1m_inv_logit', 'log1p', 'log1p_exp', 'log2', 'log_determinant',
+    'log_diff_exp', 'log_falling_factorial', 'log_inv_logit', 'log_mix',
+    'log_rising_factorial', 'log_softmax', 'log_sum_exp', 'logistic_cdf',
+    'logistic_lccdf', 'logistic_lcdf', 'logistic_lpdf', 'logistic_rng', 'logit',
+    'lognormal_cdf', 'lognormal_lccdf', 'lognormal_lcdf', 'lognormal_lpdf',
+    'lognormal_rng', 'machine_precision', 'matrix_exp', 'max', 'mdivide_left_spd',
+    'mdivide_left_tri_low', 'mdivide_right_spd', 'mdivide_right_tri_low', 'mean',
+    'min', 'modified_bessel_first_kind', 'modified_bessel_second_kind',
+    'multi_gp_cholesky_lpdf', 'multi_gp_lpdf', 'multi_normal_cholesky_lpdf',
+    'multi_normal_cholesky_rng', 'multi_normal_lpdf', 'multi_normal_prec_lpdf',
+    'multi_normal_rng', 'multi_student_t_lpdf', 'multi_student_t_rng',
+    'multinomial_lpmf', 'multinomial_rng', 'multiply_log',
+    'multiply_lower_tri_self_transpose', 'neg_binomial_2_cdf',
+    'neg_binomial_2_lccdf', 'neg_binomial_2_lcdf', 'neg_binomial_2_log_lpmf',
+    'neg_binomial_2_log_rng', 'neg_binomial_2_lpmf', 'neg_binomial_2_rng',
+    'neg_binomial_cdf', 'neg_binomial_lccdf', 'neg_binomial_lcdf',
+    'neg_binomial_lpmf', 'neg_binomial_rng', 'negative_infinity', 'normal_cdf',
+    'normal_lccdf', 'normal_lcdf', 'normal_lpdf', 'normal_rng', 'not_a_number',
+    'num_elements', 'ordered_logistic_lpmf', 'ordered_logistic_rng', 'owens_t',
+    'pareto_cdf', 'pareto_lccdf', 'pareto_lcdf', 'pareto_lpdf', 'pareto_rng',
+    'pareto_type_2_cdf', 'pareto_type_2_lccdf', 'pareto_type_2_lcdf',
+    'pareto_type_2_lpdf', 'pareto_type_2_rng', 'pi', 'poisson_cdf', 'poisson_lccdf',
+    'poisson_lcdf', 'poisson_log_lpmf', 'poisson_log_rng', 'poisson_lpmf',
+    'poisson_rng', 'positive_infinity', 'pow', 'print', 'prod', 'qr_Q', 'qr_R',
+    'quad_form', 'quad_form_diag', 'quad_form_sym', 'rank', 'rayleigh_cdf',
+    'rayleigh_lccdf', 'rayleigh_lcdf', 'rayleigh_lpdf', 'rayleigh_rng', 'reject',
+    'rep_array', 'rep_matrix', 'rep_row_vector', 'rep_vector', 'rising_factorial',
+    'round', 'row', 'rows', 'rows_dot_product', 'rows_dot_self',
+    'scaled_inv_chi_square_cdf', 'scaled_inv_chi_square_lccdf',
+    'scaled_inv_chi_square_lcdf', 'scaled_inv_chi_square_lpdf',
+    'scaled_inv_chi_square_rng', 'sd', 'segment', 'sin', 'singular_values', 'sinh',
+    'size', 'skew_normal_cdf', 'skew_normal_lccdf', 'skew_normal_lcdf',
+    'skew_normal_lpdf', 'skew_normal_rng', 'softmax', 'sort_asc', 'sort_desc',
+    'sort_indices_asc', 'sort_indices_desc', 'sqrt', 'sqrt2', 'square',
+    'squared_distance', 'step', 'student_t_cdf', 'student_t_lccdf',
+    'student_t_lcdf', 'student_t_lpdf', 'student_t_rng', 'sub_col', 'sub_row',
+    'sum', 'tail', 'tan', 'tanh', 'target', 'tcrossprod', 'tgamma', 'to_array_1d',
+    'to_array_2d', 'to_matrix', 'to_row_vector', 'to_vector', 'trace',
+    'trace_gen_quad_form', 'trace_quad_form', 'trigamma', 'trunc', 'uniform_cdf',
+    'uniform_lccdf', 'uniform_lcdf', 'uniform_lpdf', 'uniform_rng', 'variance',
+    'von_mises_lpdf', 'von_mises_rng', 'weibull_cdf', 'weibull_lccdf',
+    'weibull_lcdf', 'weibull_lpdf', 'weibull_rng', 'wiener_lpdf', 'wishart_lpdf',
+    'wishart_rng'
+  ];
+  var DISTRIBUTIONS = [
+    'bernoulli', 'bernoulli_logit', 'beta', 'beta_binomial', 'binomial',
+    'binomial_logit', 'categorical', 'categorical_logit', 'cauchy', 'chi_square',
+    'dirichlet', 'double_exponential', 'exp_mod_normal', 'exponential', 'frechet',
+    'gamma', 'gaussian_dlm_obs', 'gumbel', 'hypergeometric', 'inv_chi_square',
+    'inv_gamma', 'inv_wishart', 'lkj_corr', 'lkj_corr_cholesky', 'logistic',
+    'lognormal', 'multi_gp', 'multi_gp_cholesky', 'multi_normal',
+    'multi_normal_cholesky', 'multi_normal_prec', 'multi_student_t', 'multinomial',
+    'neg_binomial', 'neg_binomial_2', 'neg_binomial_2_log', 'normal',
+    'ordered_logistic', 'pareto', 'pareto_type_2', 'poisson', 'poisson_log',
+    'rayleigh', 'scaled_inv_chi_square', 'skew_normal', 'student_t', 'uniform',
+    'von_mises', 'weibull', 'wiener', 'wishart'
+  ];
+
   return {
+    aliases: ['stanfuncs'],
+    keywords: {
+      'title': BLOCKS.join(' '),
+      'keyword': STATEMENTS.concat(VAR_TYPES).concat(SPECIAL_FUNCTIONS).join(' '),
+      'built_in': FUNCTIONS.join(' ')
+    },
+    lexemes: hljs.IDENT_RE,
     contains: [
-      hljs.HASH_COMMENT_MODE,
       hljs.C_LINE_COMMENT_MODE,
-      hljs.C_BLOCK_COMMENT_MODE,
+      hljs.COMMENT(
+        /#/,
+        /$/,
+        {
+          relevance: 0,
+          keywords: {
+            'meta-keyword': 'include'
+          }
+        }
+      ),
+      hljs.COMMENT(
+        /\/\*/,
+        /\*\//,
+        {
+          relevance: 0,
+          // highlight doc strings mentioned in Stan reference
+          contains: [
+            {
+              className: 'doctag',
+              begin: /@(return|param)/
+            }
+          ]
+        }
+      ),
       {
-        begin: hljs.UNDERSCORE_IDENT_RE,
-        lexemes: hljs.UNDERSCORE_IDENT_RE,
-        keywords: {
-          // Stan's keywords
-          name:
-            'for in while repeat until if then else',
-          // Stan's probablity distributions (less beta and gamma, as commonly
-          // used for parameter names). So far, _log and _rng variants are not
-          // included
-          symbol:
-            'bernoulli bernoulli_logit binomial binomial_logit '               +
-            'beta_binomial hypergeometric categorical categorical_logit '      +
-            'ordered_logistic neg_binomial neg_binomial_2 '                    +
-            'neg_binomial_2_log poisson poisson_log multinomial normal '       +
-            'exp_mod_normal skew_normal student_t cauchy double_exponential '  +
-            'logistic gumbel lognormal chi_square inv_chi_square '             +
-            'scaled_inv_chi_square exponential inv_gamma weibull frechet '     +
-            'rayleigh wiener pareto pareto_type_2 von_mises uniform '          +
-            'multi_normal multi_normal_prec multi_normal_cholesky multi_gp '   +
-            'multi_gp_cholesky multi_student_t gaussian_dlm_obs dirichlet '    +
-            'lkj_corr lkj_corr_cholesky wishart inv_wishart',
-          // Stan's data types
-          'selector-tag':
-            'int real vector simplex unit_vector ordered positive_ordered '    +
-            'row_vector matrix cholesky_factor_corr cholesky_factor_cov '      +
-            'corr_matrix cov_matrix',
-          // Stan's model blocks
-          title:
-            'functions model data parameters quantities transformed '          +
-            'generated',
-          literal:
-            'true false'
-        },
-        relevance: 0
-      },
-      // The below is all taken from the R language definition
-      {
-        // hex value
-        className: 'number',
-        begin: "0[xX][0-9a-fA-F]+[Li]?\\b",
-        relevance: 0
+        // hack: in range constraints, lower must follow "<"
+        begin: /<\s*lower\s*=/,
+        keywords: 'lower'
       },
       {
-        // hex value
-        className: 'number',
-        begin: "0[xX][0-9a-fA-F]+[Li]?\\b",
-        relevance: 0
+        // hack: in range constraints, upper must follow either , or <
+        // <lower = ..., upper = ...> or <upper = ...>
+        begin: /[<,]*upper\s*=/,
+        keywords: 'upper'
       },
       {
-        // explicit integer
-        className: 'number',
-        begin: "\\d+(?:[eE][+\\-]?\\d*)?L\\b",
-        relevance: 0
+        className: 'keyword',
+        begin: /\btarget\s*\+=/,
+        relevance: 10
       },
       {
-        // number with trailing decimal
+        begin: '~\\s*(' + hljs.IDENT_RE + ')\\s*\\(',
+        keywords: DISTRIBUTIONS.join(' ')
+      },
+      {
         className: 'number',
-        begin: "\\d+\\.(?!\\d)(?:i\\b)?",
+        variants: [
+          {
+            begin: /\b\d+(?:\.\d*)?(?:[eE][+-]?\d+)?/
+          },
+          {
+            begin: /\.\d+(?:[eE][+-]?\d+)?\b/
+          }
+        ],
         relevance: 0
       },
       {
-        // number
-        className: 'number',
-        begin: "\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",
-        relevance: 0
-      },
-      {
-        // number with leading decimal
-        className: 'number',
-        begin: "\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",
+        className: 'string',
+        begin: '"',
+        end: '"',
         relevance: 0
       }
     ]
-  };
+  }
 };
 
 /***/ }),
@@ -42184,7 +42899,11 @@ module.exports = function(hljs) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = function(hljs) {
+module.exports = /*
+  This is a fork and modification of Drew McDonald's file (https://github.com/drewmcdonald/stata-highlighting). I have also included a list of builtin commands from https://bugs.kde.org/show_bug.cgi?id=135646.
+*/
+
+function(hljs) {
   return {
     aliases: ['do', 'ado'],
     case_insensitive: true,
@@ -42210,7 +42929,7 @@ module.exports = function(hljs) {
         className: 'built_in',
         variants: [
           {
-            begin: '\\b(abs|acos|asin|atan|atan2|atanh|ceil|cloglog|comb|cos|digamma|exp|floor|invcloglog|invlogit|ln|lnfact|lnfactorial|lngamma|log|log10|max|min|mod|reldif|round|sign|sin|sqrt|sum|tan|tanh|trigamma|trunc|betaden|Binomial|binorm|binormal|chi2|chi2tail|dgammapda|dgammapdada|dgammapdadx|dgammapdx|dgammapdxdx|F|Fden|Ftail|gammaden|gammap|ibeta|invbinomial|invchi2|invchi2tail|invF|invFtail|invgammap|invibeta|invnchi2|invnFtail|invnibeta|invnorm|invnormal|invttail|nbetaden|nchi2|nFden|nFtail|nibeta|norm|normal|normalden|normd|npnchi2|tden|ttail|uniform|abbrev|char|index|indexnot|length|lower|ltrim|match|plural|proper|real|regexm|regexr|regexs|reverse|rtrim|string|strlen|strlower|strltrim|strmatch|strofreal|strpos|strproper|strreverse|strrtrim|strtrim|strupper|subinstr|subinword|substr|trim|upper|word|wordcount|_caller|autocode|byteorder|chop|clip|cond|e|epsdouble|epsfloat|group|inlist|inrange|irecode|matrix|maxbyte|maxdouble|maxfloat|maxint|maxlong|mi|minbyte|mindouble|minfloat|minint|minlong|missing|r|recode|replay|return|s|scalar|d|date|day|dow|doy|halfyear|mdy|month|quarter|week|year|d|daily|dofd|dofh|dofm|dofq|dofw|dofy|h|halfyearly|hofd|m|mofd|monthly|q|qofd|quarterly|tin|twithin|w|weekly|wofd|y|yearly|yh|ym|yofd|yq|yw|cholesky|colnumb|colsof|corr|det|diag|diag0cnt|el|get|hadamard|I|inv|invsym|issym|issymmetric|J|matmissing|matuniform|mreldif|nullmat|rownumb|rowsof|sweep|syminv|trace|vec|vecdiag)(?=\\(|$)'
+            begin: '\\b(abs|acos|asin|atan|atan2|atanh|ceil|cloglog|comb|cos|digamma|exp|floor|invcloglog|invlogit|ln|lnfact|lnfactorial|lngamma|log|log10|max|min|mod|reldif|round|sign|sin|sqrt|sum|tan|tanh|trigamma|trunc|betaden|Binomial|binorm|binormal|chi2|chi2tail|dgammapda|dgammapdada|dgammapdadx|dgammapdx|dgammapdxdx|F|Fden|Ftail|gammaden|gammap|ibeta|invbinomial|invchi2|invchi2tail|invF|invFtail|invgammap|invibeta|invnchi2|invnFtail|invnibeta|invnorm|invnormal|invttail|nbetaden|nchi2|nFden|nFtail|nibeta|norm|normal|normalden|normd|npnchi2|tden|ttail|uniform|abbrev|char|index|indexnot|length|lower|ltrim|match|plural|proper|real|regexm|regexr|regexs|reverse|rtrim|string|strlen|strlower|strltrim|strmatch|strofreal|strpos|strproper|strreverse|strrtrim|strtrim|strupper|subinstr|subinword|substr|trim|upper|word|wordcount|_caller|autocode|byteorder|chop|clip|cond|e|epsdouble|epsfloat|group|inlist|inrange|irecode|matrix|maxbyte|maxdouble|maxfloat|maxint|maxlong|mi|minbyte|mindouble|minfloat|minint|minlong|missing|r|recode|replay|return|s|scalar|d|date|day|dow|doy|halfyear|mdy|month|quarter|week|year|d|daily|dofd|dofh|dofm|dofq|dofw|dofy|h|halfyearly|hofd|m|mofd|monthly|q|qofd|quarterly|tin|twithin|w|weekly|wofd|y|yearly|yh|ym|yofd|yq|yw|cholesky|colnumb|colsof|corr|det|diag|diag0cnt|el|get|hadamard|I|inv|invsym|issym|issymmetric|J|matmissing|matuniform|mreldif|nullmat|rownumb|rowsof|sweep|syminv|trace|vec|vecdiag)(?=\\()'
           }
         ]
       },
@@ -42403,7 +43122,7 @@ module.exports = function(hljs) {
     'video'
   ];
 
-  var TAG_END = '[\\.\\s\\n\\[\\:,]';
+  var LOOKAHEAD_TAG_END = '(?=[\\.\\s\\n\\[\\:,])';
 
   var ATTRIBUTES = [
     'align-content',
@@ -42646,34 +43365,25 @@ module.exports = function(hljs) {
 
       // class tag
       {
-        begin: '\\.[a-zA-Z][a-zA-Z0-9_-]*' + TAG_END,
-        returnBegin: true,
-        contains: [
-          {className: 'selector-class', begin: '\\.[a-zA-Z][a-zA-Z0-9_-]*'}
-        ]
+        begin: '\\.[a-zA-Z][a-zA-Z0-9_-]*' + LOOKAHEAD_TAG_END,
+        className: 'selector-class'
       },
 
       // id tag
       {
-        begin: '\\#[a-zA-Z][a-zA-Z0-9_-]*' + TAG_END,
-        returnBegin: true,
-        contains: [
-          {className: 'selector-id', begin: '\\#[a-zA-Z][a-zA-Z0-9_-]*'}
-        ]
+        begin: '\\#[a-zA-Z][a-zA-Z0-9_-]*' + LOOKAHEAD_TAG_END,
+        className: 'selector-id'
       },
 
       // tags
       {
-        begin: '\\b(' + TAGS.join('|') + ')' + TAG_END,
-        returnBegin: true,
-        contains: [
-          {className: 'selector-tag', begin: '\\b[a-zA-Z][a-zA-Z0-9_-]*'}
-        ]
+        begin: '\\b(' + TAGS.join('|') + ')' + LOOKAHEAD_TAG_END,
+        className: 'selector-tag'
       },
 
       // psuedo selectors
       {
-        begin: '&?:?:\\b(' + PSEUDO_SELECTORS.join('|') + ')' + TAG_END
+        begin: '&?:?:\\b(' + PSEUDO_SELECTORS.join('|') + ')' + LOOKAHEAD_TAG_END
       },
 
       // @ keywords
@@ -42912,7 +43622,8 @@ module.exports = function(hljs) {
                   '@NSCopying|@NSManaged|@objc|@objcMembers|@convention|@required|' +
                   '@noreturn|@IBAction|@IBDesignable|@IBInspectable|@IBOutlet|' +
                   '@infix|@prefix|@postfix|@autoclosure|@testable|@available|' +
-                  '@nonobjc|@NSApplicationMain|@UIApplicationMain)'
+                  '@nonobjc|@NSApplicationMain|@UIApplicationMain|@dynamicMemberLookup|' +
+                  '@propertyWrapper)'
 
       },
       {
@@ -43328,17 +44039,17 @@ module.exports = function(hljs) {
   var FILTER = {
     begin: /\|[A-Za-z_]+:?/,
     keywords:
-      'abs batch capitalize convert_encoding date date_modify default ' +
-      'escape first format join json_encode keys last length lower ' +
-      'merge nl2br number_format raw replace reverse round slice sort split ' +
-      'striptags title trim upper url_encode',
+      'abs batch capitalize column convert_encoding date date_modify default ' +
+      'escape filter first format inky_to_html inline_css join json_encode keys last ' +
+      'length lower map markdown merge nl2br number_format raw reduce replace ' +
+      'reverse round slice sort spaceless split striptags title trim upper url_encode',
     contains: [
       FUNCTIONS
     ]
   };
 
-  var TAGS = 'autoescape block do embed extends filter flush for ' +
-    'if import include macro sandbox set spaceless use verbatim';
+  var TAGS = 'apply autoescape block deprecated do embed extends filter flush for from ' +
+    'if import include macro sandbox set use verbatim with';
 
   TAGS = TAGS + ' ' + TAGS.split(' ').map(function(t){return 'end' + t}).join(' ');
 
@@ -43437,9 +44148,9 @@ module.exports = function(hljs) {
   var NUMBER = {
     className: 'number',
     variants: [
-      { begin: '\\b(0[bB][01]+)' },
-      { begin: '\\b(0[oO][0-7]+)' },
-      { begin: hljs.C_NUMBER_RE }
+      { begin: '\\b(0[bB][01]+)n?' },
+      { begin: '\\b(0[oO][0-7]+)n?' },
+      { begin: hljs.C_NUMBER_RE + 'n?' }
     ],
     relevance: 0
   };
@@ -43547,7 +44258,7 @@ module.exports = function(hljs) {
       },
       {
         className: 'function',
-        begin: 'function', end: /[\{;]/, excludeEnd: true,
+        beginKeywords: 'function', end: /[\{;]/, excludeEnd: true,
         keywords: KEYWORDS,
         contains: [
           'self',
@@ -43558,7 +44269,7 @@ module.exports = function(hljs) {
         relevance: 0 // () => {} is more typical in TypeScript
       },
       {
-        beginKeywords: 'constructor', end: /\{/, excludeEnd: true,
+        beginKeywords: 'constructor', end: /[\{;]/, excludeEnd: true,
         contains: [
           'self',
           PARAMS
@@ -43662,17 +44373,17 @@ module.exports = function(hljs) {
     case_insensitive: true,
     keywords: {
       keyword:
-        'addhandler addressof alias and andalso aggregate ansi as assembly auto binary by byref byval ' + /* a-b */
+        'addhandler addressof alias and andalso aggregate ansi as async assembly auto await binary by byref byval ' + /* a-b */
         'call case catch class compare const continue custom declare default delegate dim distinct do ' + /* c-d */
         'each equals else elseif end enum erase error event exit explicit finally for friend from function ' + /* e-f */
-        'get global goto group handles if implements imports in inherits interface into is isfalse isnot istrue ' + /* g-i */
+        'get global goto group handles if implements imports in inherits interface into is isfalse isnot istrue iterator ' + /* g-i */
         'join key let lib like loop me mid mod module mustinherit mustoverride mybase myclass ' + /* j-m */
-        'namespace narrowing new next not notinheritable notoverridable ' + /* n */
+        'nameof namespace narrowing new next not notinheritable notoverridable ' + /* n */
         'of off on operator option optional or order orelse overloads overridable overrides ' + /* o */
         'paramarray partial preserve private property protected public ' + /* p */
         'raiseevent readonly redim rem removehandler resume return ' + /* r */
         'select set shadows shared skip static step stop structure strict sub synclock ' + /* s */
-        'take text then throw to try unicode until using when where while widening with withevents writeonly xor', /* t-x */
+        'take text then throw to try unicode until using when where while widening with withevents writeonly xor yield', /* t-y */
       built_in:
         'boolean byte cbool cbyte cchar cdate cdec cdbl char cint clng cobj csbyte cshort csng cstr ctype ' +  /* b-c */
         'date decimal directcast double gettype getxmlnamespace iif integer long object ' + /* d-o */
@@ -44316,6 +45027,23 @@ module.exports = function(hljs) {
 
 module.exports = function(hljs) {
   var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
+  var XML_ENTITIES = {
+    className: 'symbol',
+    begin: '&[a-z]+;|&#[0-9]+;|&#x[a-f0-9]+;'
+  };
+  var XML_META_KEYWORDS = {
+	  begin: '\\s',
+	  contains:[
+	    {
+	      className: 'meta-keyword',
+	      begin: '#?[a-z_][a-z1-9_-]+',
+	      illegal: '\\n',
+      }
+	  ]
+  };
+  var XML_META_PAR_KEYWORDS = hljs.inherit(XML_META_KEYWORDS, {begin: '\\(', end: '\\)'});
+  var APOS_META_STRING_MODE = hljs.inherit(hljs.APOS_STRING_MODE, {className: 'meta-string'});
+  var QUOTE_META_STRING_MODE = hljs.inherit(hljs.QUOTE_STRING_MODE, {className: 'meta-string'});
   var TAG_INTERNALS = {
     endsWithParent: true,
     illegal: /</,
@@ -44334,8 +45062,8 @@ module.exports = function(hljs) {
             className: 'string',
             endsParent: true,
             variants: [
-              {begin: /"/, end: /"/},
-              {begin: /'/, end: /'/},
+              {begin: /"/, end: /"/, contains: [XML_ENTITIES]},
+              {begin: /'/, end: /'/, contains: [XML_ENTITIES]},
               {begin: /[^\s"'=<>`]+/}
             ]
           }
@@ -44344,14 +45072,34 @@ module.exports = function(hljs) {
     ]
   };
   return {
-    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist', 'wsf'],
+    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist', 'wsf', 'svg'],
     case_insensitive: true,
     contains: [
       {
         className: 'meta',
-        begin: '<!DOCTYPE', end: '>',
+        begin: '<![a-z]', end: '>',
         relevance: 10,
-        contains: [{begin: '\\[', end: '\\]'}]
+        contains: [
+				  XML_META_KEYWORDS,
+				  QUOTE_META_STRING_MODE,
+				  APOS_META_STRING_MODE,
+					XML_META_PAR_KEYWORDS,
+					{
+					  begin: '\\[', end: '\\]',
+					  contains:[
+						  {
+					      className: 'meta',
+					      begin: '<![a-z]', end: '>',
+					      contains: [
+					        XML_META_KEYWORDS,
+					        XML_META_PAR_KEYWORDS,
+					        QUOTE_META_STRING_MODE,
+					        APOS_META_STRING_MODE
+						    ]
+			        }
+					  ]
+				  }
+				]
       },
       hljs.COMMENT(
         '<!--',
@@ -44364,6 +45112,7 @@ module.exports = function(hljs) {
         begin: '<\\!\\[CDATA\\[', end: '\\]\\]>',
         relevance: 10
       },
+      XML_ENTITIES,
       {
         className: 'meta',
         begin: /<\?xml/, end: /\?>/, relevance: 10
@@ -44389,7 +45138,7 @@ module.exports = function(hljs) {
         ending braket. The '$' is needed for the lexeme to be recognized
         by hljs.subMode() that tests lexemes outside the stream.
         */
-        begin: '<style(?=\\s|>|$)', end: '>',
+        begin: '<style(?=\\s|>)', end: '>',
         keywords: {name: 'style'},
         contains: [TAG_INTERNALS],
         starts: {
@@ -44400,12 +45149,12 @@ module.exports = function(hljs) {
       {
         className: 'tag',
         // See the comment in the <style tag about the lookahead pattern
-        begin: '<script(?=\\s|>|$)', end: '>',
+        begin: '<script(?=\\s|>)', end: '>',
         keywords: {name: 'script'},
         contains: [TAG_INTERNALS],
         starts: {
           end: '\<\/script\>', returnEnd: true,
-          subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml', 'vbscript']
+          subLanguage: ['actionscript', 'javascript', 'handlebars', 'xml']
         }
       },
       {
@@ -44613,14 +45362,16 @@ module.exports = function(hljs) {
 module.exports = function(hljs) {
   var LITERALS = 'true false yes no null';
 
-  var keyPrefix = '^[ \\-]*';
-  var keyName =  '[a-zA-Z_][\\w\\-]*';
+  // Define keys as starting with a word character
+  // ...containing word chars, spaces, colons, forward-slashes, hyphens and periods
+  // ...and ending with a colon followed immediately by a space, tab or newline.
+  // The YAML spec allows for much more than this, but this covers most use-cases.
   var KEY = {
     className: 'attr',
     variants: [
-      { begin: keyPrefix + keyName + ":"},
-      { begin: keyPrefix + '"' + keyName + '"' + ":"},
-      { begin: keyPrefix + "'" + keyName + "'" + ":"}
+      { begin: '\\w[\\w :\\/.-]*:(?=[ \t]|$)' },
+      { begin: '"\\w[\\w :\\/.-]*":(?=[ \t]|$)' }, //double quoted keys
+      { begin: '\'\\w[\\w :\\/.-]*\':(?=[ \t]|$)' } //single quoted keys
     ]
   };
 
@@ -44656,12 +45407,12 @@ module.exports = function(hljs) {
         relevance: 10
       },
       { // multi line string
+        // Blocks start with a | or > followed by a newline
+        //
+        // Indentation of subsequent lines must be the same to
+        // be considered part of the block
         className: 'string',
-        begin: '[\\|>] *$',
-        returnEnd: true,
-        contains: STRING.contains,
-        // very simple termination: next hash key
-        end: KEY.variants[0].begin
+        begin: '[\\|>]([0-9]?[+-])?[ ]*\\n( *)[\\S ]+\\n(\\2[\\S ]+\\n?)*',
       },
       { // Ruby/Rails erb
         begin: '<%[%=-]?', end: '[%-]?%>',
@@ -44688,7 +45439,8 @@ module.exports = function(hljs) {
       },
       { // array listing
         className: 'bullet',
-        begin: '^ *-',
+      // TODO: remove |$ hack when we have proper look-ahead support
+      begin: '\\-(?=[ ]|$)',
         relevance: 0
       },
       hljs.HASH_COMMENT_MODE,
@@ -44696,7 +45448,12 @@ module.exports = function(hljs) {
         beginKeywords: LITERALS,
         keywords: {literal: LITERALS}
       },
-      hljs.C_NUMBER_MODE,
+      // numbers are any valid C-style number that
+      // sit isolated from other words
+      {
+        className: 'number',
+        begin: hljs.C_NUMBER_RE + '\\b'
+      },
       STRING
     ]
   };
@@ -65882,7 +66639,7 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js");
+var util = Object.create(__webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js"));
 util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 /*</replacement>*/
 
@@ -66011,7 +66768,7 @@ module.exports = PassThrough;
 var Transform = __webpack_require__(/*! ./_stream_transform */ "./node_modules/readable-stream/lib/_stream_transform.js");
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js");
+var util = Object.create(__webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js"));
 util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 /*</replacement>*/
 
@@ -66103,7 +66860,7 @@ function _isUint8Array(obj) {
 /*</replacement>*/
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js");
+var util = Object.create(__webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js"));
 util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 /*</replacement>*/
 
@@ -67138,7 +67895,7 @@ module.exports = Transform;
 var Duplex = __webpack_require__(/*! ./_stream_duplex */ "./node_modules/readable-stream/lib/_stream_duplex.js");
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js");
+var util = Object.create(__webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js"));
 util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 /*</replacement>*/
 
@@ -67359,7 +68116,7 @@ var Duplex;
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = __webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js");
+var util = Object.create(__webpack_require__(/*! core-util-is */ "./node_modules/core-util-is/lib/util.js"));
 util.inherits = __webpack_require__(/*! inherits */ "./node_modules/inherits/inherits_browser.js");
 /*</replacement>*/
 
@@ -69998,15 +70755,15 @@ function simpleEnd(buf) {
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/lib/loader.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/lib/loader.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CourseComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CourseComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -70597,15 +71354,15 @@ module.exports = function (css) {
 
 /***/ }),
 
-/***/ "./node_modules/sweetalert2/dist/sweetalert2.all.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/sweetalert2/dist/sweetalert2.all.js ***!
-  \**********************************************************/
+/***/ "./node_modules/sweetalert2/dist/sweetalert2.js":
+/*!******************************************************!*\
+  !*** ./node_modules/sweetalert2/dist/sweetalert2.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v8.15.1
+* sweetalert2 v8.19.0
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -70909,7 +71666,7 @@ var prefix = function prefix(items) {
 
   return result;
 };
-var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'toast', 'toast-shown', 'toast-column', 'fade', 'show', 'hide', 'noanimation', 'close', 'title', 'header', 'content', 'actions', 'confirm', 'cancel', 'footer', 'icon', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl']);
+var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'noanimation', 'close', 'title', 'header', 'content', 'actions', 'confirm', 'cancel', 'footer', 'icon', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl']);
 var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
 
 var states = {
@@ -70918,15 +71675,23 @@ var states = {
 var hasClass = function hasClass(elem, className) {
   return elem.classList.contains(className);
 };
-var applyCustomClass = function applyCustomClass(elem, customClass, className) {
-  // Clean up previous custom classes
+
+var removeCustomClasses = function removeCustomClasses(elem) {
   toArray(elem.classList).forEach(function (className) {
     if (!(objectValues(swalClasses).indexOf(className) !== -1) && !(objectValues(iconTypes).indexOf(className) !== -1)) {
       elem.classList.remove(className);
     }
   });
+};
+
+var applyCustomClass = function applyCustomClass(elem, customClass, className) {
+  removeCustomClasses(elem);
 
   if (customClass && customClass[className]) {
+    if (typeof customClass[className] !== 'string' && !customClass[className].forEach) {
+      return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(_typeof(customClass[className]), "\""));
+    }
+
     addClass(elem, customClass[className]);
   }
 };
@@ -71092,7 +71857,9 @@ var getFooter = function getFooter() {
 };
 var getCloseButton = function getCloseButton() {
   return elementByClass(swalClasses.close);
-};
+}; // https://github.com/jkup/focusable/blob/master/index.js
+
+var focusable = "\n  a[href],\n  area[href],\n  input:not([disabled]),\n  select:not([disabled]),\n  textarea:not([disabled]),\n  button:not([disabled]),\n  iframe,\n  object,\n  embed,\n  [tabindex=\"0\"],\n  [contenteditable],\n  audio[controls],\n  video[controls],\n  summary\n";
 var getFocusableElements = function getFocusableElements() {
   var focusableElementsWithTabindex = toArray(getPopup().querySelectorAll('[tabindex]:not([tabindex="-1"]):not([tabindex="0"])')) // sort according to tabindex
   .sort(function (a, b) {
@@ -71106,9 +71873,8 @@ var getFocusableElements = function getFocusableElements() {
     }
 
     return 0;
-  }); // https://github.com/jkup/focusable/blob/master/index.js
-
-  var otherFocusableElements = toArray(getPopup().querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable], audio[controls], video[controls]')).filter(function (el) {
+  });
+  var otherFocusableElements = toArray(getPopup().querySelectorAll(focusable)).filter(function (el) {
     return el.getAttribute('tabindex') !== '-1';
   });
   return uniqueArray(focusableElementsWithTabindex.concat(otherFocusableElements)).filter(function (el) {
@@ -71295,7 +72061,7 @@ var renderActions = function renderActions(instance, params) {
   var cancelButton = getCancelButton(); // Actions (buttons) wrapper
 
   if (!params.showConfirmButton && !params.showCancelButton) {
-    return hide(actions);
+    hide(actions);
   } // Custom class
 
 
@@ -71424,15 +72190,20 @@ var renderInput = function renderInput(instance, params) {
 
     setAttributes(inputType, params.inputAttributes); // set class
 
-    setClass(inputContainer, inputClass, params);
+    inputContainer.className = inputClass;
 
     if (rerender) {
       hide(inputContainer);
     }
   });
 
-  if (params.input && rerender) {
-    showInput(params);
+  if (params.input) {
+    if (rerender) {
+      showInput(params);
+    } // set custom class
+
+
+    setCustomClass(params);
   }
 };
 
@@ -71441,7 +72212,8 @@ var showInput = function showInput(params) {
     return error("Unexpected type of input! Expected \"text\", \"email\", \"password\", \"number\", \"tel\", \"select\", \"radio\", \"checkbox\", \"textarea\", \"file\" or \"url\", got \"".concat(params.input, "\""));
   }
 
-  var input = renderInputType[params.input](params);
+  var inputContainer = getInputContainer(params.input);
+  var input = renderInputType[params.input](inputContainer, params);
   show(input); // input autofocus
 
   setTimeout(function () {
@@ -71479,8 +72251,8 @@ var setAttributes = function setAttributes(inputType, inputAttributes) {
   }
 };
 
-var setClass = function setClass(inputContainer, inputClass, params) {
-  inputContainer.className = inputClass;
+var setCustomClass = function setCustomClass(params) {
+  var inputContainer = getInputContainer(params.input);
 
   if (params.inputClass) {
     addClass(inputContainer, params.inputClass);
@@ -71497,11 +72269,14 @@ var setInputPlaceholder = function setInputPlaceholder(input, params) {
   }
 };
 
+var getInputContainer = function getInputContainer(inputType) {
+  var inputClass = swalClasses[inputType] ? swalClasses[inputType] : swalClasses.input;
+  return getChildByClass(getContent(), inputClass);
+};
+
 var renderInputType = {};
 
-renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = function (params) {
-  var input = getChildByClass(getContent(), swalClasses.input);
-
+renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = function (input, params) {
   if (typeof params.inputValue === 'string' || typeof params.inputValue === 'number') {
     input.value = params.inputValue;
   } else if (!isPromise(params.inputValue)) {
@@ -71513,15 +72288,12 @@ renderInputType.text = renderInputType.email = renderInputType.password = render
   return input;
 };
 
-renderInputType.file = function (params) {
-  var input = getChildByClass(getContent(), swalClasses.file);
+renderInputType.file = function (input, params) {
   setInputPlaceholder(input, params);
-  input.type = params.input;
   return input;
 };
 
-renderInputType.range = function (params) {
-  var range = getChildByClass(getContent(), swalClasses.range);
+renderInputType.range = function (range, params) {
   var rangeInput = range.querySelector('input');
   var rangeOutput = range.querySelector('output');
   rangeInput.value = params.inputValue;
@@ -71530,8 +72302,7 @@ renderInputType.range = function (params) {
   return range;
 };
 
-renderInputType.select = function (params) {
-  var select = getChildByClass(getContent(), swalClasses.select);
+renderInputType.select = function (select, params) {
   select.innerHTML = '';
 
   if (params.inputPlaceholder) {
@@ -71546,28 +72317,46 @@ renderInputType.select = function (params) {
   return select;
 };
 
-renderInputType.radio = function () {
-  var radio = getChildByClass(getContent(), swalClasses.radio);
+renderInputType.radio = function (radio) {
   radio.innerHTML = '';
   return radio;
 };
 
-renderInputType.checkbox = function (params) {
-  var checkbox = getChildByClass(getContent(), swalClasses.checkbox);
-  var checkboxInput = getInput(getContent(), 'checkbox');
-  checkboxInput.type = 'checkbox';
-  checkboxInput.value = 1;
-  checkboxInput.id = swalClasses.checkbox;
-  checkboxInput.checked = Boolean(params.inputValue);
-  var label = checkbox.querySelector('span');
+renderInputType.checkbox = function (checkboxContainer, params) {
+  var checkbox = getInput(getContent(), 'checkbox');
+  checkbox.value = 1;
+  checkbox.id = swalClasses.checkbox;
+  checkbox.checked = Boolean(params.inputValue);
+  var label = checkboxContainer.querySelector('span');
   label.innerHTML = params.inputPlaceholder;
-  return checkbox;
+  return checkboxContainer;
 };
 
-renderInputType.textarea = function (params) {
-  var textarea = getChildByClass(getContent(), swalClasses.textarea);
+renderInputType.textarea = function (textarea, params) {
   textarea.value = params.inputValue;
   setInputPlaceholder(textarea, params);
+
+  if ('MutationObserver' in window) {
+    // #1699
+    var initialPopupWidth = parseInt(window.getComputedStyle(getPopup()).width);
+    var popupPadding = parseInt(window.getComputedStyle(getPopup()).paddingLeft) + parseInt(window.getComputedStyle(getPopup()).paddingRight);
+
+    var outputsize = function outputsize() {
+      var contentWidth = textarea.offsetWidth + popupPadding;
+
+      if (contentWidth > initialPopupWidth) {
+        getPopup().style.width = contentWidth + 'px';
+      } else {
+        getPopup().style.width = null;
+      }
+    };
+
+    new MutationObserver(outputsize).observe(textarea, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+  }
+
   return textarea;
 };
 
@@ -71800,6 +72589,10 @@ var render = function render(instance, params) {
   renderContent(instance, params);
   renderActions(instance, params);
   renderFooter(instance, params);
+
+  if (typeof params.onRender === 'function') {
+    params.onRender(getPopup());
+  }
 };
 
 /*
@@ -72111,9 +72904,10 @@ var defaultParams = {
   currentProgressStep: null,
   progressStepsDistance: null,
   onBeforeOpen: null,
-  onAfterClose: null,
   onOpen: null,
+  onRender: null,
   onClose: null,
+  onAfterClose: null,
   scrollbarPadding: true
 };
 var updatableParams = ['title', 'titleText', 'text', 'html', 'type', 'customClass', 'showConfirmButton', 'showCancelButton', 'confirmButtonText', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonClass', 'cancelButtonText', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonClass', 'buttonsStyling', 'reverseButtons', 'imageUrl', 'imageWidth', 'imageHeigth', 'imageAlt', 'imageClass', 'progressSteps', 'currentProgressStep'];
@@ -72285,7 +73079,7 @@ var undoScrollbar = function undoScrollbar() {
 /* istanbul ignore next */
 
 var iOSfix = function iOSfix() {
-  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 
   if (iOS && !hasClass(document.body, swalClasses.iosfix)) {
     var offset = document.body.scrollTop;
@@ -72546,12 +73340,12 @@ function disableButtons() {
 } // @deprecated
 
 function enableConfirmButton() {
-  warnAboutDepreation('Swal.disableConfirmButton()', "Swal.getConfirmButton().removeAttribute('disabled')");
+  warnAboutDepreation('Swal.enableConfirmButton()', "Swal.getConfirmButton().removeAttribute('disabled')");
   setButtonsDisabled(this, ['confirmButton'], false);
 } // @deprecated
 
 function disableConfirmButton() {
-  warnAboutDepreation('Swal.enableConfirmButton()', "Swal.getConfirmButton().setAttribute('disabled', '')");
+  warnAboutDepreation('Swal.disableConfirmButton()', "Swal.getConfirmButton().setAttribute('disabled', '')");
   setButtonsDisabled(this, ['confirmButton'], true);
 }
 function enableInput() {
@@ -72812,7 +73606,6 @@ var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding
 var addClasses = function addClasses(container, popup, params) {
   if (params.animation) {
     addClass(popup, swalClasses.show);
-    addClass(container, swalClasses.fade);
   }
 
   show(popup);
@@ -72829,6 +73622,39 @@ var handleInputOptionsAndValue = function handleInputOptionsAndValue(instance, p
   } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && isPromise(params.inputValue)) {
     handleInputValue(instance, params);
   }
+};
+var getInputValue = function getInputValue(instance, innerParams) {
+  var input = instance.getInput();
+
+  if (!input) {
+    return null;
+  }
+
+  switch (innerParams.input) {
+    case 'checkbox':
+      return getCheckboxValue(input);
+
+    case 'radio':
+      return getRadioValue(input);
+
+    case 'file':
+      return getFileValue(input);
+
+    default:
+      return innerParams.inputAutoTrim ? input.value.trim() : input.value;
+  }
+};
+
+var getCheckboxValue = function getCheckboxValue(input) {
+  return input.checked ? 1 : 0;
+};
+
+var getRadioValue = function getRadioValue(input) {
+  return input.checked ? input.value : null;
+};
+
+var getFileValue = function getFileValue(input) {
+  return input.files.length ? input.getAttribute('multiple') !== null ? input.files : input.files[0] : null;
 };
 
 var handleInputOptions = function handleInputOptions(instance, params) {
@@ -72914,12 +73740,11 @@ var populateInputOptions = {
       radios[0].focus();
     }
   }
-  /**
-   * Converts `inputOptions` into an array of `[value, label]`s
-   * @param inputOptions
-   */
-
 };
+/**
+ * Converts `inputOptions` into an array of `[value, label]`s
+ * @param inputOptions
+ */
 
 var formatInputOptions = function formatInputOptions(inputOptions) {
   var result = [];
@@ -73005,40 +73830,6 @@ var confirm = function confirm(instance, innerParams, value) {
   }
 };
 
-var getInputValue = function getInputValue(instance, innerParams) {
-  var input = instance.getInput();
-
-  if (!input) {
-    return null;
-  }
-
-  switch (innerParams.input) {
-    case 'checkbox':
-      return getCheckboxValue(input);
-
-    case 'radio':
-      return getRadioValue(input);
-
-    case 'file':
-      return getFileValue(input);
-
-    default:
-      return innerParams.inputAutoTrim ? input.value.trim() : input.value;
-  }
-};
-
-var getCheckboxValue = function getCheckboxValue(input) {
-  return input.checked ? 1 : 0;
-};
-
-var getRadioValue = function getRadioValue(input) {
-  return input.checked ? input.value : null;
-};
-
-var getFileValue = function getFileValue(input) {
-  return input.files.length ? input.files[0] : null;
-};
-
 var addKeydownHandler = function addKeydownHandler(instance, globalState, innerParams, dismissWith) {
   if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
     globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
@@ -73062,7 +73853,7 @@ var addKeydownHandler = function addKeydownHandler(instance, globalState, innerP
 }; // Focus handling
 
 var setFocus = function setFocus(innerParams, index, increment) {
-  var focusableElements = getFocusableElements(innerParams.focusCancel); // search for visible elements and select the next possible match
+  var focusableElements = getFocusableElements(); // search for visible elements and select the next possible match
 
   for (var i = 0; i < focusableElements.length; i++) {
     index = index + increment; // rollover to first item
@@ -73119,7 +73910,7 @@ var handleEnter = function handleEnter(instance, e, innerParams) {
 
 var handleTab = function handleTab(e, innerParams) {
   var targetElement = e.target;
-  var focusableElements = getFocusableElements(innerParams.focusCancel);
+  var focusableElements = getFocusableElements();
   var btnIndex = -1;
 
   for (var i = 0; i < focusableElements.length; i++) {
@@ -73352,6 +74143,12 @@ var blurActiveElement = function blurActiveElement() {
  */
 
 function update(params) {
+  var popup = getPopup();
+
+  if (!popup || hasClass(popup, swalClasses.hide)) {
+    return warn("You're trying to update the closed or closing popup, that won't work. Use the update() method in preConfirm parameter or show a new popup.");
+  }
+
   var validUpdatableParams = {}; // assign valid params from `params` to `defaults`
 
   Object.keys(params).forEach(function (param) {
@@ -73468,7 +74265,7 @@ Object.keys(instanceMethods).forEach(function (key) {
   };
 });
 SweetAlert.DismissReason = DismissReason;
-SweetAlert.version = '8.15.1';
+SweetAlert.version = '8.19.0';
 
 var Swal = SweetAlert;
 Swal["default"] = Swal;
@@ -73478,7 +74275,6 @@ return Swal;
 })));
 if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
 
-"undefined"!=typeof document&&function(e,t){var n=e.createElement("style");if(e.getElementsByTagName("head")[0].appendChild(n),n.styleSheet)n.styleSheet.disabled||(n.styleSheet.cssText=t);else try{n.innerHTML=t}catch(e){n.innerText=t}}(document,"@charset \"UTF-8\";@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.875em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-shown{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon::before{display:flex;align-items:center;font-size:2em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon::before{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 .0625em #fff,0 0 0 .125em rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-shown{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent}body.swal2-no-backdrop .swal2-shown>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-shown.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-top-left,body.swal2-no-backdrop .swal2-shown.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-top-end,body.swal2-no-backdrop .swal2-shown.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-shown.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-left,body.swal2-no-backdrop .swal2-shown.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-center-end,body.swal2-no-backdrop .swal2-shown.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-shown.swal2-bottom-left,body.swal2-no-backdrop .swal2-shown.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-shown.swal2-bottom-end,body.swal2-no-backdrop .swal2-shown.swal2-bottom-right{right:0;bottom:0}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;background-color:transparent;-webkit-overflow-scrolling:touch}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-container.swal2-fade{transition:background-color .1s}.swal2-container.swal2-shown{background-color:rgba(0,0,0,.4)}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{box-sizing:border-box;width:2.5em;height:2.5em;margin:.46875em;padding:0;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{content:\"\";display:inline-block;width:15px;height:15px;margin-left:5px;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff}.swal2-styled{margin:.3125em;padding:.625em 2em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(50,100,150,.4)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:0;outline:initial;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:300;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-file::-webkit-input-placeholder,.swal2-input::-webkit-input-placeholder,.swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:inherit}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:inherit;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;zoom:normal;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;zoom:normal;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon::before{display:flex;align-items:center;height:92%;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-warning::before{content:\"!\"}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-info::before{content:\"i\"}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-question::before{content:\"?\"}.swal2-icon.swal2-question.swal2-arabic-question-mark::before{content:\"؟\"}.swal2-icon.swal2-success{border-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.875em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-progress-steps{align-items:center;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#3085d6}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;width:2.5em;height:.4em;margin:0 -1px;background:#3085d6}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-show.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-hide.swal2-noanimation{-webkit-animation:none;animation:none}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-animate-success-icon .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-animate-success-icon .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-animate-success-icon .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-animate-error-icon{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-animate-error-icon .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}");
 
 /***/ }),
 
@@ -76477,41 +77273,42 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.js */ "./node_modules/sweetalert2/dist/sweetalert2.js");
+/* harmony import */ var sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0__);
 
 var VueSweetalert2 = (function () {
     function VueSweetalert2() {
     }
     VueSweetalert2.install = function (vue, options) {
-        var _swal = function () {
+        var swalFunction = function () {
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
             if (options) {
-                var mixed = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(options);
+                var mixed = sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a.mixin(options);
                 return mixed.fire.apply(mixed, args);
             }
-            return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire.apply(sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a, args);
+            return sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a.fire.apply(sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a, args);
         };
-        var _loop_1 = function (k) {
-            if (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.hasOwnProperty(k) && typeof sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a[k] === 'function') {
-                _swal[k] = function () {
-                    var args = [];
-                    for (var _i = 0; _i < arguments.length; _i++) {
-                        args[_i] = arguments[_i];
-                    }
-                    return sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a[k].apply(sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a, args);
-                };
+        var methodName;
+        for (methodName in sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a) {
+            if (Object.prototype.hasOwnProperty.call(sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a, methodName) &&
+                typeof sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a[methodName] === 'function') {
+                swalFunction[methodName] = (function (method) {
+                    return function () {
+                        var args = [];
+                        for (var _i = 0; _i < arguments.length; _i++) {
+                            args[_i] = arguments[_i];
+                        }
+                        return sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a[method].apply(sweetalert2_dist_sweetalert2_js__WEBPACK_IMPORTED_MODULE_0___default.a, args);
+                    };
+                })(methodName);
             }
-        };
-        for (var k in sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a) {
-            _loop_1(k);
         }
-        vue['swal'] = _swal;
+        vue['swal'] = swalFunction;
         if (!vue.prototype.hasOwnProperty('$swal')) {
-            vue.prototype.$swal = _swal;
+            vue.prototype.$swal = swalFunction;
         }
     };
     return VueSweetalert2;
@@ -76779,10 +77576,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/lib/loader.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CourseComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/lib/loader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_lib_loader_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./CourseComponent.vue?vue&type=style&index=0&lang=scss& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CourseComponent.vue?vue&type=style&index=0&lang=scss&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseComponent_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

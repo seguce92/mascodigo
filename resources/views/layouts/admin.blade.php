@@ -37,7 +37,7 @@
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
   <nav id="header" class="bg-white fixed w-full z-40 top-0 shadow">
-		<div class="w-full container px-2 lg:px-0 mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
+		<div class="w-full container px-3 xl:px-0 mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
 			<div class="w-1/2 pl-2 md:pl-0">
 				<a href="{{ url('/') }}" class="text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold font-mono"> 
          {{ config('app.name') }}
@@ -78,7 +78,7 @@
               </ul>
             </div>
           </div>
-          <div class="block lg:hidden pr-4">
+          <div class="block lg:hidden">
             <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-teal-500 appearance-none focus:outline-none">
               <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
             </button>
@@ -93,8 +93,8 @@
     </div>
   </nav>
 
-	<div class="container w-full mx-auto pt-20 sm:pt-20 md:pt-5 lg:pt-20 xl:pt-20">
-		<div id="app" class="w-full px-4 md:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
+	<div class="container w-full mx-auto pt-20 sm:pt-20 md:pt-5 lg:pt-24 xl:pt-20">
+		<div id="app" class="w-full px-3 xl:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
 			@error @enderror
 			@alert @endalert
 			@yield('content')	
@@ -102,7 +102,7 @@
   </div> 
   
 	<footer class="bg-white border-t border-gray-400 shadow inset-x-0 bottom-0 relative sm:absolute md:fixed lg:fixed xl:fixed">	
-		<div class="py-2 text-center">
+		<div class="py-2 text-center text-sm">
       Copyright &copy; <strong>Más Código</strong> {{ \Carbon\Carbon::now()->year }}
 		</div>
 	</footer>

@@ -10,29 +10,29 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "@tailwindcss/custom-forms": "^0.2.0",
+        "@tailwindcss/custom-forms": "^0.2.1",
         "axios": "^0.18",
-        "cross-env": "^5.1",
-        "laravel-mix": "^4.0.14",
-        "laravel-mix-purgecss": "^4.1",
+        "cross-env": "^5.2.1",
+        "laravel-mix": "^4.1.4",
+        "laravel-mix-purgecss": "^4.2.0",
         "laravel-mix-tailwind": "^0.1.0",
         "lodash": "^4.17.5",
         "marked": "^0.7.0",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.15.2",
-        "sass-loader": "^7.1.0",
-        "tailwindcss": "^1.0",
+        "sass": "^1.25.0",
+        "sass-loader": "^7.3.1",
+        "tailwindcss": "^1.2.0",
         "tailwindcss-plugins": "^0.2.0",
-        "vue": "^2.5.17",
+        "vue": "^2.6.11",
         "vue-multiselect": "^2.1.6",
-        "vue-sweetalert2": "^2.1.1",
-        "vue-template-compiler": "^2.6.4",
-        "vuex": "^3.1.1"
+        "vue-sweetalert2": "^2.1.5",
+        "vue-template-compiler": "^2.6.11",
+        "vuex": "^3.1.2"
     },
     "dependencies": {
-        "@github/markdown-toolbar-element": "^1.0.6",
-        "highlight.js": "^9.15.10",
-        "portal-vue": "^2.1.6",
+        "@github/markdown-toolbar-element": "^1.1.1",
+        "highlight.js": "^9.18.1",
+        "portal-vue": "^2.1.7",
         "vue-plyr": "^5.1.3"
     }
 }
