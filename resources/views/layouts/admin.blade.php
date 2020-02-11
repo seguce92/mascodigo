@@ -107,11 +107,7 @@
 		</div>
 	</footer>
 
-<script>
-	var ab=document.getElementById("userMenu");var userMenu=document.getElementById("userButton");var z=document.getElementById("nav-content");var x=document.getElementById("nav-toggle");document.onclick=check;
-	function check(e){var target=(e&&e.target)||(event&&event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}if(!checkParent(target,z)){if(checkParent(target,x)){if(z.classList.contains("hidden")){z.classList.remove("hidden")}else{z.classList.add("hidden")}}else{z.classList.add("hidden")}}}
-	function checkParent(t,elm){while(t.parentNode){if(t==elm){return true}t=t.parentNode}return false}
-</script>
+<script>var ab=document.getElementById("userMenu");var userMenu=document.getElementById("userButton");var z=document.getElementById("nav-content");var x=document.getElementById("nav-toggle");document.onclick=check;function check(e){var target=(e&&e.target)||(event&&event.srcElement);if(!checkParent(target,ab)){if(checkParent(target,userMenu)){if(ab.classList.contains("invisible")){ab.classList.remove("invisible")}else{ab.classList.add("invisible")}}else{ab.classList.add("invisible")}}if(!checkParent(target,z)){if(checkParent(target,x)){if(z.classList.contains("hidden")){z.classList.remove("hidden")}else{z.classList.add("hidden")}}else{z.classList.add("hidden")}}}function checkParent(t,elm){while(t.parentNode){if(t==elm){return true}t=t.parentNode}return false}</script>
 @stack('script')
 </body>
 </html>

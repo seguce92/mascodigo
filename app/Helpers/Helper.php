@@ -94,23 +94,30 @@ class Helper {
   public function formatDatePost ($timestamp) {
 		return $this->month($timestamp->month).' '.$timestamp->day.', '.$timestamp->year;
   }
+
+  public function formatDateText ($timestamp) {
+		return $this->month($timestamp->month, 3).' '.$timestamp->day.', '.$timestamp->year;
+  }
   
-  private function month ($number) {
+  public function month ($number, $char = 0) {
+    $month = 'Enero';
     switch ( $number ) {
-      case 1: return 'Enero';
-      case 2: return 'Febrero';
-      case 3: return 'Marzo';
-      case 4: return 'Abril';
-      case 5: return 'Mayo';
-      case 6: return 'Junio';
-      case 7: return 'Julio';
-      case 8: return 'Agosto';
-      case 9: return 'Septiembre';
-      case 10: return 'Octubre';
-      case 11: return 'Noviembre';
-      case 12: return 'Diciembre';
-      default: return 'Enero';
+      case 1: $month = 'Enero';
+      case 2: $month = 'Febrero';
+      case 3: $month = 'Marzo';
+      case 4: $month = 'Abril';
+      case 5: $month = 'Mayo';
+      case 6: $month = 'Junio';
+      case 7: $month = 'Julio';
+      case 8: $month = 'Agosto';
+      case 9: $month = 'Septiembre';
+      case 10: $month = 'Octubre';
+      case 11: $month = 'Noviembre';
+      case 12: $month = 'Diciembre';
+      default: $month = 'Enero';
     }
+
+    return $char == 0 ? $month : substr($month, 0, $char);
   }
 
   public function excerpt ($content) {

@@ -23,7 +23,7 @@
 
 @if ( \Auth::user()->hasRole('administrador') )
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     <div class="bg-white border rounded shadow p-2">
         <div class="flex flex-row items-center">
             <div class="flex-shrink pr-4">
@@ -88,7 +88,7 @@
 </div>
 @else
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     <div class="bg-white border rounded shadow p-2">
         <div class="flex flex-row items-center">
             <div class="flex-shrink pr-4">
@@ -133,82 +133,98 @@
 
 <div class="grid grid-cols-1">
     <div class="mt-8 mb-3">
-        <h2 class="font-semibold text-lg">Novedades</h2>
+        <h2 class="font-semibold text-lg">Lecciones de {{ to_month(date('m')) }}</h2>
     </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @for ( $i = 0; $i < 5; $i++)
-    <div class="bg-white border rounded shadow">
-        <div class="flex flex-row p-2">
-            <div class="flex-shrink pr-2">
-                <div class="rounded-full border-white border-2 p-3 bg-blue-600 course laravel shadow">
-                    <img class="w-12 h-12" src="https://mascodigo.app/storage/icons/05102019_1570254801.svg" alt="">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    @foreach ( $news as $lesson)
+        <div class="bg-white border rounded shadow">
+            <div class="flex flex-row p-2">
+                <div class="flex-shrink pr-2">
+                    <div class="rounded-full border-white border-2 p-3 bg-blue-600 course {{ $lesson->course->color }} shadow">
+                        <img class="w-12 h-12" src="{{ $lesson->course->icon }}" alt="Icon">
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="grid grid-cols-2">
+                        <div class="font-semibold text-gray-700 text-xs uppercase">Lección {{ $lesson->order }}</div>
+                        <time datetime="{{ $lesson->published_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ date_text($lesson->published_at) }}</time>
+                    </div>
+                    <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $lesson->course->slug]) }}" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
+                        {{ $lesson->title }}
+                    </a>
                 </div>
             </div>
-            <div class="flex-1">
-                <div class="grid grid-cols-2">
-                    <div class="font-semibold text-gray-700 text-xs uppercase">Lección 1</div>
-                    <div class="text-gray-600 text-xs italic text-right">Feb 5, 2019</div>
+            <div class="grid grid-cols-3 border-t font-mono">
+                <time class="text-xs p-2 text-center">{{ $lesson->duration }}</time>
+                <div class="text-xs text-center p-2 border-l border-r">
+                    @if ( $lesson->is_private && $lesson->is_premium )
+                        Premium
+                    @elseif ( $lesson->is_private )
+                        Estandar
+                    @else
+                        Gratis
+                    @endif
                 </div>
-                <a href="#" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
-                    Este es el titulo de la Leccion mucho mas larga de lo normal para seguir adminrando</a>
+                <div class="text-xs text-center p-2">{{ $lesson->course->level }}</div>
+            </div>
+            <div class="flex">
+                <div class="w-full bg-gray-300 p-2 rounded-b">
+                    <a href="{{ route('course', $lesson->course->slug) }}" class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
+                        {{ $lesson->course->title }}
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="grid grid-cols-3">
-            <div class="text-xs p-2">
-                <svg class="w-3 h-3 fill-current inline-block text-gray-500 -mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"/></svg>
-                00:00
-            </div>
-            <div class="text-xs text-center p-2">Gratis</div>
-            <div class="text-xs text-right p-2">Nivel</div>
-        </div>
-        <div class="flex">
-            <div class="w-full bg-gray-300 p-2 rounded-b">
-                <h2 class="font-bold text-xs text-gray-800">Titulo de Curso Titulo de Curso Titulo de Curso Titulo de Curso Titulo de Curso</h2>
-            </div>
-        </div>
-    </div>
-    @endfor
+    @endforeach
 </div>
 
 <div class="grid grid-cols-1">
     <div class="mt-6 mb-3">
-        <h2 class="font-semibold text-lg">Contenido Anterior</h2>
+        <h2 class="font-semibold text-lg">Contenido Pasado</h2>
     </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @for ( $i = 0; $i < 5; $i++)
-    <div class="bg-white border rounded shadow">
-        <div class="flex flex-row p-2">
-            <div class="flex-shrink pr-2">
-                <div class="rounded-full border-white border-2 p-3 bg-blue-600 course vue-js shadow">
-                    <img class="w-12 h-12" src="https://mascodigo.app/storage/icons/07022020_1581109370.svg" alt="">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    @foreach ( $lasted as $lesson )
+        <div class="bg-white border rounded shadow">
+            <div class="flex flex-row p-2">
+                <div class="flex-shrink pr-2">
+                    <div class="rounded-full border-white border-2 p-3 bg-blue-600 course {{ $lesson->course->color }} shadow">
+                        <img class="w-12 h-12" src="{{ $lesson->course->icon }}" alt="Icon">
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="grid grid-cols-2">
+                        <div class="font-semibold text-gray-700 text-xs uppercase">Lección {{ $lesson->order }}</div>
+                        <time datetime="{{ $lesson->published_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ date_text($lesson->published_at) }}</time>
+                    </div>
+                    <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $lesson->course->slug]) }}" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
+                        {{ $lesson->title }}
+                    </a>
                 </div>
             </div>
-            <div class="flex-1">
-                <div class="grid grid-cols-2">
-                    <div class="font-semibold text-gray-700 text-xs uppercase">Lección 1</div>
-                    <div class="text-gray-600 text-xs italic text-right">Feb 5, 2019</div>
+            <div class="grid grid-cols-3 border-t font-mono">
+                <time class="text-xs p-2 text-center">{{ $lesson->duration }}</time>
+                <div class="text-xs text-center p-2 border-l border-r">
+                    @if ( $lesson->is_private && $lesson->is_premium )
+                        Premium
+                    @elseif ( $lesson->is_private )
+                        Estandar
+                    @else
+                        Gratis
+                    @endif
                 </div>
-                <a href="#" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
-                    Este es el titulo de la Leccion mucho mas larga de lo normal para seguir adminrando</a>
+                <div class="text-xs text-center p-2">{{ $lesson->course->level }}</div>
+            </div>
+            <div class="flex">
+                <div class="w-full bg-gray-300 p-2 rounded-b">
+                    <a href="{{ route('course', $lesson->course->slug) }}" class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
+                        {{ $lesson->course->title }}
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="grid grid-cols-3">
-            <div class="text-xs p-2">
-                <svg class="w-3 h-3 fill-current inline-block text-gray-500 -mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"/></svg>
-                00:00
-            </div>
-            <div class="text-xs text-center p-2">Gratis</div>
-            <div class="text-xs text-right p-2">Nivel</div>
-        </div>
-        <div class="flex">
-            <div class="w-full bg-gray-300 p-2 rounded-b">
-                <h2 class="font-bold text-xs text-gray-800">Titulo de Curso Titulo de Curso Titulo de Curso Titulo de Curso Titulo de Curso</h2>
-            </div>
-        </div>
-    </div>
-    @endfor
+    @endforeach
 </div>
 @endif
 

@@ -42,6 +42,13 @@ if (! function_exists ('to_seconds') ) {
   }
 }
 
+if (! function_exists ('to_month') ) {
+  function to_month ($number, $char = 0) {
+    return app(\App\Helpers\Helper::class)->month($number, $char);
+  }
+}
+
+
 if (! function_exists ('to_time') ) {
   function to_time ($time_seconds) {
     return app(\App\Helpers\Helper::class)->toTime($time_seconds);
@@ -51,6 +58,12 @@ if (! function_exists ('to_time') ) {
 if (! function_exists ('format_date_post') ) {
   function format_date_post ($timestamp) {
     return app(\App\Helpers\Helper::class)->formatDatePost($timestamp);
+  }
+}
+
+if (! function_exists ('date_text') ) {
+  function date_text ($timestamp) {
+    return app(\App\Helpers\Helper::class)->formatDateText($timestamp);
   }
 }
 

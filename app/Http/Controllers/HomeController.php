@@ -8,9 +8,17 @@ class HomeController extends Controller
 {
     public function home () {
 
+        $news = \App\Entities\Learn\Lesson::whereYear('published_at', date('Y'))->whereMonth('published_at', date('m'))->get();
+        $id = $news->map(function ($item) {
+            return $item->id;
+        });
+        $lasted = \App\Entities\Learn\Lesson::whereNotIn('id', $id)->limit(15)->get();
+
         return view('admin::home', [
             'posts' =>  \App\Entities\Blog\Post::all(),
-            'courses'   =>  \App\Entities\Learn\Course::all()
+            'courses'   =>  \App\Entities\Learn\Course::all(),
+            'news'      =>  $news,
+            'lasted'    =>  $lasted 
         ]);
     }
 

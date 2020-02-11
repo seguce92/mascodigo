@@ -40,6 +40,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
   Route::resource('courses', 'Learn\CourseController');
   Route::resource('lessons', 'Learn\LessonController')->except(['create', 'edit']);
 
+  Route::group(['prefix' => 'academic', 'namespace' => 'Learn'], function () {
+    Route::get('/', 'AcademicController@index')->name('academic.index');
+    Route::get('/courses', 'AcademicController@courses')->name('academic.courses');
+    Route::get('/advance', 'AcademicController@advance')->name('academic.advance');
+    Route::get('/favorite', 'AcademicController@favorite')->name('academic.favorite');
+    Route::get('/completed', 'AcademicController@completed')->name('academic.completed');
+    Route::get('/history', 'AcademicController@history')->name('academic.history');
+  });
+
   Route::get('profile', 'Core\ProfileController@index')->name('profile');
   Route::post('profile/{user}', 'Core\ProfileController@store')->name('profile.store');
   Route::get('profile/password', 'Core\ProfileController@passwordIndex')->name('password.index');

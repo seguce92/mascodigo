@@ -31,6 +31,8 @@ Vue.component('courses', require('./components/Courses.vue').default);
 
 Vue.component('portlet-component', require('./components/PortletComponent.vue').default);
 
+Vue.component('academic', require('./components/Academic.vue').default);
+
 const app = new Vue({
     //store
 }).$mount('#app');
