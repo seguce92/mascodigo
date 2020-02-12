@@ -63,4 +63,25 @@ class User extends Authenticatable
     public function posts () {
         return $this->hasMany(\App\Entities\Blog\Post::class, 'author_id');
     }
+
+
+    /**
+     * Suscribe
+     */
+
+    public function advances () {
+        return $this->hasMany(\App\Entities\Learn\Advance::class);
+    }
+
+    public function completes () {
+        return $this->hasMany(\App\Entities\Learn\Complete::class);
+    }
+
+    public function favorites () {
+        return $this->hasMany(\App\Entities\Learn\Favorite::class);
+    }
+
+    public function histories () {
+        return $this->hasMany(\App\Entities\Learn\History::class);
+    }
 }

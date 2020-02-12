@@ -47,19 +47,19 @@
   <header class="hero box-shadow-hero" >
   @else
   <div id="app">
-  <header class="hero box-shadow-hero">
-  @endif
-    @yield('menu-component')
-    <section class="flex hidden lg:flex flex-wrap container mx-auto text-white">
-      <nav class="select-none bg-grey flex justify-end items-stretch w-full">
-        <div class="flex items-stretch flex-no-shrink h-12">
-          <div class="flex items-stretch justify-end ml-auto">            
-            @yield('menu')
+    <header class="hero box-shadow-hero">
+    @endif
+      @yield('menu-component')
+      <section class="flex hidden lg:flex flex-wrap container mx-auto text-white">
+        <nav class="select-none bg-grey flex justify-end items-stretch w-full">
+          <div class="flex items-stretch flex-no-shrink h-12">
+            <div class="flex items-stretch justify-end ml-auto">            
+              @yield('menu')
+            </div>
           </div>
-        </div>
-      </nav>
-    </section>
-  </header>
+        </nav>
+      </section>
+    </header>
     @yield('content')
   </div>
   @include ('component.footer')

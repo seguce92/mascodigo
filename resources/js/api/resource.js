@@ -15,10 +15,10 @@ class Resource {
         });
     }
 
-    post (uri, esource) {
+    post (uri, resource) {
         return request({
             url: uri,
-            method: 'get',
+            method: 'post',
             data: resource,
         });
     }

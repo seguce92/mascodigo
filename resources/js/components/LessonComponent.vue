@@ -137,78 +137,24 @@
     <div class="container mx-auto mb-8">
       <div class="flex justify-center flex-wrap">
         <div class="flex flex-wrap w-full lg:2-4/5 xl:w-4/5  items-start content-start mx-auto">
-          <input type="checkbox" name="panel" id="panel-1" class="hidden" checked>
-          <label for="panel-1" class="panel-header relative w-full lg:rounded-t uppercase font-bold px-4 py-2 bg-gray-300 mt-3">Notas de la lección</label>
+          <label for="panel-1" 
+            class="panel-header relative w-full lg:rounded-t font-bold px-4 py-2 bg-gray-200 mt-3">
+            <div class="grid grid-rows-2 grid-flow-col">
+              <div class="row-span-1 col-span-2">
+                {{ lesson.title }}
+              </div>
+              <div class="row-span-1 col-span-2 text-xs font-normal text-gray-600">
+                {{ lesson.published_human }} <span class="ml-4">1000 reproducciones</span>
+              </div>
+              <div class="row-span-2 col-span-1 text-right text-xs font-normal justify-center">
+                <like :logged="logged" :lesson="lesson"></like>
+              </div>
+            </div>
+          </label>
           <div v-show="lesson.content != null && lesson.content != '' && init" 
-            class="lesson-about accordion__content overflow-hidden w-full bg-white lg:rounded-b px-4 py-2 leading-relaxed lg:border markdown-body" v-html="parse">
+            class="lesson-about accordion__content overflow-hidden w-full bg-white lg:rounded-b p-4 leading-relaxed lg:border markdown-body" 
+            v-html="parse">
           </div>
-
-          <!-- comments -->
-          <!--h4 class="w-full lg:rounded uppercase font-bold bg-gray-300 px-4 py-2 mt-3 mb-3">COMENTARIOS / DISCUSIÓN</h4> 
-          <div class="comments w-full bg-white py-2 p-3">
-            <div class="flex items-start mb-4 text-sm">
-                <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
-                <div class="flex-1 overflow-hidden">
-                    <div>
-                        <span class="font-bold">Adam Wathan</span>
-                        <span class="text-grey text-xs">12:45</span>
-                    </div>
-                    <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
-                    <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
-                      .marquee-lightspeed { -webkit-marquee-speed: fast; }
-                      .marquee-lightspeeder { -webkit-marquee-speed: faster; }
-                    </div>
-                </div>
-            </div>
-            <div class="reply">
-              <div class="flex items-start mb-4 text-sm">
-                  <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
-                  <div class="flex-1 overflow-hidden">
-                      <div>
-                          <span class="font-bold">Adam Wathan</span>
-                          <span class="text-grey text-xs">12:45</span>
-                      </div>
-                      <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
-                      <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
-                        .marquee-lightspeed { -webkit-marquee-speed: fast; }
-                        .marquee-lightspeeder { -webkit-marquee-speed: faster; }
-                      </div>
-                  </div>
-              </div>
-              <div class="flex items-start mb-4 text-sm">
-                  <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
-                  <div class="flex-1 overflow-hidden">
-                      <div>
-                          <span class="font-bold">Adam Wathan</span>
-                          <span class="text-grey text-xs">12:45</span>
-                      </div>
-                      <p class="text-black leading-normal">How are we supposed to control the marquee space without an utility for it? I propose this:</p>
-                      <div class="bg-grey-lighter border border-grey-light text-grey-darkest text-sm font-mono rounded p-3 mt-2 whitespace-pre overflow-scroll">
-                        .marquee-lightspeed { -webkit-marquee-speed: fast; }
-                        .marquee-lightspeeder { -webkit-marquee-speed: faster; }
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="flex items-start mb-4 text-sm">
-              <img src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg" class="w-10 h-10 rounded mr-3" />
-              <div class="flex-1 overflow-hidden">
-                  <div>
-                      <span class="font-bold">David Hemphill</span>
-                      <span class="text-grey text-xs">12:46</span>
-                  </div>
-                  <p class="text-black leading-normal"><a href="#" class="inline-block bg-blue-lightest text-blue no-underline">@Adam Wathan</a> the size of the generated CSS is creating a singularity in space/time, we must stop adding more utilities before it's too late!</p>
-              </div>
-            </div>
-
-            <div class="comment-box">
-              <markdown v-model="comment" :options="options"></markdown>
-              <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-3 border border-blue-500 hover:border-transparent rounded">
-                Enviar Comentario
-              </button>
-            </div>
-          </div-->
-          <!-- comments -->
         </div>
       </div>
     </div>
@@ -223,9 +169,13 @@ import { constants } from 'crypto';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 window.hljs = hljs;
+import Like from './Like.vue'
 
 Vue.use(VuePlyr)
 export default {
+  components: {
+    Like
+  },
   props: {
     course: {
       type: Object
@@ -320,36 +270,9 @@ export default {
     }
   }
 
-  .panel-header:after {
-    content: '+';
-    position: absolute;
-    right: .5em;
-    color: #000;
-    font-size: 20px;
-    line-height: 1.5;
-  }
-
-  input:checked + .panel-header:after {
-    content: '-';
-    font-size: 25px;
-    line-height: 1;
-  }
-
   .accordion__content{
-    max-height: 0em;
-    display: none;
-    transition: all 0.4s cubic-bezier(0.865, 0.14, 0.095, 0.87);
-  }
-  
-  input[name='panel']:checked ~ .accordion__content {
     max-height: 100em;
     display: inline-block;
-  }
-
-  .message-standar {
-
-  }
-  .message-premium {
-
+    transition: all 0.4s cubic-bezier(0.865, 0.14, 0.095, 0.87);
   }
 </style>

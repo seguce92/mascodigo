@@ -18,6 +18,18 @@ class Course extends Model
         'is_publish'    =>  'boolean'
     ];
 
+    protected $appends = [
+        'published_human', 'created_human'
+    ];
+
+    public function getPublishedHumanAttribute () {
+        return date_text($this->published_at);
+    }
+
+    public function getCreatedHumanAttribute () {
+        return date_text($this->created_at);
+    }
+
     public function author () {
         return $this->belongsTo(\App\User::class, 'author_id', 'id');
     }

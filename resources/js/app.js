@@ -19,6 +19,9 @@ const options = {
 }
 Vue.use(VueSweetalert2, options);
 
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
+
 
 Vue.component('skill-courses', require('./components/SkillCourses.vue').default);
 Vue.component('course-component', require('./components/CourseComponent.vue').default);

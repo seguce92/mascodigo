@@ -4,14 +4,14 @@ namespace App\Entities\Learn;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Advance extends Model
+class History extends Model
 {
-    protected $table = 'advances';
+    protected $table = 'histories';
 
     protected $fillable = [
-        'course_id', 'lesson_id', 'user_id'
+        'lesson_id', 'user_id'
     ];
-
+    
     protected $appends = [
         'created_human'
     ];
@@ -22,10 +22,6 @@ class Advance extends Model
 
     public function user () {
         return $this->belongsTo(\App\User::class);
-    }
-
-    public function course () {
-        return $this->belongsTo(Course::class);
     }
 
     public function lesson () {
