@@ -66,7 +66,7 @@ class PostController extends Controller
         $post->author_id    =   \Auth::id();
         $post->category_id  =   $request->category_id;
         $post->editor_id    =   \Auth::id();
-        $post->published_at =   \Carbon\Carbon::now();
+        $post->published_at =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $post->save();
 
         session()->flash('message', 'Post Registrado');
@@ -129,7 +129,7 @@ class PostController extends Controller
         $post->author_id    =   \Auth::id();
         $post->category_id  =   $request->category_id;
         $post->editor_id    =   \Auth::id();
-        $post->published_at =   \Carbon\Carbon::now();
+        $post->published_at =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $post->save();
 
         session()->flash('message', 'Post Actualizado');

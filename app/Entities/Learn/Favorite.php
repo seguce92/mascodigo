@@ -13,8 +13,12 @@ class Favorite extends Model
     ];
 
     protected $appends = [
-        'created_human'
+        'hashid', 'created_human'
     ];
+
+    public function getHashidAttribute () {
+        return hashid_encode($this->id);
+    }
 
     public function getCreatedHumanAttribute () {
         return date_text($this->created_at);

@@ -26,6 +26,14 @@
                 </a>
             </li>
             <li class="mr-1">
+                <a @click="selectTab('completed')" 
+                    class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
+                    :class="option == 'completed' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 fill-current mx-auto mb-1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M5 42.285V37.68l-1.291-2.594A2.974 2.974 0 003 37v5.285c-1.228.669-2 2.442-2 3.715 0 1.654 1.346 3 3 3s3-1.346 3-3c0-1.273-.772-3.046-2-3.715zM23.235 32.82l-.567.508c-.02.018-.118.105-.267.234A6.997 6.997 0 0124 38a6.986 6.986 0 01-2.612 5.446A12.183 12.183 0 0126 45.86V33h14v2h19v2H40v4h18c1.654 0 3-1.346 3-3v-7H22.328zM36 13.618v4.764L40.764 16zM38.276 49c-.513 0-.996.227-1.325.621L32.468 55h-1.989l-3.961-5.658A10.185 10.185 0 0018.179 45H17c-4.962 0-9 4.037-9 9v7h15v-6l-1.8-2.4 1.6-1.199 3.9 5.2C27.827 58.103 29.622 59 31.5 59s3.673-.897 4.8-2.399l3.355-4.474c.222-.297.345-.665.345-1.035v-.368c0-.951-.773-1.724-1.724-1.724zM5.019 33.229l.883 1.775L21 26.766l-.902-1.77zM19.519 29.846l-10.362 5.65 1.162 2.333c1.247-.338 3.755-1.081 5.555-2.027 1.82-.955 3.9-2.635 4.885-3.467z"/><path d="M17 43c2.757 0 5-2.243 5-5a5 5 0 00-1.139-3.166c-1.134.895-2.641 1.995-4.057 2.739-1.44.756-3.225 1.376-4.605 1.797A4.984 4.984 0 0017 43zM35.415 48.34A3.7 3.7 0 0138 47.03V35H28v12.997c.05.068.109.128.157.198L31.532 53zM30 37h6v2h-6zm0 4h6v2h-6zm0 4h4v2h-4zM58 3H20c-1.654 0-3 1.346-3 3v18.418l2.177-1.187a1.998 1.998 0 011.541-.135c.507.164.92.516 1.162.991l.902 1.77c.499.978.11 2.18-.865 2.681l-.641.349.056.113H61V6c0-1.654-1.346-3-3-3zM21 15h-2v-2h2zm0-8v4h-2V7c0-1.103.897-2 2-2h8v2zm18 20c-6.065 0-11-4.935-11-11S32.935 5 39 5s11 4.935 11 11-4.935 11-11 11zm20 0h-2v-2h2zm0-4h-2v-2h2zm0-4h-2v-2h2z"/><path d="M39 7c-4.962 0-9 4.037-9 9s4.038 9 9 9 9-4.037 9-9-4.038-9-9-9zm-5 14.618V10.382L45.236 16z"/></svg>
+                    <span>Completado</span>
+                </a>
+            </li>
+            <li class="mr-1">
                 <a @click="selectTab('rewards')" 
                     class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
                     :class="option == 'rewards' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
@@ -51,23 +59,27 @@
         <div v-else-if="option == 'advance'" class="z-10 bg-white border rounded-b p-4 shadow">
             <advance></advance>
         </div>
+        <div v-else-if="option == 'completed'" class="z-10 bg-white border rounded-b p-4 shadow">
+            <completed></completed>
+        </div>
         <div v-else-if="option == 'favorite'" class="z-10 bg-white border rounded-b p-4 shadow">
             <favorites></favorites>
         </div>
         <div v-else class="z-10 bg-white border rounded-b py-2 px-4 shadow">
-            Mis Logros
+            Rewards
         </div>
     </div>
 </template>
 
 <script>
-import { Courses, Advance, Favorites } from './academicom'
+import { Courses, Advance, Favorites, Completed } from './academicom'
 export default {
     name: 'academic',
     components: {
         Courses,
         Advance,
-        Favorites
+        Favorites,
+        Completed
     },
     data: () => ({
         option: 'courses'

@@ -148,9 +148,10 @@
                 <div class="flex-1">
                     <div class="grid grid-cols-2">
                         <div class="font-semibold text-gray-700 text-xs uppercase">Lección {{ $lesson->order }}</div>
-                        <time datetime="{{ $lesson->published_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ date_text($lesson->published_at) }}</time>
+                        <time datetime="{{ $lesson->published_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ $lesson->published_human }}</time>
                     </div>
-                    <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $lesson->course->slug]) }}" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
+                    <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $lesson->course->slug]) }}"
+                        class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
                         {{ $lesson->title }}
                     </a>
                 </div>
@@ -169,8 +170,10 @@
                 <div class="text-xs text-center p-2">{{ $lesson->course->level }}</div>
             </div>
             <div class="flex">
-                <div class="w-full bg-gray-300 p-2 rounded-b">
-                    <a href="{{ route('course', $lesson->course->slug) }}" class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
+                <div class="w-full bg-gray-300 p-2 rounded-b truncate">
+                    <a href="{{ route('course', $lesson->course->slug) }}" 
+                        title="{{ $lesson->course->title }}"
+                        class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
                         {{ $lesson->course->title }}
                     </a>
                 </div>
@@ -196,7 +199,7 @@
                 <div class="flex-1">
                     <div class="grid grid-cols-2">
                         <div class="font-semibold text-gray-700 text-xs uppercase">Lección {{ $lesson->order }}</div>
-                        <time datetime="{{ $lesson->published_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ date_text($lesson->published_at) }}</time>
+                        <time datetime="{{ $lesson->created_at->toDateString() }}" class="text-gray-600 text-xs text-right">{{ $lesson->published_human }}</time>
                     </div>
                     <a href="{{ route('lesson', ['order' => $lesson->order, 'course' => $lesson->course->slug]) }}" class="text-base text-gray-700 hover:underline leading-tight tracking-tighter">
                         {{ $lesson->title }}
@@ -217,8 +220,10 @@
                 <div class="text-xs text-center p-2">{{ $lesson->course->level }}</div>
             </div>
             <div class="flex">
-                <div class="w-full bg-gray-300 p-2 rounded-b">
-                    <a href="{{ route('course', $lesson->course->slug) }}" class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
+                <div class="w-full bg-gray-300 p-2 rounded-b truncate">
+                    <a href="{{ route('course', $lesson->course->slug) }}" 
+                        title="{{ $lesson->course->title }}"
+                        class="font-bold text-xs text-gray-800 hover:text-gray-900 hover:underline">
                         {{ $lesson->course->title }}
                     </a>
                 </div>

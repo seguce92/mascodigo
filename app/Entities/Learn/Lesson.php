@@ -3,7 +3,7 @@
 namespace App\Entities\Learn;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use \Illuminate\Support\Str;
 
 class Lesson extends Model
 {
@@ -21,15 +21,19 @@ class Lesson extends Model
     protected $casts = [
         'is_publish'    =>  'boolean',
         'is_private'    =>  'boolean',
-        'is_premium'    =>  'boolean'
+        'is_premium'    =>  'boolean',
     ];
 
     protected $appends = [
-        'server', 'published_human', 'created_human'
+        'server', 'published_human', 'created_human', 'hashid'
     ];
 
+    public function getHashidAttribute () {
+        return hashid_encode($this->id);
+    }
+
     public function getPublishedHumanAttribute () {
-        return date_text($this->published_at);
+        return $this->published_at ? date_text($this->published_at) : '';
     }
 
     public function getCreatedHumanAttribute () {

@@ -36,8 +36,8 @@
   @stack('style')
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
-  <nav id="header" class="bg-white fixed w-full z-40 top-0 shadow">
-		<div class="w-full container px-3 xl:px-0 mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-0">
+  <nav id="header" class="bg-white fixed w-full z-40 top-0 shadow md:mb-3">
+		<div class="w-full container px-3 xl:px-0 mx-auto flex flex-wrap items-center mt-0 pt-3 pb-3 md:pb-3">
 			<div class="w-1/2 pl-2 md:pl-0">
 				<a href="{{ url('/') }}" class="text-gray-900 text-base xl:text-xl no-underline hover:no-underline font-bold font-mono"> 
          {{ config('app.name') }}
@@ -93,7 +93,7 @@
     </div>
   </nav>
 
-	<div class="container w-full mx-auto pt-20 sm:pt-20 md:pt-5 lg:pt-24 xl:pt-20">
+	<div class="container w-full mx-auto pt-20 sm:pt-20 md:pt-10 lg:pt-24 xl:pt-20">
 		<div id="app" class="w-full px-3 xl:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
 			@error @enderror
 			@alert @endalert

@@ -3,7 +3,7 @@
 @section('title', config('app.name', 'Laravel'))
 
 @section('menu-component')
-  <menu-component type="learn"></menu-component>
+  <menu-component type="learn" :logged="false"></menu-component>
 @endsection
 
 @section('menu')

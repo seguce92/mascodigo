@@ -142,4 +142,8 @@ class Helper {
     return $name[0];
   }
 
+  public function gravatar ($email) {
+    return 'https://www.gravatar.com/avatar/'.md5( strtolower( trim( $email ) ) );
+  }
+
 }

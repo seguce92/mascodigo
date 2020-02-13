@@ -19,11 +19,15 @@ class Course extends Model
     ];
 
     protected $appends = [
-        'published_human', 'created_human'
+        'published_human', 'created_human', 'hashid'
     ];
 
+    public function getHashidAttribute () {
+        return hashid_encode($this->id);
+    }
+
     public function getPublishedHumanAttribute () {
-        return date_text($this->published_at);
+        return $this->published_at ? date_text($this->published_at) : '';
     }
 
     public function getCreatedHumanAttribute () {

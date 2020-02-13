@@ -84,3 +84,9 @@ if (! function_exists ('first_name') ) {
     return app(\App\Helpers\Helper::class)->firstName($name);
   }
 }
+
+if (! function_exists ('gravatar') ) {
+  function gravatar ($email) {
+    return app(\App\Helpers\Helper::class)->gravatar($email);
+  }
+}

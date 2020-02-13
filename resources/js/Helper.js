@@ -28,6 +28,16 @@ class Helper {
 
         return seconds
     }
+
+    viewed (time) {
+        let seconds = this.toSeconds(time);
+
+        return false;
+    }
+
+    histored () {
+
+    }
 }
 
 export default Helper

@@ -9,13 +9,13 @@
             <div class="flex-1">
                 <div class="grid grid-cols-2 mb-2">
                     <div class="font-semibold text-gray-700 text-xs uppercase">{{ item.course.skill.name }}</div>
-                    <time :datetime="item.course.published_at" class="text-gray-600 text-xs text-right">{{ item.course.published_human }}</time>
+                    <time :datetime="item.created_at" class="text-gray-600 text-xs text-right">{{ item.created_human }}</time>
                 </div>
                 <div class="grid grid-cols-3">
                     <a class="col-span-2 text-base text-gray-700 leading-tight tracking-tighter">
                         {{ item.course.title }}
                     </a>
-                    <span class="col-span-1 text-right">30%</span>
+                    <span class="col-span-1 text-right">{{ item.progress }}%</span>
                 </div>
             </div>
         </a>

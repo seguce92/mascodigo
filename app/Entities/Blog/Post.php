@@ -22,6 +22,14 @@ class Post extends Model
         'is_publish'    =>  'Boolean'
     ];
 
+    protected $appends = [
+        'hashid'
+    ];
+
+    public function getHashidAttribute () {
+        return hashid_encode($this->id);
+    }
+
     public function author () {
         return $this->belongsTo(\App\User::class, 'author_id');
     }

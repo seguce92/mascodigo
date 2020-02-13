@@ -73,6 +73,7 @@ class CourseController extends Controller
         $course->is_publish =   $request->is_publish;
         $course->level      =   $request->level;
         $course->skill_id   =   $request->skill_id;
+        $lesson->published_at   =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $course->author_id  =   \Auth::id();
         $course->save();
 
@@ -128,6 +129,7 @@ class CourseController extends Controller
         $course->is_publish =   $request->is_publish;
         $course->level      =   $request->level;
         $course->skill_id   =   $request->skill_id;
+        $lesson->published_at   =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $course->editor_id  =   \Auth::id();
         $course->save();
 

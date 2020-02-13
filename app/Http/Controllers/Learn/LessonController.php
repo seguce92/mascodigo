@@ -39,7 +39,7 @@ class LessonController extends Controller
         $lesson->course_id  =   $request->course_id;
         $lesson->author_id  =   \Auth::id();
         $lesson->editor_id  =   \Auth::id();
-        $lesson->published_at   =   $request->published_at;
+        $lesson->published_at   =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $lesson->save();
 
         session()->flash('message', 'Lección registrado.');
@@ -60,7 +60,7 @@ class LessonController extends Controller
         $lesson->points     =   $request->points;
         $lesson->order      =   $request->order;
         $lesson->editor_id  =   \Auth::id();
-        $lesson->published_at   = $request->published_at;
+        $lesson->published_at   =   $request->is_publish == 1 ? \Carbon\Carbon::now() : null;
         $lesson->save();
 
         session()->flash('message', 'Lección actualizado.');

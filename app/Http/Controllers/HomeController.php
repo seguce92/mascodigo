@@ -57,6 +57,11 @@ class HomeController extends Controller
 
         abort_if(!$courses || !$skills, 404);
 
+        return response()->json([
+            'courses'   =>  $courses,
+            'skills'    =>  $skills
+        ]);
+
         return view('app::courses', [
             'courses'   =>  $courses,
             'skills'    =>  $skills

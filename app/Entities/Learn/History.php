@@ -13,8 +13,12 @@ class History extends Model
     ];
     
     protected $appends = [
-        'created_human'
+        'created_human', 'hashid'
     ];
+
+    public function getHashidAttribute () {
+        return hashid_encode($this->id);
+    }
 
     public function getCreatedHumanAttribute () {
         return date_text($this->created_at);
