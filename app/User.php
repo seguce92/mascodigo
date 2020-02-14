@@ -49,7 +49,7 @@ class User extends Authenticatable
         /*return Storage::disk('upload_files')->exists('users/'.$this->username) 
             ? asset('storage/users/'.$this->username) : asset('img/default.png');*/
         
-        return strlen($value) && \strlen($value) > 5 ? $value : asset('img/default.png');
+        return strlen($value) && \strlen($value) > 5 ? $value : gravatar($this->email);//asset('img/default.png');
     }
 
     public function information () {

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Resources\ModelResource as Resource;
 use App\Entities\Learn\Favorite;
 use Illuminate\Support\Collection;
+use App\Entities\Learn\Advance;
+use App\Entities\Learn\History;
 
 class AcademicController extends Controller
 {
@@ -134,7 +136,26 @@ class AcademicController extends Controller
     }
 
     public function history (Request $request) {
-        $data = $request->user()->histories->sortByDesc('created_at');
+        $keys = $request->user()->histories->pluck('id');
+
+        $data = \App\Entities\Learn\History::with('lesson.course.skill')
+            ->whereIn('id', $keys)->orderBy('created_at', 'desc')
+            ->get();
+
+        $data = $data->map(function ($item, $key) {
+            return [
+                'id'            =>  $item->hashid,
+                'lesson'        =>  $item->lesson->title,
+                'lesson_order'  =>  $item->lesson->order,
+                'course'        =>  $item->lesson->course->title,
+                'course_slug'   =>  $item->lesson->course->slug,
+                'course_icon'   =>  $item->lesson->course->icon,
+                'course_color'  =>  $item->lesson->course->color,
+                'skill'         =>  $item->lesson->course->skill->name,
+                'skill_slug'    =>  $item->lesson->course->skill->slug,
+                'date'          =>  $item->created_human
+            ];
+        });
 
         return (new Resource(
             $data
@@ -172,6 +193,39 @@ class AcademicController extends Controller
             'data'  =>  $favorite->delete() ? false : true
         ]);
     }
+
+    public function storeHistory (Request $request) {
+        $item = new History();
+        $item->lesson_id = $request->lesson;
+        $item->user_id = \Auth::id();
+        $item->save();
+
+        return (new Resource(
+            $item
+        ));
+    }
+
+    public function storeCompleted (Request $request) {
+        $complete = Advance::where('lesson_id', $request->lesson)
+            ->where('course_id', $request->course)
+            ->where('user_id', \Auth::id())->first();
+
+        if ( $complete ) {
+            return (new Resource(
+                $complete
+            ));
+        }
+
+        $item = new Advance();
+        $item->lesson_id = $request->lesson;
+        $item->course_id = $request->course;
+        $item->user_id = \Auth::id();
+        $item->save();
+
+        return (new Resource(
+            $item
+        ));
+    } 
 
     public function loadLiked (Request $request, $id) {
         $data = Favorite::where('user_id', $request->user()->id)->where('lesson_id', $id)->first();

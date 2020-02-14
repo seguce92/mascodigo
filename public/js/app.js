@@ -4280,7 +4280,8 @@ __webpack_require__.r(__webpack_exports__);
     Courses: _academicom__WEBPACK_IMPORTED_MODULE_0__["Courses"],
     Advance: _academicom__WEBPACK_IMPORTED_MODULE_0__["Advance"],
     Favorites: _academicom__WEBPACK_IMPORTED_MODULE_0__["Favorites"],
-    Completed: _academicom__WEBPACK_IMPORTED_MODULE_0__["Completed"]
+    Completed: _academicom__WEBPACK_IMPORTED_MODULE_0__["Completed"],
+    History: _academicom__WEBPACK_IMPORTED_MODULE_0__["History"]
   },
   data: function data() {
     return {
@@ -4497,18 +4498,32 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_plyr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-plyr */ "./node_modules/vue-plyr/dist/vue-plyr.es.js");
-/* harmony import */ var vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-plyr/dist/vue-plyr.css */ "./node_modules/vue-plyr/dist/vue-plyr.css");
-/* harmony import */ var vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! crypto */ "./node_modules/crypto-browserify/index.js");
-/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! highlight.js */ "./node_modules/highlight.js/lib/index.js");
-/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(highlight_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! highlight.js/styles/github.css */ "./node_modules/highlight.js/styles/github.css");
-/* harmony import */ var highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _Like_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Like.vue */ "./resources/js/components/Like.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_plyr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-plyr */ "./node_modules/vue-plyr/dist/vue-plyr.es.js");
+/* harmony import */ var vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-plyr/dist/vue-plyr.css */ "./node_modules/vue-plyr/dist/vue-plyr.css");
+/* harmony import */ var vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_plyr_dist_vue_plyr_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! crypto */ "./node_modules/crypto-browserify/index.js");
+/* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! highlight.js */ "./node_modules/highlight.js/lib/index.js");
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(highlight_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! highlight.js/styles/github.css */ "./node_modules/highlight.js/styles/github.css");
+/* harmony import */ var highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(highlight_js_styles_github_css__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Like_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Like.vue */ "./resources/js/components/Like.vue");
+/* harmony import */ var _api_resource__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/api/resource */ "./resources/js/api/resource.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4678,12 +4693,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-window.hljs = highlight_js__WEBPACK_IMPORTED_MODULE_4___default.a;
+window.hljs = highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a;
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_8__["default"]();
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Like: _Like_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Like: _Like_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
     course: {
@@ -4705,6 +4722,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
       domain: config.domain,
       total: 0,
       comment: "",
+      start: false,
+      timer: {
+        counter: 0,
+        total: 0,
+        history: 0,
+        completed: 0
+      },
       options: {
         mention: false,
         listol: false,
@@ -4716,8 +4740,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.total = this.course.lessons.length;
     if (this.init) this.player.config.autoplay = true;
+    this.timer.total = window.Helper.toSeconds(this.lesson.duration);
+    this.timer.history = window.Helper.percent(this.timer.total, 20);
+    this.timer.completed = window.Helper.percent(this.timer.total, 85);
+    this.interval = setInterval(function () {
+      _this.timerCount();
+    }, 1000);
   },
   computed: {
     player: function player() {
@@ -4726,7 +4758,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
     parse: function parse() {
       marked.setOptions({
         highlight: function highlight(code) {
-          return highlight_js__WEBPACK_IMPORTED_MODULE_4___default.a.highlightAuto(code).value;
+          return highlight_js__WEBPACK_IMPORTED_MODULE_5___default.a.highlightAuto(code).value;
         },
         sanitize: true
       });
@@ -4741,7 +4773,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
       window.location = this.domain + 'course/' + course + '/lesson/' + order;
     },
     ended: function ended() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.lesson.order < this.total) {
         this.$swal({
@@ -4753,7 +4785,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
           showConfirmButton: false,
           allowOutsideClick: false,
           onClose: function onClose() {
-            _this.showLesson(_this.course.slug, _this.lesson.order + 1);
+            _this2.showLesson(_this2.course.slug, _this2.lesson.order + 1);
           }
         });
       } else {
@@ -4767,8 +4799,86 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
         });
       }
     },
+    play: function play() {
+      this.start = true;
+    },
+    pause: function pause() {
+      this.start = false;
+    },
     validPlayer: function validPlayer() {
       return true;
+    },
+    storeCompletedLesson: function storeCompletedLesson() {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var params, _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                params = {
+                  lesson: _this3.lesson.id,
+                  course: _this3.course.id
+                };
+                _context.next = 3;
+                return resource.post('admin/academic/completed/store', params);
+
+              case 3:
+                _ref = _context.sent;
+                data = _ref.data;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    storeHistoryLesson: function storeHistoryLesson() {
+      var _this4 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var params, _ref2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                params = {
+                  lesson: _this4.lesson.id
+                };
+                _context2.next = 3;
+                return resource.post('admin/academic/history/store', params);
+
+              case 3:
+                _ref2 = _context2.sent;
+                data = _ref2.data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    timerCount: function timerCount() {
+      if (this.start) this.timer.counter++;
+
+      if (window.Helper.viewed(this.timer.completed, this.timer.counter)) {
+        this.storeCompletedLesson();
+      }
+
+      if (window.Helper.histored(this.timer.history, this.timer.counter)) {
+        this.storeHistoryLesson();
+      }
     }
   }
 });
@@ -5878,16 +5988,156 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api_resource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/resource */ "./resources/js/api/resource.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'history',
   data: function data() {
-    return {};
+    return {
+      completed: [],
+      search: {
+        course: 'all',
+        skill: 'all'
+      },
+      courses: [],
+      skills: []
+    };
   },
-  created: function created() {},
-  methods: {}
+  created: function created() {
+    this.loadData();
+  },
+  computed: {
+    filter: function filter() {
+      var _this = this;
+
+      return this.completed.filter(function (item) {
+        return _this.search.course == 'all' || _this.search.course != '' && item.course_slug == _this.search.course || _this.search.skill_slug != '' && item.skill_slug == _this.search.skill_slug;
+      });
+    }
+  },
+  methods: {
+    loadData: function loadData() {
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return resource.get('admin/academic/history');
+
+              case 2:
+                _ref = _context.sent;
+                data = _ref.data;
+                _this2.completed = data;
+
+                _this2.loadCourses(data);
+
+                _this2.loadSkills(data);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    loadCourses: function loadCourses(data) {
+      var array = [];
+      data.forEach(function (item) {
+        array.push([item.course, item.course_slug]);
+      });
+      var hash = {};
+      array = array.filter(function (current) {
+        var exists = !hash[current.id] || false;
+        hash[current.id] = true;
+        return exists;
+      });
+      this.courses = array;
+    },
+    loadSkills: function loadSkills(data) {
+      var array = [];
+      data.forEach(function (item) {
+        array.push([item.skill, item.skill_slug]);
+      });
+      var hash = {};
+      array = array.filter(function (current) {
+        var exists = !hash[current.id] || false;
+        hash[current.id] = true;
+        return exists;
+      });
+      this.skills = array;
+    }
+  }
 });
 
 /***/ }),
@@ -76250,48 +76500,6 @@ var render = function() {
               staticClass:
                 "inline-block text-sm rounded-t py-2 px-4 cursor-pointer",
               class:
-                _vm.option == "favorite"
-                  ? "active-tab text-red-600 border-l border-t border-r bg-white font-semibold"
-                  : "text-gray-500 hover:text-gray-800",
-              on: {
-                click: function($event) {
-                  return _vm.selectTab("favorite")
-                }
-              }
-            },
-            [
-              _c(
-                "svg",
-                {
-                  staticClass:
-                    "w-4 h-4 md:w-6 md:h-6 fill-current mx-auto mb-1",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    viewBox: "0 0 512 512"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c("span", [_vm._v("Favoritos")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "mr-1" }, [
-          _c(
-            "a",
-            {
-              staticClass:
-                "inline-block text-sm rounded-t py-2 px-4 cursor-pointer",
-              class:
                 _vm.option == "completed"
                   ? "active-tab text-red-600 border-l border-t border-r bg-white font-semibold"
                   : "text-gray-500 hover:text-gray-800",
@@ -76388,6 +76596,48 @@ var render = function() {
               staticClass:
                 "inline-block text-sm rounded-t py-2 px-4 cursor-pointer",
               class:
+                _vm.option == "favorite"
+                  ? "active-tab text-red-600 border-l border-t border-r bg-white font-semibold"
+                  : "text-gray-500 hover:text-gray-800",
+              on: {
+                click: function($event) {
+                  return _vm.selectTab("favorite")
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass:
+                    "w-4 h-4 md:w-6 md:h-6 fill-current mx-auto mb-1",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    viewBox: "0 0 512 512"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [_vm._v("Favoritos")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "mr-1" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "inline-block text-sm rounded-t py-2 px-4 cursor-pointer",
+              class:
                 _vm.option == "history"
                   ? "active-tab text-red-600 border-l border-t border-r bg-white font-semibold"
                   : "text-gray-500 hover:text-gray-800",
@@ -76436,7 +76686,8 @@ var render = function() {
       ? _c(
           "div",
           { staticClass: "z-10 bg-white border rounded-b p-4 shadow" },
-          [_vm._v("\n        Historial\n    ")]
+          [_c("history")],
+          1
         )
       : _vm.option == "advance"
       ? _c(
@@ -77161,8 +77412,12 @@ var render = function() {
                           {
                             ref: "plyr",
                             staticClass: "rounded-none lg:rounded-lg",
-                            attrs: { emit: ["ended"] },
-                            on: { ended: _vm.ended }
+                            attrs: { emit: ["ended", "play", "pause"] },
+                            on: {
+                              ended: _vm.ended,
+                              play: _vm.play,
+                              pause: _vm.pause
+                            }
                           },
                           [
                             _c("div", {
@@ -79527,7 +79782,240 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    { staticClass: "grid grid-cols-1 gap-3" },
+    [
+      _c("div", { staticClass: "grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5" }, [
+        _c("div", [
+          _c("span", { staticClass: "text-xs" }, [
+            _vm._v("Filtrar por Curso:")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search.course,
+                  expression: "search.course"
+                }
+              ],
+              staticClass:
+                "block w-full bg-gray-200 border border-gray-200 text-sm text-gray-700 py-1 px-2 rounded leading-tight mt-1",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.search,
+                    "course",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "all" } }, [
+                _vm._v("Todos los Cursos")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.courses, function(item, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: item[1] } },
+                  [_vm._v(_vm._s(item[0]))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("span", { staticClass: "text-xs" }, [
+            _vm._v("Filtrar por Habilidad:")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search.skill,
+                  expression: "search.skill"
+                }
+              ],
+              staticClass:
+                "block w-full bg-gray-200 border border-gray-200 text-sm text-gray-700 py-1 px-2 rounded leading-tight mt-1",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.search,
+                    "skill",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "all" } }, [
+                _vm._v("Todos las Habilidades")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.skills, function(item, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: item[1] } },
+                  [_vm._v(_vm._s(item[0]))]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.filter, function(item) {
+        return _c(
+          "div",
+          {
+            key: item.id,
+            staticClass: "flex flex-row p-2 rounded-lg hover:bg-gray-200",
+            attrs: { href: "/course/" + item.course_slug }
+          },
+          [
+            _c("div", { staticClass: "flex-shrink pr-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "rounded-full border-white border-2 p-3 bg-blue-600 course shadow",
+                  class: item.course_color
+                },
+                [
+                  _c("img", {
+                    staticClass: "w-10 h-10",
+                    attrs: { src: item.course_icon, alt: "Icon" }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex-1 justify-center" }, [
+              _c("div", { staticClass: "grid grid-cols-5 mb-2 mt-2" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "font-semibold col-span-2 text-base text-gray-700 leading-tight tracking-tighter hover:underline",
+                    attrs: {
+                      href:
+                        "/course/" +
+                        item.course_slug +
+                        "/lesson/" +
+                        item.lesson_order,
+                      title: "Ver la Lección"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.lesson) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "col-span-2 text-xs font-semibold hover:underline",
+                    attrs: {
+                      href: "/course/" + item.course_slug,
+                      title: "Ir al Curso"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.course) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "time",
+                  { staticClass: "text-gray-600 text-xs text-right" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.date) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "grid grid-cols-5" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-span-2 text-gray-600 text-xs uppercase" },
+                  [
+                    _vm._v(
+                      "\n                    LECCION " +
+                        _vm._s(item.lesson_order) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "col-span-2 text-gray-600 text-xs uppercase hover:underline",
+                    attrs: {
+                      href: "/skill/" + item.skill_slug,
+                      title: "Habilidad " + item.skill
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.skill) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -81251,14 +81739,22 @@ function () {
       return seconds;
     }
   }, {
+    key: "percent",
+    value: function percent(total, _percent) {
+      return parseInt(_percent * total / 100);
+    }
+  }, {
     key: "viewed",
-    value: function viewed(time) {
-      var seconds = this.toSeconds(time);
+    value: function viewed(percent, current) {
+      if (current == percent) return true;
       return false;
     }
   }, {
     key: "histored",
-    value: function histored() {}
+    value: function histored(percent, current) {
+      if (current == percent) return true;
+      return false;
+    }
   }]);
 
   return Helper;

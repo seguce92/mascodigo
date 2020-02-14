@@ -29,14 +29,20 @@ class Helper {
         return seconds
     }
 
-    viewed (time) {
-        let seconds = this.toSeconds(time);
+    percent (total, percent) {
+        return parseInt((percent * total) / 100);
+    }
 
+    viewed (percent, current) {
+        if ( current ==  percent )
+            return true;
         return false;
     }
 
-    histored () {
-
+    histored (percent, current) {
+        if ( current == percent )
+            return true;
+        return false;
     }
 }
 

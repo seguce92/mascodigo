@@ -52,6 +52,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/store/favorite', 'AcademicController@storeFavorite')->name('academic.store.favorite');
     
     Route::get('/load/liked', 'AcademicController@loadLiked')->name('academic.load.liked');
+
+    Route::post('/completed/store', 'AcademicController@storeCompleted')->name('academic.store.completed');
+    Route::post('/history/store', 'AcademicController@storeHistory')->name('academic.store.completed');
   });
 
   Route::get('profile', 'Core\ProfileController@index')->name('profile');

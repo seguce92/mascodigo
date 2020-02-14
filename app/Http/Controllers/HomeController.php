@@ -56,12 +56,7 @@ class HomeController extends Controller
         $skills = \App\Entities\Learn\Skill::with(['courses.lessons', 'courses.skill'])->get();
 
         abort_if(!$courses || !$skills, 404);
-
-        return response()->json([
-            'courses'   =>  $courses,
-            'skills'    =>  $skills
-        ]);
-
+        
         return view('app::courses', [
             'courses'   =>  $courses,
             'skills'    =>  $skills

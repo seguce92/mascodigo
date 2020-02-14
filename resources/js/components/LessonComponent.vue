@@ -46,7 +46,12 @@
         </div>
         
         <div v-if="init" class="flex-grow self-start bg-gray-900 video-content mr-auto lg:rounded-lg">
-          <vue-plyr v-if="lesson.server == 'youtube' || lesson.server == 'vimeo'" ref="plyr" :emit="['ended']" @ended="ended" class="rounded-none lg:rounded-lg">
+          <vue-plyr v-if="lesson.server == 'youtube' || lesson.server == 'vimeo'" 
+            ref="plyr" :emit="['ended', 'play', 'pause']" 
+            @ended="ended" 
+            @play="play"
+            @pause="pause"
+            class="rounded-none lg:rounded-lg">
             <div :data-plyr-provider="lesson.server" :data-plyr-embed-id="lesson.url"></div>
           </vue-plyr>
 
@@ -171,7 +176,11 @@ import 'highlight.js/styles/github.css';
 window.hljs = hljs;
 import Like from './Like.vue'
 
+import Resource from '@/api/resource';
+const resource = new Resource();
+
 Vue.use(VuePlyr)
+
 export default {
   components: {
     Like
@@ -195,6 +204,13 @@ export default {
     domain: config.domain,
     total: 0,
     comment: "",
+    start: false,
+    timer: {
+      counter: 0,
+      total: 0,
+      history: 0,
+      completed: 0
+    },
     options: {
       mention: false,
       listol: false,
@@ -207,6 +223,14 @@ export default {
   mounted () {
     this.total = this.course.lessons.length
     if ( this.init ) this.player.config.autoplay = true
+
+    this.timer.total = window.Helper.toSeconds(this.lesson.duration)
+    this.timer.history = window.Helper.percent(this.timer.total, 20)
+    this.timer.completed = window.Helper.percent(this.timer.total, 85)
+
+    this.interval = setInterval(() => {
+      this.timerCount();
+    }, 1000);
   },
   computed: {
     player () { 
@@ -256,8 +280,44 @@ export default {
         })
       }
     },
+    
+    play: function () {
+      this.start = true;
+    },
+    
+    pause: function () {
+      this.start = false
+    },
+    
     validPlayer: function () {
       return true;
+    },
+    
+    async storeCompletedLesson () {
+      let params = {
+        lesson: this.lesson.id,
+        course: this.course.id
+      }
+      const { data } = await resource.post('admin/academic/completed/store', params);
+    },
+    
+    async storeHistoryLesson () {
+      let params = {
+        lesson: this.lesson.id
+      }
+      const { data } = await resource.post('admin/academic/history/store', params);
+    },
+
+    timerCount: function () {
+      if (this.start) this.timer.counter++
+
+      if ( window.Helper.viewed(this.timer.completed, this.timer.counter) ) {
+        this.storeCompletedLesson()
+      }
+
+      if ( window.Helper.histored(this.timer.history, this.timer.counter) ) {
+        this.storeHistoryLesson()
+      }
     }
   }
 }

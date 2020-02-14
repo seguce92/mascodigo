@@ -18,14 +18,6 @@
                 </a>
             </li>
             <li class="mr-1">
-                <a @click="selectTab('favorite')"
-                    class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
-                    :class="option == 'favorite' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
-                    <svg class="w-4 h-4 md:w-6 md:h-6 fill-current mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>
-                    <span>Favoritos</span>
-                </a>
-            </li>
-            <li class="mr-1">
                 <a @click="selectTab('completed')" 
                     class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
                     :class="option == 'completed' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
@@ -42,6 +34,14 @@
                 </a>
             </li>
             <li class="mr-1">
+                <a @click="selectTab('favorite')"
+                    class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
+                    :class="option == 'favorite' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
+                    <svg class="w-4 h-4 md:w-6 md:h-6 fill-current mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>
+                    <span>Favoritos</span>
+                </a>
+            </li>
+            <li class="mr-1">
                 <a @click="selectTab('history')"
                     class="inline-block text-sm rounded-t py-2 px-4 cursor-pointer"
                     :class="option == 'history' ? 'active-tab text-red-600 border-l border-t border-r bg-white font-semibold' : 'text-gray-500 hover:text-gray-800'">
@@ -54,7 +54,7 @@
             <courses></courses>
         </div>
         <div v-else-if="option == 'history'" class="z-10 bg-white border rounded-b p-4 shadow">
-            Historial
+            <history></history>
         </div>
         <div v-else-if="option == 'advance'" class="z-10 bg-white border rounded-b p-4 shadow">
             <advance></advance>
@@ -72,14 +72,15 @@
 </template>
 
 <script>
-import { Courses, Advance, Favorites, Completed } from './academicom'
+import { Courses, Advance, Favorites, Completed, History } from './academicom'
 export default {
     name: 'academic',
     components: {
         Courses,
         Advance,
         Favorites,
-        Completed
+        Completed,
+        History
     },
     data: () => ({
         option: 'courses'
