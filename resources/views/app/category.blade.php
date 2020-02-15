@@ -65,7 +65,7 @@
               </p>
             </div>
             <div class="flex items-center">
-              <img class="w-10 h-10 rounded-full mr-4" src="{{ $post->author->photo }}" alt="">
+              <img class="w-10 h-10 rounded-full mr-4" src="{{ $post->author->photo }}" alt="" loading="lazy">
               <div class="text-sm">
                 <a href="{{ url('/') }}" class="text-gray-900 leading-none hover:text-gray-700">{{ $post->author->fullname }}</a>
                 <p class="text-gray-600">{{ format_date_post($post->published_at) }}</p>

@@ -7,7 +7,7 @@
           <ul class="flex lesson flex-col w-full list-reset select-none" :class="course.color">
             <li :class="course.color" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
               <img v-if="course.icon != null" class="p-1 bg-black-trans flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
-                :src="course.icon">
+                :src="course.icon" loading="lazy">
               <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
                 {{ course.title.substr(0, 2) }}
               </div>
@@ -106,7 +106,7 @@
       <ul class="flex lesson flex-col w-full list-reset select-none rounded-lg" :class="course.color">
         <li :class="course.color" class="flex course sticky top-0 bg-white flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2">
           <img v-if="course.icon != null" class="bg-black-trans p-1 flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3" 
-            :src="course.icon">
+            :src="course.icon" loading="lazy">
           <div v-else class="icon border border-white flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-xl text-white mr-3">
             {{ course.title.substr(0, 2) }}
           </div>

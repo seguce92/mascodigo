@@ -11,6 +11,7 @@
           <li><a href="{{ url('login') }}" class="hover:text-gray-400">Iniciar Sesión</a></li>
           <li><a href="{{ url('register') }}" class="hover:text-gray-400">Registrarse</a></li>
           <li><a href="{{ url('/') }}" class="hover:text-gray-400">Inicio</a></li>
+          <li><a href="{{ url('blog') }}" class="hover:text-gray-400">Blog</a></li>
           <li><a href="{{ url('courses') }}" class="hover:text-gray-400">Cursos</a></li>
         </ul>
       </div>

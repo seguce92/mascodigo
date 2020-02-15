@@ -4281,7 +4281,8 @@ __webpack_require__.r(__webpack_exports__);
     Advance: _academicom__WEBPACK_IMPORTED_MODULE_0__["Advance"],
     Favorites: _academicom__WEBPACK_IMPORTED_MODULE_0__["Favorites"],
     Completed: _academicom__WEBPACK_IMPORTED_MODULE_0__["Completed"],
-    History: _academicom__WEBPACK_IMPORTED_MODULE_0__["History"]
+    History: _academicom__WEBPACK_IMPORTED_MODULE_0__["History"],
+    Rewards: _academicom__WEBPACK_IMPORTED_MODULE_0__["Rewards"]
   },
   data: function data() {
     return {
@@ -6155,8 +6156,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'rewards'
+  name: 'rewards',
+  data: function data() {
+    return {
+      option: true
+    };
+  },
+  created: function created() {},
+  methods: {}
 });
 
 /***/ }),
@@ -76713,7 +76742,8 @@ var render = function() {
       : _c(
           "div",
           { staticClass: "z-10 bg-white border rounded-b py-2 px-4 shadow" },
-          [_vm._v("\n        Rewards\n    ")]
+          [_c("rewards")],
+          1
         )
   ])
 }
@@ -76755,7 +76785,7 @@ var render = function() {
               title: "INICIAR CURSO"
             }
           },
-          [_c("img", { attrs: { src: _vm.course.icon } })]
+          [_c("img", { attrs: { src: _vm.course.icon, loading: "lazy" } })]
         ),
         _vm._v(" "),
         _c(
@@ -77082,7 +77112,7 @@ var render = function() {
       _c("div", { staticClass: "w-full justify-center px-6 pt-2" }, [
         _c("img", {
           staticClass: "mx-auto max-w-md w-2/3",
-          attrs: { src: _vm.image }
+          attrs: { src: _vm.image, loading: "lazy" }
         })
       ]),
       _vm._v(" "),
@@ -77190,7 +77220,7 @@ var render = function() {
                           ? _c("img", {
                               staticClass:
                                 "p-1 bg-black-trans flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3",
-                              attrs: { src: _vm.course.icon }
+                              attrs: { src: _vm.course.icon, loading: "lazy" }
                             })
                           : _c(
                               "div",
@@ -77649,7 +77679,7 @@ var render = function() {
                   ? _c("img", {
                       staticClass:
                         "bg-black-trans p-1 flex justify-center items-center flex-no-shrink w-12 h-12 rounded-full font-semibold text-white mr-3",
-                      attrs: { src: _vm.course.icon }
+                      attrs: { src: _vm.course.icon, loading: "lazy" }
                     })
                   : _c(
                       "div",
@@ -78750,7 +78780,8 @@ var render = function() {
                                       _c("img", {
                                         attrs: {
                                           src: item.course.icon,
-                                          alt: item.course.title
+                                          alt: item.course.title,
+                                          loading: "lazy"
                                         }
                                       })
                                     ]
@@ -78875,7 +78906,8 @@ var render = function() {
                                       _c("img", {
                                         attrs: {
                                           src: item.image,
-                                          alt: item.category.title
+                                          alt: item.category.title,
+                                          loading: "lazy"
                                         }
                                       })
                                     ]
@@ -79037,7 +79069,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("img", { staticClass: "mb-2", attrs: { src: _vm.image, alt: "" } }),
+    _c("img", {
+      staticClass: "mb-2",
+      attrs: { src: _vm.image, alt: "", loading: "lazy" }
+    }),
     _vm._v(" "),
     _c(
       "select",
@@ -79550,7 +79585,7 @@ var render = function() {
           [
             _c("img", {
               staticClass: "w-10 h-10",
-              attrs: { src: _vm.data.icon, alt: "Icon" }
+              attrs: { src: _vm.data.icon, alt: "Icon", loading: "lazy" }
             })
           ]
         )
@@ -80039,7 +80074,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c("div", { staticClass: "grid grid-cols-2 my-2" }, [
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "span",
+          {
+            staticClass: "py-1 px-3 cursor-pointer hover:text-gray-800",
+            class: _vm.option
+              ? "border-b-4 border-red-600 text-gray-800"
+              : "text-gray-600",
+            on: {
+              click: function($event) {
+                _vm.option = true
+              }
+            }
+          },
+          [_vm._v("\n                CURSOS\n            ")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "text-center" }, [
+        _c(
+          "span",
+          {
+            staticClass: "py-1 px-3 cursor-pointer hover:text-gray-800",
+            class: !_vm.option
+              ? "border-b-4 border-red-600 text-gray-800"
+              : "text-gray-600",
+            on: {
+              click: function($event) {
+                _vm.option = false
+              }
+            }
+          },
+          [_vm._v("\n                TROFEOS\n            ")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.option
+      ? _c("div", [_vm._v("\n        cursos\n    ")])
+      : _c("div", [_vm._v("\n        trofeos\n    ")])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

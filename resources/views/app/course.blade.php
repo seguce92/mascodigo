@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="flex w-full lg:w-1/3 order-1 lg:order-2 justify-center lg:justify-end">
-        <img class="icon ml-auto mr-auto text-5xl" src="{{ asset($course->icon) }}" alt="">
+        <img class="icon ml-auto mr-auto text-5xl" src="{{ asset($course->icon) }}" alt="" loading="lazy">
       </div>
     </div>
   </section>

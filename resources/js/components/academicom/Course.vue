@@ -2,7 +2,7 @@
     <a :href="'/course/' + data.slug" class="flex flex-row p-2 rounded-lg hover:bg-gray-200">
         <div class="flex-shrink pr-3">
             <div class="rounded-full border-white border-2 p-3 bg-blue-600 course shadow" :class="data.color">
-                <img class="w-10 h-10" :src="data.icon" alt="Icon">
+                <img class="w-10 h-10" :src="data.icon" alt="Icon" loading="lazy">
             </div>
         </div>
         <div class="flex-1">

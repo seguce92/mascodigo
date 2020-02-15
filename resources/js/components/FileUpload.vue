@@ -4,7 +4,7 @@
       <input type="text" class="form-input" name="image" v-model="image">
     </div>
     <div class="w-full justify-center px-6 pt-2">
-      <img :src="image" class="mx-auto max-w-md w-2/3">
+      <img :src="image" class="mx-auto max-w-md w-2/3" loading="lazy">
     </div>
     <div class="flex py-1 justify-center items-start pt-2">
       <label class="w-full flex inline-flex items-center justify-center px-4 py-1 bg-white text-blue rounded shadow-lg tracking-wide uppercase border border-blue-700 cursor-pointer hover:bg-blue hover:text-blue-700">

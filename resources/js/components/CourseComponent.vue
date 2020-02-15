@@ -3,7 +3,7 @@
     <div class="card pt-4" :class="course.color">
       <div class="overlay"></div>
       <a :href="domain + 'course/' + course.slug" class="circle text-white" title="INICIAR CURSO">
-        <img :src="course.icon">
+        <img :src="course.icon" loading="lazy">
       </a>
       <a class="skill shadow" :href="domain + 'skill/' + course.skill.slug" title="INICIAR CURSO">{{ course.skill.name }}</a>
       <a class="title font-serif" :href="domain + 'course/' + course.slug">{{ course.title }}</a>

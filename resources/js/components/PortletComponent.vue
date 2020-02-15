@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :src="image" alt="" class="mb-2">
+    <img :src="image" alt="" class="mb-2" loading="lazy">
     <select name="portlet" id="portlet" class="form-select" v-on:change="changeImage">
       <option v-for="(row, index) in images" 
         :key="index" :value="row.id" 

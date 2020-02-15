@@ -45,7 +45,7 @@
       </div>
       <div class="border-b px-4 pb-2">
         <div class="text-center sm:text-left sm:flex mb-2">
-          <img class="mx-auto md:mx-0 z-50 h-32 w-32 rounded-full border-4 border-white -mt-16 lg:mr-4 lg:mx-0" src="{{ $user->photo }}" alt="{{ $user->username }}">
+          <img class="mx-auto md:mx-0 z-50 h-32 w-32 rounded-full border-4 border-white -mt-16 lg:mr-4 lg:mx-0" src="{{ $user->photo }}" alt="{{ $user->username }}" loading="lazy">
           <div class="py-2 flex-col">
             <a class="flex font-bold text-2xl mb-1">{{ $user->fullname }} <i>({{ '@'.$user->username }})</i></a>
             <div class="flex inline-flex text-gray-600 hover:text-gray-800 sm:flex items-center">
@@ -143,7 +143,7 @@
           <article class="w-full self-start md:w-1/2 lg:w-1/3 overflow-hidden mb-4 {{ $loop->index == 0 ? 'md:pr-1 lg:pr-1' : '' }} {{ $loop->index == 1 ? 'md:pl-1 lg:px-1' : '' }} {{ $loop->index == 2 ? 'lg:pl-1' : '' }}">
             <div class="rounded shadow-lg border post">
               <figure>
-                <img class="w-full" src="{{ $post->image }}" alt="{{ $post->title }}" style="max-height:150px">
+                <img class="w-full" src="{{ $post->image }}" alt="{{ $post->title }}" style="max-height:150px" loading="lazy">
               </figure>
               <div class="px-4 py-4">
                 <a href="{{ route('category', $post->category->slug) }}" class="text-sm text-gray-600 flex items-center">

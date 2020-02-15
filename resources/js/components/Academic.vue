@@ -66,13 +66,13 @@
             <favorites></favorites>
         </div>
         <div v-else class="z-10 bg-white border rounded-b py-2 px-4 shadow">
-            Rewards
+            <rewards></rewards>
         </div>
     </div>
 </template>
 
 <script>
-import { Courses, Advance, Favorites, Completed, History } from './academicom'
+import { Courses, Advance, Favorites, Completed, History, Rewards } from './academicom'
 export default {
     name: 'academic',
     components: {
@@ -80,7 +80,8 @@ export default {
         Advance,
         Favorites,
         Completed,
-        History
+        History,
+        Rewards
     },
     data: () => ({
         option: 'courses'

@@ -24,6 +24,10 @@ Route::get('/blog', 'HomeController@blog')->name('blog');
 
 Route::get('/category/{slug}', 'HomeController@category')->name('category');
 
+
+Route::get('/forums', 'ForumController@index')->name('forums.index');
+
+
 Route::get('sergiocruzes.com', function () {
   abort(404);
 });

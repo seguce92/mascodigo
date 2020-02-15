@@ -62,7 +62,7 @@
                 :key="index" class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
                 v-on:click="showLesson(item.course.slug, item.order)">
                 <a :href="domain + 'skill/' + item.course.skill.slug" :class="item.course.color" class="icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3">
-                  <img :src="item.course.icon" :alt="item.course.title">
+                  <img :src="item.course.icon" :alt="item.course.title" loading="lazy">
                 </a>
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between mb-1">
@@ -84,7 +84,7 @@
                 class="flex flex-no-wrap items-center border-b border-dashed hover:bg-gray-200 text-black p-2 cursor-pointer bg-white"
                 v-on:click="showPost(item.slug)">
                 <a :href="domain + 'category/' + item.category.slug" class="red flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 mr-3">
-                  <img :src="item.image" :alt="item.category.title">
+                  <img :src="item.image" :alt="item.category.title" loading="lazy">
                 </a>
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between mb-1">

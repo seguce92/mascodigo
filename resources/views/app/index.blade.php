@@ -41,7 +41,7 @@
       <div class="flex relative inline-block float-right">
         <div class="relative text-sm">
           <button id="userButton" class="flex items-center focus:outline-none mr-3 text-white">
-            <img class="w-6 h-6 rounded-full mr-4" src="{{ \Auth::user()->photo }}" alt="{{ \Auth::user()->email }}">
+            <img class="w-6 h-6 rounded-full mr-4" src="{{ \Auth::user()->photo }}" alt="{{ \Auth::user()->email }}" loading="lazy">
             <span class="inline-block">Hola, {{ \Auth::user()->username }} </span>
             <svg class="pl-2 h-2 fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129"><g><path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z"/></g></svg>
           </button>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="w-full lg:w-1/2 order-1 lg:order-2">
-        <img class="w-5/5 lg:3/5 xl:3/5 ml-auto mr-auto" src="{{ asset('img/logo.svg') }}">
+        <img class="w-5/5 lg:3/5 xl:3/5 ml-auto mr-auto" src="{{ asset('img/logo.svg') }}" loading="lazy">
       </div>
     </section>
 
@@ -136,7 +136,7 @@
                     </p>
                   </div>
                   <div class="flex items-center">
-                    <img class="w-10 h-10 rounded-full mr-4" src="{{ $post->author->photo }}" alt="{{ $post->author->email }}">
+                    <img class="w-10 h-10 rounded-full mr-4" src="{{ $post->author->photo }}" alt="{{ $post->author->email }}" loading="lazy">
                     <div class="text-sm">
                       <a href="{{ route('me', $post->author->username) }}" class="text-gray-900 leading-none hover:text-gray-700">{{ $post->author->fullname }}</a>
                       <p class="text-gray-600">{{ format_date_post($post->published_at) }}</p>
