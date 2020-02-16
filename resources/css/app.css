@@ -499,5 +499,23 @@
     padding-bottom: 0.17rem;
 }
 
+.channels li {
+    @apply cursor-pointer text-lg
+}
+
+.channels li:hover {
+    @apply font-semibold;
+}
+
+.channels li .channel  {
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+            transition:         transform .8s ease-in-out;
+    @apply inline-block w-6 h-6 text-center
+}
+.channels li:hover .channel {
+    -webkit-transform: rotate(1080deg);
+            transform: rotate(1080deg);
+}
+
 @import 'github-markdown.css';
 @import 'skill.css';

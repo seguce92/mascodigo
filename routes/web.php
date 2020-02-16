@@ -26,6 +26,7 @@ Route::get('/category/{slug}', 'HomeController@category')->name('category');
 
 
 Route::get('/forums', 'ForumController@index')->name('forums.index');
+Route::get('/discussion/{slug}', 'ForumController@discussion')->name('forums.discussion');
 
 
 Route::get('sergiocruzes.com', function () {

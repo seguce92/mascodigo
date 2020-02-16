@@ -15,4 +15,8 @@ class ForumController extends Controller
     public function index (Request $request) {
         return view('app::forum');
     }
+
+    public function discussion ($slug) {
+        return view('app::discussion');
+    }
 }
