@@ -16403,6 +16403,8 @@ video {
   transform: rotate(1080deg);
 }
 
+/**@import 'animate.css';*/
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

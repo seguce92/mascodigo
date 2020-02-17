@@ -48,7 +48,7 @@
         <div class="mt-4">
             <h2 class="font-bold text-2xl">Foro</h2>
             <p class="text-sm font-mono italic">
-                Aqui puedes preguntar cualquier cosa referente a programación. Pero siempre mateniendo el respeto mutuo.
+                Aqui puedes preguntar cualquier cosa referente a programación. Pero siempre mateniendo el respeto al resto de la comunidad.
             </p>
         </div>
         <div class="flex flex-wrap-reverse lg:flex-wrap mt-8 relative">
@@ -69,7 +69,7 @@
                             <li><div class="channel text-green-600">#</div> Vue Js</li>
                             <li><div class="channel text-blue-700">#</div> Php</li>
                             @for ( $i = 0; $i < 10; $i++ )
-                            <li><div class="channel text-red-700">#</div> Angular</li>
+                                <li><div class="channel text-red-700">#</div> Angular</li>
                             @endfor
                             <li><div class="channel text-blue-700">#</div> Php</li>
                         </ul>

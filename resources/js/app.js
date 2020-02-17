@@ -27,7 +27,6 @@ Vue.component('skill-courses', require('./components/SkillCourses.vue').default)
 Vue.component('course-component', require('./components/CourseComponent.vue').default);
 Vue.component('lesson-component', require('./components/LessonComponent.vue').default);
 
-Vue.component('markdown', require('./components/Markdown.vue').default);
 Vue.component('menu-component', require('./components/Menu.vue').default);
 Vue.component('file-upload', require('./components/FileUpload.vue').default);
 Vue.component('courses', require('./components/Courses.vue').default);
@@ -35,6 +34,7 @@ Vue.component('courses', require('./components/Courses.vue').default);
 Vue.component('portlet-component', require('./components/PortletComponent.vue').default);
 
 Vue.component('academic', require('./components/Academic.vue').default);
+Vue.component('discussion', require('./components/Discussion.vue').default);
 
 const app = new Vue({
     //store
