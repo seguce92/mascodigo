@@ -13,10 +13,21 @@ class ForumController extends Controller
     }
 
     public function index (Request $request) {
-        return view('app::forum');
+        return view('app::discussions', [
+            'channel'   =>  $request->channel
+        ]);
     }
 
-    public function discussion ($slug) {
-        return view('app::discussion');
+    public function show ($slug) {
+
+        $discussion = $this->entity->with('user')->where('slug', $slug)->first();
+
+        abort_unless($discussion, 404);
+
+        $discussion->increment('views');
+
+        return view('app::discussion', [
+            'discussion'    =>  $discussion
+        ]);
     }
 }

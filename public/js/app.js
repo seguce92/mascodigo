@@ -3706,6 +3706,19 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! highlight.js */ "./node_modules/highlight.js/lib/index.js");
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(highlight_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! highlight.js/styles/atom-one-dark-reasonable.css */ "./node_modules/highlight.js/styles/atom-one-dark-reasonable.css");
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _api_resource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/resource */ "./resources/js/api/resource.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -3807,31 +3820,548 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'discussion',
-  props: {},
+  props: {
+    logged: {
+      type: Boolean,
+      "default": false
+    },
+    discussion: {
+      type: Object
+    }
+  },
   data: function data() {
     return {
       modal: false,
-      input: '',
-      preview: false
+      preview: false,
+      channels: [],
+      replies: [],
+      reply: {
+        content: '',
+        mention: null,
+        username: null,
+        question_id: null
+      }
     };
   },
   computed: {
     compiledMarkdown: function compiledMarkdown() {
-      return marked(this.input, {
-        sanitize: true
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        highlight: function highlight(code) {
+          return highlight_js__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAuto(code).value;
+        },
+        pedantic: false,
+        gfm: true,
+        tables: false,
+        breaks: true,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
       });
+      return marked(this.reply.content);
     }
   },
-  created: function created() {},
+  created: function created() {
+    this.loadChannels();
+    this.loadReplies(this.discussion.slug);
+  },
   methods: {
     toggleModal: function toggleModal() {
-      this.modal = !this.modal;
+      if (this.logged) this.modal = !this.modal;else {
+        window.location = '/login';
+      }
+    },
+    showMessage: function showMessage() {
+      this.$notify({
+        group: 'foo',
+        text: 'Respuesta registrada exitosamente.',
+        duration: 2500
+      });
     },
     update: _.debounce(function (e) {
-      this.input = e.target.value;
-    }, 300)
+      this.reply.content = e.target.value;
+    }, 300),
+    parseMarkdown: function parseMarkdown(text) {
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        highlight: function highlight(code) {
+          return highlight_js__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAuto(code).value;
+        },
+        pedantic: false,
+        gfm: true,
+        tables: false,
+        breaks: true,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
+      });
+      return marked(text);
+    },
+    loadChannels: function loadChannels() {
+      var _this = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return resource.get('api/data/discussions/channels');
+
+              case 2:
+                _ref = _context.sent;
+                data = _ref.data;
+                _this.channels = data;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    loadReplies: function loadReplies(slug) {
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _ref2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return resource.get('api/data/replies/' + slug);
+
+              case 2:
+                _ref2 = _context2.sent;
+                data = _ref2.data;
+                _this2.replies = data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    storeReply: function storeReply() {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _ref3, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this3.reply.question_id = _this3.discussion.id;
+                _context3.next = 3;
+                return resource.post('api/data/replies/store', _this3.reply);
+
+              case 3:
+                _ref3 = _context3.sent;
+                data = _ref3.data;
+                console.log(data);
+
+                if (data) {
+                  _this3.$notify({
+                    group: 'foo',
+                    text: 'Respuesta registrada exitosamente.',
+                    duration: 2500
+                  });
+
+                  _this3.toggleModal();
+
+                  _this3.loadReplies(_this3.discussion.slug);
+                } else {
+                  _this3.$notify({
+                    group: 'foo',
+                    text: 'Lo siento se produjo un error al registrar.',
+                    duration: 3000,
+                    type: 'error'
+                  });
+                }
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    replyUser: function replyUser(id, username) {
+      this.reply.mention = id;
+      this.reply.username = username;
+      this.toggleModal();
+    },
+    cancelModal: function cancelModal() {
+      this.reply = {
+        content: '',
+        username: null,
+        mention: null,
+        question_id: null
+      };
+      this.toggleModal();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Discussions.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! highlight.js */ "./node_modules/highlight.js/lib/index.js");
+/* harmony import */ var highlight_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(highlight_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! highlight.js/styles/atom-one-dark-reasonable.css */ "./node_modules/highlight.js/styles/atom-one-dark-reasonable.css");
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _api_resource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/resource */ "./resources/js/api/resource.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'discussion',
+  props: {
+    logged: {
+      type: Boolean,
+      "default": false
+    },
+    channel: {
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      modal: false,
+      preview: false,
+      channels: [],
+      discussions: [],
+      discussion: {
+        title: '',
+        slug: '',
+        content: '',
+        channel: 'general'
+      }
+    };
+  },
+  computed: {
+    compiledMarkdown: function compiledMarkdown() {
+      marked.setOptions({
+        renderer: new marked.Renderer(),
+        highlight: function highlight(code) {
+          return highlight_js__WEBPACK_IMPORTED_MODULE_1___default.a.highlightAuto(code).value;
+        },
+        pedantic: false,
+        gfm: true,
+        tables: false,
+        breaks: true,
+        sanitize: true,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false
+      });
+      return marked(this.discussion.content);
+    }
+  },
+  created: function created() {
+    this.loadChannels();
+    this.loadDiscussions();
+  },
+  methods: {
+    toggleModal: function toggleModal() {
+      if (this.logged) this.modal = !this.modal;else {
+        window.location = '/login';
+      }
+    },
+    update: _.debounce(function (e) {
+      this.discussion.content = e.target.value;
+    }, 300),
+    loadChannels: function loadChannels() {
+      var _this = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _ref, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return resource.get('api/data/discussions/channels');
+
+              case 2:
+                _ref = _context.sent;
+                data = _ref.data;
+                _this.channels = data;
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    loadDiscussions: function loadDiscussions() {
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _ref2, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return resource.get('api/data/discussions');
+
+              case 2:
+                _ref2 = _context2.sent;
+                data = _ref2.data;
+                _this2.discussions = data;
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    storeDiscussion: function storeDiscussion() {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var _ref3, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _this3.discussion.slug = window.Helper.slugify(_this3.discussion.title);
+                _context3.next = 3;
+                return resource.post('api/data/discussions/store', _this3.discussion);
+
+              case 3:
+                _ref3 = _context3.sent;
+                data = _ref3.data;
+                console.log(data);
+
+                if (data) {
+                  _this3.$notify({
+                    group: 'foo',
+                    text: 'Discusión registrado exitosamente.',
+                    duration: 2500
+                  });
+
+                  _this3.toggleModal();
+
+                  _this3.loadDiscussions();
+                } else {
+                  _this3.$notify({
+                    group: 'foo',
+                    text: 'Lo siento se produjo un error al registrar.',
+                    duration: 3000,
+                    type: 'error'
+                  });
+                }
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    }
   }
 });
 
@@ -13398,6 +13928,25 @@ exports.push([module.i, ".card .circle {\n  padding: 4px;\n}\n.card .circle img 
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/highlight.js/styles/atom-one-dark-reasonable.css":
+/*!*******************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/highlight.js/styles/atom-one-dark-reasonable.css ***!
+  \*******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/*\n\nAtom One Dark With support for ReasonML by Gidi Morris, based off work by Daniel Gamage\n\nOriginal One Dark Syntax theme from https://github.com/atom/one-dark-syntax\n\n*/\n.hljs {\n  display: block;\n  overflow-x: auto;\n  padding: 0.5em;\n  color: #abb2bf;\n  background: #282c34;\n}\n.hljs-keyword, .hljs-operator {\n  color: #F92672;\n}\n.hljs-pattern-match {\n  color: #F92672;\n}\n.hljs-pattern-match .hljs-constructor {\n  color: #61aeee;\n}\n.hljs-function {\n  color: #61aeee;\n}\n.hljs-function .hljs-params {\n  color: #A6E22E;\n}\n.hljs-function .hljs-params .hljs-typing {\n  color: #FD971F;\n}\n.hljs-module-access .hljs-module {\n  color: #7e57c2;\n}\n.hljs-constructor {\n  color: #e2b93d;\n}\n.hljs-constructor .hljs-string {\n  color: #9CCC65;\n}\n.hljs-comment, .hljs-quote {\n  color: #b18eb1;\n  font-style: italic;\n}\n.hljs-doctag, .hljs-formula {\n  color: #c678dd;\n}\n.hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst {\n  color: #e06c75;\n}\n.hljs-literal {\n  color: #56b6c2;\n}\n.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string {\n  color: #98c379;\n}\n.hljs-built_in, .hljs-class .hljs-title {\n  color: #e6c07b;\n}\n.hljs-attr, .hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number {\n  color: #d19a66;\n}\n.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id, .hljs-title {\n  color: #61aeee;\n}\n.hljs-emphasis {\n  font-style: italic;\n}\n.hljs-strong {\n  font-weight: bold;\n}\n.hljs-link {\n  text-decoration: underline;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/highlight.js/styles/github.css":
 /*!*************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./node_modules/highlight.js/styles/github.css ***!
@@ -13486,7 +14035,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.discussion-overlay[data-v-03c490d3] {\n    background-color: rgba(0,0,0,.7);\n}\n.discussion[data-v-03c490d3] {\n    width: 100%;\n    -webkit-transition: opacity 400ms ease-in;\n    -moz-transition: opacity 400ms ease-in;\n    transition: opacity 400ms ease-in;\n}\n.editor[data-v-03c490d3] {\n    display: block;\n    width: 100%;\n    resize: none;\n    height: calc(100vh - 160px);\n\n    -moz-appearance: none;\n    -webkit-appearance: none;\n    -webkit-box-align: center;\n    align-items: center;\n\n     outline:none !important;\n    outline-width: 0 !important;\n    box-shadow: none;\n    -moz-box-shadow: none;\n    -webkit-box-shadow: none;\n}\n.preview[data-v-03c490d3] {\n    display: block;\n    width: 100%;\n    height: calc(100vh - 160px);\n    overflow-y: scroll;\n\n    -moz-appearance: none;\n    -webkit-appearance: none;\n    -webkit-box-align: center;\n    align-items: center;\n\n     outline:none !important;\n    outline-width: 0 !important;\n    box-shadow: none;\n    -moz-box-shadow: none;\n    -webkit-box-shadow: none;\n}\n.slide-fade-enter-active[data-v-03c490d3] {\n    transition: all .8s ease;\n}\n.slide-fade-leave-active[data-v-03c490d3] {\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-03c490d3], .slide-fade-leave-to[data-v-03c490d3] {\n    transform: translateX(10px);\n    opacity: 0;\n}\n@media (min-width: 769px) {\n.discussion[data-v-03c490d3] {\n        width: 50%\n}\n}\n", ""]);
+exports.push([module.i, "\n.discussion-overlay[data-v-03c490d3] {\n        background-color: rgba(0,0,0,.7);\n}\n.discussion[data-v-03c490d3] {\n        width: 100%;\n        max-width: 700px;\n        -webkit-transition: opacity 400ms ease-in;\n        -moz-transition: opacity 400ms ease-in;\n        transition: opacity 400ms ease-in;\n}\n.editor[data-v-03c490d3] {\n        display: block;\n        width: 100%;\n        resize: none;\n        height: calc(100vh - 170px);\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n        outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.preview[data-v-03c490d3] {\n        display: block;\n        width: 100%;\n        height: calc(100vh - 170px);\n        overflow-y: scroll;\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n         outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.slide-fade-enter-active[data-v-03c490d3] {\n        transition: all .8s ease;\n}\n.slide-fade-leave-active[data-v-03c490d3] {\n        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-03c490d3], .slide-fade-leave-to[data-v-03c490d3] {\n        transform: translateX(10px);\n        opacity: 0;\n}\n.editor[data-v-03c490d3]::-webkit-scrollbar-track, .preview[data-v-03c490d3]::-webkit-scrollbar-track {\n\t    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n\t    background-color: #F5F5F5;\n\t    border-radius: 10px;\n}\n.editor[data-v-03c490d3]::-webkit-scrollbar, .preview[data-v-03c490d3]::-webkit-scrollbar {\n\t    width: 8px;\n\t    background-color: #F5F5F5;\n}\n.editor[data-v-03c490d3]::-webkit-scrollbar-thumb, .preview[data-v-03c490d3]::-webkit-scrollbar-thumb {\n\t    border-radius: 10px;\n        background-image: -webkit-gradient(linear, left bottom, left top, \n            color-stop(0.44, #f56565), \n            color-stop(0.72, #e53e3e), \n            color-stop(0.86, #c53030)\n        );\n}\n@media (min-width: 769px) {\n.discussion[data-v-03c490d3] {\n            width: 50%\n}\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.discussion-overlay[data-v-78792ab0] {\n        background-color: rgba(0,0,0,.7);\n}\n.discussion[data-v-78792ab0] {\n        width: 100%;\n        max-width: 700px;\n        -webkit-transition: opacity 400ms ease-in;\n        -moz-transition: opacity 400ms ease-in;\n        transition: opacity 400ms ease-in;\n}\n.editor[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        resize: none;\n        height: calc(100vh - 200px);\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n        outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.preview[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        height: calc(100vh - 200px);\n        overflow-y: scroll;\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n         outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.slide-fade-enter-active[data-v-78792ab0] {\n        transition: all .8s ease;\n}\n.slide-fade-leave-active[data-v-78792ab0] {\n        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-78792ab0], .slide-fade-leave-to[data-v-78792ab0] {\n        transform: translateX(10px);\n        opacity: 0;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-track, .preview[data-v-78792ab0]::-webkit-scrollbar-track {\n\t    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n\t    background-color: #F5F5F5;\n\t    border-radius: 10px;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar, .preview[data-v-78792ab0]::-webkit-scrollbar {\n\t    width: 8px;\n\t    background-color: #F5F5F5;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-thumb, .preview[data-v-78792ab0]::-webkit-scrollbar-thumb {\n\t    border-radius: 10px;\n        background-image: -webkit-gradient(linear, left bottom, left top, \n            color-stop(0.44, #f56565), \n            color-stop(0.72, #e53e3e), \n            color-stop(0.86, #c53030)\n        );\n}\n@media (min-width: 769px) {\n.discussion[data-v-78792ab0] {\n            width: 50%\n}\n}\n", ""]);
 
 // exports
 
@@ -45920,6 +46488,36 @@ module.exports = function(hljs) {
 
 /***/ }),
 
+/***/ "./node_modules/highlight.js/styles/atom-one-dark-reasonable.css":
+/*!***********************************************************************!*\
+  !*** ./node_modules/highlight.js/styles/atom-one-dark-reasonable.css ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../css-loader??ref--6-1!../../postcss-loader/src??ref--6-2!./atom-one-dark-reasonable.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/highlight.js/styles/atom-one-dark-reasonable.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/highlight.js/styles/github.css":
 /*!*****************************************************!*\
   !*** ./node_modules/highlight.js/styles/github.css ***!
@@ -71925,6 +72523,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LessonComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -76438,6 +77066,10 @@ var render = function() {
     "div",
     { staticClass: "flex flex-wrap-reverse lg:flex-wrap mt-8 relative" },
     [
+      _c("notifications", {
+        attrs: { group: "foo", position: "bottom right" }
+      }),
+      _vm._v(" "),
       _c("aside", { staticClass: "w-full lg:w-1/4 mb-4 lg:pr-2" }, [
         _c("div", { staticClass: "lg:sticky lg:top-0 lg:pt-5" }, [
           _c(
@@ -76447,7 +77079,7 @@ var render = function() {
                 "w-full cursor-pointer inline-block text-center bg-red-700 hover:bg-red-800 text-white py-2 px-5 rounded-full",
               on: { click: _vm.toggleModal }
             },
-            [_vm._v("\n                RESPONDER")]
+            [_vm._v("\n                RESPONDER\n            ")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "my-6" }, [
@@ -76456,7 +77088,7 @@ var render = function() {
               {
                 staticClass:
                   "w-full inline-block text-lg text-blue-600 hover:text-blue-700 hover:underline",
-                attrs: { href: "#" }
+                attrs: { href: "/discussions" }
               },
               [
                 _c(
@@ -76478,13 +77110,41 @@ var render = function() {
                   ]
                 ),
                 _vm._v(
-                  "\n                    Todos las Discusiones\n                "
+                  "\n                    Todas las Discusiones\n                "
                 )
               ]
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("nav", { staticClass: "channels" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.channels, function(channel) {
+                return _c(
+                  "a",
+                  {
+                    key: channel.slug,
+                    staticClass: "w-full inline-block",
+                    attrs: { href: "/discussions?" + channel.slug }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "w-2 channel inline-block",
+                        class: channel.icon
+                      },
+                      [_vm._v("#")]
+                    ),
+                    _vm._v(
+                      " " + _vm._s(channel.title) + "\n                    "
+                    )
+                  ]
+                )
+              }),
+              0
+            )
+          ])
         ])
       ]),
       _vm._v(" "),
@@ -76499,7 +77159,26 @@ var render = function() {
                 "flex flex-wrap px-3 py-4 mb-4 bg-gray-200 rounded-lg"
             },
             [
-              _vm._m(1),
+              _c("div", { staticClass: "w-full lg:w-5/6" }, [
+                _c("div", [
+                  _c("a", { staticClass: "text-xl font-semibold" }, [
+                    _vm._v(_vm._s(_vm.discussion.title))
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
+                      attrs: {
+                        href:
+                          "/discussions?channel=" + _vm.discussion.channel.slug
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.discussion.channel.title))]
+                  )
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -76530,7 +77209,11 @@ var render = function() {
                           })
                         ]
                       ),
-                      _vm._v("\n                    0\n                ")
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.discussion.replies_total) +
+                          "\n                "
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -76553,7 +77236,11 @@ var render = function() {
                         })
                       ]
                     ),
-                    _vm._v("\n                    0\n                ")
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.discussion.views) +
+                        "\n                "
+                    )
                   ])
                 ]
               )
@@ -76565,14 +77252,14 @@ var render = function() {
               "article",
               {
                 staticClass:
-                  "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
+                  "flex px-3 py-4 rounded-lg bg-gray-200 relative mb-3"
               },
               [
                 _c("div", { staticClass: "flex-shrink pr-3 relative h-16" }, [
                   _c("img", {
                     staticClass:
                       "w-16 h-16 rounded-full border-white border-2 shadow-lg",
-                    attrs: { src: "img/user.jpg", alt: "User" }
+                    attrs: { src: _vm.discussion.user.photo, alt: "G" }
                   })
                 ]),
                 _vm._v(" "),
@@ -76584,55 +77271,182 @@ var render = function() {
                           "a",
                           {
                             staticClass: "text-blue-600 font-semibold",
-                            attrs: { href: "#" }
+                            attrs: {
+                              href: "/me/" + _vm.discussion.user.username
+                            }
                           },
-                          [_vm._v("seguce92")]
+                          [_vm._v(_vm._s(_vm.discussion.user.username))]
                         ),
                         _vm._v(" "),
                         _c(
                           "small",
                           { staticClass: "text-gray-600 text-xs ml-2" },
-                          [_vm._v("Publicado hace 15 hrs")]
+                          [
+                            _vm._v(
+                              "Publicado " +
+                                _vm._s(_vm.discussion.created_human)
+                            )
+                          ]
                         )
                       ])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
-                      },
-                      [
-                        _c(
-                          "span",
-                          {
-                            staticClass:
-                              "text-white text-xs bg-green-500 py-1 px-2 rounded-lg shadow-lg"
-                          },
-                          [
-                            _vm._v(
-                              "\n                                Mejor Respuesta\n                            "
-                            )
-                          ]
-                        )
-                      ]
-                    )
+                    _c("div", {
+                      staticClass:
+                        "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
+                    })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "markdown-body p-3" }, [
-                    _c("p", [
-                      _vm._v(
-                        "\n                            Tempor magna est dolor aute laborum id dolore quis est commodo sunt consectetur cillum consectetur. Irure exercitation culpa excepteur duis irure nisi eiusmod. Incididunt fugiat ipsum sint nisi commodo.\n                            Aliqua occaecat nostrud laboris elit eiusmod veniam nostrud officia nostrud eu eu veniam labore laborum. Aliqua do ad cupidatat amet cupidatat exercitation. Pariatur commodo veniam enim ad ex in occaecat commodo. Sint ex eu laborum nulla cupidatat voluptate consectetur consectetur minim laborum laboris.    \n                            Ullamco proident reprehenderit commodo deserunt occaecat. Ipsum aute ullamco proident sunt excepteur irure incididunt fugiat sunt. Est labore ad laborum ea elit. Ad aliqua anim dolor labore sunt eiusmod ad minim voluptate est nisi et. Do aute laboris commodo ullamco velit eiusmod pariatur.\n                            Ut commodo commodo nisi tempor sit irure consectetur fugiat aliqua nisi adipisicing et. Eiusmod excepteur culpa incididunt aliquip ea irure occaecat nulla reprehenderit irure nostrud ad consectetur. Elit occaecat excepteur sunt fugiat nisi consectetur. Eiusmod non elit est magna cupidatat aute commodo quis ea. Reprehenderit sint eu cupidatat non culpa enim in exercitation.\n                            Duis culpa labore non nulla ex minim ipsum reprehenderit anim veniam magna consequat. Aliqua nisi deserunt irure officia consectetur sunt minim nulla ex esse voluptate qui. Culpa amet aliqua magna consequat mollit culpa officia ea dolore ut anim incididunt nisi. Cupidatat voluptate qui mollit aute ex cillum.\n                        "
+                  _c("div", {
+                    staticClass: "markdown-body p-3",
+                    domProps: {
+                      innerHTML: _vm._s(
+                        _vm.parseMarkdown(_vm.discussion.content)
                       )
-                    ])
-                  ])
+                    }
+                  })
                 ])
               ]
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.replies, function(r) {
+            return _c(
+              "transition",
+              { key: r.hash, attrs: { name: "slide-fade" } },
+              [
+                _c(
+                  "article",
+                  {
+                    staticClass: "flex px-3 py-4 rounded-lg relative mb-3",
+                    class: r.solved ? "bg-red-100" : "hover:bg-gray-200"
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "flex-shrink pr-3 relative h-16" },
+                      [
+                        _c("img", {
+                          staticClass:
+                            "w-16 h-16 rounded-full border-white border-2 shadow-lg",
+                          attrs: { src: r.user.photo, alt: "G" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex-1" }, [
+                      _c("div", { staticClass: "flex flex-wrap" }, [
+                        _c("div", { staticClass: "w-full lg:w-5/6 p-3" }, [
+                          _c("div", { staticClass: "mb-2" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "text-blue-600 font-semibold",
+                                attrs: { href: "/me/" + r.user.username }
+                              },
+                              [_vm._v(_vm._s(r.user.username))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "small",
+                              { staticClass: "text-gray-600 text-xs ml-2" },
+                              [_vm._v("Publicado " + _vm._s(r.created_human))]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
+                          },
+                          [
+                            r.solved
+                              ? _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "text-white text-xs bg-green-500 py-1 px-2 rounded-lg shadow-lg"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                Mejor Respuesta\n                            "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      r.mention
+                        ? _c("div", { staticClass: "mb-2 p-3" }, [
+                            _vm._v("\n                        En respuesta a "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "text-blue-600 font-semibold",
+                                attrs: { href: "/me/" + r.mention.username }
+                              },
+                              [_vm._v(_vm._s("@" + r.mention.username))]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass: "markdown-body p-3",
+                        domProps: {
+                          innerHTML: _vm._s(_vm.parseMarkdown(r.content))
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-3" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "cursor-pointer text-sm text-gray-700 hover:text-gray-900",
+                            on: {
+                              click: function($event) {
+                                return _vm.replyUser(r.user.id, r.user.username)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "w-4 h-4 fill-current mr-1 inline-block",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 512 512"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M8.309 189.836L184.313 37.851C199.719 24.546 224 35.347 224 56.015v80.053c160.629 1.839 288 34.032 288 186.258 0 61.441-39.581 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 45.344-145.012-21.507-183.51-176.59-185.742V360c0 20.7-24.3 31.453-39.687 18.164l-176.004-152c-11.071-9.562-11.086-26.753 0-36.328z"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                            Responder\n                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          })
         ],
-        1
+        2
       ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
@@ -76645,10 +77459,17 @@ var render = function() {
               },
               [
                 _c(
-                  "div",
+                  "form",
                   {
                     staticClass:
-                      "discussion fixed bg-white bg-white h-screen relative"
+                      "discussion fixed bg-white bg-white h-screen relative",
+                    attrs: { method: "POST" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.storeReply()
+                      }
+                    }
                   },
                   [
                     _c(
@@ -76658,29 +77479,103 @@ var render = function() {
                           "border-b p-4 text-lg text-grey font-semibold"
                       },
                       [
-                        _vm._v("Responder a "),
+                        _c(
+                          "svg",
+                          {
+                            staticClass:
+                              "w-4 h-4 fill-current mr-1 inline-block",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 512 512"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M8.309 189.836L184.313 37.851C199.719 24.546 224 35.347 224 56.015v80.053c160.629 1.839 288 34.032 288 186.258 0 61.441-39.581 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 45.344-145.012-21.507-183.51-176.59-185.742V360c0 20.7-24.3 31.453-39.687 18.164l-176.004-152c-11.071-9.562-11.086-26.753 0-36.328z"
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v("\n                    Responder a "),
                         _c("span", { staticClass: "text-blue-600" }, [
-                          _vm._v("Conversacion")
+                          _vm._v(
+                            _vm._s(
+                              _vm.reply.mention
+                                ? _vm.reply.username
+                                : "Discusión"
+                            )
+                          )
                         ])
                       ]
                     ),
                     _vm._v(" "),
                     _c(
-                      "span",
+                      "div",
                       {
                         staticClass:
-                          "absolute top-0 right-0 cursor-pointer px-4 py-5 font-semibold",
-                        on: {
-                          click: function($event) {
-                            _vm.preview = !_vm.preview
-                          }
-                        }
+                          "absolute top-0 right-0 h-16 p-4 inline-flex"
                       },
                       [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(_vm.preview ? "Editar" : "Vista Previa") +
-                            "\n                "
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "cursor-pointer focus:outline-none outline-none hover:bg-gray-300 shadow border text-gray-800 font-bold py-2 px-2 rounded inline-flex items-center",
+                            on: {
+                              click: function($event) {
+                                _vm.preview = !_vm.preview
+                              }
+                            }
+                          },
+                          [
+                            _vm.preview
+                              ? _c(
+                                  "svg",
+                                  {
+                                    staticClass: "w-4 h-4 fill-current",
+                                    attrs: {
+                                      title: "Editar",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 576 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _c(
+                                  "svg",
+                                  {
+                                    staticClass: "w-4 h-4 fill-current",
+                                    attrs: {
+                                      title: "Previsualizar",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 512 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M435.174 382.964c25.042-35.155 21.986-84.07-9.541-115.597-33.803-33.803-93.51-33.816-127.266 0-35.193 35.162-35.175 92.122 0 127.266 31.531 31.556 80.458 34.567 115.596 9.542l76.826 75.036L512 458l-76.826-75.036zM272 8.789V121h111.211z"
+                                      }
+                                    }),
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M361.985 451.015c-32.051 0-62.183-12.495-84.844-35.186-46.915-46.855-46.926-122.794.029-169.688 26.755-26.81 69.164-41.373 114.829-30.018V151H242V0H0v512h392v-65.235c-9.732 2.509-19.698 4.25-30.015 4.25zM60 181h212v30H60v-30zm152 210H60v-30h152v30zm0-60H60v-30h152v30zm0-60H60v-30h152v30z"
+                                      }
+                                    })
+                                  ]
+                                )
+                          ]
                         )
                       ]
                     ),
@@ -76689,14 +77584,19 @@ var render = function() {
                       !_vm.preview
                         ? _c("textarea", {
                             staticClass:
-                              "editor bg-white focus:bg-gray-100 rounded py-4",
-                            attrs: { autofocus: "" },
-                            domProps: { value: _vm.input },
+                              "editor bg-white focus:bg-gray-100 py-4 border-b focus:border-red-400",
+                            attrs: {
+                              autofocus: "",
+                              require: "",
+                              minlength: "15",
+                              placeholder: "Escribe tu respuesta aqui..."
+                            },
+                            domProps: { value: _vm.reply.content },
                             on: { input: _vm.update }
                           })
                         : _c("div", {
                             staticClass:
-                              "preview markdown-body rounded py-4 select-none",
+                              "preview border-b markdown-body py-4 select-none",
                             domProps: {
                               innerHTML: _vm._s(_vm.compiledMarkdown)
                             }
@@ -76706,15 +77606,580 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass:
-                          "w-full border-t absolute bottom-0 p-4 text-right"
+                        staticClass: "w-full absolute bottom-0 p-4 text-right"
                       },
                       [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "cursor-pointer border border-red-600 w-32 outline-none hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2 shadow-lg",
+                            on: {
+                              click: function($event) {
+                                return _vm.cancelModal()
+                              }
+                            }
+                          },
+                          [_vm._v("Cancelar")]
+                        ),
+                        _vm._v(" "),
                         _c(
                           "button",
                           {
                             staticClass:
-                              "border border-red-600 w-32 hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2",
+                              "bg-red-600 w-32 hover:bg-red-700 text-white outline-none font-bold py-2 px-4 rounded-full shadow-lg",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Enviar")]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          : _vm._e()
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "flex flex-wrap-reverse lg:flex-wrap mt-8 relative" },
+    [
+      _c("notifications", {
+        attrs: { group: "foo", position: "bottom right" }
+      }),
+      _vm._v(" "),
+      _c("aside", { staticClass: "w-full lg:w-1/4 mb-4 lg:pr-2" }, [
+        _c("div", { staticClass: "lg:sticky lg:top-0 lg:pt-5" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "w-full cursor-pointer inline-block text-center bg-red-700 hover:bg-red-800 text-white py-2 px-5 rounded-full",
+              on: { click: _vm.toggleModal }
+            },
+            [_vm._v("\n                NUEVA DISCUSIÓN\n            ")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-6" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "w-full inline-block text-lg text-blue-600 hover:text-blue-700 hover:underline",
+                attrs: { href: "/discussions" }
+              },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "2-4 h-4 fill-current inline-block mr-2",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      viewBox: "0 0 576 512"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0019.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(
+                  "\n                    Todas las Discusiones\n                "
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("nav", { staticClass: "channels" }, [
+            _c(
+              "ul",
+              _vm._l(_vm.channels, function(ch) {
+                return _c(
+                  "a",
+                  {
+                    key: ch.slug,
+                    staticClass: "w-full inline-block",
+                    class: ch.slug === _vm.channel ? "font-semibold" : "",
+                    attrs: {
+                      href:
+                        ch.slug === _vm.channel
+                          ? "#"
+                          : "/discussions?channel=" + ch.slug
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "w-2 channel inline-block",
+                        class: ch.icon
+                      },
+                      [_vm._v("#")]
+                    ),
+                    _vm._v(" " + _vm._s(ch.title) + "\n                    ")
+                  ]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "w-full lg:w-3/4 lg:pl-4" },
+        _vm._l(_vm.discussions, function(d) {
+          return _c(
+            "article",
+            {
+              key: d.id,
+              staticClass:
+                "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
+            },
+            [
+              _c("div", { staticClass: "flex-shrink pr-3 relative h-16" }, [
+                _c("img", {
+                  staticClass:
+                    "w-16 h-16 rounded-full border-white border-2 shadow-lg",
+                  attrs: { src: d.user.photo, alt: "Icon" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
+                    attrs: {
+                      title: "Esta discusion ya fue marcada como solucionado"
+                    }
+                  },
+                  [
+                    _c(
+                      "svg",
+                      {
+                        staticClass:
+                          "w-4 h-4 inline-block fill-current text-white",
+                        attrs: {
+                          xmlns: "http://www.w3.org/2000/svg",
+                          viewBox: "0 0 512 512"
+                        }
+                      },
+                      [
+                        _c("path", {
+                          attrs: {
+                            d:
+                              "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex-1" }, [
+                _c("div", { staticClass: "flex flex-wrap" }, [
+                  _c("div", { staticClass: "w-full lg:w-5/6" }, [
+                    _c("div", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "font-semibold",
+                          attrs: { href: "/discussion/" + d.slug }
+                        },
+                        [_vm._v(_vm._s(d.title))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
+                          attrs: {
+                            href: "/discussions?channel=" + d.channel.slug
+                          }
+                        },
+                        [_vm._v(_vm._s(d.channel.title))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-xs mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-blue-600 font-semibold",
+                          attrs: { href: "/me/" + d.user.username }
+                        },
+                        [_vm._v(_vm._s(d.user.username))]
+                      ),
+                      _vm._v(" "),
+                      _c("small", { staticClass: "text-gray-600" }, [
+                        _vm._v("Publicado " + _vm._s(d.created_human))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0, true)
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
+                    },
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "inline-block mr-2 text-gray-600" },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "w-4 h-4 fill-current inline-block",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 576 512"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(d.replies_total) +
+                              "\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "inline-block text-gray-600" },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass: "w-4 h-4 fill-current inline-block",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 576 512"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
+                                }
+                              })
+                            ]
+                          ),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(d.views) +
+                              "\n                        "
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "slide-fade" } }, [
+        _vm.modal
+          ? _c(
+              "div",
+              {
+                staticClass:
+                  "discussion-overlay w-full h-screen fixed z-50 overflow-hidden top-0 left-0"
+              },
+              [
+                _c(
+                  "form",
+                  {
+                    staticClass:
+                      "discussion fixed bg-white bg-white h-screen relative",
+                    attrs: { method: "POST", autocomplete: "off" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.storeDiscussion()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "h2",
+                      {
+                        staticClass:
+                          "p-4 text-lg text-grey font-semibold uppercase"
+                      },
+                      [_vm._v("Nueva Discusión")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "absolute top-0 right-0 h-16 p-4 inline-flex"
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "inline-block relative mr-2" },
+                          [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.discussion.channel,
+                                    expression: "discussion.channel"
+                                  }
+                                ],
+                                staticClass:
+                                  "inline-block outline-none w-40 appearance-none bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded shadow leading-tight",
+                                attrs: { required: "" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.discussion,
+                                      "channel",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              _vm._l(_vm.channels, function(ch) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: ch.slug,
+                                    domProps: { value: ch.slug }
+                                  },
+                                  [_vm._v(_vm._s(ch.title))]
+                                )
+                              }),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fill-current h-4 w-4",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 20 20"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "cursor-pointer focus:outline-none outline-none hover:bg-gray-300 shadow border text-gray-800 font-bold py-2 px-2 rounded inline-flex items-center",
+                            on: {
+                              click: function($event) {
+                                _vm.preview = !_vm.preview
+                              }
+                            }
+                          },
+                          [
+                            _vm.preview
+                              ? _c(
+                                  "svg",
+                                  {
+                                    staticClass: "w-4 h-4 fill-current",
+                                    attrs: {
+                                      title: "Editar",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 576 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _c(
+                                  "svg",
+                                  {
+                                    staticClass: "w-4 h-4 fill-current",
+                                    attrs: {
+                                      title: "Previsualizar",
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 512 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M435.174 382.964c25.042-35.155 21.986-84.07-9.541-115.597-33.803-33.803-93.51-33.816-127.266 0-35.193 35.162-35.175 92.122 0 127.266 31.531 31.556 80.458 34.567 115.596 9.542l76.826 75.036L512 458l-76.826-75.036zM272 8.789V121h111.211z"
+                                      }
+                                    }),
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M361.985 451.015c-32.051 0-62.183-12.495-84.844-35.186-46.915-46.855-46.926-122.794.029-169.688 26.755-26.81 69.164-41.373 114.829-30.018V151H242V0H0v512h392v-65.235c-9.732 2.509-19.698 4.25-30.015 4.25zM60 181h212v30H60v-30zm152 210H60v-30h152v30zm0-60H60v-30h152v30zm0-60H60v-30h152v30z"
+                                      }
+                                    })
+                                  ]
+                                )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full px-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.discussion.title,
+                            expression: "discussion.title"
+                          }
+                        ],
+                        staticClass:
+                          "appearance-none border-b font-semibold border-gray-500 focus:border-red-400 w-full py-2 text-gray-700 leading-tight focus:outline-none",
+                        attrs: {
+                          type: "text",
+                          placeholder: "Titulo de la Discusión",
+                          autofocus: "",
+                          required: "",
+                          minlength: "5",
+                          maxlength: "255"
+                        },
+                        domProps: { value: _vm.discussion.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.discussion,
+                              "title",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "w-full px-4 mt-6" }, [
+                      !_vm.preview
+                        ? _c("textarea", {
+                            staticClass:
+                              "editor bg-white focus:bg-gray-100 py-4 border-b focus:border-red-400",
+                            attrs: {
+                              required: "",
+                              minlength: "40",
+                              placeholder: "Que quieres preguntar ?"
+                            },
+                            domProps: { value: _vm.discussion.content },
+                            on: { input: _vm.update }
+                          })
+                        : _c("div", {
+                            staticClass:
+                              "preview border-b markdown-body py-4 select-none",
+                            domProps: {
+                              innerHTML: _vm._s(_vm.compiledMarkdown)
+                            }
+                          })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "w-full absolute bottom-0 p-4 text-right"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "cursor-pointer border border-red-600 w-32 outline-none hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2 shadow-lg",
                             on: { click: _vm.toggleModal }
                           },
                           [_vm._v("Cancelar")]
@@ -76724,7 +78189,8 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-red-600 w-32 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                              "bg-red-600 w-32 hover:bg-red-700 text-white outline-none font-bold py-2 px-4 rounded-full shadow-lg",
+                            attrs: { type: "submit" }
                           },
                           [_vm._v("Enviar")]
                         )
@@ -76745,65 +78211,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "channels" }, [
-      _c("ul", [
-        _c("li", [
-          _c("div", { staticClass: "channel text-blue-600" }, [_vm._v("#")]),
-          _vm._v(" General")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-yellow-600" }, [_vm._v("#")]),
-          _vm._v(" JavaScript")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-red-500" }, [_vm._v("#")]),
-          _vm._v(" Laravel")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-green-600" }, [_vm._v("#")]),
-          _vm._v(" Vue Js")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-blue-700" }, [_vm._v("#")]),
-          _vm._v(" Php")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-red-700" }, [_vm._v("#")]),
-          _vm._v(" Angular")
-        ]),
-        _vm._v(" "),
-        _c("li", [
-          _c("div", { staticClass: "channel text-blue-700" }, [_vm._v("#")]),
-          _vm._v(" Php")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full lg:w-5/6" }, [
-      _c("div", [
-        _c(
-          "a",
-          { staticClass: "text-xl font-semibold", attrs: { href: "#" } },
-          [_vm._v("Titulo de discusion")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Channel")]
+    return _c("div", { staticClass: "text-sm" }, [
+      _c("p", { staticClass: "text-gray-700 overflow-hidden" }, [
+        _vm._v(
+          "aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka"
         )
       ])
     ])
@@ -81222,8 +82633,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/index.js");
 /* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
 /* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vue_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-notification */ "./node_modules/vue-notification/dist/index.js");
-/* harmony import */ var vue_notification__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_notification__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! highlight.js/styles/atom-one-dark-reasonable.css */ "./node_modules/highlight.js/styles/atom-one-dark-reasonable.css");
+/* harmony import */ var highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(highlight_js_styles_atom_one_dark_reasonable_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-notification */ "./node_modules/vue-notification/dist/index.js");
+/* harmony import */ var vue_notification__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_notification__WEBPACK_IMPORTED_MODULE_4__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -81234,6 +82647,7 @@ window.marked = __webpack_require__(/*! marked */ "./node_modules/marked/lib/mar
 window.Helper = new _Helper__WEBPACK_IMPORTED_MODULE_0__["default"]();
 
 
+
 var options = {
   title: 'Hey...',
   confirmButtonColor: '#41b882',
@@ -81241,7 +82655,7 @@ var options = {
 };
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
-Vue.use(vue_notification__WEBPACK_IMPORTED_MODULE_3___default.a);
+Vue.use(vue_notification__WEBPACK_IMPORTED_MODULE_4___default.a);
 Vue.component('skill-courses', __webpack_require__(/*! ./components/SkillCourses.vue */ "./resources/js/components/SkillCourses.vue")["default"]);
 Vue.component('course-component', __webpack_require__(/*! ./components/CourseComponent.vue */ "./resources/js/components/CourseComponent.vue")["default"]);
 Vue.component('lesson-component', __webpack_require__(/*! ./components/LessonComponent.vue */ "./resources/js/components/LessonComponent.vue")["default"]);
@@ -81250,6 +82664,7 @@ Vue.component('file-upload', __webpack_require__(/*! ./components/FileUpload.vue
 Vue.component('courses', __webpack_require__(/*! ./components/Courses.vue */ "./resources/js/components/Courses.vue")["default"]);
 Vue.component('portlet-component', __webpack_require__(/*! ./components/PortletComponent.vue */ "./resources/js/components/PortletComponent.vue")["default"]);
 Vue.component('academic', __webpack_require__(/*! ./components/Academic.vue */ "./resources/js/components/Academic.vue")["default"]);
+Vue.component('discussions', __webpack_require__(/*! ./components/Discussions.vue */ "./resources/js/components/Discussions.vue")["default"]);
 Vue.component('discussion', __webpack_require__(/*! ./components/Discussion.vue */ "./resources/js/components/Discussion.vue")["default"]);
 var app = new Vue({//store
 }).$mount('#app');
@@ -81603,6 +83018,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussion_vue_vue_type_template_id_03c490d3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussion_vue_vue_type_template_id_03c490d3_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Discussions.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/Discussions.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Discussions.vue?vue&type=template&id=78792ab0&scoped=true& */ "./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true&");
+/* harmony import */ var _Discussions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Discussions.vue?vue&type=script&lang=js& */ "./resources/js/components/Discussions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& */ "./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Discussions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "78792ab0",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Discussions.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Discussions.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Discussions.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Discussions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=style&index=0&id=78792ab0&lang=css&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_style_index_0_id_78792ab0_lang_css_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Discussions.vue?vue&type=template&id=78792ab0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Discussions.vue?vue&type=template&id=78792ab0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Discussions_vue_vue_type_template_id_78792ab0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

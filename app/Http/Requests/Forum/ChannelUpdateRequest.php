@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Core;
+namespace App\Http\Requests\Forum;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class ChannelUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'username'  =>  'required|min:5|max:25|unique:users,username',
-            'email'     =>  'required|min:5|max:100|unique:users,email',
-            'fullname'  =>  'required|min:3|max:150'
+            'title' =>  'required|min:3|max:255',
+            'slug'  =>  'required|min:3|max:255|unique:channels,slug,'.$this->route('channel')
         ];
     }
 }

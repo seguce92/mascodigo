@@ -25,8 +25,8 @@ Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/category/{slug}', 'HomeController@category')->name('category');
 
 
-Route::get('/forums', 'ForumController@index')->name('forums.index');
-Route::get('/discussion/{slug}', 'ForumController@discussion')->name('forums.discussion');
+Route::get('/discussions', 'ForumController@index')->name('discussions.index');
+Route::get('/discussion/{slug}', 'ForumController@show')->name('discussions.show');
 
 
 Route::get('sergiocruzes.com', function () {
@@ -76,6 +76,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
   Route::resource('categories', 'Blog\CategoryController');
   Route::resource('posts', 'Blog\PostController');
 
+  Route::resource('channels', 'Forum\ChannelController');
+
 });
 
 Route::group(['prefix' => 'api/data'], function () {
@@ -83,6 +85,17 @@ Route::group(['prefix' => 'api/data'], function () {
   Route::post('search', 'Api\DataController@searchGlobal')->name('search');
   Route::post('search/post', 'Api\DataController@searchGlobalPost')->name('search.post');
 
+  Route::get('discussions/channels', 'Api\DataController@channels')->name('discussion.channels');
+
+  Route::get('authenticate', 'Api\DataController@authenticate');
+
+  Route::get('discussions', 'Api\DataController@discussions');
+
+  Route::post('discussions/store', 'Api\DataController@storeDiscussion')->middleware('auth');
+
+  Route::post('replies/store', 'Api\DataController@storeReply');
+
+  Route::get('replies/{slug}', 'Api\DataController@replies');
 });
 
 Route::get('/{slug}', 'HomeController@post')->name('post');

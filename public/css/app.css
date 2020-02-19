@@ -16382,16 +16382,17 @@ video {
   padding-bottom: 0.17rem;
 }
 
-.channels li {
+.channels a {
   cursor: pointer;
-  font-size: 1.125rem
+  font-size: 1rem;
+  margin-bottom: 0.5rem
 }
 
-.channels li:hover {
+.channels a:hover {
   font-weight: 600;
 }
 
-.channels li .channel  {
+.channels a .channel  {
   transition:         transform .8s ease-in-out;
   display: inline-block;
   width: 1.5rem;
@@ -16399,11 +16400,11 @@ video {
   text-align: center
 }
 
-.channels li:hover .channel {
+.channels a:hover .channel {
   transform: rotate(1080deg);
 }
 
-/**@import 'animate.css';*/
+/*@import 'animate.css';*/
 
 @media (min-width: 640px) {
   .sm\:sr-only {

@@ -53,6 +53,11 @@ class AssyncTableSeeder extends Seeder
         Permission::create([ 'name'    =>  'editar posts', 'guard_name' =>  'web' ]);
         Permission::create([ 'name'    =>  'eliminar posts', 'guard_name' =>  'web' ]);
 
+        Permission::create([ 'name'    =>  'listar canales', 'guard_name' =>  'web' ]);
+        Permission::create([ 'name'    =>  'crear canales', 'guard_name' =>  'web' ]);
+        Permission::create([ 'name'    =>  'editar canales', 'guard_name' =>  'web' ]);
+        Permission::create([ 'name'    =>  'eliminar canales', 'guard_name' =>  'web' ]);
+
         $permissions = Permission::pluck('id', 'id')->all();
 
         $user = User::find(1);

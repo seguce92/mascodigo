@@ -499,24 +499,24 @@
     padding-bottom: 0.17rem;
 }
 
-.channels li {
-    @apply cursor-pointer text-lg
+.channels a {
+    @apply cursor-pointer text-base mb-2
 }
 
-.channels li:hover {
+.channels a:hover {
     @apply font-semibold;
 }
 
-.channels li .channel  {
+.channels a .channel  {
     -webkit-transition: -webkit-transform .8s ease-in-out;
             transition:         transform .8s ease-in-out;
     @apply inline-block w-6 h-6 text-center
 }
-.channels li:hover .channel {
+.channels a:hover .channel {
     -webkit-transform: rotate(1080deg);
             transform: rotate(1080deg);
 }
 
 @import 'github-markdown.css';
 @import 'skill.css';
-/**@import 'animate.css';*/
+/*@import 'animate.css';*/

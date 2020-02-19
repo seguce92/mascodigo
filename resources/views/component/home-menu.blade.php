@@ -8,7 +8,7 @@
 <a href="{{ route('courses') }}" class="{{ $opt == 'courses' ? 'border-b-4 font-bold' : '' }} flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
   Cursos</a>
 
-<a href="{{ route('forums.index') }}" class="{{ $opt == 'forums' ? 'border-b-4 font-bold' : '' }} flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
+<a href="{{ route('discussions.index') }}" class="{{ $opt == 'discussions' ? 'border-b-4 font-bold' : '' }} flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
   Foro</a>
 
 <!--a href="#" class="{{ $opt == 'about' ? 'border-b-4 font-bold' : '' }} flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:text-gray-300">

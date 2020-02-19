@@ -48,13 +48,14 @@
         <div class="mt-4">
             <h2 class="font-bold text-2xl">Foro</h2>
             <p class="text-sm font-mono italic">
-                Aqui puedes preguntar cualquier cosa referente a programación. Pero siempre mateniendo el respeto mutuo.
+                Aqui puedes preguntar cualquier cosa referente a programación. Pero siempre mateniendo el respeto al resto de la comunidad.
             </p>
         </div>
+        {{ $channel }}
         @if ( \Auth::check() )
-            <discussion :logged="true" :discussion="{{ $discussion }}"></discussion>
+            <discussions :logged="true" channel="{{ $channel }}"></discussions>
         @else
-            <discussion :logged="false" :discussion="{{ $discussion }}"></discussion>
+            <discussions :logged="false" channel="{{ $channel }}"></discussions>
         @endif
     </main>
 @endsection
