@@ -35,6 +35,11 @@ service.interceptors.response.use(
       errors = error.response.data.error;
     }
 
+    if ( error.response.data && error.response.data.message && error.response.data.message == 'Unauthenticated.' ) {
+      alert('Necesitas iniciar sesion para utilizar esta funcion')
+      window.location = '/login'
+    }
+
     return errors;
     
     return Promise.reject(message);

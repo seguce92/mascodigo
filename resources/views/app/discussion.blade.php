@@ -52,9 +52,9 @@
             </p>
         </div>
         @if ( \Auth::check() )
-            <discussion :logged="true" :discussion="{{ $discussion }}"></discussion>
+            <discussion :logged="true" :discussion="{{ $discussion }}" user="{{ \Auth::id() }}"></discussion>
         @else
-            <discussion :logged="false" :discussion="{{ $discussion }}"></discussion>
+            <discussion :logged="false" :discussion="{{ $discussion }}" user="0"></discussion>
         @endif
     </main>
 @endsection

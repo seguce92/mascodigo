@@ -46,6 +46,9 @@
                 <article class="flex px-3 py-4 rounded-lg bg-gray-200 relative mb-3">
                     <div class="flex-shrink pr-3 relative h-16">
                         <img class="w-16 h-16 rounded-full border-white border-2 shadow-lg" :src="discussion.user.photo" alt="G">
+                        <div v-if="discussionVue.solved" title="Esta discusion ya fue marcada como solucionado" class="absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg">
+                            <svg class="w-4 h-4 inline-block fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
+                        </div>
                     </div>
                     <div class="flex-1 overflow-x-auto">
                         <div class="flex flex-wrap">
@@ -90,6 +93,10 @@
                             <a @click="replyUser(r.user.id, r.user.username)" class="cursor-pointer text-sm text-gray-700 hover:text-gray-900">
                                 <svg class="w-4 h-4 fill-current mr-1 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M8.309 189.836L184.313 37.851C199.719 24.546 224 35.347 224 56.015v80.053c160.629 1.839 288 34.032 288 186.258 0 61.441-39.581 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 45.344-145.012-21.507-183.51-176.59-185.742V360c0 20.7-24.3 31.453-39.687 18.164l-176.004-152c-11.071-9.562-11.086-26.753 0-36.328z"/></svg>
                                 Responder
+                            </a>
+                            <a v-if="!discussionVue.solved && discussion.user_id == parseInt(user)" @click="solveDiscussion(r.id)" class="cursor-pointer text-sm text-gray-700 hover:text-gray-900 ml-3">
+                                <svg class="w-4 h-4 fill-current mr-1 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.9 439.4L7.5 273c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.69l240.1-240.1c10-10 26.2-10 36.2 0l36.2 36.21c10 10 10 26.2 0 36.2L210.1 439.4c-10 10-26.2 10-36.2 0z"/></svg>
+                                Marcar Respuesta Correcta
                             </a>
                         </div>
                     </div>
@@ -146,6 +153,9 @@ export default {
             type: Boolean,
             default: false
         },
+        user: {
+            type: String
+        },
         discussion: {
             type: Object
         }
@@ -155,6 +165,7 @@ export default {
         preview: false,
         channels: [],
         replies: [],
+        discussionVue: {},
         reply: {
             content: '',
             mention: null,
@@ -184,7 +195,9 @@ export default {
     },
     created() {
         this.loadChannels()
+        this.loadDiscussion(this.discussion.id)
         this.loadReplies(this.discussion.slug)
+        console.log(this.user)
     },
     methods: {
         toggleModal() {
@@ -229,6 +242,11 @@ export default {
         async loadChannels() {
             const { data } = await resource.get('api/data/discussions/channels');
             this.channels = data;
+        },
+
+        async loadDiscussion (id) {
+            const { data } = await resource.get('api/data/discussions/show/' + id);
+            this.discussionVue = data;
         },
 
         async loadReplies( slug ) {
@@ -288,6 +306,47 @@ export default {
             }
 
             this.toggleModal()
+        },
+
+        solveDiscussion: function (id) {
+            this.$swal({
+                title: 'Estas seguro(a) ?',
+                text: "Esta respuesta será MARCADA COMO LA MEJOR RESPUESTA, no podras revertir esta operación.",
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Estoy seguro'
+            }).then((result) => {
+                if (result.value) {
+                    this.storeSolve(id)
+                }
+            })
+        },
+
+        async storeSolve (id) {
+            let params = {
+                discussion: this.discussion.id,
+                reply: id
+            }
+            const { data } = await resource.post('api/data/replies/store/solve', params);
+            if ( data.status ) {
+                this.$notify({
+                    group: 'foo',
+                    text: data.message,
+                    duration: 3500,
+                    type: 'success'
+                });
+                this.loadDiscussion(this.discussion.id)
+                this.loadReplies(this.discussion.slug)
+            } else {
+                this.$notify({
+                    group: 'foo',
+                    text: data.message,
+                    duration: 3500,
+                    type: 'error'
+                });
+            }
         }
     }
 }

@@ -91,11 +91,13 @@ Route::group(['prefix' => 'api/data'], function () {
 
   Route::get('discussions', 'Api\DataController@discussions');
 
+  Route::get('discussions/show/{id}', 'Api\DataController@showDiscussion');
+
   Route::post('discussions/store', 'Api\DataController@storeDiscussion')->middleware('auth');
 
   Route::post('replies/store', 'Api\DataController@storeReply');
-
   Route::get('replies/{slug}', 'Api\DataController@replies');
+  Route::post('replies/store/solve', 'Api\DataController@storeReplySolve')->middleware('auth');
 });
 
 Route::get('/{slug}', 'HomeController@post')->name('post');

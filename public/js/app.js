@@ -3853,6 +3853,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3864,6 +3871,9 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
       type: Boolean,
       "default": false
     },
+    user: {
+      type: String
+    },
     discussion: {
       type: Object
     }
@@ -3874,6 +3884,7 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
       preview: false,
       channels: [],
       replies: [],
+      discussionVue: {},
       reply: {
         content: '',
         mention: null,
@@ -3903,7 +3914,9 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
   },
   created: function created() {
     this.loadChannels();
+    this.loadDiscussion(this.discussion.id);
     this.loadReplies(this.discussion.slug);
+    console.log(this.user);
   },
   methods: {
     toggleModal: function toggleModal() {
@@ -3966,7 +3979,7 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
         }, _callee);
       }))();
     },
-    loadReplies: function loadReplies(slug) {
+    loadDiscussion: function loadDiscussion(id) {
       var _this2 = this;
 
       return _asyncToGenerator(
@@ -3979,12 +3992,12 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return resource.get('api/data/replies/' + slug);
+                return resource.get('api/data/discussions/show/' + id);
 
               case 2:
                 _ref2 = _context2.sent;
                 data = _ref2.data;
-                _this2.replies = data;
+                _this2.discussionVue = data;
 
               case 5:
               case "end":
@@ -3994,47 +4007,75 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
         }, _callee2);
       }))();
     },
-    storeReply: function storeReply() {
+    loadReplies: function loadReplies(slug) {
       var _this3 = this;
 
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _ref3, data, errors, message, error, i;
+        var _ref3, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _this3.reply.question_id = _this3.discussion.id;
-                _context3.next = 3;
-                return resource.post('api/data/replies/store', _this3.reply);
+                _context3.next = 2;
+                return resource.get('api/data/replies/' + slug);
 
-              case 3:
+              case 2:
                 _ref3 = _context3.sent;
                 data = _ref3.data;
-                errors = _ref3.errors;
-                message = _ref3.message;
+                _this3.replies = data;
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    storeReply: function storeReply() {
+      var _this4 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var _ref4, data, errors, message, error, i;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.reply.question_id = _this4.discussion.id;
+                _context4.next = 3;
+                return resource.post('api/data/replies/store', _this4.reply);
+
+              case 3:
+                _ref4 = _context4.sent;
+                data = _ref4.data;
+                errors = _ref4.errors;
+                message = _ref4.message;
 
                 if (data) {
-                  _this3.$notify({
+                  _this4.$notify({
                     group: 'foo',
                     text: 'Respuesta registrada exitosamente.',
                     duration: 2500
                   });
 
-                  _this3.reply = {
+                  _this4.reply = {
                     content: '',
                     username: null,
                     mention: null,
                     question_id: null
                   };
 
-                  _this3.toggleModal();
+                  _this4.toggleModal();
 
-                  _this3.loadReplies(_this3.discussion.slug);
+                  _this4.loadReplies(_this4.discussion.slug);
                 } else {
-                  _this3.$notify({
+                  _this4.$notify({
                     group: 'foo',
                     text: message,
                     duration: 5000,
@@ -4043,7 +4084,7 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
 
                   for (error in errors) {
                     for (i = 0; i < errors[error].length; i++) {
-                      _this3.$notify({
+                      _this4.$notify({
                         group: 'foo',
                         text: errors[error][i],
                         duration: 5000,
@@ -4055,10 +4096,10 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
 
               case 8:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     replyUser: function replyUser(id, username) {
@@ -4074,6 +4115,74 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
         question_id: null
       };
       this.toggleModal();
+    },
+    solveDiscussion: function solveDiscussion(id) {
+      var _this5 = this;
+
+      this.$swal({
+        title: 'Estas seguro(a) ?',
+        text: "Esta respuesta será MARCADA COMO LA MEJOR RESPUESTA, no podras revertir esta operación.",
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Estoy seguro'
+      }).then(function (result) {
+        if (result.value) {
+          _this5.storeSolve(id);
+        }
+      });
+    },
+    storeSolve: function storeSolve(id) {
+      var _this6 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var params, _ref5, data;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                params = {
+                  discussion: _this6.discussion.id,
+                  reply: id
+                };
+                _context5.next = 3;
+                return resource.post('api/data/replies/store/solve', params);
+
+              case 3:
+                _ref5 = _context5.sent;
+                data = _ref5.data;
+
+                if (data.status) {
+                  _this6.$notify({
+                    group: 'foo',
+                    text: data.message,
+                    duration: 3500,
+                    type: 'success'
+                  });
+
+                  _this6.loadDiscussion(_this6.discussion.id);
+
+                  _this6.loadReplies(_this6.discussion.slug);
+                } else {
+                  _this6.$notify({
+                    group: 'foo',
+                    text: data.message,
+                    duration: 3500,
+                    type: 'error'
+                  });
+                }
+
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
     }
   }
 });
@@ -4222,6 +4331,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4250,8 +4385,10 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
         channel: 'general'
       },
       query: {
-        search: ''
-      }
+        search: '',
+        filter: 'all'
+      },
+      loading: false
     };
   },
   computed: {
@@ -4326,18 +4463,21 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                _this2.loading = true;
                 url = '';
                 if (_this2.channel.length > 0) url = '?channel=' + _this2.channel;
-                if (_this2.query.search.length > 0) url = _this2.url.length > 0 ? url + '&q=' + _this2.query.search : '?q=' + _this2.query.search;
-                _context2.next = 5;
+                if (_this2.query.search.length > 0) url = url.length > 0 ? url + '&q=' + _this2.query.search : '?q=' + _this2.query.search;
+                if (_this2.query.filter != 'all') url = url.length > 0 ? url + '&filter=' + _this2.query.filter : '?filter=' + _this2.query.filter;
+                _context2.next = 7;
                 return resource.get('api/data/discussions' + url);
 
-              case 5:
+              case 7:
                 _ref2 = _context2.sent;
                 data = _ref2.data;
                 _this2.discussions = data;
+                _this2.loading = false;
 
-              case 8:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -4404,6 +4544,12 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
           }
         }, _callee3);
       }))();
+    },
+    searchDiscussion: function searchDiscussion() {
+      this.loadDiscussions();
+    },
+    changeFilter: function changeFilter() {
+      this.loadDiscussions();
     },
     cancelModal: function cancelModal() {
       this.discussion = {
@@ -77311,7 +77457,42 @@ var render = function() {
                     staticClass:
                       "w-16 h-16 rounded-full border-white border-2 shadow-lg",
                     attrs: { src: _vm.discussion.user.photo, alt: "G" }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.discussionVue.solved
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
+                          attrs: {
+                            title:
+                              "Esta discusion ya fue marcada como solucionado"
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              staticClass:
+                                "w-4 h-4 inline-block fill-current text-white",
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "flex-1 overflow-x-auto" }, [
@@ -77488,7 +77669,47 @@ var render = function() {
                               "\n                            Responder\n                        "
                             )
                           ]
-                        )
+                        ),
+                        _vm._v(" "),
+                        !_vm.discussionVue.solved &&
+                        _vm.discussion.user_id == parseInt(_vm.user)
+                          ? _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "cursor-pointer text-sm text-gray-700 hover:text-gray-900 ml-3",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.solveDiscussion(r.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "svg",
+                                  {
+                                    staticClass:
+                                      "w-4 h-4 fill-current mr-1 inline-block",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 512 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M173.9 439.4L7.5 273c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.69l240.1-240.1c10-10 26.2-10 36.2 0l36.2 36.21c10 10 10 26.2 0 36.2L210.1 439.4c-10 10-26.2 10-36.2 0z"
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(
+                                  "\n                            Marcar Respuesta Correcta\n                        "
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ])
                   ]
@@ -77809,83 +78030,143 @@ var render = function() {
         "section",
         { staticClass: "w-full lg:w-3/4 lg:pl-4" },
         [
-          _c("div", { staticClass: "w-full" }, [
-            _c(
-              "select",
-              {
-                directives: [
+          _c(
+            "div",
+            {
+              staticClass:
+                "grid grid-cols-1 md:grid-cols-2 mb-3 bg-gray-200 md:p-3 rounded-lg"
+            },
+            [
+              _c("div", { staticClass: "w-full mb-3 md:mb-0" }, [
+                _c(
+                  "select",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.discussion.channel,
-                    expression: "discussion.channel"
-                  }
-                ],
-                staticClass:
-                  "inline-block outline-none w-40 appearance-none bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded shadow leading-tight",
-                attrs: { required: "" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.discussion,
-                      "channel",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              _vm._l(_vm.channels, function(ch) {
-                return _c(
-                  "option",
-                  { key: ch.slug, domProps: { value: ch.slug } },
-                  [_vm._v(_vm._s(ch.title))]
-                )
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.discussions, function(d) {
-            return _c(
-              "article",
-              {
-                key: d.id,
-                staticClass:
-                  "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
-              },
-              [
-                _c("div", { staticClass: "flex-shrink pr-3 relative h-16" }, [
-                  _c("img", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.query.filter,
+                        expression: "query.filter"
+                      }
+                    ],
                     staticClass:
-                      "w-16 h-16 rounded-full border-white border-2 shadow-lg",
-                    attrs: { src: d.user.photo, alt: "Icon" }
-                  }),
-                  _vm._v(" "),
-                  d.solved
-                    ? _c(
+                      "w-full inline-block text-sm outline-none md:max-w-xs bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded leading-tight",
+                    on: {
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.query,
+                            "filter",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          return _vm.changeFilter()
+                        }
+                      ]
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "all" } }, [
+                      _vm._v("Todas las Discusiones")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "desc" } }, [
+                      _vm._v("Descendente por fecha")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "asc" } }, [
+                      _vm._v("Ascendente por fecha")
+                    ]),
+                    _vm._v(" "),
+                    _vm.logged
+                      ? _c("option", { attrs: { value: "me" } }, [
+                          _vm._v("De mi autoria")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "solved" } }, [
+                      _vm._v("Solucionadas")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "unsolved" } }, [
+                      _vm._v("Sin Solución")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "text-left md:text-right w-full justify-end" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "relative w-full md:max-w-xs inline-block" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.query.search,
+                            expression: "query.search"
+                          }
+                        ],
+                        staticClass:
+                          "w-full text-sm bg-gray-100 text-gray-800 transition border focus:outline-none focus:border-gray-500 rounded py-1 px-2 pl-8 appearance-none leading-normal",
+                        attrs: {
+                          type: "search",
+                          placeholder: "Algo en concreto que buscas ?"
+                        },
+                        domProps: { value: _vm.query.search },
+                        on: {
+                          keypress: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.searchDiscussion()
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.query, "search", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
                         "div",
                         {
-                          staticClass:
-                            "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
-                          attrs: {
-                            title:
-                              "Esta discusion ya fue marcada como solucionado"
-                          }
+                          staticClass: "absolute",
+                          staticStyle: { top: "0.5rem", left: "0.6rem" }
                         },
                         [
                           _c(
                             "svg",
                             {
                               staticClass:
-                                "w-4 h-4 inline-block fill-current text-white",
+                                "w-4 h-4 fill-current pointer-events-none text-gray-600",
                               attrs: {
                                 xmlns: "http://www.w3.org/2000/svg",
                                 viewBox: "0 0 512 512"
@@ -77895,135 +78176,220 @@ var render = function() {
                               _c("path", {
                                 attrs: {
                                   d:
-                                    "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                    "M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
                                 }
                               })
                             ]
                           )
                         ]
                       )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex-1 overflow-x-auto" }, [
-                  _c("div", { staticClass: "flex flex-wrap" }, [
-                    _c("div", { staticClass: "w-full lg:w-5/6" }, [
-                      _c("div", [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "font-semibold",
-                            attrs: { href: "/discussion/" + d.slug }
-                          },
-                          [_vm._v(_vm._s(d.title))]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
-                            attrs: {
-                              href: "/discussions?channel=" + d.channel.slug
-                            }
-                          },
-                          [_vm._v(_vm._s(d.channel.title))]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-xs mb-2" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-blue-600 font-semibold mr-2",
-                            attrs: { href: "/me/" + d.user.username }
-                          },
-                          [_vm._v(_vm._s(d.user.username))]
-                        ),
-                        _vm._v(" "),
-                        _c("small", { staticClass: "text-gray-600" }, [
-                          _vm._v("Publicado " + _vm._s(d.created_human))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(0, true)
-                    ]),
-                    _vm._v(" "),
+                    ]
+                  )
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm.loading
+            ? _c("div", { staticClass: "w-full text-center" }, [_vm._m(0)])
+            : _vm._l(_vm.discussions, function(d) {
+                return _c(
+                  "transition",
+                  { key: d.id, attrs: { name: "slide-fade" } },
+                  [
+                    _vm._v('">\n            '),
                     _c(
-                      "div",
+                      "article",
                       {
                         staticClass:
-                          "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
+                          "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
                       },
                       [
                         _c(
-                          "span",
-                          { staticClass: "inline-block mr-2 text-gray-600" },
+                          "div",
+                          { staticClass: "flex-shrink pr-3 relative h-16" },
                           [
-                            _c(
-                              "svg",
-                              {
-                                staticClass:
-                                  "w-4 h-4 fill-current inline-block",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 576 512"
-                                }
-                              },
-                              [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"
-                                  }
-                                })
-                              ]
-                            ),
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(d.replies_total) +
-                                "\n                        "
-                            )
+                            _c("img", {
+                              staticClass:
+                                "w-16 h-16 rounded-full border-white border-2 shadow-lg",
+                              attrs: { src: d.user.photo, alt: "Icon" }
+                            }),
+                            _vm._v(" "),
+                            d.solved
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
+                                    attrs: {
+                                      title:
+                                        "Esta discusion ya fue marcada como solucionado"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "w-4 h-4 inline-block fill-current text-white",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 512 512"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
                           ]
                         ),
                         _vm._v(" "),
-                        _c(
-                          "span",
-                          { staticClass: "inline-block text-gray-600" },
-                          [
+                        _c("div", { staticClass: "flex-1 overflow-x-auto" }, [
+                          _c("div", { staticClass: "flex flex-wrap" }, [
+                            _c("div", { staticClass: "w-full lg:w-5/6" }, [
+                              _c("div", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "font-semibold",
+                                    attrs: { href: "/discussion/" + d.slug }
+                                  },
+                                  [_vm._v(_vm._s(d.title))]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
+                                    attrs: {
+                                      href:
+                                        "/discussions?channel=" + d.channel.slug
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(d.channel.title))]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "text-xs mb-2" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "text-blue-600 font-semibold mr-2",
+                                    attrs: { href: "/me/" + d.user.username }
+                                  },
+                                  [_vm._v(_vm._s(d.user.username))]
+                                ),
+                                _vm._v(" "),
+                                _c("small", { staticClass: "text-gray-600" }, [
+                                  _vm._v("Publicado " + _vm._s(d.created_human))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "text-sm" }, [
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass: "text-gray-700 overflow-hidden"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka"
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
                             _c(
-                              "svg",
+                              "div",
                               {
                                 staticClass:
-                                  "w-4 h-4 fill-current inline-block",
-                                attrs: {
-                                  xmlns: "http://www.w3.org/2000/svg",
-                                  viewBox: "0 0 576 512"
-                                }
+                                  "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
                               },
                               [
-                                _c("path", {
-                                  attrs: {
-                                    d:
-                                      "M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
-                                  }
-                                })
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "inline-block mr-2 text-gray-600"
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "w-4 h-4 fill-current inline-block",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 576 512"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(d.replies_total) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  { staticClass: "inline-block text-gray-600" },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass:
+                                          "w-4 h-4 fill-current inline-block",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 576 512"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
+                                          }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(d.views) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                )
                               ]
-                            ),
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(d.views) +
-                                "\n                        "
                             )
-                          ]
-                        )
+                          ])
+                        ])
                       ]
                     )
-                  ])
-                ])
-              ]
-            )
-          })
+                  ]
+                )
+              })
         ],
         2
       ),
@@ -78315,12 +78681,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-sm" }, [
-      _c("p", { staticClass: "text-gray-700 overflow-hidden" }, [
-        _vm._v(
-          "aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka"
-        )
-      ])
+    return _c("div", { staticClass: "lds-ellipsis" }, [
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div")
     ])
   }
 ]
@@ -84272,6 +84637,11 @@ service.interceptors.response.use(function (response) {
   } else if (error.response.data && error.response.data.error) {
     message = error.response.data.message;
     errors = error.response.data.error;
+  }
+
+  if (error.response.data && error.response.data.message && error.response.data.message == 'Unauthenticated.') {
+    alert('Necesitas iniciar sesion para utilizar esta funcion');
+    window.location = '/login';
   }
 
   return errors;

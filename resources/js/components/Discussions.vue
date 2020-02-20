@@ -26,46 +26,72 @@
         </aside>
 
         <section class="w-full lg:w-3/4 lg:pl-4">
-            <div class="w-full">
-                <select required v-model="discussion.channel" class="inline-block outline-none w-40 appearance-none bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded shadow leading-tight">
-                    <option v-for="ch in channels" :key="ch.slug" :value="ch.slug">{{ ch.title }}</option>
-                </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 mb-3 bg-gray-200 md:p-3 rounded-lg">
+                <div class="w-full mb-3 md:mb-0">
+                    <select v-model="query.filter" 
+                        @change="changeFilter()"
+                        class="w-full inline-block text-sm outline-none md:max-w-xs bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded leading-tight">
+                        <option value="all">Todas las Discusiones</option>
+                        <option value="desc">Descendente por fecha</option>
+                        <option value="asc">Ascendente por fecha</option>
+                        <option v-if="logged" value="me">De mi autoria</option>
+                        <option value="solved">Solucionadas</option>
+                        <option value="unsolved">Sin Solución</option>
+                    </select>
+                </div>
+                <div class="text-left md:text-right w-full justify-end">
+                    <div class="relative w-full md:max-w-xs inline-block">
+                        <input type="search" placeholder="Algo en concreto que buscas ?" 
+                            v-model="query.search" 
+                            @keypress.enter="searchDiscussion()"
+                            class="w-full text-sm bg-gray-100 text-gray-800 transition border focus:outline-none focus:border-gray-500 rounded py-1 px-2 pl-8 appearance-none leading-normal">
+                        <div class="absolute" style="top:0.5rem;left: 0.6rem;">
+                            <svg class="w-4 h-4 fill-current pointer-events-none text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <article v-for="d in discussions" :key="d.id" class="flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3">
-                <div class="flex-shrink pr-3 relative h-16">
-                    <img class="w-16 h-16 rounded-full border-white border-2 shadow-lg" :src="d.user.photo" alt="Icon">
-                    <div v-if="d.solved" title="Esta discusion ya fue marcada como solucionado" class="absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg">
-                        <svg class="w-4 h-4 inline-block fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
-                    </div>
-                </div>
-                <div class="flex-1 overflow-x-auto">
-                    <div class="flex flex-wrap">
-                        <div class="w-full lg:w-5/6">
-                            <div>
-                                <a :href="'/discussion/' + d.slug" class="font-semibold">{{ d.title }}</a>
-                                <a :href="'/discussions?channel=' + d.channel.slug" class="ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs">{{ d.channel.title }}</a>
-                            </div>
-                            <div class="text-xs mb-2">
-                                <a :href="'/me/' + d.user.username" class="text-blue-600 font-semibold mr-2">{{ d.user.username }}</a> <small class="text-gray-600">Publicado {{ d.created_human }}</small>
-                            </div>
-                            <div class="text-sm">
-                                <p class="text-gray-700 overflow-hidden">aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka</p>
-                            </div>
-                        </div>
-                        <div class="w-full lg:w-1/6 hidden lg:inline-block text-right my-auto">
-                            <span class="inline-block mr-2 text-gray-600">
-                                <svg class="w-4 h-4 fill-current inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"/></svg>
-                                {{ d.replies_total }}
-                            </span>
-                            <span class="inline-block text-gray-600">
-                                <svg class="w-4 h-4 fill-current inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/></svg>
-                                {{ d.views }}
-                            </span>
+            <div v-if="loading" class="w-full text-center">
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+
+            <transition v-else v-for="d in discussions" :key="d.id" name="slide-fade">">
+                <article class="flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3">
+                    <div class="flex-shrink pr-3 relative h-16">
+                        <img class="w-16 h-16 rounded-full border-white border-2 shadow-lg" :src="d.user.photo" alt="Icon">
+                        <div v-if="d.solved" title="Esta discusion ya fue marcada como solucionado" class="absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg">
+                            <svg class="w-4 h-4 inline-block fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
                         </div>
                     </div>
-                </div>
-            </article>
+                    <div class="flex-1 overflow-x-auto">
+                        <div class="flex flex-wrap">
+                            <div class="w-full lg:w-5/6">
+                                <div>
+                                    <a :href="'/discussion/' + d.slug" class="font-semibold">{{ d.title }}</a>
+                                    <a :href="'/discussions?channel=' + d.channel.slug" class="ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs">{{ d.channel.title }}</a>
+                                </div>
+                                <div class="text-xs mb-2">
+                                    <a :href="'/me/' + d.user.username" class="text-blue-600 font-semibold mr-2">{{ d.user.username }}</a> <small class="text-gray-600">Publicado {{ d.created_human }}</small>
+                                </div>
+                                <div class="text-sm">
+                                    <p class="text-gray-700 overflow-hidden">aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka</p>
+                                </div>
+                            </div>
+                            <div class="w-full lg:w-1/6 hidden lg:inline-block text-right my-auto">
+                                <span class="inline-block mr-2 text-gray-600">
+                                    <svg class="w-4 h-4 fill-current inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"/></svg>
+                                    {{ d.replies_total }}
+                                </span>
+                                <span class="inline-block text-gray-600">
+                                    <svg class="w-4 h-4 fill-current inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/></svg>
+                                    {{ d.views }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </transition>
 
         </section>
 
@@ -148,8 +174,10 @@ export default {
             channel: 'general'
         },
         query: {
-            search: ''
-        }
+            search: '',
+            filter: 'all'
+        },
+        loading: false
     }),
     computed: {
         compiledMarkdown: function () {
@@ -189,20 +217,24 @@ export default {
         }, 300),
 
         async loadChannels() {
-
             const { data } = await resource.get('api/data/discussions/channels');
             this.channels = data;
         },
 
         async loadDiscussions() {
+            this.loading = true
             let url = '';
             if ( this.channel.length > 0 )
                 url = '?channel=' + this.channel
             if ( this.query.search.length > 0 )
-                url = this.url.length > 0 ? url + '&q=' + this.query.search : '?q=' + this.query.search;
+                url = url.length > 0 ? url + '&q=' + this.query.search : '?q=' + this.query.search;
+            
+            if ( this.query.filter != 'all')
+                url = url.length > 0 ? url + '&filter=' + this.query.filter : '?filter=' + this.query.filter;
 
             const { data } = await resource.get('api/data/discussions' + url);
             this.discussions = data;
+            this.loading = false
         },
 
         async storeDiscussion() {
@@ -234,6 +266,12 @@ export default {
                     }
                 }
             }
+        },
+        searchDiscussion: function () {
+            this.loadDiscussions();
+        },
+        changeFilter: function () {
+            this.loadDiscussions()
         },
         cancelModal: function () {
             this.discussion = {
