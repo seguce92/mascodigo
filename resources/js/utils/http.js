@@ -26,13 +26,18 @@ service.interceptors.response.use(
   },
   error => {
     let message = error.message;
+    let errors;
     if (error.response.data && error.response.data.errors) {
-      message = error.response.data.errors;
+      message = error.response.data.message;
+      errors = error.response.data,errors;
     } else if (error.response.data && error.response.data.error) {
-      message = error.response.data.error;
+      message = error.response.data.message;
+      errors = error.response.data.error;
     }
+
+    return errors;
     
-    return Promise.reject(error);
+    return Promise.reject(message);
   },
 );
 

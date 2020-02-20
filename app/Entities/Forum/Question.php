@@ -10,6 +10,10 @@ class Question extends Model
         'title', 'slug', 'content', 'views', 'solved', 'channel_id', 'user_id'
     ];
 
+    protected $casts = [
+        'solved'    =>  'Boolean'
+    ];
+
     protected $appends = [
         'created_human', 'channel_slug', 'replies_total'
     ];

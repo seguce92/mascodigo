@@ -101,7 +101,7 @@ tail.writer.strings = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/seguce92/code/projects/web/mascodigo/resources/js/tail-es.js */"./resources/js/tail-es.js");
+module.exports = __webpack_require__(/*! /media/seguce92/Code/projects/web/mascodigo/resources/js/tail-es.js */"./resources/js/tail-es.js");
 
 
 /***/ })

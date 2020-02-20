@@ -22,7 +22,7 @@
             </div>
         </aside>
 
-        <section class="w-full lg:w-3/4 lg:pl-4">
+        <section class="w-full lg:w-3/4 lg:pl-4 lg:pt-5">
             <div class="flex flex-wrap px-3 py-4 mb-4 bg-gray-200 rounded-lg">
                 <div class="w-full lg:w-5/6">
                     <div>
@@ -47,7 +47,7 @@
                     <div class="flex-shrink pr-3 relative h-16">
                         <img class="w-16 h-16 rounded-full border-white border-2 shadow-lg" :src="discussion.user.photo" alt="G">
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 overflow-x-auto">
                         <div class="flex flex-wrap">
                             <div class="w-full lg:w-5/6 p-3">
                                 <div class="mb-2">
@@ -197,10 +197,10 @@ export default {
 
         showMessage: function () {
             this.$notify({
-                    group: 'foo',
-                    text: 'Respuesta registrada exitosamente.',
-                    duration: 2500
-                });
+                group: 'foo',
+                text: 'Respuesta registrada exitosamente.',
+                duration: 2500
+            });
         },
 
         update: _.debounce(function (e) {
@@ -238,23 +238,38 @@ export default {
 
         async storeReply() {
             this.reply.question_id = this.discussion.id
-            const { data } = await resource.post('api/data/replies/store', this.reply);
-            console.log(data)
+            const { data, errors, message } = await resource.post('api/data/replies/store', this.reply);
             if ( data ) {
                 this.$notify({
                     group: 'foo',
                     text: 'Respuesta registrada exitosamente.',
                     duration: 2500
                 });
+                this.reply = {
+                    content: '',
+                    username: null,
+                    mention: null,
+                    question_id: null
+                }
                 this.toggleModal()
                 this.loadReplies(this.discussion.slug)
             } else {
                 this.$notify({
                     group: 'foo',
-                    text: 'Lo siento se produjo un error al registrar.',
-                    duration: 3000,
+                    text: message,
+                    duration: 5000,
                     type: 'error'
                 });
+                for ( var error in errors) {
+                    for ( var i = 0; i < errors[error].length; i++) {
+                        this.$notify({
+                            group: 'foo',
+                            text: errors[error][i],
+                            duration: 5000,
+                            type: 'error'
+                        });
+                    }
+                }
             }
         },
 

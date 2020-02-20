@@ -178,4 +178,8 @@ return [
         'subject'               => 'asunto',
         'message'               => 'mensaje',
     ],
+
+    'exception' => [
+        'message' => 'Los datos proporcionados son incorrectos'
+    ]
 ];

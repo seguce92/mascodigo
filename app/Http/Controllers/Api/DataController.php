@@ -54,9 +54,17 @@ class DataController extends Controller
     }
 
     public function discussions (Request $request) {
-        if ( $request->q ) $data = $this->question->with('user')->where('title', 'like', '%'.$request->q.'%')
-            ->orderByDesc('created_at')->paginate(12);
-        else $data = $this->question->with('user')->orderByDesc('created_at')->paginate(12);
+        $data = $this->question->with('user');
+
+        if ( $request->channel ) {
+            $channel = \App\Entities\Forum\Channel::where('slug', $request->channel)->first();
+            $data = $data->where('channel_id', $channel->id);
+        }
+
+        if ( $request->q ) 
+            $data = $data->where('title', 'like', '%'.$request->q.'%');
+
+        $data = $data->orderByDesc('created_at')->get();
 
         return (new ModelResource($data))
             ->response()

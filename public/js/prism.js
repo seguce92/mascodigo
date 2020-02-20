@@ -1820,7 +1820,7 @@ Prism.languages.python = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /media/seguce92/code/projects/web/mascodigo/resources/js/prism.js */"./resources/js/prism.js");
+module.exports = __webpack_require__(/*! /media/seguce92/Code/projects/web/mascodigo/resources/js/prism.js */"./resources/js/prism.js");
 
 
 /***/ })

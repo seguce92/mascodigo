@@ -4000,7 +4000,7 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _ref3, data;
+        var _ref3, data, errors, message, error, i;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -4013,7 +4013,8 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
               case 3:
                 _ref3 = _context3.sent;
                 data = _ref3.data;
-                console.log(data);
+                errors = _ref3.errors;
+                message = _ref3.message;
 
                 if (data) {
                   _this3.$notify({
@@ -4022,19 +4023,37 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
                     duration: 2500
                   });
 
+                  _this3.reply = {
+                    content: '',
+                    username: null,
+                    mention: null,
+                    question_id: null
+                  };
+
                   _this3.toggleModal();
 
                   _this3.loadReplies(_this3.discussion.slug);
                 } else {
                   _this3.$notify({
                     group: 'foo',
-                    text: 'Lo siento se produjo un error al registrar.',
-                    duration: 3000,
+                    text: message,
+                    duration: 5000,
                     type: 'error'
                   });
+
+                  for (error in errors) {
+                    for (i = 0; i < errors[error].length; i++) {
+                      _this3.$notify({
+                        group: 'foo',
+                        text: errors[error][i],
+                        duration: 5000,
+                        type: 'error'
+                      });
+                    }
+                  }
                 }
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -4197,6 +4216,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4223,6 +4248,9 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
         slug: '',
         content: '',
         channel: 'general'
+      },
+      query: {
+        search: ''
       }
     };
   },
@@ -4292,21 +4320,24 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var _ref2, data;
+        var url, _ref2, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return resource.get('api/data/discussions');
+                url = '';
+                if (_this2.channel.length > 0) url = '?channel=' + _this2.channel;
+                if (_this2.query.search.length > 0) url = _this2.url.length > 0 ? url + '&q=' + _this2.query.search : '?q=' + _this2.query.search;
+                _context2.next = 5;
+                return resource.get('api/data/discussions' + url);
 
-              case 2:
+              case 5:
                 _ref2 = _context2.sent;
                 data = _ref2.data;
                 _this2.discussions = data;
 
-              case 5:
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -4320,7 +4351,7 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        var _ref3, data;
+        var _ref3, data, message, errors, error, i;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
@@ -4333,7 +4364,8 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
               case 3:
                 _ref3 = _context3.sent;
                 data = _ref3.data;
-                console.log(data);
+                message = _ref3.message;
+                errors = _ref3.errors;
 
                 if (data) {
                   _this3.$notify({
@@ -4342,25 +4374,44 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_3__["default"]();
                     duration: 2500
                   });
 
-                  _this3.toggleModal();
+                  _this3.cancelModal();
 
                   _this3.loadDiscussions();
                 } else {
                   _this3.$notify({
                     group: 'foo',
-                    text: 'Lo siento se produjo un error al registrar.',
-                    duration: 3000,
+                    text: message,
+                    duration: 5000,
                     type: 'error'
                   });
+
+                  for (error in errors) {
+                    for (i = 0; i < errors[error].length; i++) {
+                      _this3.$notify({
+                        group: 'foo',
+                        text: errors[error][i],
+                        duration: 5000,
+                        type: 'error'
+                      });
+                    }
+                  }
                 }
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }
           }
         }, _callee3);
       }))();
+    },
+    cancelModal: function cancelModal() {
+      this.discussion = {
+        title: '',
+        slug: '',
+        content: '',
+        channel: 'general'
+      }, this.toggleModal();
     }
   }
 });
@@ -14054,7 +14105,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.discussion-overlay[data-v-78792ab0] {\n        background-color: rgba(0,0,0,.7);\n}\n.discussion[data-v-78792ab0] {\n        width: 100%;\n        max-width: 700px;\n        -webkit-transition: opacity 400ms ease-in;\n        -moz-transition: opacity 400ms ease-in;\n        transition: opacity 400ms ease-in;\n}\n.editor[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        resize: none;\n        height: calc(100vh - 200px);\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n        outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.preview[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        height: calc(100vh - 200px);\n        overflow-y: scroll;\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n         outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.slide-fade-enter-active[data-v-78792ab0] {\n        transition: all .8s ease;\n}\n.slide-fade-leave-active[data-v-78792ab0] {\n        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-78792ab0], .slide-fade-leave-to[data-v-78792ab0] {\n        transform: translateX(10px);\n        opacity: 0;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-track, .preview[data-v-78792ab0]::-webkit-scrollbar-track {\n\t    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n\t    background-color: #F5F5F5;\n\t    border-radius: 10px;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar, .preview[data-v-78792ab0]::-webkit-scrollbar {\n\t    width: 8px;\n\t    background-color: #F5F5F5;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-thumb, .preview[data-v-78792ab0]::-webkit-scrollbar-thumb {\n\t    border-radius: 10px;\n        background-image: -webkit-gradient(linear, left bottom, left top, \n            color-stop(0.44, #f56565), \n            color-stop(0.72, #e53e3e), \n            color-stop(0.86, #c53030)\n        );\n}\n@media (min-width: 769px) {\n.discussion[data-v-78792ab0] {\n            width: 50%\n}\n}\n", ""]);
+exports.push([module.i, "\n.discussion-overlay[data-v-78792ab0] {\n        background-color: rgba(0,0,0,.7);\n}\n.discussion[data-v-78792ab0] {\n        width: 100%;\n        max-width: 700px;\n        -webkit-transition: opacity 400ms ease-in;\n        -moz-transition: opacity 400ms ease-in;\n        transition: opacity 400ms ease-in;\n}\n.editor[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        resize: none;\n        height: calc(100vh - 200px);\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n        outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.preview[data-v-78792ab0] {\n        display: block;\n        width: 100%;\n        height: calc(100vh - 200px);\n        overflow-y: scroll;\n\n        -moz-appearance: none;\n        -webkit-appearance: none;\n        -webkit-box-align: center;\n        align-items: center;\n\n         outline:none !important;\n        outline-width: 0 !important;\n        box-shadow: none;\n        -moz-box-shadow: none;\n        -webkit-box-shadow: none;\n}\n.slide-fade-enter-active[data-v-78792ab0] {\n        transition: all .8s ease;\n}\n.slide-fade-leave-active[data-v-78792ab0] {\n        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-78792ab0], .slide-fade-leave-to[data-v-78792ab0] {\n        transform: translateX(10px);\n        opacity: 0;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-track, .preview[data-v-78792ab0]::-webkit-scrollbar-track {\n\t    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);\n\t    background-color: #F5F5F5;\n\t    border-radius: 10px;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar, .preview[data-v-78792ab0]::-webkit-scrollbar {\n\t    width: 8px;\n\t    background-color: #F5F5F5;\n}\n.editor[data-v-78792ab0]::-webkit-scrollbar-thumb, .preview[data-v-78792ab0]::-webkit-scrollbar-thumb {\n\t    border-radius: 10px;\n        background-image: -webkit-gradient(linear, left bottom, left top, \n            color-stop(0.44, #f56565), \n            color-stop(0.72, #e53e3e), \n            color-stop(0.86, #c53030)\n        );\n}\n", ""]);
 
 // exports
 
@@ -19283,10 +19334,10 @@ utils.intFromLE = intFromLE;
 /*!********************************************!*\
   !*** ./node_modules/elliptic/package.json ***!
   \********************************************/
-/*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
+/*! exports provided: _args, _development, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, dependencies, description, devDependencies, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_from\":\"elliptic@^6.0.0\",\"_id\":\"elliptic@6.5.2\",\"_inBundle\":false,\"_integrity\":\"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"elliptic@^6.0.0\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"^6.0.0\",\"saveSpec\":null,\"fetchSpec\":\"^6.0.0\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz\",\"_shasum\":\"05c5678d7173c049d8ca433552224a495d0e3762\",\"_spec\":\"elliptic@^6.0.0\",\"_where\":\"/media/seguce92/code/projects/web/mascodigo/node_modules/browserify-sign\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"deprecated\":false,\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^3.0.8\",\"grunt\":\"^1.0.4\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^3.0.7\",\"jshint\":\"^2.10.3\",\"mocha\":\"^6.2.2\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.2\"}");
+module.exports = JSON.parse("{\"_args\":[[\"elliptic@6.5.2\",\"/media/seguce92/Code/projects/web/mascodigo\"]],\"_development\":true,\"_from\":\"elliptic@6.5.2\",\"_id\":\"elliptic@6.5.2\",\"_inBundle\":false,\"_integrity\":\"sha512-f4x70okzZbIQl/NSRLkI/+tteV/9WqL98zx+SQ69KbXxmVrmjwsNUPn/gYJJ0sHvEak24cZgHIPegRePAtA/xw==\",\"_location\":\"/elliptic\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"elliptic@6.5.2\",\"name\":\"elliptic\",\"escapedName\":\"elliptic\",\"rawSpec\":\"6.5.2\",\"saveSpec\":null,\"fetchSpec\":\"6.5.2\"},\"_requiredBy\":[\"/browserify-sign\",\"/create-ecdh\"],\"_resolved\":\"https://registry.npmjs.org/elliptic/-/elliptic-6.5.2.tgz\",\"_spec\":\"6.5.2\",\"_where\":\"/media/seguce92/Code/projects/web/mascodigo\",\"author\":{\"name\":\"Fedor Indutny\",\"email\":\"fedor@indutny.com\"},\"bugs\":{\"url\":\"https://github.com/indutny/elliptic/issues\"},\"dependencies\":{\"bn.js\":\"^4.4.0\",\"brorand\":\"^1.0.1\",\"hash.js\":\"^1.0.0\",\"hmac-drbg\":\"^1.0.0\",\"inherits\":\"^2.0.1\",\"minimalistic-assert\":\"^1.0.0\",\"minimalistic-crypto-utils\":\"^1.0.0\"},\"description\":\"EC cryptography\",\"devDependencies\":{\"brfs\":\"^1.4.3\",\"coveralls\":\"^3.0.8\",\"grunt\":\"^1.0.4\",\"grunt-browserify\":\"^5.0.0\",\"grunt-cli\":\"^1.2.0\",\"grunt-contrib-connect\":\"^1.0.0\",\"grunt-contrib-copy\":\"^1.0.0\",\"grunt-contrib-uglify\":\"^1.0.1\",\"grunt-mocha-istanbul\":\"^3.0.1\",\"grunt-saucelabs\":\"^9.0.1\",\"istanbul\":\"^0.4.2\",\"jscs\":\"^3.0.7\",\"jshint\":\"^2.10.3\",\"mocha\":\"^6.2.2\"},\"files\":[\"lib\"],\"homepage\":\"https://github.com/indutny/elliptic\",\"keywords\":[\"EC\",\"Elliptic\",\"curve\",\"Cryptography\"],\"license\":\"MIT\",\"main\":\"lib/elliptic.js\",\"name\":\"elliptic\",\"repository\":{\"type\":\"git\",\"url\":\"git+ssh://git@github.com/indutny/elliptic.git\"},\"scripts\":{\"jscs\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"jshint\":\"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js\",\"lint\":\"npm run jscs && npm run jshint\",\"test\":\"npm run lint && npm run unit\",\"unit\":\"istanbul test _mocha --reporter=spec test/index.js\",\"version\":\"grunt dist && git add dist/\"},\"version\":\"6.5.2\"}");
 
 /***/ }),
 
@@ -77150,7 +77201,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "section",
-        { staticClass: "w-full lg:w-3/4 lg:pl-4" },
+        { staticClass: "w-full lg:w-3/4 lg:pl-4 lg:pt-5" },
         [
           _c(
             "div",
@@ -77263,7 +77314,7 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "flex-1" }, [
+                _c("div", { staticClass: "flex-1 overflow-x-auto" }, [
                   _c("div", { staticClass: "flex flex-wrap" }, [
                     _c("div", { staticClass: "w-full lg:w-5/6 p-3" }, [
                       _c("div", { staticClass: "mb-2" }, [
@@ -77670,9 +77721,7 @@ var render = function() {
     "div",
     { staticClass: "flex flex-wrap-reverse lg:flex-wrap mt-8 relative" },
     [
-      _c("notifications", {
-        attrs: { group: "foo", position: "bottom right" }
-      }),
+      _c("notifications", { attrs: { group: "foo", position: "bottom left" } }),
       _vm._v(" "),
       _c("aside", { staticClass: "w-full lg:w-1/4 mb-4 lg:pr-2" }, [
         _c("div", { staticClass: "lg:sticky lg:top-0 lg:pt-5" }, [
@@ -77759,173 +77808,224 @@ var render = function() {
       _c(
         "section",
         { staticClass: "w-full lg:w-3/4 lg:pl-4" },
-        _vm._l(_vm.discussions, function(d) {
-          return _c(
-            "article",
-            {
-              key: d.id,
-              staticClass:
-                "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
-            },
-            [
-              _c("div", { staticClass: "flex-shrink pr-3 relative h-16" }, [
-                _c("img", {
-                  staticClass:
-                    "w-16 h-16 rounded-full border-white border-2 shadow-lg",
-                  attrs: { src: d.user.photo, alt: "Icon" }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
+        [
+          _c("div", { staticClass: "w-full" }, [
+            _c(
+              "select",
+              {
+                directives: [
                   {
-                    staticClass:
-                      "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
-                    attrs: {
-                      title: "Esta discusion ya fue marcada como solucionado"
-                    }
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass:
-                          "w-4 h-4 inline-block fill-current text-white",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 512 512"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            d:
-                              "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
-                          }
-                        })
-                      ]
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.discussion.channel,
+                    expression: "discussion.channel"
+                  }
+                ],
+                staticClass:
+                  "inline-block outline-none w-40 appearance-none bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded shadow leading-tight",
+                attrs: { required: "" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.discussion,
+                      "channel",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
-                  ]
+                  }
+                }
+              },
+              _vm._l(_vm.channels, function(ch) {
+                return _c(
+                  "option",
+                  { key: ch.slug, domProps: { value: ch.slug } },
+                  [_vm._v(_vm._s(ch.title))]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex-1" }, [
-                _c("div", { staticClass: "flex flex-wrap" }, [
-                  _c("div", { staticClass: "w-full lg:w-5/6" }, [
-                    _c("div", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-semibold",
-                          attrs: { href: "/discussion/" + d.slug }
-                        },
-                        [_vm._v(_vm._s(d.title))]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.discussions, function(d) {
+            return _c(
+              "article",
+              {
+                key: d.id,
+                staticClass:
+                  "flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3"
+              },
+              [
+                _c("div", { staticClass: "flex-shrink pr-3 relative h-16" }, [
+                  _c("img", {
+                    staticClass:
+                      "w-16 h-16 rounded-full border-white border-2 shadow-lg",
+                    attrs: { src: d.user.photo, alt: "Icon" }
+                  }),
+                  _vm._v(" "),
+                  d.solved
+                    ? _c(
+                        "div",
                         {
                           staticClass:
-                            "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
+                            "absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg",
                           attrs: {
-                            href: "/discussions?channel=" + d.channel.slug
+                            title:
+                              "Esta discusion ya fue marcada como solucionado"
                           }
                         },
-                        [_vm._v(_vm._s(d.channel.title))]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text-xs mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue-600 font-semibold",
-                          attrs: { href: "/me/" + d.user.username }
-                        },
-                        [_vm._v(_vm._s(d.user.username))]
-                      ),
-                      _vm._v(" "),
-                      _c("small", { staticClass: "text-gray-600" }, [
-                        _vm._v("Publicado " + _vm._s(d.created_human))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0, true)
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
-                    },
-                    [
-                      _c(
-                        "span",
-                        { staticClass: "inline-block mr-2 text-gray-600" },
                         [
                           _c(
                             "svg",
                             {
-                              staticClass: "w-4 h-4 fill-current inline-block",
+                              staticClass:
+                                "w-4 h-4 inline-block fill-current text-white",
                               attrs: {
                                 xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 576 512"
+                                viewBox: "0 0 512 512"
                               }
                             },
                             [
                               _c("path", {
                                 attrs: {
                                   d:
-                                    "M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"
+                                    "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
                                 }
                               })
                             ]
-                          ),
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(d.replies_total) +
-                              "\n                        "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "inline-block text-gray-600" },
-                        [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "w-4 h-4 fill-current inline-block",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 576 512"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
-                                }
-                              })
-                            ]
-                          ),
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(d.views) +
-                              "\n                        "
                           )
                         ]
                       )
-                    ]
-                  )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex-1 overflow-x-auto" }, [
+                  _c("div", { staticClass: "flex flex-wrap" }, [
+                    _c("div", { staticClass: "w-full lg:w-5/6" }, [
+                      _c("div", [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "font-semibold",
+                            attrs: { href: "/discussion/" + d.slug }
+                          },
+                          [_vm._v(_vm._s(d.title))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs",
+                            attrs: {
+                              href: "/discussions?channel=" + d.channel.slug
+                            }
+                          },
+                          [_vm._v(_vm._s(d.channel.title))]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-xs mb-2" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-blue-600 font-semibold mr-2",
+                            attrs: { href: "/me/" + d.user.username }
+                          },
+                          [_vm._v(_vm._s(d.user.username))]
+                        ),
+                        _vm._v(" "),
+                        _c("small", { staticClass: "text-gray-600" }, [
+                          _vm._v("Publicado " + _vm._s(d.created_human))
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0, true)
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "w-full lg:w-1/6 hidden lg:inline-block text-right my-auto"
+                      },
+                      [
+                        _c(
+                          "span",
+                          { staticClass: "inline-block mr-2 text-gray-600" },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "w-4 h-4 fill-current inline-block",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 576 512"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M532 386.2c27.5-27.1 44-61.1 44-98.2 0-80-76.5-146.1-176.2-157.9C368.3 72.5 294.3 32 208 32 93.1 32 0 103.6 0 192c0 37 16.5 71 44 98.2-15.3 30.7-37.3 54.5-37.7 54.9-6.3 6.7-8.1 16.5-4.4 25 3.6 8.5 12 14 21.2 14 53.5 0 96.7-20.2 125.2-38.8 9.2 2.1 18.7 3.7 28.4 4.9C208.1 407.6 281.8 448 368 448c20.8 0 40.8-2.4 59.8-6.8C456.3 459.7 499.4 480 553 480c9.2 0 17.5-5.5 21.2-14 3.6-8.5 1.9-18.3-4.4-25-.4-.3-22.5-24.1-37.8-54.8zm-392.8-92.3L122.1 305c-14.1 9.1-28.5 16.3-43.1 21.4 2.7-4.7 5.4-9.7 8-14.8l15.5-31.1L77.7 256C64.2 242.6 48 220.7 48 192c0-60.7 73.3-112 160-112s160 51.3 160 112-73.3 112-160 112c-16.5 0-33-1.9-49-5.6l-19.8-4.5zM498.3 352l-24.7 24.4 15.5 31.1c2.6 5.1 5.3 10.1 8 14.8-14.6-5.1-29-12.3-43.1-21.4l-17.1-11.1-19.9 4.6c-16 3.7-32.5 5.6-49 5.6-54 0-102.2-20.1-131.3-49.7C338 339.5 416 272.9 416 192c0-3.4-.4-6.7-.7-10C479.7 196.5 528 238.8 528 288c0 28.7-16.2 50.6-29.7 64z"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(d.replies_total) +
+                                "\n                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "inline-block text-gray-600" },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "w-4 h-4 fill-current inline-block",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 576 512"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M288 144a110.94 110.94 0 00-31.24 5 55.4 55.4 0 017.24 27 56 56 0 01-56 56 55.4 55.4 0 01-27-7.24A111.71 111.71 0 10288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 000 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 000-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(d.views) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ])
                 ])
-              ])
-            ]
-          )
-        }),
-        0
+              ]
+            )
+          })
+        ],
+        2
       ),
       _vm._v(" "),
       _c("transition", { attrs: { name: "slide-fade" } }, [
@@ -78180,7 +78280,11 @@ var render = function() {
                           {
                             staticClass:
                               "cursor-pointer border border-red-600 w-32 outline-none hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2 shadow-lg",
-                            on: { click: _vm.toggleModal }
+                            on: {
+                              click: function($event) {
+                                return _vm.cancelModal()
+                              }
+                            }
                           },
                           [_vm._v("Cancelar")]
                         ),
@@ -84160,14 +84264,18 @@ service.interceptors.response.use(function (response) {
   return response.data;
 }, function (error) {
   var message = error.message;
+  var errors;
 
   if (error.response.data && error.response.data.errors) {
-    message = error.response.data.errors;
+    message = error.response.data.message;
+    errors = error.response.data, errors;
   } else if (error.response.data && error.response.data.error) {
-    message = error.response.data.error;
+    message = error.response.data.message;
+    errors = error.response.data.error;
   }
 
-  return Promise.reject(error);
+  return errors;
+  return Promise.reject(message);
 });
 /* harmony default export */ __webpack_exports__["default"] = (service);
 
@@ -84180,8 +84288,8 @@ service.interceptors.response.use(function (response) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /media/seguce92/code/projects/web/mascodigo/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /media/seguce92/code/projects/web/mascodigo/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /media/seguce92/Code/projects/web/mascodigo/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /media/seguce92/Code/projects/web/mascodigo/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ }),

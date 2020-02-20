@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-wrap-reverse lg:flex-wrap mt-8 relative">
-        <notifications group="foo" position="bottom right" />
+        <notifications group="foo" position="bottom left" />
         <aside class="w-full lg:w-1/4 mb-4 lg:pr-2">
             <div class="lg:sticky lg:top-0 lg:pt-5">
                 <a @click="toggleModal" class="w-full cursor-pointer inline-block text-center bg-red-700 hover:bg-red-800 text-white py-2 px-5 rounded-full">
@@ -26,14 +26,20 @@
         </aside>
 
         <section class="w-full lg:w-3/4 lg:pl-4">
+            <div class="w-full">
+                <select required v-model="discussion.channel" class="inline-block outline-none w-40 appearance-none bg-white border border-gray-300 hover:border-gray-400 px-2 py-1 rounded shadow leading-tight">
+                    <option v-for="ch in channels" :key="ch.slug" :value="ch.slug">{{ ch.title }}</option>
+                </select>
+            </div>
+
             <article v-for="d in discussions" :key="d.id" class="flex px-3 py-4 rounded-lg hover:bg-gray-200 relative mb-3">
                 <div class="flex-shrink pr-3 relative h-16">
                     <img class="w-16 h-16 rounded-full border-white border-2 shadow-lg" :src="d.user.photo" alt="Icon">
-                    <div title="Esta discusion ya fue marcada como solucionado" class="absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg">
+                    <div v-if="d.solved" title="Esta discusion ya fue marcada como solucionado" class="absolute bottom-0 left-0 rounded-full w-6 h-6 bg-green-600 text-center shadow-lg">
                         <svg class="w-4 h-4 inline-block fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>
                     </div>
                 </div>
-                <div class="flex-1">
+                <div class="flex-1 overflow-x-auto">
                     <div class="flex flex-wrap">
                         <div class="w-full lg:w-5/6">
                             <div>
@@ -41,7 +47,7 @@
                                 <a :href="'/discussions?channel=' + d.channel.slug" class="ml-2 bg-red-700 shadow px-4 py-1 rounded-full text-white text-xs">{{ d.channel.title }}</a>
                             </div>
                             <div class="text-xs mb-2">
-                                <a :href="'/me/' + d.user.username" class="text-blue-600 font-semibold">{{ d.user.username }}</a> <small class="text-gray-600">Publicado {{ d.created_human }}</small>
+                                <a :href="'/me/' + d.user.username" class="text-blue-600 font-semibold mr-2">{{ d.user.username }}</a> <small class="text-gray-600">Publicado {{ d.created_human }}</small>
                             </div>
                             <div class="text-sm">
                                 <p class="text-gray-700 overflow-hidden">aksdj añlskdñalks dñlaksñldkañls dkñlaks ñdlkañsdk ñaskd ñlaksñdl ka</p>
@@ -102,7 +108,7 @@
                         <div v-else class="preview border-b markdown-body py-4 select-none" v-html="compiledMarkdown"></div>
                     </div>
                     <div class="w-full absolute bottom-0 p-4 text-right">
-                        <a @click="toggleModal" class="cursor-pointer border border-red-600 w-32 outline-none hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2 shadow-lg">Cancelar</a>
+                        <a @click="cancelModal()" class="cursor-pointer border border-red-600 w-32 outline-none hover:bg-red-600 hover:text-white text-red-600 font-bold py-2 px-4 rounded-full lg:mr-2 shadow-lg">Cancelar</a>
                         <button type="submit" class="bg-red-600 w-32 hover:bg-red-700 text-white outline-none font-bold py-2 px-4 rounded-full shadow-lg">Enviar</button>
                     </div>
                 </form>
@@ -140,6 +146,9 @@ export default {
             slug: '',
             content: '',
             channel: 'general'
+        },
+        query: {
+            search: ''
         }
     }),
     computed: {
@@ -180,36 +189,62 @@ export default {
         }, 300),
 
         async loadChannels() {
+
             const { data } = await resource.get('api/data/discussions/channels');
             this.channels = data;
         },
 
         async loadDiscussions() {
-            const { data } = await resource.get('api/data/discussions');
+            let url = '';
+            if ( this.channel.length > 0 )
+                url = '?channel=' + this.channel
+            if ( this.query.search.length > 0 )
+                url = this.url.length > 0 ? url + '&q=' + this.query.search : '?q=' + this.query.search;
+
+            const { data } = await resource.get('api/data/discussions' + url);
             this.discussions = data;
         },
 
         async storeDiscussion() {
             this.discussion.slug = window.Helper.slugify(this.discussion.title)
-            const { data } = await resource.post('api/data/discussions/store', this.discussion);
-            console.log(data)
+            const { data, message, errors } = await resource.post('api/data/discussions/store', this.discussion);
             if ( data ) {
                 this.$notify({
                     group: 'foo',
                     text: 'Discusión registrado exitosamente.',
                     duration: 2500
                 });
-                this.toggleModal()
+                this.cancelModal()
                 this.loadDiscussions()
             } else {
                 this.$notify({
                     group: 'foo',
-                    text: 'Lo siento se produjo un error al registrar.',
-                    duration: 3000,
+                    text: message,
+                    duration: 5000,
                     type: 'error'
                 });
+                for ( var error in errors) {
+                    for ( var i = 0; i < errors[error].length; i++) {
+                        this.$notify({
+                            group: 'foo',
+                            text: errors[error][i],
+                            duration: 5000,
+                            type: 'error'
+                        });
+                    }
+                }
             }
         },
+        cancelModal: function () {
+            this.discussion = {
+                title: '',
+                slug: '',
+                content: '',
+                channel: 'general'
+            },
+
+            this.toggleModal()
+        }
     }
 }
 </script>
@@ -290,11 +325,5 @@ export default {
             color-stop(0.72, #e53e3e), 
             color-stop(0.86, #c53030)
         );
-    }
-
-    @media (min-width: 769px) {
-        .discussion {
-            width: 50%
-        }
     }
 </style>

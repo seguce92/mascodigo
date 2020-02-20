@@ -14,10 +14,10 @@
 <body class="leading-normal tracking-normal font-sans">
   @if (\Auth::check())
   <div id="header_menu" class="w-full px-2 lg:px-0 mx-auto flex flex-wrap items-center h-10 bg-gray-800" style="z-index:51">
-    <div class="hidden lg:inline-block w-full lg:w-1/2 pl-2 md:pl-0">
-      <span class="text-gray-400 ml-2 text-xs italic">{{ config('seguce92.data.message') }}</span>
+    <div class="hidden md:inline-block w-full md:w-2/3 lg:w-1/2 pl-2 md:pl-0">
+      <div class="h-5 text-gray-400 ml-2 text-xs italic md:text-xs overflow-hidden">{{ config('seguce92.data.message') }}</div>
     </div>
-    <div class="w-full lg:w-1/2  pr-0">
+    <div class="w-full md:w-1/3 lg:w-1/2  pr-0">
       <div class="flex relative inline-block float-right">
         <div class="relative text-sm">
           <button id="userButton" class="flex items-center focus:outline-none mr-3 text-white">
