@@ -5298,6 +5298,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -79757,6 +79762,8 @@ var render = function() {
                   _vm._v(" "),
                   _vm._m(2),
                   _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
                   _c("li", { staticClass: "mr-3" }, [
                     _c(
                       "a",
@@ -80218,6 +80225,22 @@ var staticRenderFns = [
           attrs: { href: "/courses" }
         },
         [_vm._v("\n            Cursos\n          ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "mr-3 lg:hidden" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "uppercase w-full text-white inline-block py-2 px-4 text-black no-underline",
+          attrs: { href: "/discussions" }
+        },
+        [_vm._v("\n            Discusiones\n          ")]
       )
     ])
   }

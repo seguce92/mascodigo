@@ -100,4 +100,8 @@ Route::group(['prefix' => 'api/data'], function () {
   Route::post('replies/store/solve', 'Api\DataController@storeReplySolve')->middleware('auth');
 });
 
+Route::group(['prefix' => 'certificates', 'namespace' => 'Learn'], function () {
+  Route::get('/{user}/{uid}', 'CertificateController@make')->name('certificates.make');
+});
+
 Route::get('/{slug}', 'HomeController@post')->name('post');

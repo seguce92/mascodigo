@@ -6,5 +6,6 @@
     "/js/prism.js": "/js/prism.js",
     "/js/vendor.js": "/js/vendor.js",
     "/css/error.css": "/css/error.css",
-    "/css/prism.css": "/css/prism.css"
+    "/css/prism.css": "/css/prism.css",
+    "/css/invoice.css": "/css/invoice.css"
 }

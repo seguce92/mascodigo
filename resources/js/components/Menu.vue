@@ -26,6 +26,11 @@
                 Cursos
               </a>
             </li>
+            <li class="mr-3 lg:hidden">
+              <a class="uppercase w-full text-white inline-block py-2 px-4 text-black no-underline" href="/discussions">
+                Discusiones
+              </a>
+            </li>
             <!--li class="mr-3 lg:hidden">
               <a class="uppercase w-full text-white inline-block py-2 px-4 text-black no-underline" href="/about">
                 Acerca

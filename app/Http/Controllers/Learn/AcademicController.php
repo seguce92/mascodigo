@@ -220,7 +220,12 @@ class AcademicController extends Controller
         $item->lesson_id = $request->lesson;
         $item->course_id = $request->course;
         $item->user_id = \Auth::id();
-        $item->save();
+        if ( $item->save() ) {
+            $lesson = \App\Entities\Learn\Lesson::find($request->lesson);
+            $user = \App\User::find(\Auth::id());
+            $user->xp = $user->xp + $lesson->points;
+            $user->save();
+        }
 
         return (new Resource(
             $item
