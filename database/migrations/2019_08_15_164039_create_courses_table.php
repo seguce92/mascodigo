@@ -26,6 +26,8 @@ class CreateCoursesTable extends Migration
             $table->unsignedBigInteger('skill_id');
             $table->foreign('skill_id')->references('id')->on('skills');
 
+            $table->string('template')->nullable();
+
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
 

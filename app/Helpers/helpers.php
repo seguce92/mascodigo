@@ -90,3 +90,9 @@ if (! function_exists ('gravatar') ) {
     return app(\App\Helpers\Helper::class)->gravatar($email);
   }
 }
+
+if (! function_exists ('code_uuid') ) {
+  function code_uuid ($a, $b, $c) {
+    return app(\App\Helpers\Helper::class)->getCodeUUID($a, $b, $c);
+  }
+}

@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'icon', 'color', 'content', 'is_publish', 'level', 'skill_id', 'author_id', 'editor_id', 'published_at'
+        'title', 'slug', 'icon', 'color', 'content', 'is_publish', 
+        'level', 'skill_id', 'author_id', 'editor_id', 'published_at',
+        'template'
     ];
 
     protected $dates = [

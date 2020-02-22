@@ -12,7 +12,6 @@
 */
 Auth::routes();
 
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/skill/{skill}', 'HomeController@skill')->name('skill');
 Route::get('/courses', 'HomeController@courses')->name('courses');

@@ -115,7 +115,7 @@
     <section class="blog">
       <div class="container mx-auto py-2 lg:py-10">
         <div class="text-center lg:mt-10 mb-4">
-          <h1 class="font-bold text-xl uppercase text-shadow">Post Destacados</h1>
+          <h1 class="font-bold text-xl uppercase text-shadow">Artículos Destacados</h1>
         </div>
         <div class="flex justify-center flex-wrap pb-8">
           <div class="flex justify-center flex-wrap container">
@@ -149,7 +149,7 @@
         </div>
         <div class="text-center mb-10">
           <a href="{{ route('blog') }}" class="bg-white shadow hover:text-orange-700 py-3 px-8 border border-gray-400 hover:border-orange-700 rounded-full">
-            VER TODOS LOS POSTS
+            VER TODOS LOS ARTICULOS
           </a>
         </div>
       </div>

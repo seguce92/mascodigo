@@ -24,6 +24,11 @@
         <input class="form-input" id="slug" name="slug" type="text" placeholder="{{ url('/') }}" value="{{ old('slug') }}">
       </div>
 
+      <div class="w-full">
+        <label class="form-label" for="template">Plantilla de Certificado</label>
+        <input class="form-input" id="template" name="template" type="text" placeholder="Plantilla para el certificado" value="{{ old('template') }}">
+      </div>
+
       <div class="relative w-full sm:w-1/1 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-1 pr-1">
         <label class="form-label" for="skill_id">Habilidad</label>
         <select name="skill_id" class="form-select" id="skill_id">

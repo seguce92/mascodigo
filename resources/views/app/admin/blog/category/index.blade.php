@@ -4,7 +4,7 @@
 
 @section('menu')
   @include('component.menu', [
-    'option'  =>  'category'
+    'option'  =>  'categories'
   ])
 @endsection
 

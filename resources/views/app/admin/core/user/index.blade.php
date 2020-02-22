@@ -45,8 +45,14 @@
         @foreach ( $users as $user )
           <tr class="hover:bg-gray-200">
             <td class="table-content">{{ $user->id }}</td>
-            <td class="table-content">{{ $user->fullname }}</td>
-            <td class="table-content">{{ $user->email }}</td>
+            <td class="table-content">
+              <a href="{{ route('users.show', $user->id) }}" class="text-blue-400 hover:text-blue-500 hover:underline">
+                {{ $user->fullname }}</a>
+            </td>
+            <td class="table-content">
+              <a href="{{ route('users.show', $user->id) }}" class="text-blue-400 hover:text-blue-500 hover:underline">
+                {{ $user->email }}</a>
+            </td>
             <td class="table-content">
               @foreach ( $user->getRoleNames() as $role)
                 @if ( $loop->last )  

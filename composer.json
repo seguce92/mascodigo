@@ -13,6 +13,7 @@
         "intervention/image": "^2.5",
         "laravel-frontend-presets/tailwindcss": "^1.0",
         "laravel/framework": "5.8.*",
+        "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
         "seguce92/laravel-dompdf": "^2.3",
         "seguce92/laravel-hashid": "^2.2",

@@ -1,11 +1,11 @@
 <footer class="footer-home">
   <div class="container mx-auto text-center py-2 mb-12 sm:mb-12 md:mb-12 lg:mb-0 xl:mb-0">
-    <div class="flex text-white mt-6">
+    <div class="flex flex-wrap text-white mt-6">
       <div class="w-full lg:w-2/4 text-left">
         <h5 class="pl-4 font-bold text-xl">Más Código</h5>
         <p class="p-4">Más Código es una plataforma virtual de aprendizaje y publicacion de contenido referente a la tecnologia actual.</p>
       </div>
-      <div class="w-full lg:w-1/4 text-left p-0 lg:pt-6">
+      <div class="w-1/2 lg:w-1/4 text-left lg:pt-6 pl-3 lg:pl-0">
         <h4 class="text-lg font-bold mb-2">MENU</h4>
         <ul>
           <li><a href="{{ url('login') }}" class="hover:text-gray-400">Iniciar Sesión</a></li>
@@ -15,7 +15,7 @@
           <li><a href="{{ url('courses') }}" class="hover:text-gray-400">Cursos</a></li>
         </ul>
       </div>
-      <div class="w-full lg:w-1/4 text-left p-0 lg:pt-12">
+      <div class="w-1/2 lg:w-1/4 text-left lg:pt-10 pl-3 lg:pl-0">
         <h4 class="uppercase text-lg font-bold mb-2">SIGUENOS EN</h4>
         <ul>
           <li><a class="hover:text-gray-400" href="https://www.facebook.com/mascodigo.net.po/" target="_blank">Facebook</a></li>

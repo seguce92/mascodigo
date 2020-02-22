@@ -43,7 +43,10 @@
         @foreach ( $roles as $role )
           <tr class="hover:bg-gray-200">
             <td class="table-content">{{ $role->id }}</td>
-            <td class="table-content">{{ $role->name }}</td>
+            <td class="table-content">
+              <a href="{{ route('roles.show', $role->id) }}" class="text-blue-400 hover:text-blue-500 hover:underline">
+                {{ $role->name }}</a>
+            </td>
             <td class="table-content">{{ $role->created_at->format('d/m/Y H:m') }}</td>
             <td class="table-content">
               <a class="hover:text-blue-600" href="{{ route('roles.show', $role->id) }}">

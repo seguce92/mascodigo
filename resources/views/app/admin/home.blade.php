@@ -21,6 +21,15 @@
 </div>
 @endunless
 
+@if ( \Auth::user()->password == null )
+<div class="flex mb-5">
+    <div class="w-full bg-blue-500 px-3 py-2 text-white rounded italic text-sm shadow-lg">
+        <svg class="w-5 h-5 fill-current inline-block mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119.04 8 8 119.08 8 256c0 137 111.04 248 248 248s248-111 248-248C504 119.08 392.96 8 256 8zm0 110a42 42 0 110 84 42 42 0 010-84zm56 254a12 12 0 01-12 12h-88a12 12 0 01-12-12v-24a12 12 0 0112-12h12v-64h-12a12 12 0 01-12-12v-24a12 12 0 0112-12h64a12 12 0 0112 12v100h12a12 12 0 0112 12v24z"/></svg>
+        Tu cuenta no tiene una <strong>Contraseña</strong>. Por favor crea un contraseña. <a href="{{ route('password.index') }}" class="underline hover:text-blue-900">Crear Contraseña ahora</a>
+    </div>
+</div>
+@endif
+
 @if ( \Auth::user()->hasRole('administrador') )
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

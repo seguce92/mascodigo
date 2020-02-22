@@ -11,11 +11,11 @@
 @endsection
 
 @section('content')
-  <form class="flex flex-wrap lg:flex-no-wrap w-full" action="{{ route('password.store') }}" method="POST">
+  <form class="flex flex-wrap lg:flex-no-wrap w-full justify-center" action="{{ route('password.store') }}" method="POST">
     @csrf
     <div class="flex flex-wrap self-start w-full lg:w-9/12 bg-transparent lg:bg-white md:bg-white lg:border md:border rounded lg:shadow md:shadow lg:p-2 md:p-2 mr-0 lg:mr-2">
       <div class="w-full">
-        <label class="font-bold">CAMBIAR CONTRASEÑA</label>
+        <label class="font-bold">NUEVA / CAMBIAR CONTRASEÑA</label>
       </div>
       <div class="w-full lg:w-6/12 md:w-6/12">
         <label class="form-label" for="password">Contraseña</label>

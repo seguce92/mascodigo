@@ -34,10 +34,14 @@ class CertificateController extends Controller
 
 		//$pdf->setWatermarkImage(public_path('img/logo.png'), 0.165, '2%', '100%');
 
-        $view =  \View::make('app::invoice.certificate')->render();
-        //return $view;
+        $view =  \View::make('app::invoice.tmp01')->render();
+        
 
-        $pdf->loadHTML($view)->setPaper(array(0, 0, 396, 612), 'landscape')->setWarnings(false);
+        /**
+         * image size
+         * 1125 x 800
+         */
+        $pdf->loadHTML($view)->setPaper('a4', 'landscape')->setWarnings(false);
 
         return $pdf->stream();
 

@@ -146,4 +146,8 @@ class Helper {
     return 'https://www.gravatar.com/avatar/'.md5( strtolower( trim( $email ) ) ).'?s=200';
   }
 
+
+  public function getCodeUUID($a, $b, $c) {
+    return hashid_encode($a).'-'.hashid_encode($b).'-'.hashid_encode($c);
+  }
 }
