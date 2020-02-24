@@ -33,6 +33,9 @@
                 </div>
             </div>
         </div>
+        <div v-if="favorites.length == 0" class="bg-gray-200 text-gray-900 p-5 rounded shadow mx-2 my-6">
+            Vaya! Aun no Tienes lecciones favoritas.
+        </div>
     </div>
 </template>
 

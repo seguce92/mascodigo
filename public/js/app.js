@@ -5588,6 +5588,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5970,6 +5974,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6188,6 +6195,10 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -80333,7 +80344,7 @@ var render = function() {
               {
                 staticClass:
                   "text-xs md:text-sm lg:text-base font-mono text-gray-700 hover:text-gray-800 hover:bg-gray-300 px-3 flex-no-grow flex-no-shrink py-2 flex items-center",
-                attrs: { href: _vm.domain }
+                attrs: { href: "/" }
               },
               [
                 _c(
@@ -80413,77 +80424,90 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "grid grid-cols-1 gap-3" },
-    _vm._l(_vm.advances, function(item) {
-      return _c(
-        "a",
-        {
-          key: item.id,
-          staticClass: "flex flex-row p-2 rounded-lg hover:bg-gray-200",
-          attrs: { href: "/course/" + item.course.slug }
-        },
-        [
-          _c("div", { staticClass: "flex-shrink pr-3" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "rounded-full border-white border-2 p-3 bg-blue-600 course shadow",
-                class: item.course.color
-              },
-              [
-                _c("img", {
-                  staticClass: "w-10 h-10",
-                  attrs: { src: item.course.icon, alt: "Icon" }
-                })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex-1" }, [
-            _c("div", { staticClass: "grid grid-cols-2 mb-2" }, [
+    [
+      _vm._l(_vm.advances, function(item) {
+        return _c(
+          "a",
+          {
+            key: item.id,
+            staticClass: "flex flex-row p-2 rounded-lg hover:bg-gray-200",
+            attrs: { href: "/course/" + item.course.slug }
+          },
+          [
+            _c("div", { staticClass: "flex-shrink pr-3" }, [
               _c(
                 "div",
                 {
-                  staticClass: "font-semibold text-gray-700 text-xs uppercase"
+                  staticClass:
+                    "rounded-full border-white border-2 p-3 bg-blue-600 course shadow",
+                  class: item.course.color
                 },
-                [_vm._v(_vm._s(item.course.skill.name))]
-              ),
-              _vm._v(" "),
-              _c(
-                "time",
-                {
-                  staticClass: "text-gray-600 text-xs text-right",
-                  attrs: { datetime: item.created_at }
-                },
-                [_vm._v(_vm._s(item.created_human))]
+                [
+                  _c("img", {
+                    staticClass: "w-10 h-10",
+                    attrs: { src: item.course.icon, alt: "Icon" }
+                  })
+                ]
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "grid grid-cols-3" }, [
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "col-span-2 text-base text-gray-700 leading-tight tracking-tighter"
-                },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.course.title) +
-                      "\n                "
-                  )
-                ]
-              ),
+            _c("div", { staticClass: "flex-1" }, [
+              _c("div", { staticClass: "grid grid-cols-2 mb-2" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "font-semibold text-gray-700 text-xs uppercase"
+                  },
+                  [_vm._v(_vm._s(item.course.skill.name))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "time",
+                  {
+                    staticClass: "text-gray-600 text-xs text-right",
+                    attrs: { datetime: item.created_at }
+                  },
+                  [_vm._v(_vm._s(item.created_human))]
+                )
+              ]),
               _vm._v(" "),
-              _c("span", { staticClass: "col-span-1 text-right" }, [
-                _vm._v(_vm._s(item.progress) + "%")
+              _c("div", { staticClass: "grid grid-cols-3" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "col-span-2 text-base text-gray-700 leading-tight tracking-tighter"
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.course.title) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "col-span-1 text-right" }, [
+                  _vm._v(_vm._s(item.progress) + "%")
+                ])
               ])
             ])
-          ])
-        ]
-      )
-    }),
-    0
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _vm.advances.length == 0
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-200 text-gray-900 p-5 rounded shadow mx-2 my-6"
+            },
+            [_vm._v("\n        Vaya! Aun no tienes Cursos en progreso.\n    ")]
+          )
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -80875,122 +80899,139 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "grid grid-cols-1 gap-3" },
-    _vm._l(_vm.favorites, function(item) {
-      return _c(
-        "div",
-        {
-          key: item.id,
-          staticClass: "flex flex-row p-2 rounded-lg hover:bg-gray-200",
-          attrs: { href: "/course/" + item.course_slug }
-        },
-        [
-          _c("div", { staticClass: "flex-shrink pr-3" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "rounded-full border-white border-2 p-3 bg-blue-600 course shadow",
-                class: item.course_color
-              },
-              [
-                _c("img", {
-                  staticClass: "w-10 h-10",
-                  attrs: { src: item.course_icon, alt: "Icon" }
-                })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex-1 justify-center" }, [
-            _c("div", { staticClass: "grid grid-cols-5 mb-2 mt-2" }, [
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "font-semibold col-span-2 text-base text-gray-700 leading-tight tracking-tighter hover:underline",
-                  attrs: {
-                    href:
-                      "/course/" +
-                      item.course_slug +
-                      "/lesson/" +
-                      item.lesson_order,
-                    title: "Ver la Lección"
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.lesson) +
-                      "\n                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass:
-                    "col-span-2 text-xs font-semibold hover:underline",
-                  attrs: {
-                    href: "/course/" + item.course_slug,
-                    title: "Ir al Curso"
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.course) +
-                      "\n                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("time", { staticClass: "text-gray-600 text-xs text-right" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(item.date) +
-                    "\n                "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "grid grid-cols-5" }, [
+    [
+      _vm._l(_vm.favorites, function(item) {
+        return _c(
+          "div",
+          {
+            key: item.id,
+            staticClass: "flex flex-row p-2 rounded-lg hover:bg-gray-200",
+            attrs: { href: "/course/" + item.course_slug }
+          },
+          [
+            _c("div", { staticClass: "flex-shrink pr-3" }, [
               _c(
                 "div",
-                { staticClass: "col-span-2 text-gray-600 text-xs uppercase" },
-                [
-                  _vm._v(
-                    "\n                    LECCION " +
-                      _vm._s(item.lesson_order) +
-                      "\n                "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
                 {
                   staticClass:
-                    "col-span-2 text-gray-600 text-xs uppercase hover:underline",
-                  attrs: {
-                    href: "/skill/" + item.skill_slug,
-                    title: "Habilidad " + item.skill
-                  }
+                    "rounded-full border-white border-2 p-3 bg-blue-600 course shadow",
+                  class: item.course_color
                 },
                 [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.skill) +
-                      "\n                "
-                  )
+                  _c("img", {
+                    staticClass: "w-10 h-10",
+                    attrs: { src: item.course_icon, alt: "Icon" }
+                  })
                 ]
               )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex-1 justify-center" }, [
+              _c("div", { staticClass: "grid grid-cols-5 mb-2 mt-2" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "font-semibold col-span-2 text-base text-gray-700 leading-tight tracking-tighter hover:underline",
+                    attrs: {
+                      href:
+                        "/course/" +
+                        item.course_slug +
+                        "/lesson/" +
+                        item.lesson_order,
+                      title: "Ver la Lección"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.lesson) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "col-span-2 text-xs font-semibold hover:underline",
+                    attrs: {
+                      href: "/course/" + item.course_slug,
+                      title: "Ir al Curso"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.course) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "time",
+                  { staticClass: "text-gray-600 text-xs text-right" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.date) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "grid grid-cols-5" }, [
+                _c(
+                  "div",
+                  { staticClass: "col-span-2 text-gray-600 text-xs uppercase" },
+                  [
+                    _vm._v(
+                      "\n                    LECCION " +
+                        _vm._s(item.lesson_order) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "col-span-2 text-gray-600 text-xs uppercase hover:underline",
+                    attrs: {
+                      href: "/skill/" + item.skill_slug,
+                      title: "Habilidad " + item.skill
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(item.skill) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ])
             ])
-          ])
-        ]
-      )
-    }),
-    0
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _vm.favorites.length == 0
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-200 text-gray-900 p-5 rounded shadow mx-2 my-6"
+            },
+            [_vm._v("\n        Vaya! Aun no Tienes lecciones favoritas.\n    ")]
+          )
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -81272,51 +81313,31 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "grid grid-cols-2 my-2" }, [
-      _c("div", { staticClass: "text-center" }, [
-        _c(
-          "span",
-          {
-            staticClass: "py-1 px-3 cursor-pointer hover:text-gray-800",
-            class: _vm.option
-              ? "border-b-4 border-red-600 text-gray-800"
-              : "text-gray-600",
-            on: {
-              click: function($event) {
-                _vm.option = true
-              }
-            }
-          },
-          [_vm._v("\n                CURSOS\n            ")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c(
-          "span",
-          {
-            staticClass: "py-1 px-3 cursor-pointer hover:text-gray-800",
-            class: !_vm.option
-              ? "border-b-4 border-red-600 text-gray-800"
-              : "text-gray-600",
-            on: {
-              click: function($event) {
-                _vm.option = false
-              }
-            }
-          },
-          [_vm._v("\n                TROFEOS\n            ")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm.option
-      ? _c("div", [_vm._v("\n        cursos\n    ")])
-      : _c("div", [_vm._v("\n        trofeos\n    ")])
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c(
+        "div",
+        {
+          staticClass: "bg-gray-200 text-gray-900 p-5 rounded shadow mx-4 my-10"
+        },
+        [
+          _c("span", { staticClass: "font-semibold" }, [
+            _vm._v("LO SIENTO... ")
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v("Esta funcion aun se encuentra en desarrollo\n    ")
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

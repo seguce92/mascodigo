@@ -13,7 +13,7 @@
         @if ( $lesson->is_private && $lesson->is_premium )
           <span class="ml-4 bg-yellow-500 text-yellow-800 border border-yellow-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Premium</span>
         @elseif ($lesson->is_private)
-          <span class="ml-4 bg-blue-500 text-gray-100 border border-blue-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Estandar</span>
+          <span class="ml-4 bg-blue-500 text-gray-100 border border-blue-600 rounded-full px-2 py-05 text-xss font-normal italic shadow">Registro</span>
         @else
           <span class="ml-4 bg-transparent border border-gray-600 text-gray-800 rounded-full px-3 py-05 text-xss font-normal italic shadow">Gratis</span>
         @endif

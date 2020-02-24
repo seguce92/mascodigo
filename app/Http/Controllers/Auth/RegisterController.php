@@ -48,11 +48,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = [
+            'username.unique'   =>  'El Nombre de Usuario :input ya está en uso. Prueba agregando números.',
+            'email.unique'      =>  'El correo electrónico :input ya se encuentra registrado.'
+        ];
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'fullname'  =>  ['required', 'string', 'min:10', 'max:255'],
+            'username'  =>  ['required', 'string', 'min:5', 'max:25', 'unique:users', 'alpha_num'],
+            'email'     =>  ['required', 'string', 'email', 'min:10', 'max:255', 'unique:users'],
+            'password'  =>  ['required', 'string', 'min:7', 'confirmed'],
+            'password_confirmation'  =>  ['required', 'string', 'min:7'],
+        ], $messages);
     }
 
     /**
@@ -64,9 +71,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'username'  =>  $data['username'],
+            'email'     =>  $data['email'],
+            'fullname'  =>  $data['fullname'],
+            'password'  =>  Hash::make($data['password']),
         ]);
     }
 }

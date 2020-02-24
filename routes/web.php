@@ -10,9 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware(['auth', 'verified']);
 Route::get('/skill/{skill}', 'HomeController@skill')->name('skill');
 Route::get('/courses', 'HomeController@courses')->name('courses');
 Route::get('/course/{course}', 'HomeController@course')->name('course');
@@ -32,11 +32,11 @@ Route::get('sergiocruzes.com', function () {
   abort(404);
 });
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
   Route::get('/home', 'HomeController@home')->name('home');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
 
   Route::resource('users', 'Core\UserController')->except(['destroy']);
   Route::resource('roles', 'Core\RoleController');
@@ -86,17 +86,17 @@ Route::group(['prefix' => 'api/data'], function () {
 
   Route::get('discussions/channels', 'Api\DataController@channels')->name('discussion.channels');
 
-  Route::get('authenticate', 'Api\DataController@authenticate');
+  Route::get('authenticate', 'Api\DataController@authenticate')->middleware(['auth', 'verified']);
 
   Route::get('discussions', 'Api\DataController@discussions');
 
   Route::get('discussions/show/{id}', 'Api\DataController@showDiscussion');
 
-  Route::post('discussions/store', 'Api\DataController@storeDiscussion')->middleware('auth');
+  Route::post('discussions/store', 'Api\DataController@storeDiscussion')->middleware(['auth', 'verified']);
 
   Route::post('replies/store', 'Api\DataController@storeReply');
   Route::get('replies/{slug}', 'Api\DataController@replies');
-  Route::post('replies/store/solve', 'Api\DataController@storeReplySolve')->middleware('auth');
+  Route::post('replies/store/solve', 'Api\DataController@storeReplySolve')->middleware(['auth', 'verified']);
 });
 
 Route::group(['prefix' => 'certificates', 'namespace' => 'Learn'], function () {

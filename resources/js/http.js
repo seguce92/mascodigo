@@ -12,8 +12,8 @@ let token = document.head.querySelector('meta[name="csrf-token"]');
 
 window.token = token.content
 http.defaults.headers.common = {
-  'X-CSRF-TOKEN': token.content,
-  'X-Requested-With': 'XMLHttpRequest'
+    'X-CSRF-TOKEN': token.content,
+    'X-Requested-With': 'XMLHttpRequest'
 };
 
 export default http

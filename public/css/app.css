@@ -16439,13 +16439,17 @@ video {
 
 .footer {
   background: #880e4f;
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 769px) {
   .footer-home {
     -webkit-clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
     clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+  }
+
+  .footer {
+    margin-top: 5rem;
   }
 }
 

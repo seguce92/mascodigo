@@ -13,11 +13,11 @@
 @endsection
 
 @section('content')
-<section class="lg:py-10 lg:mt-10">
-    <div class="container mx-auto flex flex-wrap pt-4 lg:py-12 max-900 justify-center">
+<section class="py-4 lg:py-10 lg:mt-10">
+    <div class="container mx-auto flex flex-wrap max-900 justify-center">
 
-        <div class="w-full max-w-sm mt-10">
-            <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
+        <div class="w-full max-w-md">
+            <div class="flex flex-col break-words bg-white md:border md:border-2 md:rounded md:shadow-md">
 
                 <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
                     Iniciar Sesión

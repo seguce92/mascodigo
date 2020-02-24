@@ -64,12 +64,43 @@
     </div>
   </div>
   <header class="hero-home box-shadow-hero mt-10" id="app">
-    <menu-component :fixed="true" :logged="true"></menu-component>
+    <menu-component :logged="true"></menu-component>
   @else
   <header class="hero-home box-shadow-hero" id="app">
-    <menu-component :fixed="true" :logged="false"></menu-component>
+    <menu-component :logged="false"></menu-component>
   @endif
-    
+  {{--<div class="w-full flex items-stretch container flex-no-shrink h-12 pt-20">
+    <div class="flex items-stretch justify-end ml-auto">            
+      <a href="{{ route('blog') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:text-gray-300">
+        Blog</a>
+      
+      <a href="{{ route('courses') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
+        Cursos</a>
+      
+      <a href="{{ route('discussions.index') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
+        Discusiones</a>
+    </div>
+  </div>--}}
+    <section class="flex hidden lg:flex flex-wrap container mx-auto text-white">
+      <nav class="select-none bg-grey flex justify-end items-stretch w-full">
+        <div class="flex items-stretch flex-no-shrink h-12">
+          <div class="flex items-stretch justify-end ml-auto">            
+            <div class="flex items-stretch container flex-no-shrink h-12">
+              <div class="flex items-stretch justify-end ml-auto">            
+                <a href="{{ route('blog') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white no-underline flex items-center hover:text-gray-300">
+                  Blog</a>
+                
+                <a href="{{ route('courses') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
+                  Cursos</a>
+                
+                <a href="{{ route('discussions.index') }}" class="flex-no-grow flex-no-shrink relative py-2 px-4 leading-normal text-white flex items-center hover:text-gray-300">
+                  Discusiones</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </section>
     <section class="flex flex-wrap pt-20 lg:pt-40 lg:pb-40 pb-10 container px-3 mx-auto text-white">
       <div class="flex flex-col w-full pt-12 lg:pt-0 lg:w-1/2 order-2 lg:order-1 text-center lg:text-left">
         <p class="uppercase tracking-loose w-full">que quieres aprender hoy?</p>
