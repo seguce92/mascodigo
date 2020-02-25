@@ -208,6 +208,12 @@ class DataController extends Controller
             ->setStatusCode(201);
     }
 
+    /**
+     * Store reply solved
+     *
+     * @param Request $request
+     * @return void
+     */
     public function storeReplySolve (Request $request) {
         $discussion = $this->question->find($request->discussion);
         $discussion->solved = 1;

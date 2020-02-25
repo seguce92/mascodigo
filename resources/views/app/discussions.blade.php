@@ -4,7 +4,7 @@
 
 @section('seo')
     <meta property="fb:app_id" content="334747354108904">
-    <meta property="og:url" content="{{ url('/forum') }}" />
+    <meta property="og:url" content="{{ url('/discussions') }}" />
     <meta property="og:site_name" content="Más Código">
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_ES" />

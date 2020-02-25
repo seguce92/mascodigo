@@ -12,23 +12,34 @@ use App\Entities\Learn\History;
 
 class AcademicController extends Controller
 {
+    /**
+     * @var \App\Entities\Learn\Course
+     */
     protected $course;
 
+    /**
+     * Construct
+     */
     public function __construct () {
         $this->course = app(\App\Entities\Learn\Course::class);
     }
     
+    /**
+     * Return view courses
+     *
+     * @return void
+     */
     public function index () {
         return view('admin::learn.academic.index', [
             'courses'   =>  $this->course->all()
         ]);
     }
 
-    public function store (Request $request) {
-
-    }
-
-
+    /**
+     * Lists all courses
+     *
+     * @return void
+     */
     public function courses () {
         $data = $this->course->with('skill')->where('is_publish', 1)->orderBy('published_at', 'desc')->get();
         
@@ -54,6 +65,12 @@ class AcademicController extends Controller
         ));
     }
 
+    /**
+     * Lists courses and lessons in progress
+     *
+     * @param Request $request
+     * @return void
+     */
     public function advance (Request $request) {
         $keys = $request->user()->advances->pluck('id');
 
@@ -83,6 +100,12 @@ class AcademicController extends Controller
         ));
     }
 
+    /**
+     * Lists lessons completed
+     *
+     * @param Request $request
+     * @return void
+     */
     public function completed (Request $request) {
         $keys = $request->user()->advances->pluck('id');
 
@@ -109,6 +132,12 @@ class AcademicController extends Controller
     }
 
 
+    /**
+     * List favorite
+     *
+     * @param Request $request
+     * @return void
+     */
     public function favorites (Request $request) {
         $data = Favorite::with('lesson.course.skill')->where('user_id', \Auth::id())
             ->orderBy('created_at', 'desc')
@@ -135,6 +164,12 @@ class AcademicController extends Controller
         ));
     }
 
+    /**
+     * Lists lessons and data of favorites
+     *
+     * @param Request $request
+     * @return void
+     */
     public function history (Request $request) {
         $keys = $request->user()->histories->pluck('id');
 
@@ -163,6 +198,12 @@ class AcademicController extends Controller
     }
 
 
+    /**
+     * Lists lessons favorites
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function loadFavorite ($id) {
         $data = Favorite::where('user_id', \Auth::id())
             ->where('lesson_id', $id)
@@ -173,6 +214,12 @@ class AcademicController extends Controller
         ]);
     }
 
+    /**
+     * Store lesson in favorites
+     *
+     * @param Request $request
+     * @return void
+     */
     public function storeFavorite (Request $request) {
         $favorite = Favorite::where('user_id', \Auth::id())
             ->where('lesson_id', $request->lesson)
@@ -194,6 +241,12 @@ class AcademicController extends Controller
         ]);
     }
 
+    /**
+     * Store lesson in history
+     *
+     * @param Request $request
+     * @return void
+     */
     public function storeHistory (Request $request) {
         $item = new History();
         $item->lesson_id = $request->lesson;
@@ -205,6 +258,12 @@ class AcademicController extends Controller
         ));
     }
 
+    /**
+     * Store completed lesson
+     *
+     * @param Request $request
+     * @return void
+     */
     public function storeCompleted (Request $request) {
         $complete = Advance::where('lesson_id', $request->lesson)
             ->where('course_id', $request->course)
@@ -232,6 +291,13 @@ class AcademicController extends Controller
         ));
     } 
 
+    /**
+     * List like lessons
+     *
+     * @param Request $request
+     * @param integer $id
+     * @return void
+     */
     public function loadLiked (Request $request, $id) {
         $data = Favorite::where('user_id', $request->user()->id)->where('lesson_id', $id)->first();
 

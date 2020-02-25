@@ -4838,6 +4838,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4866,6 +4873,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
     },
     user: {
       type: Object
+    },
+    completes: {
+      type: Array,
+      "default": []
     }
   },
   data: function data() {
@@ -4917,6 +4928,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_plyr__WEBPACK_IMPORTED_MODULE
     },
     init: function init() {
       return !this.lesson.is_private || this.lesson.is_private && this.logged && !this.lesson.is_premium || this.lesson.is_private && this.logged && this.lesson.is_premium && this.user.is_premium;
+    },
+    number_views: function number_views() {
+      return window.Helper.number_short(this.lesson.views, true);
     }
   },
   methods: {
@@ -5187,6 +5201,12 @@ var resource = new _api_resource__WEBPACK_IMPORTED_MODULE_1__["default"]();
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! crypto */ "./node_modules/crypto-browserify/index.js");
 /* harmony import */ var crypto__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(crypto__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14134,7 +14154,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card .circle {\n  padding: 4px;\n}\n.card .circle img {\n  z-index: 1;\n  width: 75%;\n}", ""]);
+exports.push([module.i, ".card .circle {\n  padding: 6px;\n}\n.card .circle img {\n  z-index: 1;\n  width: 75%;\n}", ""]);
 
 // exports
 
@@ -14286,7 +14306,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n@media (min-width: 1024px) {\n.plyr--video {\n    border-radius: 0.5rem;\n}\n}\n.accordion__content{\n  max-height: 100em;\n  display: inline-block;\n  transition: all 0.4s cubic-bezier(0.865, 0.14, 0.095, 0.87);\n}\n", ""]);
+exports.push([module.i, "\n@media (min-width: 1024px) {\n.plyr--video {\n    border-radius: 0.5rem;\n}\n}\n.accordion__content{\n  max-height: 100em;\n  display: inline-block;\n  transition: all 0.4s cubic-bezier(0.865, 0.14, 0.095, 0.87);\n}\n.plyr--full-ui input[type=range] {\n  color: #A81C4E;\n}\n.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {\n  background: #A81C4E;\n}\n.plyr__control--overlaid {\n  background: #A81C4E;\n}\n", ""]);
 
 // exports
 
@@ -78941,58 +78961,85 @@ var render = function() {
                                 "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
                             },
                             [
-                              row.id == _vm.lesson.id
-                                ? _c(
-                                    "svg",
-                                    {
-                                      staticClass: "fa h-4 w-4 fill-current",
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 448 512"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          d:
-                                            "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                : row.is_private
-                                ? _c(
-                                    "svg",
-                                    {
-                                      staticClass: "fa h-4 w-4",
-                                      attrs: {
-                                        xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 448 512"
-                                      }
-                                    },
-                                    [
-                                      _c("path", {
-                                        attrs: {
-                                          d:
-                                            "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
-                                        }
-                                      })
-                                    ]
-                                  )
+                              !_vm.completes.includes(row.id)
+                                ? _c("div", { staticClass: "text-center" }, [
+                                    row.id == _vm.lesson.id
+                                      ? _c(
+                                          "svg",
+                                          {
+                                            staticClass:
+                                              "fa h-4 w-4 fill-current",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 448 512"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : row.is_private
+                                      ? _c(
+                                          "svg",
+                                          {
+                                            staticClass: "fa h-4 w-4",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 448 512"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                      : _c(
+                                          "svg",
+                                          {
+                                            staticClass: "fa h-4 w-4",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 576 512"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M423.5 0C339.5.3 272 69.5 272 153.5V224H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48h-48v-71.1c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v80c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-80C576 68 507.5-.3 423.5 0z"
+                                              }
+                                            })
+                                          ]
+                                        )
+                                  ])
                                 : _c(
                                     "svg",
                                     {
-                                      staticClass: "fa h-4 w-4",
+                                      staticClass:
+                                        "w-5 h-5 inline-block fill-current text-white",
                                       attrs: {
+                                        title: "Lección completada",
                                         xmlns: "http://www.w3.org/2000/svg",
-                                        viewBox: "0 0 576 512"
+                                        viewBox: "0 0 512 512"
                                       }
                                     },
                                     [
                                       _c("path", {
                                         attrs: {
                                           d:
-                                            "M423.5 0C339.5.3 272 69.5 272 153.5V224H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48h-48v-71.1c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v80c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-80C576 68 507.5-.3 423.5 0z"
+                                            "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
                                         }
                                       })
                                     ]
@@ -79391,39 +79438,81 @@ var render = function() {
                         "icon flex bg-black-trans justify-center items-center flex-no-shrink w-12 h-12 bg-gray-400 rounded-full font-semibold text-xl text-white mr-3"
                     },
                     [
-                      row.id == _vm.lesson.id
-                        ? _c(
-                            "svg",
-                            {
-                              staticClass: "fa h-4 w-4 fill-current",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 448 512"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-                                }
-                              })
-                            ]
-                          )
+                      !_vm.completes.includes(row.id)
+                        ? _c("div", { staticClass: "text-center" }, [
+                            row.id == _vm.lesson.id
+                              ? _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fa h-4 w-4 fill-current",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 448 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              : row.is_private
+                              ? _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fa h-4 w-4",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 448 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                                      }
+                                    })
+                                  ]
+                                )
+                              : _c(
+                                  "svg",
+                                  {
+                                    staticClass: "fa h-4 w-4",
+                                    attrs: {
+                                      xmlns: "http://www.w3.org/2000/svg",
+                                      viewBox: "0 0 576 512"
+                                    }
+                                  },
+                                  [
+                                    _c("path", {
+                                      attrs: {
+                                        d:
+                                          "M423.5 0C339.5.3 272 69.5 272 153.5V224H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48h-48v-71.1c0-39.6 31.7-72.5 71.3-72.9 40-.4 72.7 32.1 72.7 72v80c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24v-80C576 68 507.5-.3 423.5 0z"
+                                      }
+                                    })
+                                  ]
+                                )
+                          ])
                         : _c(
                             "svg",
                             {
-                              staticClass: "fa h-4 w-4",
+                              staticClass:
+                                "w-5 h-5 inline-block fill-current text-white",
                               attrs: {
+                                title: "Lección completada",
                                 xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 448 512"
+                                viewBox: "0 0 512 512"
                               }
                             },
                             [
                               _c("path", {
                                 attrs: {
                                   d:
-                                    "M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"
+                                    "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
                                 }
                               })
                             ]
@@ -79499,9 +79588,14 @@ var render = function() {
                           _vm._s(_vm.lesson.published_human) +
                           " "
                       ),
-                      _c("span", { staticClass: "ml-4" }, [
-                        _vm._v("1000 reproducciones")
-                      ])
+                      _c(
+                        "span",
+                        {
+                          staticClass: "ml-4",
+                          attrs: { title: _vm.lesson.views + " reproducciones" }
+                        },
+                        [_vm._v(_vm._s(_vm.number_views) + " reproducciones")]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -79603,44 +79697,6 @@ var render = function() {
       _c("notifications", {
         attrs: { group: "foo", position: "bottom right" }
       }),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "py-4 px-2 cursor-pointer text-gray-700",
-          class: _vm.liked ? "text-red-500" : "hover:text-gray-800",
-          attrs: { title: "ME GUSTA" },
-          on: {
-            click: function($event) {
-              return _vm.likedPress()
-            }
-          }
-        },
-        [
-          _c(
-            "svg",
-            {
-              staticClass: "w-6 h-6 fill-current inline-block",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                viewBox: "0 0 576 512"
-              }
-            },
-            [
-              _c("path", {
-                attrs: {
-                  d:
-                    "M485.5 0L576 160H474.9L405.7 0h79.8zm-128 0l69.2 160H149.3L218.5 0h139zm-267 0h79.8l-69.2 160H0L90.5 0zM0 192h100.7l123 251.7c1.5 3.1-2.7 5.9-5 3.3L0 192zm148.2 0h279.6l-137 318.2c-1 2.4-4.5 2.4-5.5 0L148.2 192zm204.1 251.7l123-251.7H576L357.3 446.9c-2.3 2.7-6.5-.1-5-3.2z"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("small", { staticClass: "text-gray-900 text-xs" }, [
-            _vm._v(_vm._s(_vm.likes))
-          ])
-        ]
-      ),
       _vm._v(" "),
       _c(
         "span",
@@ -79756,15 +79812,45 @@ var render = function() {
                 },
                 [
                   _vm.logged == false
-                    ? _c("li", { staticClass: "mr-3" }, [
+                    ? _c("li", [
                         _c(
                           "a",
                           {
                             staticClass:
-                              "w-full text-white font-bold uppercase inline-block py-2 px-4 text-black no-underline",
+                              "w-full text-white hover:underline uppercase inline-block py-2 px-4 text-black no-underline",
                             attrs: { href: "/login" }
                           },
                           [_vm._v("Inicia Sesión")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.logged == false
+                    ? _c("li", { staticClass: "hidden lg:inline-block" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "w-full rounded-full border-2 border-white hover:bg-white text-white hover:text-red-500 uppercase inline-block py-1 px-4 text-black no-underline",
+                            staticStyle: { "margin-top": "2px" },
+                            attrs: { href: "/register" }
+                          },
+                          [_vm._v("Registrate")]
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.logged == false
+                    ? _c("li", { staticClass: "lg:hidden" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "w-full text-white uppercase inline-block py-1 px-4 text-black no-underline",
+                            staticStyle: { "margin-top": "2px" },
+                            attrs: { href: "/register" }
+                          },
+                          [_vm._v("Registrate")]
                         )
                       ])
                     : _vm._e(),
@@ -80177,7 +80263,7 @@ var render = function() {
                       { staticClass: "text-xs uppercase text-gray-600" },
                       [
                         _vm._v(
-                          "presione ESC o click fuera del panel para salir"
+                          "presione ESC o click fuera del panel para salir."
                         )
                       ]
                     )
@@ -83050,6 +83136,21 @@ function () {
     value: function histored(percent, current) {
       if (current == percent) return true;
       return false;
+    }
+  }, {
+    key: "number_short",
+    value: function number_short(count) {
+      var withAbbr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var decimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+      var COUNT_ABBRS = ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'];
+      var i = 0 === count ? count : Math.floor(Math.log(count) / Math.log(1000));
+      var result = parseFloat((count / Math.pow(1000, i)).toFixed(decimals));
+
+      if (withAbbr) {
+        result += "".concat(COUNT_ABBRS[i]);
+      }
+
+      return result;
     }
   }]);
 

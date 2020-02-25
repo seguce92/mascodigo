@@ -96,3 +96,9 @@ if (! function_exists ('code_uuid') ) {
     return app(\App\Helpers\Helper::class)->getCodeUUID($a, $b, $c);
   }
 }
+
+if (! function_exists ('number_short') ) {
+  function number_short ($number, $precision = 1 ) {
+    return app(\App\Helpers\Helper::class)->numberFormatShort($number, $precision);
+  }
+}

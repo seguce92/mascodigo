@@ -47,10 +47,13 @@
                         @endif
                     </div>
 
-                    <div class="flex flex-wrap items-center">
+                    <div class="flex flex-wrap items-center justify-between">
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-gray-100 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Iniciar Sesión
                         </button>
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="text-xs hover:text-blue-600 hover:underline text-blue-500">Olvide mi Contraseña</a>
+                        @endif
                     </div>
                 </form>
 

@@ -25,6 +25,8 @@ class CreateLessonsTable extends Migration
             $table->string('duration')->default('00:00:00');
             $table->integer('points')->default(0);
             $table->integer('order')->defaut(1);
+
+            $table->integer('views')->defaut(0);
             
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');

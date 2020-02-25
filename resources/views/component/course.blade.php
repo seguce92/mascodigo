@@ -13,7 +13,7 @@
             </div>
             <div class="flex w-1/2 inline-flex justify-center items-center text-sm text-gray-600 font-serif">
                 <i class="text far fa-clock mr-2"></i>
-                <p class="text">00:00:00</ṕ>
+                <p class="text">00:00:00</p>
             </div>
         </div>
     </div>

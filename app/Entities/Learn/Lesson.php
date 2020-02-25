@@ -11,7 +11,7 @@ class Lesson extends Model
         'title', 'url', 'content', 'repository', 
         'is_publish', 'is_private', 'is_premium', 
         'duration', 'points', 'order', 'course_id', 
-        'author_id', 'editor_id', 'published_at'
+        'author_id', 'editor_id', 'published_at', 'views'
     ];
 
     protected $dates = [

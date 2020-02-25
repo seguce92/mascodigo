@@ -49,7 +49,7 @@ export default {
 <style lang="scss">
   .card {
     .circle {
-      padding: 4px;
+      padding: 6px;
       img {
         z-index: 1;
         width: 75%;

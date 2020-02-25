@@ -5,17 +5,18 @@
         <h5 class="pl-4 font-bold text-xl">Más Código</h5>
         <p class="p-4">Más Código es una plataforma virtual de aprendizaje y publicacion de contenido referente a la tecnologia actual.</p>
       </div>
-      <div class="w-1/2 lg:w-1/4 text-left lg:pt-6 pl-3 lg:pl-0">
+      <div class="w-1/2 lg:w-1/4 text-left pl-3 lg:pl-0">
         <h4 class="text-lg font-bold mb-2">MENU</h4>
         <ul>
           <li><a href="{{ url('login') }}" class="hover:text-gray-400">Iniciar Sesión</a></li>
-          <li><a href="{{ url('register') }}" class="hover:text-gray-400">Registrarse</a></li>
+          <li><a href="{{ url('register') }}" class="hover:text-gray-400">Registrate</a></li>
           <li><a href="{{ url('/') }}" class="hover:text-gray-400">Inicio</a></li>
           <li><a href="{{ url('blog') }}" class="hover:text-gray-400">Blog</a></li>
           <li><a href="{{ url('courses') }}" class="hover:text-gray-400">Cursos</a></li>
+          <li><a href="{{ url('discussions') }}" class="hover:text-gray-400">Foro</a></li>
         </ul>
       </div>
-      <div class="w-1/2 lg:w-1/4 text-left lg:pt-10 pl-3 lg:pl-0">
+      <div class="w-1/2 lg:w-1/4 text-left pl-3 lg:pl-0">
         <h4 class="uppercase text-lg font-bold mb-2">SIGUENOS EN</h4>
         <ul>
           <li><a class="hover:text-gray-400" href="https://www.facebook.com/mascodigo.net.po/" target="_blank">Facebook</a></li>
@@ -42,7 +43,7 @@
     </div>
 
     <div class="w-full mb-2">	
-      <div class="bg-white w-6/6 opacity-25 my-0 py-0 rounded-t" style="height:2px"></div>
+      <div class="bg-white w-6/6 opacity-25 my-0 py-0 rounded-t" style="height:1px"></div>
     </div>
 
     <h3 class="w-full my-2 leading-tight text-sm text-center text-white">{{ \Carbon\Carbon::now()->year }} &copy; Derechos Reservados <a class="font-bold italic" href="https://sergiocruzes.com" target="_blank">seguce92</a></h3>

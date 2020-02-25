@@ -29,22 +29,43 @@ class ProfileController extends Controller
         $user->profile  =   $request->profile;
         $user->save();
 
-        $user->information->portlet     =   $request->portlet;
-        $user->information->facebook    =   $request->facebook;
-        $user->information->twitter     =   $request->twitter;
-        $user->information->youtube     =   $request->youtube;
-        $user->information->linkedin    =   $request->linkedin;
-        $user->information->medium      =   $request->medium;
-        $user->information->pinterest   =   $request->pinterest;
-        $user->information->github      =   $request->github;
-        $user->information->codepen     =   $request->codepen;
-        $user->information->jsfiddle    =   $request->jsfiddle;
-        $user->information->gitlab      =   $request->gitlab;
-        $user->information->reddit      =   $request->reddit;
-        $user->information->telegram    =   $request->telegram;
-        $user->information->whatsapp    =   $request->whatsapp;
-        $user->information->content     =   $request->content;
-        $user->information->save();
+        if ( $user->information ) {
+            $user->information->portlet     =   $request->portlet;
+            $user->information->facebook    =   $request->facebook;
+            $user->information->twitter     =   $request->twitter;
+            $user->information->youtube     =   $request->youtube;
+            $user->information->linkedin    =   $request->linkedin;
+            $user->information->medium      =   $request->medium;
+            $user->information->pinterest   =   $request->pinterest;
+            $user->information->github      =   $request->github;
+            $user->information->codepen     =   $request->codepen;
+            $user->information->jsfiddle    =   $request->jsfiddle;
+            $user->information->gitlab      =   $request->gitlab;
+            $user->information->reddit      =   $request->reddit;
+            $user->information->telegram    =   $request->telegram;
+            $user->information->whatsapp    =   $request->whatsapp;
+            $user->information->content     =   $request->content;
+            $user->information->save();
+        } else {
+            $information            =   new \App\Entities\Core\Information();
+            $information->user_id   =   $user->id;
+            $information->portlet     =   $request->portlet;
+            $information->facebook    =   $request->facebook;
+            $information->twitter     =   $request->twitter;
+            $information->youtube     =   $request->youtube;
+            $information->linkedin    =   $request->linkedin;
+            $information->medium      =   $request->medium;
+            $information->pinterest   =   $request->pinterest;
+            $information->github      =   $request->github;
+            $information->codepen     =   $request->codepen;
+            $information->jsfiddle    =   $request->jsfiddle;
+            $information->gitlab      =   $request->gitlab;
+            $information->reddit      =   $request->reddit;
+            $information->telegram    =   $request->telegram;
+            $information->whatsapp    =   $request->whatsapp;
+            $information->content     =   $request->content;
+            $information->save();
+        }
 
         session()->flash('message', 'Información Actualizado Exitosamente');
 

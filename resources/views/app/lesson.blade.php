@@ -62,7 +62,7 @@
   </section>
   <main class="mx-auto">
     @if (\Auth::check())
-      <lesson-component :course="{{ $course }}" :lesson="{{ $lesson }}" :logged="true" :user="{{ \Auth::user() }}"></lesson-component>
+      <lesson-component :course="{{ $course }}" :completes="{{ $completes }}" :lesson="{{ $lesson }}" :logged="true" :user="{{ \Auth::user() }}"></lesson-component>
     @else
       <lesson-component :course="{{ $course }}" :lesson="{{ $lesson }}" :logged="false"></lesson-component>
     @endif

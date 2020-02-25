@@ -15900,10 +15900,9 @@ video {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
   }
 
-  .blog {
-    -webkit-clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
-            clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
-  }
+  /*.blog {
+        clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0 87%);
+    }*/
 }
 
 /*@import 'skill.css';*/
@@ -16443,10 +16442,10 @@ video {
 }
 
 @media (min-width: 769px) {
-  .footer-home {
-    -webkit-clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
-  }
+  /*.footer-home {
+        -webkit-clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+        clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+    }*/
 
   .footer {
     margin-top: 5rem;
