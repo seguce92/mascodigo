@@ -57,11 +57,11 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('admin@app.com', 'AppName')
+            ->from('mascodigo.info@gmail.com', 'Más Código')
             ->subject('Notificación de restablecimiento de contraseña')
+            ->greeting('Solicitud de Reestablecimiento de Contraseña')
             ->greeting('Recibió este correo electrónico porque recibimos una solicitud de restablecimiento de contraseña para su cuenta.')
-            ->line(trans('general.reset_password_line1'))
-            ->action('Restablecer la COntraseña', url('password/reset', $this->token))
+            ->action('Reestablecer la Contraseña', route('password.reset', $this->token))
             ->line('Si no solicitó un restablecimiento de contraseña, no se requiere ninguna otra acción.');
     }
 

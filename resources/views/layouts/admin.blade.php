@@ -95,7 +95,7 @@
 
 	<div class="container w-full mx-auto pt-20 sm:pt-20 md:pt-10 lg:pt-24 xl:pt-20">
 		<div id="app" class="w-full px-3 xl:px-0 md:mt-8 mb-16 text-gray-800 leading-normal">
-			@error @enderror
+			@ferror @endferror
 			@alert @endalert
 			@yield('content')	
 		</div>

@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::component('component.alert', 'alert');
-        Blade::component('component.error', 'error');
+        Blade::component('component.error', 'ferror');
         Blade::component('component.delete', 'delete');
     }
 }
